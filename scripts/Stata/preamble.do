@@ -1,6 +1,6 @@
 global items 	birth religion illegal death increase science fraud mmr deficit
 global arms		RW IPS FSR 14k 24k
-global demo 	age i.gender i.educ i.hisla i.race
+global demo 	age i.female i.educ i.hisla i.race
 
 rename v1 id
 label var id "Participant ID"
@@ -39,7 +39,7 @@ gen rep = (pid_str=="Republican") if !missing(pid_str)
 *** Demo
 rename gender gender_str
 label define genderLabel 0 "Male" 1 "Female"
-encode gender_str, gen(gender) label(genderLabel)
+encode gender_str, gen(female) label(genderLabel)
 
 foreach demo in educ hisla race {
 	rename `demo' `demo'_str
