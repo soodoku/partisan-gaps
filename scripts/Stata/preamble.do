@@ -1,6 +1,6 @@
 global items 	birth religion illegal death increase science fraud mmr deficit
 global arms		RW IPS FSR 14k 24k
-global demo 	age i.female i.educ i.hisla i.race
+global demo 	age i.female i.educ i.hisla $races
 
 rename v1 id
 label var id "Participant ID"
@@ -45,6 +45,12 @@ foreach demo in educ hisla race {
 	rename `demo' `demo'_str
 	encode `demo'_str, gen(`demo')
 }
+
+gen asian = strmatch(race_str, "Asian*")
+gen black = strmatch(race_str, "Black*")
+gen white = strmatch(race_str, "White*")
+gen others = strmatch(race_str, "Other*")
+global races asian black white others
 
 *------------------------------------------------------------------------------
 *** Survey types

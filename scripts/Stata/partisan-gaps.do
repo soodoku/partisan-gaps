@@ -20,7 +20,7 @@ set linesize 120        // Line size limit to make output more readable, affects
 // sysdir set PERSONAL analysis/utilities // Add path to my ados
 * -----------------------------------------------------------------------------
 
-import delimited D:/partisan_gaps/data/mturk-recoded.csv
+import delimited D:/partisan-gaps/data/mturk-recoded.csv
 
 **** Basic prep of data
 do preamble.do
