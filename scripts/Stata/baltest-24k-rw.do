@@ -1,38 +1,10 @@
-cd D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-
-
-* -----------------------------------------------------------------------------
-* Program Setup
-* -----------------------------------------------------------------------------
-cd scripts/Stata
-
-cap log close
-log using logs/partisan-gaps.txt, replace text
-
-cls 					// Clear results window
-version 13              // Still on version 13 :(
-clear all               // Start with a clean slate
-set more off            // Disable partitioned output
-macro drop _all         // Clear all macros to avoid namespace conflicts
-set linesize 120        // Line size limit to make output more readable, affects logs
-// local figsavedir ./out/figures	// Savepath for figures
-// local tabsavedir ./out/tables 	// Savepath for tables
-// sysdir set PERSONAL analysis/utilities // Add path to my ados
-* -----------------------------------------------------------------------------
-
-import delimited D:/partisan-gaps/data/mturk-recoded.csv
-
-**** Basic prep of data
-do preamble.do
-*-----------------------------------------------------------------------------
-tictoc tic
 
 drop if (question_type!="24k") & (question_type!="RW")
 gen tarm = (question_type=="24k") 
 
 
 global bs_seed 0
-global nboot 1000
+global nboot 10000
 
 cap program drop run_reg_corr
 program define run_reg_corr
@@ -49,7 +21,7 @@ end
 *** Run regressions and correlation
 
 center age interest_1 vote_1 pid_strength_1, standardize inplace
-tabulate educ, gen(d_educ)
+qui tabulate educ, gen(d_educ)
 local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
 
 eststo clear 
@@ -129,4 +101,4 @@ gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_
 
 gr_edit .title.DragBy 0 -31
 
-tictoc toc
+graph export ../../ms/figures/baltest-24k-rw.pdf, replace	

@@ -1,8 +1,8 @@
-------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  26 Nov 2021, 22:33:07
+ opened on:   1 Dec 2021, 21:05:12
 
 . 
 . cls                                     // Clear results window
@@ -19,14 +19,27 @@
 
 . // local figsavedir ./out/figures       // Savepath for figures
 . // local tabsavedir ./out/tables        // Savepath for tables
-. // sysdir set PERSONAL analysis/utilities // Add path to my ados
+. adopath ++ ./ado                // Add path to ados
+  [1]              "./ado"
+  [2]  (BASE)      "C:\Program Files\Stata17\ado\base/"
+  [3]  (SITE)      "C:\Program Files\Stata17\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "C:\Users\lsys\ado\personal/"
+  [6]  (PLUS)      "C:\Users\lsys\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+
 . * -----------------------------------------------------------------------------
-. 
-. import delimited D:/partisan-gaps/data/mturk-recoded.csv
-(344 vars, 1,253 obs)
+. tictoc tic
+------------------------------------------------------------------------------------------------------------------------
+----------- Time log -----------
+Start time:  1 Dec 2021 21:05:13
+------------------------------------------------------------------------------------------------------------------------
 
 . 
 . **** Basic prep of data
+. import delimited D:/partisan-gaps/data/mturk-recoded.csv
+(344 vars, 1,253 obs)
+
 . do preamble.do
 
 . global items    birth religion illegal death increase science fraud mmr deficit
@@ -281,6 +294,166 @@ file ../../ms/figures/partisan-gap-by-item-arm.pdf saved as PDF format
 end of do-file
 
 . 
+. *** Balance tests (24k vs RW), takes a while
+. do baltest-24k-rw.do
+
+. 
+. drop if (question_type!="24k") & (question_type!="RW")
+(725 observations deleted)
+
+. gen tarm = (question_type=="24k") 
+
+. 
+. 
+. global bs_seed 0
+
+. global nboot 10000
+
+. 
+. cap program drop run_reg_corr
+
+. program define run_reg_corr
+  1.         args xvar
+  2. 
+.         qui eststo: reg tarm `xvar', vce(hc3) 
+  3.         global `xvar'_N = "(N=`e(N)')"
+  4.         
+.         rho_report tarm `xvar', seed($bs_seed) nboot($nboot)
+  5.         global `xvar'_rreport = "`r(rreport)'"
+  6. end
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. *** Run regressions and correlation
+. 
+. center age interest_1 vote_1 pid_strength_1, standardize inplace
+(modified variables: age interest_1 vote_1 pid_strength_1)
+
+. qui tabulate educ, gen(d_educ)
+
+. local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
+
+. 
+. eststo clear 
+
+. local i = 1
+
+. foreach xvar of varlist `listofxvar' {
+  2.         _dots `i++' 0
+  3.         run_reg_corr `xvar'
+  4. }
+.............
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. *** Plot
+. grstyle init
+
+. grstyle set plain, noextend
+
+. 
+. #delimit; 
+delimiter now ;
+. coefplot est*,
+>         mcolor(navy) msize(small) 
+>         ciopts(lcolor(gs7))
+>         keep(`listofxvar')               
+>         eqrename(est1="Female $female_N $female_rreport"
+>                          est2="Age cohort $age_N $age_rreport"
+>                          est3="Hispanic/Latinx $hisla_N   $hisla_rreport"
+>                          // est4="No HS diploma `d_educ3_N' `d_educ3_rreport'"
+>                          est4="HS diploma $d_educ2_N $d_educ2_rreport"
+>                          est5="Some college $d_educ5_N $d_educ5_rreport"
+>                          est6="Four-year college $d_educ1_N $d_educ1_rreport"
+>                          est7="Post-graduate $d_educ4_N $d_educ4_rreport"
+>                          est8="Asian $asian_N $asian_rreport"
+>                          est9="Black $black_N $black_rreport"
+>                          est10="White $white_N $white_rreport"
+>                          // est11="Others `others_N' `others_rreport'"
+>                          est11="Political interest $interest_1_N $interest_1_rreport"
+>                          est12="Intention to vote $vote_1_N $vote_1_rreport"
+>                          est13="Political leaning $pid_strength_1_N $pid_strength_1_rreport"
+>                          )
+>         headings(
+>                 "HS diploma $d_educ2_N $d_educ2_rreport"="{bf:Education}"
+>                 "Asian $asian_N $asian_rreport"="{bf:Race}"
+>                 "Political interest $interest_1_N $interest_1_rreport"="{bf:Politics}", 
+>                 labsize(vsmall) labgap(-3.5)
+>                 )
+>         asequation /// "set equation to model name or string" make the rows the models
+>         swapnames /// "swap coefficient names and equation names"
+>         xline(0, lcolor(gs10) lpattern(dash) lwidth(medium)) ///
+>         ytick(none) /// remove horizontal grids 
+>         ylabel(, labsize(vsmall))
+>         xlabel(-.3(.1).3, labsize(vsmall))
+>         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound  
+>         yscale(noline alt)
+>         plotregion(margin(0 1 0 0) ) ///        
+>         graphregion(margin(3 0 0 0)) ///        
+>         title("{bf:Pearson Correlation}" "{bf:Coefficient [95% CI]}", 
+>                         position(11) justification(center) size(small)
+>                 )
+>         legend(off)
+> ;
+
+. #delimit cr
+delimiter now cr
+. 
+. gr_edit .yaxis1.style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy // yaxis1 edits
+
+. 
+. gr_edit .move yaxis1 leftof 8 5 // yaxis1 grid reposition
+
+. 
+. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N              $female_rreport}}"', tickset(ma
+> jor)
+
+. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $age_rreport}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N      $hisla_rreport}}"', tickset(maj
+> or)
+
+. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N           $d_educ2_rreport}}"', tickset
+> (major)
+
+. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N        $d_educ5_rreport}}"', tickset(
+> major)
+
+. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N    $d_educ1_rreport}}"', tickset
+> (major)
+
+. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N       $d_educ4_rreport}}"', tickset(
+> major)
+
+. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N                $asian_rreport}}"', tickset(maj
+> or)
+
+. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               $black_rreport}}"', tickset(majo
+> r)
+
+. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               $white_rreport}}"', tickset(majo
+> r)
+
+. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', tickset(major)
+. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_1_N  $interest_1_rreport}}"', ti
+> ckset(major)
+
+. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N   $vote_1_rreport}}"', tickset(ma
+> jor)
+
+. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_strength_1_N   $pid_strength_1_rreport
+> }}"', tickset(major)
+
+. 
+. gr_edit .title.DragBy 0 -31
+
+. 
+. graph export ../../ms/figures/baltest-24k-rw.pdf, replace       
+file ../../ms/figures/baltest-24k-rw.pdf saved as PDF format
+
+. 
+end of do-file
+
+. 
 . **** Reg table for effect of party & survey type on response
 . do reg-table.do
 
@@ -295,8 +468,8 @@ end of do-file
 
 Data                               Wide   ->   Long
 -----------------------------------------------------------------------------
-Number of observations            1,207   ->   10,863      
-Number of variables                 406   ->   399         
+Number of observations              482   ->   4,338       
+Number of variables                 425   ->   418         
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -304,7 +477,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3,708 observations deleted)
+(1,476 observations deleted)
 
 . 
 . 
@@ -335,99 +508,99 @@ xij variables:
  12.                 estadd local demo "."           
  13.         }
  14. }
-(est1 stored)
+(est14 stored)
 
 added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "794"
+       e(Nrespondents) : "317"
 
 added macro:
              e(itemFE) : "Yes"
 
 added macro:
-               e(nobs) : "    6,893"
+               e(nobs) : "    2,600"
 
 added macro:
                e(demo) : "."
-(est2 stored)
+(est15 stored)
 
 added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "794"
+       e(Nrespondents) : "317"
 
 added macro:
              e(itemFE) : "Yes"
 
 added macro:
-               e(nobs) : "    6,893"
+               e(nobs) : "    2,600"
 
 added macro:
                e(demo) : "."
-(est3 stored)
+(est16 stored)
 
 added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "794"
+       e(Nrespondents) : "317"
 
 added macro:
              e(itemFE) : "Yes"
 
 added macro:
-               e(nobs) : "    6,893"
+               e(nobs) : "    2,600"
 
 added macro:
                e(demo) : "."
-(est4 stored)
+(est17 stored)
 
 added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "793"
+       e(Nrespondents) : "317"
 
 added macro:
              e(itemFE) : "Yes"
 
 added macro:
-               e(nobs) : "    6,884"
+               e(nobs) : "    2,600"
 
 added macro:
                e(demo) : "Yes"
-(est5 stored)
+(est18 stored)
 
 added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "793"
+       e(Nrespondents) : "317"
 
 added macro:
              e(itemFE) : "Yes"
 
 added macro:
-               e(nobs) : "    6,884"
+               e(nobs) : "    2,600"
 
 added macro:
                e(demo) : "Yes"
-(est6 stored)
+(est19 stored)
 
 added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "793"
+       e(Nrespondents) : "317"
 
 added macro:
              e(itemFE) : "Yes"
 
 added macro:
-               e(nobs) : "    6,884"
+               e(nobs) : "    2,600"
 
 added macro:
                e(demo) : "Yes"
@@ -460,46 +633,66 @@ delimiter now ;
 > ;
 
 Dep. var. is 1(response is congenial)
---------------------------------------------------------------------------------------------
-                          (1)         (2)         (3)         (4)         (5)         (6)   
---------------------------------------------------------------------------------------------
-rep=1                   0.256***                0.375***    0.258***                0.374***
-                      (0.016)                 (0.030)     (0.016)                 (0.029)   
+------------------------------------------------------------------------------------------------------------------------
+> ----------------------------------------------------------------------------------------------------------------------
+> ----------
+                          (1)         (2)         (3)         (4)         (5)         (6)         (7)         (8)       
+>   (9)        (10)        (11)        (12)        (13)        (14)        (15)        (16)        (17)        (18)     
+>    (19)   
+------------------------------------------------------------------------------------------------------------------------
+> ----------------------------------------------------------------------------------------------------------------------
+> ----------
+rep=1                                                                                                                   
+>                                                             0.268***                0.375***    0.273***              
+>   0.376***
+                                                                                                                        
+>                                                           (0.027)                 (0.030)     (0.027)                 
+> (0.029)   
 
-14k                                -0.090***   -0.023                  -0.093***   -0.026   
-                                  (0.025)     (0.022)                 (0.025)     (0.021)   
+24k                                                                                                                     
+>                                                                        -0.163***   -0.063***               -0.166***  
+>  -0.067***
+                                                                                                                        
+>                                                                       (0.023)     (0.018)                 (0.022)     
+> (0.017)   
 
-24k                                -0.165***   -0.064***               -0.166***   -0.066***
-                                  (0.022)     (0.018)                 (0.022)     (0.017)   
+rep=1 # 24k                                                                                                             
+>                                                                                    -0.264***                          
+>  -0.259***
+                                                                                                                        
+>                                                                                   (0.042)                             
+> (0.041)   
 
-FSR                                -0.074**    -0.000                  -0.075**    -0.004   
-                                  (0.025)     (0.022)                 (0.024)     (0.021)   
-
-IPS                                -0.010      -0.000                  -0.014      -0.005   
-                                  (0.028)     (0.022)                 (0.028)     (0.021)   
-
-rep=1 # 14k                                    -0.156***                           -0.157***
-                                              (0.044)                             (0.044)   
-
-rep=1 # 24k                                    -0.265***                           -0.266***
-                                              (0.042)                             (0.041)   
-
-rep=1 # FSR                                    -0.196***                           -0.186***
-                                              (0.042)                             (0.041)   
-
-rep=1 # IPS                                    -0.024                              -0.021   
-                                              (0.046)                             (0.045)   
-
-Constant                0.165***    0.314***    0.182***   -0.008       1.794+      0.483   
-                      (0.006)     (0.020)     (0.017)     (0.946)     (1.083)     (0.878)   
---------------------------------------------------------------------------------------------
-R$^2$                   0.329       0.270       0.354       0.335       0.277       0.361   
-Survey item FE                                                                              
-Demographic controls                                                                        
-Items                       9           9           9           9           9           9   
-Respondents                                                                                 
-Respondent-items                                                                            
---------------------------------------------------------------------------------------------
+Constant                0.533***    0.527***    0.503***    0.523***    0.535***    0.500***    0.544***    0.518***    
+> 0.529***    0.559***    0.527***    0.527***    0.527***    0.146***    0.309***    0.178***    0.116***    0.302***  
+>   0.155***
+                      (0.032)     (0.023)     (0.104)     (0.024)     (0.027)     (0.030)     (0.025)     (0.024)     (0
+> .024)     (0.052)     (0.023)     (0.023)     (0.023)     (0.009)     (0.020)     (0.017)     (0.017)     (0.026)     
+> (0.019)   
+------------------------------------------------------------------------------------------------------------------------
+> ----------------------------------------------------------------------------------------------------------------------
+> ----------
+R$^2$                   0.000       0.000       0.000       0.001       0.001       0.004       0.005       0.003       
+> 0.000       0.001       0.002       0.000       0.004       0.326       0.276       0.377       0.335       0.290     
+>   0.386   
+Survey item FE                                                                                                          
+>                                                                                                                       
+>           
+Demographic controls                                                                                                    
+>                                                                                                                       
+>           
+Items                                                                                                                   
+>                                                                 9           9           9           9           9     
+>       9   
+Respondents                                                                                                             
+>                                                                                                                       
+>           
+Respondent-items                                                                                                        
+>                                                                                                                       
+>           
+------------------------------------------------------------------------------------------------------------------------
+> ----------------------------------------------------------------------------------------------------------------------
+> ----------
 Standard errors in parentheses
 + p<0.1, * p<0.05, ** p<0.01, *** p<0.001
 
@@ -507,9 +700,20 @@ Standard errors in parentheses
 end of do-file
 
 . 
+. tictoc toc
+------------------------------------------------------------------------------------------------------------------------
+----------- Time log -----------
+Start time:  1 Dec 2021 21:05:13
+End time:  1 Dec 2021 21:11:44
+Elapsed seconds:       390
+Elapsed minutes:         7
+Elapsed hours:       .11
+------------------------------------------------------------------------------------------------------------------------
+
+. 
 . log close
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  26 Nov 2021, 22:33:52
+ closed on:   1 Dec 2021, 21:11:44
 ------------------------------------------------------------------------------------------------------------------------
