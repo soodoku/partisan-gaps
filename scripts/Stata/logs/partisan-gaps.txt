@@ -1,8 +1,8 @@
-------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:   1 Dec 2021, 21:05:12
+ opened on:   6 Dec 2021, 19:54:08
 
 . 
 . cls                                     // Clear results window
@@ -32,7 +32,7 @@
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time:  1 Dec 2021 21:05:13
+Start time:  6 Dec 2021 19:54:09
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
@@ -186,61 +186,61 @@ Press any key to reset default scheme to s2color and overwrite scheme _GRSTYLE_,
 >         ytick(none) /// remove horizontal grids
 >         yscale(noline alt)  /// swap labels to RHS
 >         eqrename( ///
->                 birth_RW = "{bf:birth}" ///
->                 birth_IPS = "{bf:birth}" ///
->                 birth_FSR = "{bf:birth}" ///
->                 birth_14k = "{bf:birth}" ///
->                 birth_24k = "{bf:birth}" ///
->                 birth_all = "{bf:birth}" ///
->                 religion_RW = "{bf:religion}" ///                                                                     
->                               " ///
->                 religion_IPS = "{bf:religion}" ///
->                 religion_FSR = "{bf:religion}" ///
->                 religion_14k = "{bf:religion}" ///
->                 religion_24k = "{bf:religion}" ///
->                 religion_all = "{bf:religion}" ///
->                 illegal_RW = "{bf:illegal}" ///
->                 illegal_IPS = "{bf:illegal}" ///
->                 illegal_FSR = "{bf:illegal}" ///
->                 illegal_14k = "{bf:illegal}" ///
->                 illegal_24k = "{bf:illegal}" ///
->                 illegal_all = "{bf:illegal}" ///
->                 death_RW = "{bf:death}" ///
->                 death_IPS = "{bf:death}" ///
->                 death_FSR = "{bf:death}" ///
->                 death_14k = "{bf:death}" ///
->                 death_24k = "{bf:death}" ///
->                 death_all = "{bf:death}" ///
->                 increase_RW = "{bf:increase}" ///
->                 increase_IPS = "{bf:increase}" ///
->                 increase_FSR = "{bf:increase}" ///
->                 increase_14k = "{bf:increase}" ///
->                 increase_24k = "{bf:increase}" ///
->                 increase_all = "{bf:increase}" ///
->                 science_RW = "{bf:science}" ///
->                 science_IPS = "{bf:science}" ///
->                 science_FSR = "{bf:science}" ///
->                 science_14k = "{bf:science}" ///
->                 science_24k = "{bf:science}" ///
->                 science_all = "{bf:science}" ///
->                 fraud_RW = "{bf:fraud}" ///
->                 fraud_IPS = "{bf:fraud}" ///
->                 fraud_FSR = "{bf:fraud}" ///
->                 fraud_14k = "{bf:fraud}" ///
->                 fraud_24k = "{bf:fraud}" ///
->                 fraud_all = "{bf:fraud}" ///
->                 mmr_RW = "{bf:mmr}" ///
->                 mmr_IPS = "{bf:mmr}" ///
->                 mmr_FSR = "{bf:mmr}" ///
->                 mmr_14k = "{bf:mmr}" ///
->                 mmr_24k = "{bf:mmr}" ///
->                 mmr_all = "{bf:mmr}" ///
->                 deficit_RW = "{bf:deficit}" ///
->                 deficit_IPS = "{bf:deficit}" ///
->                 deficit_FSR = "{bf:deficit}" ///
->                 deficit_14k = "{bf:deficit}" ///
->                 deficit_24k = "{bf:deficit}" ///
->                 deficit_all = "{bf:deficit}" ///                
+>                 birth_RW = "{bf:Obama birthplace}" ///
+>                 birth_IPS = "{bf:Obama birthplace}" ///
+>                 birth_FSR = "{bf:Obama birthplace}" ///
+>                 birth_14k = "{bf:Obama birthplace}" ///
+>                 birth_24k = "{bf:Obama birthplace}" ///
+>                 birth_all = "{bf:Obama birthplace}" ///
+>                 religion_RW = "{bf:Obama religion}" ///                                                               
+>                                     " ///
+>                 religion_IPS = "{bf:Obama religion}" ///
+>                 religion_FSR = "{bf:Obama religion}" ///
+>                 religion_14k = "{bf:Obama religion}" ///
+>                 religion_24k = "{bf:Obama religion}" ///
+>                 religion_all = "{bf:Obama religion}" ///
+>                 illegal_RW = "{bf:ACA illegal}" ///
+>                 illegal_IPS = "{bf:ACA illegal}" ///
+>                 illegal_FSR = "{bf:ACA illegal}" ///
+>                 illegal_14k = "{bf:ACA illegal}" ///
+>                 illegal_24k = "{bf:ACA illegal}" ///
+>                 illegal_all = "{bf:ACA illegal}" ///
+>                 death_RW = "{bf:ACA death panels}" ///
+>                 death_IPS = "{bf:ACA death panels}" ///
+>                 death_FSR = "{bf:ACA death panels}" ///
+>                 death_14k = "{bf:ACA death panels}" ///
+>                 death_24k = "{bf:ACA death panels}" ///
+>                 death_all = "{bf:ACA death panels}" ///
+>                 increase_RW = "{bf:GW causes}" ///
+>                 increase_IPS = "{bf:GW causes}" ///
+>                 increase_FSR = "{bf:GW causes}" ///
+>                 increase_14k = "{bf:GW causes}" ///
+>                 increase_24k = "{bf:GW causes}" ///
+>                 increase_all = "{bf:GW causes}" ///
+>                 science_RW = "{bf:GW scientists agree}" ///
+>                 science_IPS = "{bf:GW scientists agree}" ///
+>                 science_FSR = "{bf:GW scientists agree}" ///
+>                 science_14k = "{bf:GW scientists agree}" ///
+>                 science_24k = "{bf:GW scientists agree}" ///
+>                 science_all = "{bf:GW scientists agree}" ///
+>                 fraud_RW = "{bf:Voter fraud}" ///
+>                 fraud_IPS = "{bf:Voter fraud}" ///
+>                 fraud_FSR = "{bf:Voter fraud}" ///
+>                 fraud_14k = "{bf:Voter fraud}" ///
+>                 fraud_24k = "{bf:Voter fraud}" ///
+>                 fraud_all = "{bf:Voter fraud}" ///
+>                 mmr_RW = "{bf:MMR vaccine}" ///
+>                 mmr_IPS = "{bf:MMR vaccine}" ///
+>                 mmr_FSR = "{bf:MMR vaccine}" ///
+>                 mmr_14k = "{bf:MMR vaccine}" ///
+>                 mmr_24k = "{bf:MMR vaccine}" ///
+>                 mmr_all = "{bf:MMR vaccine}" ///
+>                 deficit_RW = "{bf:Budget deficit}" ///
+>                 deficit_IPS = "{bf:Budget deficit}" ///
+>                 deficit_FSR = "{bf:Budget deficit}" ///
+>                 deficit_14k = "{bf:Budget deficit}" ///
+>                 deficit_24k = "{bf:Budget deficit}" ///
+>                 deficit_all = "{bf:Budget deficit}" ///         
 >                 avg_RW = "{bf:Average}" ///                                                             
 >                 avg_IPS = "{bf:Average}" ///                                                            
 >                 avg_FSR = "{bf:Average}" ///                                                            
@@ -703,9 +703,9 @@ end of do-file
 . tictoc toc
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time:  1 Dec 2021 21:05:13
-End time:  1 Dec 2021 21:11:44
-Elapsed seconds:       390
+Start time:  6 Dec 2021 19:54:09
+End time:  6 Dec 2021 20:00:40
+Elapsed seconds:       391
 Elapsed minutes:         7
 Elapsed hours:       .11
 ------------------------------------------------------------------------------------------------------------------------
@@ -715,5 +715,5 @@ Elapsed hours:       .11
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:   1 Dec 2021, 21:11:44
+ closed on:   6 Dec 2021, 20:00:40
 ------------------------------------------------------------------------------------------------------------------------
