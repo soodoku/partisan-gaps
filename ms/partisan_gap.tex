@@ -1,0 +1,192 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[titletoc,title]{appendix}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\definecolor{dark-red}{rgb}{0.75,0.10,0.10}
+\definecolor{bluish}{rgb}{0.05,0.05,0.85}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[linkcolor=blue,
+			colorlinks=true,
+			urlcolor=blue,
+			pdfstartview={XYZ null null 1.00},
+			pdfpagemode=UseNone,
+			citecolor={bluish},
+			pdftitle={partisan_gap}]{hyperref}
+
+\usepackage[resetlabels,labeled]{multibib}
+\newcites{SI}{SI References}
+\usepackage{natbib}
+
+\usepackage{float}
+
+\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{letterpaper}               % This is 8.5x11 paper. Options are a4paper or a5paper or other... 
+\usepackage{graphicx}                % Handles inclusion of major graphics formats and allows use of 
+\usepackage{amsfonts,amssymb,amsbsy}
+\usepackage{amsxtra}
+\usepackage{verbatim}
+\setcitestyle{round,semicolon,aysep={},yysep={;}}
+\usepackage{setspace}		     % Permits line spacing control. Options are \doublespacing, \onehalfspace
+\usepackage{sectsty}		     % Permits control of section header styles
+\usepackage{pdflscape}
+\usepackage{fancyhdr}		     % Permits header customization. See header section below.
+\usepackage{url}                     % Correctly formats URLs with the \url{} tag
+\usepackage{fullpage}		%1-inch margins
+\usepackage{multirow}
+\usepackage{rotating}
+\setlength{\parindent}{3em}
+
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+
+\usepackage{chngcntr}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
+
+\makeatother
+
+\usepackage{footmisc}
+\setlength{\footnotesep}{\baselineskip}
+\makeatother
+\renewcommand{\footnotelayout}{\normalsize \doublespacing}
+
+
+% Caption
+\usepackage[hang, font=small,skip=0pt, labelfont={bf}]{caption}
+%\captionsetup[subtable]{font=small,skip=0pt}
+\usepackage{subcaption}
+
+% tt font issues
+% \renewcommand*{\ttdefault}{qcr}
+\renewcommand{\ttdefault}{pcr}
+
+\setcounter{page}{0}
+
+\usepackage{lscape}
+\renewcommand{\textfraction}{0}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\floatpagefraction}{0.40}
+\setcounter{totalnumber}{5}
+\makeatletter
+\providecommand\phantomcaption{\caption@refstepcounter\@captype}
+\makeatother
+
+\title{Knowledge Gaps On Partisan Knowledge Gaps}
+
+\author{Lucas Shen \and Gaurav Sood}
+
+
+\begin{comment}
+
+setwd(paste0(githubdir, "partisan-gaps/ms/"))
+tools::texi2dvi("partisan_gap.tex", pdf = TRUE, clean = TRUE)
+setwd(githubdir)
+
+\end{comment}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+
+\noindent Conventional wisdom suggests large, persistent gaps between partisans' stores of political knowledge, fanning concerns about democratic accountability. We reconsider the frequency and size of these ``partisan knowledge gaps,'' . Our findings suggest that knowledge gaps---when they do exist---stem more from motivated responding than genuine differences in factual knowledge.
+
+\end{abstract}
+
+\vspace{.2in}
+
+\newpage
+
+\doublespacing
+
+Factual knowledge about politics has long been viewed by scholars as key to democratic competence. Higher levels of political knowledge correspond to a number of normatively desirable outcomes, including higher levels of political tolerance and support for democratic norms, more active participation in politics, and more stable and consistent opinions on political matters \citep{Converse1964,dellicarpini,galston_2001}. Political knowledge also helps facilitate connections between individual group identities and policy views, which can then be applied to evaluations of public officials and parties in a way that increases democratic accountability \citep{dellicarpini}.
+
+Political knowledge's centrality to democratic health is perhaps why so many are troubled by the fact that Democrats and Republicans appear to differ in their knowledge of politics. Partisans' biased interpretation and retention of political facts appears in public opinion data reaching at least as far back as the 1980s \citep[e.g.,][]{bartels_2002,jerit2012partisan}. As such, the idea of large partisan knowledge gaps---differences in the types of information that Democrats and Republicans know---has become axiomatic in the political science. Indeed, as \citet{bullocketal_2015} note, conventional wisdom in the discipline that ``a persistent pattern in American public opinion is the presence of large differences between Democrats and Republicans in statements of factual beliefs'' (520). Everyday Americans seem to be catching on as well. A poll conducted by the Pew Research Center in 2018 demonstated that nearly eight in ten Americans believe that Democrats and Republicans not only disagree on plans and policies, but on facts as well \citep{pew2018disagree}. 
+
+Large knowledge gaps stemming from partisan biases are concerning. Just as high levels of political knowledge can lead to better citizenship, mass disagreement politically consequential facts can impede democratic governance and representation. Theories of retrospective accountability hinge citizens' ability to judge how well incumbents have performed in office  \citep{fiorina1981retrospective,Key1966,kramer_1971}. If Republicans and Democrats rely upon different sets of facts to make these judgments, elected officials have weaker incentives to work for their constituents. Partisan disagreement about basic facts also reduces the possibility of meaningful dialogue. If Republicans and Democrats disagree about how the economy is doing, a discussion about policies for improving the economy is unlikely to follow. 
+
+Given the long shadow that these gaps cast on the health of democracy, understanding how often and to what extent partisans differ in their knowledge of political facts is vital. To study the issue, we assembled a large dataset of partisan-relevant knowledge items. To do so, we made use of data from three prominent studies on the nature and pervasiveness of partisan knowledge gaps \citep{bullocketal_2015,jerit2012partisan,prior2015you}. We find that partisan knowledge gaps are highly variable, and that large differences in what Democrats and Republicans believe are less common than conventional wisdom suggests. In fact, fewer than one in three partisan knowledge gaps are larger than ten percentage points. In addition, nearly one in three partisan knowledge gaps are in the ``wrong'' direction, that is, partisans know less party-congenial information than their opponents. In addition, more than half of the gaps in the expected direction are not statistically significant at conventional levels, despite large sample sizes. On the whole, the average knowledge gap between Democrats and Republicans is six percentage points.
+
+We attempt to reconcile these findings with the conventional wisdom that partisan knowledge gaps are large and pervasive. We find little evidence that features of question wording systematically affect the size of such gaps; only questions that ask about topics about which there is significant misinformation or questions that are asked during presidential election campaigns appear to meaningfully influence the size of such gaps. We do, find, however, that the wording of response options matters. Specifically, we find that much of the conventional wisdom surrounding the ubiquity and size of knowledge gaps can be traced to  \citet{anes_gen} (ANES) questions, which include vague response options that encourage respondents to interpret meaning based on their own partisan biases. In a companion paper, using an original experiment, we demonstrate that vague response options of this type can produce partisan knowledge gaps \textit{even when} Democrats and Republicans know the answer \citep{roush_2021}. Taken together, our results support the conclusion that partisan knowledge gaps---when they do exist---are more an artifact of ``partisan cheerleading'' \citep{bullocketal_2015,prior2015you} or motivated guessing than a reflection of genuine differences in knowledge.
+
+
+\section*{Partisan Learning and Political Knowledge}
+
+During Bill Clinton's first term as president, the US budget deficit shrunk from \$255 billion to \$22 billion. Near the end of 1996, when the ANES asked a representative sample of Americans whether the budget deficit had decreased, increased, or remained the same over the past four years, far fewer Republicans than Democrats knew that the deficit had declined. While 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}.
+
+Such large discrepancies are considered neither anomalous nor unexpected. Our understanding of how partisan bias influences information processing suggests that there are good reasons to expect partisan knowledge gaps to be large and ubiquitous. The psychological processes underlying the development of knowledge gaps is similar to those that produce partisan differences in attitudes and evaluations on a wide variety of subjects. When people encounter information that conflicts with their predispositions, they experience cognitive discomfort, which they try to minimize by employing a variety of defense mechanisms \citep[e.g.,][]{abelson1959modes,festinger1962theory}. Specifically, they avoid exposing themselves to sources that provide them with uncongenial information, distrust such information when they do come across it, and do not work as hard to retain it \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. Partisanship helps reduce cognitive discomfort by acting as a ``perceptual screen,'' filtering in congenial facts that comport with an individual's partisan worldview while filtering out those that challenge it \citep{campbell1960, Zaller1992}. As a result, the theory goes, Democrats and Republicans come to ``know'' different types of information and consequently vary in their ability to answer political knowledge questions correctly.
+
+That being said, recent scholarship has provided reasons to doubt that these knowledge gaps are as frequent and sizable as commonly believed. For one,  \citet{bullocketal_2015} and \citet{prior2015you} demonstrate that partisan gaps in factual beliefs about politics are often the product of motivated responding. ``Partisan cheerleading'' arises when partisans want to send a message to either pollsters or the public at large about the strength or righteousness of their preferred party's stance on a particular matter \citep{huber_yair_2018}. As a result, what may look like differences in political knowledge among partisans may be more a consequence of respondents providing party-congenial responses rather than expressing what they genuinely know. \citet{bullocketal_2015} and \citet{prior2015you} show that these partisan gaps can be reduced by shifting respondents' directional motives to accuracy motives via small monetary incentives for correct answers. More recently, \citet{huber_yair_2018} also showed that partisan gaps shrink when survey respondents are given the opportunity to cheerlead prior to answering other questions. Taken together, these studies suggest that the concern that Democrats and Republicans are truly drawing on differential bases of political knowledge may be overblown.
+
+Secondly, a more critical examination of the processes thought to underlie the production of knowledge gaps suggests that genuine differences in knowledge between Democrats and Republicans should be smaller. According to the theory of selective exposure, Democrats and Republicans consume different media sources, thereby learning and retaining different facts that are reflected in reported knowledge of political information \citep[e.g.,][]{Stroud2008,stroud_2010}. In reality, however, most people consume very little political news \citep{Prior2007,flaxmanetal_2016}, and the news that they do consume is relatively ideologically balanced \citep{flaxmanetal_2016,garzetal_2018,gentzkowshapiro_2011,guess_2020}. There is little reason, therefore, to believe that knowledge gaps emerge as a result of partisans simply tuning into different sources. Regardless of where partisans get their information, evidence shows that they do learn facts in a motivated fashion \citep{hill_2017,jerit2012partisan,khanna2018motivated}---but the effects are modest, and people exhibit little partisan bias in their recall of information \citep{khanna2018motivated}. Other scholars have pointed out that Democrats and Republicans respond to current events in a similar fashion, bringing into question the existence of motivated learning in the first place \citep{gerber_annual_review,kernell_2019}. Therefore, the conventional wisdom regarding the individual-level mechanisms thought to produce large knowledge gaps may be flawed.
+
+Given what scholars know about the nature of partisan survey response, news consumption, and knowledge recall, there are good reasons to doubt that partisan knowledge gaps are as large, ubiquitous, and normatively troubling as expected. That being said, we lack a comprehensive understanding of the nature and frequency of such partisan differences outside of experimental contexts. Indeed, as \citet{bullocklenz_2019} note in their review of partisan bias in surveys, ``despite burgeoning interest in partisan differences [in responses to factual questions about politics], there have been few attempts to generalize about the size of these differences'' (330).  In the remainder of this paper, we attempt to do just that.
+
+\section*{Data and Research Design}
+
+To estimate the frequency and size of partisan knowledge gaps, we assembled a large dataset of political knowledge items. Because we are interested in the degree to which partisan reasoning produces knowledge gaps, we focused on questions about partisan-relevant facts---that is, facts that carry ``positive or negative implications for one's party'' \citep[][673]{jerit2012partisan} that have an objectively correct answer.
+
+To build the dataset, we harvested data from three prominent studies on partisan knowledge gaps. The first two studies---\citet{bullocketal_2015} and \citet{prior2015you}---use survey experiments to estimate the degree to which partisan knowledge gaps are a product of expressive responding. In our current study, however, we are interested in measuring the extent to which partisan gaps exist on ordinary public opinion surveys, regardless of the process by which they are generated. Accordingly, we only used data from the control group of these studies. A third study from which we source data focuses on explaining partisan gaps and includes both observational and experimental data \citep{jerit2012partisan}. Here, we only used data from the observational study---which compiles questions from surveys conducted by national news organizations---as the experiment focuses on partisan learning, not on gaps in stored knowledge. 
+
+\section*{Partisan Knowledge Gaps}
+
+\begin{center}
+\begin{figure}[H]
+  \centering
+  \caption{Balance Test by Treatment Arm}
+  \includegraphics[scale=.8]{../figs/partisan-gap-by-item-arm.pdf}
+  \label{fig:figbias}
+  \caption*{Balance Test}
+\end{figure}
+\end{center}
+
+\vspace{-10mm}
+
+\section*{Discussion and Conclusion}
+
+Our results clarify our understanding of partisan knowledge gaps in important ways. First, partisan knowledge gaps are less ubiquitous than what conventional wisdom in political science suggests. For three in ten items, partisans either know \textit{less} party-congenial information or \textit{more} party-\textit{un}congenial information than their opponents. Among gaps occurring in the correct direction, we can only be certain that Democrats and Republicans actually differ from one another in their factual understanding of politics less than half the time. Secondly, the average knowledge gap in our data is small, with a mean gap of six percentage points and a median gap of about three percentage points. Third, many question features like the number of response options or question wording weakly predict the size of partisan knowledge gaps; instead, it is question difficulty and the \textit{content} of response options that influence the size of the gap.
+
+If partisan gaps are small on average and difficult to predict based on question wording, why does the common wisdom that Democrats and Republicans differ substantially in political knowledge persist? One explanation may be that the knowledge items in our dataset are a not a representative set of relevant cognitions that partisans have. It may well be that the knowledge gaps are larger on partisan-relevant facts that are not asked about in the studies described above. To what degree this is so, we cannot say, except to note that the general bias is to ``hunt where the ducks are.'' That is, in at least two of our studies \citep{bullocketal_2015, prior2015you}, expert political scientists constructed knowledge questions that they reasonably believed \textit{a priori} would produce large partisan gaps; in the case of \citet{jerit2012partisan}, the authors built a dataset of knowledge questions that they believed carried a partisan implication (in other words, in which they expected knowledge gaps between Democrats and Republicans to occur). The fact that statistically significant, ``positive'' knowledge gaps only emerge on about half of the items from these studies suggests that partisan knowledge gaps are less common even when looking in the most obvious place. 
+
+A potentially more satisfying explanation for this discrepancy is that such conventional wisdom is largely based on studies using data from the \citet{anes_gen}. Much of the literature on partisan knowledge gaps has built upon \citet{bartels_2002}, who was the first to write about these differences \citep{bullocklenz_2019}. For example, using the ANES data, \citet{bartels_2002} discovered that Democrats and Republicans reported different beliefs on a variety of objective facts---such as how inflation and unemployment changed over the previous eight years---while Ronald Reagan was president. In 1988, the estimated differences between Democrats and Republicans on knowledge questions ranged from approximately 12 to 36 percentage points, depending on the question.\footnote{These figures have been rescaled in percentage point terms. \citeapos{bartels_2002}  original calculation is that ``the estimated differences between Democrats and Republicans rang[e] from .249 to .715 on the -1 to +1 scales'' (137).} These kinds of questions with imprecise response options---which ask about respondents' \textit{assessment} of politically relevant facts rather than their actual \textit{knowledge} of such facts---are one of the most likely source of large partisan knowledge gaps. The fact that questions with imprecise response options are commonplace on one of the biggest publicly-available sources of survey data likely helps perpetuate the idea that Democrats and Republicans approach the political world with entirely different information. 
+
+Based on our results here, we suspect that the vast majority of partisan gaps---when they do appear---are more likely to be a product of motivated responding than of partisans simply knowing different things (\citeauthor{bisgaard_slothuus_2018} \citeyear{bisgaard_slothuus_2018}; \citeauthor {bullocketal_2015} \citeyear{bullocketal_2015}; \citeauthor{prior2015you} \citeyear{prior2015you}; \citeauthor{schaffner_luks} \citeyear{schaffner_luks}; but see \citeauthor{berinsky_2017} \citeyear{berinsky_2017} and \citeauthor{peterson_iyengar_forth} \citeyear{peterson_iyengar_forth}). None of this is to say that partisan bias does not play a role in shaping how Democrats and Republicans interpret what they know; there is ample evidence to suggest that it does \citep[e.g.,][]{bisgaard2015bias, gainesetal_2007, khanna2018motivated}. Nor should the small size of the average gap prevent us from noting that on many of the questions, a majority of partisans on both sides of the aisle were either ignorant or misinformed about the facts: the average proportion of Republicans and Democrats who provided correct answers to these knowledge questions is about 42\% each. 
+
+While this is certainly troubling for those who view political knowledge as an essential component of democratic citizenship, there is some reason for optimism. When it comes to knowledge of political facts, more often than not, there do not appear to be large imbalances between what Democrats and Republicans know. When partisan differences do emerge, we suspect that they are often more a product of biased interpretation of survey questions rather than of differential stores of knowledge. This suggests that even in a polarized political context, most Democrats and Republicans can use the same information to make collective judgments about whether to reward or punish elected officials based on performance---whether they want to, of course, is another question. 
+
+\clearpage
+\bibliographystyle{apsr}
+\bibliography{pgap}
+
+\clearpage
+
+\appendix
+\renewcommand{\thesection}{SI \arabic{section}}
+\setcounter{table}{0}\renewcommand\thetable{\thesection.\arabic{table}}  
+\setcounter{figure}{0}\renewcommand\thefigure{\thesection.\arabic{figure}}
+\counterwithin{figure}{section}
+
+\begin{center}
+\Large \textbf{SUPPORTING INFORMATION}
+\end{center}
+\singlespacing
+\vspace{-.4in}
+
+\begin{center}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.8]{../figs/baltest-24k-rw.pdf}
+  \label{fig:figbias}
+  \caption*{Balance Test}
+\end{figure}
+\end{center}
+
+
+
+\end{document}
