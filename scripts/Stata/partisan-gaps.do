@@ -18,6 +18,10 @@ set linesize 120        // Line size limit to make output more readable, affects
 // local figsavedir ./out/figures	// Savepath for figures
 // local tabsavedir ./out/tables 	// Savepath for tables
 adopath ++ ./ado 		// Add path to ados
+
+*** Setup dependencies
+txt2macro stata-requirements.txt
+setup "`r(mymacro)'"
 * -----------------------------------------------------------------------------
 tictoc tic
 

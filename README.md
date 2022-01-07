@@ -3,14 +3,14 @@
 
 ### Data
 
-1. [Data](data/)
+1. [Data](data/mturk-recoded.csv)
 
 ### Scripts
 
-1. [Data inspection](scripts/)
-2. [Recode Data](scripts/)
-3. [Balance Tests](scripts/)
-4. [Figure 1](scripts/)
+1. [Data inspection](scripts/quant-description.ipynb)
+2. [Recode Data](scripts/02_mturk_recode.R)
+3. [Balance Tests](scripts/Stata/baltest-24k-rw.do)
+4. [Figure 1](scripts/Stata/fig-partisan-gap.do)
 
 ### Tables
 
