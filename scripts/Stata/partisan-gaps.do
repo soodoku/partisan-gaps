@@ -29,10 +29,10 @@ tictoc tic
 import delimited D:/partisan-gaps/data/mturk-recoded.csv
 do preamble.do
 
-**** Figure for raw partisan gaps by items, by survey type
+// **** Figure for raw partisan gaps by items, by survey type
 do fig-partisan-gap.do
 
-*** Balance tests (24k vs RW), takes a while
+// *** Balance tests (24k vs RW), takes a while
 do baltest-24k-rw.do
 
 **** Reg table for effect of party & survey type on response
