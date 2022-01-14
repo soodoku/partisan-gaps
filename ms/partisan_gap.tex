@@ -44,6 +44,8 @@
 \usepackage{chngcntr}
 \usepackage{booktabs}
 \usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{dcolumn}
 
 \def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
 
@@ -159,6 +161,20 @@ A potentially more satisfying explanation for this discrepancy is that such conv
 Based on our results here, we suspect that the vast majority of partisan gaps---when they do appear---are more likely to be a product of motivated responding than of partisans simply knowing different things (\citeauthor{bisgaard_slothuus_2018} \citeyear{bisgaard_slothuus_2018}; \citeauthor {bullocketal_2015} \citeyear{bullocketal_2015}; \citeauthor{prior2015you} \citeyear{prior2015you}; \citeauthor{schaffner_luks} \citeyear{schaffner_luks}; but see \citeauthor{berinsky_2017} \citeyear{berinsky_2017} and \citeauthor{peterson_iyengar_forth} \citeyear{peterson_iyengar_forth}). None of this is to say that partisan bias does not play a role in shaping how Democrats and Republicans interpret what they know; there is ample evidence to suggest that it does \citep[e.g.,][]{bisgaard2015bias, gainesetal_2007, khanna2018motivated}. Nor should the small size of the average gap prevent us from noting that on many of the questions, a majority of partisans on both sides of the aisle were either ignorant or misinformed about the facts: the average proportion of Republicans and Democrats who provided correct answers to these knowledge questions is about 42\% each. 
 
 While this is certainly troubling for those who view political knowledge as an essential component of democratic citizenship, there is some reason for optimism. When it comes to knowledge of political facts, more often than not, there do not appear to be large imbalances between what Democrats and Republicans know. When partisan differences do emerge, we suspect that they are often more a product of biased interpretation of survey questions rather than of differential stores of knowledge. This suggests that even in a polarized political context, most Democrats and Republicans can use the same information to make collective judgments about whether to reward or punish elected officials based on performance---whether they want to, of course, is another question. 
+
+
+\begin{table}[ht] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{l*{6}{D{.}{.}{-1}}}
+			\toprule
+			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+			\input ../tabs/mturk-reg-table-fragment.tex
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption*{All models are linear probability models where the dependent variable indicates whether response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+\end{table}
 
 \clearpage
 \bibliographystyle{apsr}
