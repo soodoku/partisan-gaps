@@ -3,4 +3,4 @@
 
 * Current setup is such that running `partisan-gaps.do` alone will reproduce all tables and figures.
 
-* The [`log file`](scripts/Stata/logs/partisan-gaps.txt) will document the log for `partisan-gaps.do`.
+* The [`log file`](logs/partisan-gaps.txt) will document the log for `partisan-gaps.do`.
