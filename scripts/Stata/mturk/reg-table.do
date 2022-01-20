@@ -63,8 +63,7 @@ esttab,
 ;	
 
 
-local tabsavedir ../../tabs;
-esttab using `tabsavedir'/mturk-reg-table-fragment.tex, 
+esttab using $tabsavedir/mturk-reg-table-fragment.tex, 
 	b(%9.3fc)
 	se(%9.3fc)
 	varwidth(20)

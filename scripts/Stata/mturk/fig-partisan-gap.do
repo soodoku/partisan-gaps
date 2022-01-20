@@ -112,8 +112,7 @@ gr_edit .plotregion1.move yaxis1[5] leftof 9 1
 gr_edit .style.editstyle margin(zero) editcopy 
 gr_edit .plotregion1.style.editstyle margin(zero) editcopy
 
-
-graph export ../../figs/partisan-gap-by-item-arm.pdf, replace	
+graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace	
 
 
 * sort(, descending) /// sort by coeff size (by first column) 

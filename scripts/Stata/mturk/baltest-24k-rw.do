@@ -102,6 +102,6 @@ gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_
 
 gr_edit .title.DragBy 0 -31
 
-graph export ../../figs/baltest-24k-rw.pdf, replace	
+graph export $figsavedir/baltest-24k-rw.pdf, replace	
 
 restore
