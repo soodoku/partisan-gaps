@@ -1,32 +1,24 @@
-------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  14 Jan 2022, 22:36:42
+ opened on:  20 Jan 2022, 18:48:16
 
 . 
-. cls                                     // Clear results window
-
 . version 13              // Still on version 13 :(
 
-. clear all               // Start with a clean slate
+. 
+. global figsavedir `rootdir'/figs
 
-. set more off            // Disable partitioned output
+. global tabsavedir `rootdir'/tabs
 
-. macro drop _all         // Clear all macros to avoid namespace conflicts
-
-. set linesize 120        // Line size limit to make output more readable, aff
-> ects logs
-
-. // local figsavedir ./out/figures       // Savepath for figures
-. // local tabsavedir ./out/tables        // Savepath for tables
 . adopath ++ ./ado                // Add path to ados
   [1]              "./ado"
-  [2]  (BASE)      "C:\Program Files\Stata17\ado\base/"
-  [3]  (SITE)      "C:\Program Files\Stata17\ado\site/"
+  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
+  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
   [4]              "."
-  [5]  (PERSONAL)  "C:\Users\lsys\ado\personal/"
-  [6]  (PLUS)      "C:\Users\lsys\ado\plus/"
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
   [7]  (OLDPLACE)  "c:\ado/"
 
 . 
@@ -40,15 +32,15 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 14 Jan 2022 22:36:43
+Start time: 20 Jan 2022 18:48:16
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
 . **** Basic prep of data
-. import delimited D:/partisan-gaps/data/mturk-recoded.csv
-(344 vars, 1,253 obs)
+. import delimited D:/partisan-gaps/data/turk/mturk-recoded.csv
+(344 vars, 1253 obs)
 
-. do preamble.do
+. do ./mturk/preamble.do
 
 . global items    birth religion illegal death increase science fraud mmr deficit
 
@@ -65,7 +57,7 @@ Start time: 14 Jan 2022 22:36:43
 . rename avg avg_str
 
 . destring avg_str, gen(avg) force
-avg_str: contains nonnumeric bytes; avg generated as double
+avg_str contains nonnumeric characters; avg generated as double
 (2 missing values generated)
 
 . 
@@ -94,7 +86,7 @@ avg_str: contains nonnumeric bytes; avg generated as double
 
 . 
 . replace deficit = 1 - deficit
-(1,171 real changes made)
+(1171 real changes made)
 
 . 
 . *------------------------------------------------------------------------------
@@ -153,12 +145,9 @@ end of do-file
 
 . 
 . // **** Figure for raw partisan gaps by items, by survey type
-. do fig-partisan-gap.do
+. do ./mturk/fig-partisan-gap.do
 
 . grstyle init
-Scheme _GRSTYLE_ already active although grstyle is not running
-Press any key to reset default scheme to s2color and overwrite scheme _GRSTYLE_, or Break to abort
-(set scheme preference recorded)
 
 . grstyle set plain, 
 
@@ -290,20 +279,20 @@ Press any key to reset default scheme to s2color and overwrite scheme _GRSTYLE_,
 . gr_edit .plotregion1.style.editstyle margin(zero) editcopy
 
 . 
-. 
-. graph export ../../figs/partisan-gap-by-item-arm.pdf, replace   
-file ../../figs/partisan-gap-by-item-arm.pdf saved as PDF format
+. graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
+(file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf written in PDF format)
 
 . 
 . 
 . * sort(, descending) /// sort by coeff size (by first column) 
-> *       transform(* = min(max(@,-.25),.5)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound
+> *       transform(* = min(max(@,-.25),.5)) /// truncate CI, 1st num is lower bound, 2nd num is up
+> per bound
 
 end of do-file
 
 . 
 . // *** Balance tests (24k vs RW), takes a while
-. do baltest-24k-rw.do
+. do ./mturk/baltest-24k-rw.do
 
 . preserve
 
@@ -341,7 +330,8 @@ end of do-file
 
 . qui tabulate educ, gen(d_educ)
 
-. local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
+. local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vo
+> te_1 pid_strength_1
 
 . 
 . eststo clear 
@@ -395,7 +385,8 @@ delimiter now ;
 >         ytick(none) /// remove horizontal grids 
 >         ylabel(, labsize(vsmall))
 >         xlabel(-.3(.1).3, labsize(vsmall))
->         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound  
+>         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound, 2nd num i
+> s upper bound  
 >         yscale(noline alt)
 >         plotregion(margin(0 1 0 0) ) ///        
 >         graphregion(margin(3 0 0 0)) ///        
@@ -414,51 +405,53 @@ delimiter now cr
 . gr_edit .move yaxis1 leftof 8 5 // yaxis1 grid reposition
 
 . 
-. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N              $female_rreport}}"', tickset(ma
-> jor)
+. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N              $female_rr
+> eport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $age_rreport}}"', tickset(major)
-
-. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N      $hisla_rreport}}"', tickset(maj
-> or)
-
-. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N           $d_educ2_rreport}}"', tickset
-> (major)
-
-. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N        $d_educ5_rreport}}"', tickset(
-> major)
-
-. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N    $d_educ1_rreport}}"', tickset
-> (major)
-
-. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N       $d_educ4_rreport}}"', tickset(
-> major)
-
-. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N                $asian_rreport}}"', tickset(maj
-> or)
-
-. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               $black_rreport}}"', tickset(majo
-> r)
-
-. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               $white_rreport}}"', tickset(majo
-> r)
-
-. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', tickset(major)
-. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_1_N  $interest_1_rreport}}"', ti
-> ckset(major)
-
-. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N   $vote_1_rreport}}"', tickset(ma
-> jor)
-
-. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_strength_1_N   $pid_strength_1_rreport
+. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $age_rreport
 > }}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N      $hisla_rre
+> port}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N           $d_educ2
+> _rreport}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N        $d_educ5_
+> rreport}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N    $d_educ1
+> _rreport}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N       $d_educ4_
+> rreport}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N                $asian_rre
+> port}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               $black_rrep
+> ort}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               $white_rrep
+> ort}}"', tickset(major)
+
+. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', tickset(maj
+> or)
+. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_1_N  $inter
+> est_1_rreport}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N   $vote_1_rr
+> eport}}"', tickset(major)
+
+. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_strength_1_N   $p
+> id_strength_1_rreport}}"', tickset(major)
 
 . 
 . gr_edit .title.DragBy 0 -31
 
 . 
-. graph export ../../figs/baltest-24k-rw.pdf, replace     
-file ../../figs/baltest-24k-rw.pdf saved as PDF format
+. graph export $figsavedir/baltest-24k-rw.pdf, replace    
+(file D:/partisan-gaps/figs/baltest-24k-rw.pdf written in PDF format)
 
 . 
 . restore
@@ -468,7 +461,7 @@ end of do-file
 
 . 
 . **** Reg table for effect of party & survey type on response
-. do reg-table.do
+. do ./mturk/reg-table.do
 
 . 
 . * Reshape from wide to long to stack participant-item observations
@@ -477,12 +470,12 @@ end of do-file
   3. }
 
 . reshape long item, i(id) j(item_type, string)
-(j = birth death deficit fraud illegal increase mmr religion science)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
 
-Data                               Wide   ->   Long
+Data                               wide   ->   long
 -----------------------------------------------------------------------------
-Number of observations            1,207   ->   10,863      
-Number of variables                 406   ->   399         
+Number of obs.                     1207   ->   10863
+Number of variables                 406   ->     399
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -490,7 +483,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3,708 observations deleted)
+(3708 observations deleted)
 
 . 
 . 
@@ -688,10 +681,10 @@ Constant                0.165***    0.314***    0.182***   -0.008       1.794+  
                       (0.006)     (0.020)     (0.017)     (0.946)     (1.083)     (0.878)   
 --------------------------------------------------------------------------------------------
 R$^2$                   0.329       0.270       0.354       0.335       0.277       0.361   
-Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
-> {Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
-Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{Yes} 
->    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
+Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes} 
+>    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
+Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \mu
+> lticolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
 Items                       9           9           9           9           9           9   
 Respondents               794         794         794         793         793         793   
 Respondent-items         6,893        6,893        6,893        6,884        6,884        6,884   
@@ -699,9 +692,7 @@ Respondent-items         6,893        6,893        6,893        6,884        6,8
 Standard errors in parentheses
 + p<0.1, * p<0.05, ** p<0.01, *** p<0.001
 
-.         local tabsavedir ../../tabs;
-
-. esttab using `tabsavedir'/mturk-reg-table-fragment.tex, 
+.         esttab using $tabsavedir/mturk-reg-table-fragment.tex, 
 >         b(%9.3fc)
 >         se(%9.3fc)
 >         varwidth(20)
@@ -731,7 +722,7 @@ Standard errors in parentheses
 >         substitute(\_ _)
 >         fragment booktabs replace        
 >         ;
-(output written to ../../tabs/mturk-reg-table-fragment.tex)
+(output written to D:/partisan-gaps/tabs/mturk-reg-table-fragment.tex)
 
 . #delimit cr     
 delimiter now cr
@@ -740,19 +731,19 @@ end of do-file
 
 . 
 . tictoc toc
-------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 14 Jan 2022 22:36:42
-End time: 14 Jan 2022 22:43:10
-Elapsed seconds:       388
-Elapsed minutes:         6
-Elapsed hours:       .11
-------------------------------------------------------------------------------------------------------------------------
+Start time: 20 Jan 2022 18:48:16
+End time: 20 Jan 2022 18:53:11
+Elapsed seconds:       294
+Elapsed minutes:         5
+Elapsed hours:       .08
+---------------------------------------------------------------------------------------------------
 
 . 
 . log close
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  14 Jan 2022, 22:43:10
-------------------------------------------------------------------------------------------------------------------------
+ closed on:  20 Jan 2022, 18:53:11
+---------------------------------------------------------------------------------------------------
