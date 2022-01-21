@@ -47,6 +47,8 @@
 \usepackage{adjustbox}
 \usepackage{dcolumn}
 
+\usepackage{cleveref}
+
 \def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
 
 \makeatother
@@ -130,7 +132,7 @@ Secondly, a more critical examination of the processes thought to underlie the p
 
 Given what scholars know about the nature of partisan survey response, news consumption, and knowledge recall, there are good reasons to doubt that partisan knowledge gaps are as large, ubiquitous, and normatively troubling as expected. That being said, we lack a comprehensive understanding of the nature and frequency of such partisan differences outside of experimental contexts. Indeed, as \citet{bullocklenz_2019} note in their review of partisan bias in surveys, ``despite burgeoning interest in partisan differences [in responses to factual questions about politics], there have been few attempts to generalize about the size of these differences'' (330).  In the remainder of this paper, we attempt to do just that.
 
-\section*{Data and Research Design}
+\section*{Data and Research Design}\label{sec:data}
 
 We surveyed 1,253 respondents on Amazon Mechanical Turk (MTurk) on July 9th, 2017. We randomly assigned respondents to one of five branches—Real World (RW), Iron Pyrite Standard (IP), Fewer Substantive Responses (FSR), 14k Gold Standard (14k), and the 24k Gold Standard (24k). In each condition respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not. (The exact question wording for each of the items is presented in Appendix C.) Respondents assigned to RW and IP saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they don’t know. (Again, see Appendix C for the specific wording.)
 The RW condition reflects the real-world standards most closely--it does not feature a `Don't Know', it often features social proof about the incorrect answer, for instance, ``Some people believe Barack Obama was not born in the United States, but was born in another country'' on a question about where Mr. Obama was born, and some neutral information about the topic, like ``According to the Constitution, American presidents must be `natural born citizens''' on the birthplace question, that may encourage the ignorant to take a guess.
@@ -154,10 +156,14 @@ In the Texas survey, we added another condition to the above design – no parti
 \begin{center}
 \begin{figure}[H]
   \centering
-  \caption{Paritsan Gap by Treatment Arm}
+  \caption{Partisan Gap by Treatment Arm}
   \includegraphics[scale=.8]{../figs/partisan-gap-by-item-arm.pdf}
-  \label{fig:figbias}
-  \caption*{Balance Test}
+  \label{fig:partisangaps}
+  \caption*{\footnotesize 
+  	Each marker is the estimated gap between Republican partisans and Democratic partisans for how congenial their responses are to their own party.
+  	Columns indicate the five different treatment arms described in \nameref{sec:data}. Rows indicate the nine individual survey items described in \cref{si:mturk} plus their average.
+  	Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
+  }
 \end{figure}
 \end{center}
 
@@ -177,9 +183,13 @@ Based on our results here, we suspect that the vast majority of partisan gaps---
 
 While this is certainly troubling for those who view political knowledge as an essential component of democratic citizenship, there is some reason for optimism. When it comes to knowledge of political facts, more often than not, there do not appear to be large imbalances between what Democrats and Republicans know. When partisan differences do emerge, we suspect that they are often more a product of biased interpretation of survey questions rather than of differential stores of knowledge. This suggests that even in a polarized political context, most Democrats and Republicans can use the same information to make collective judgments about whether to reward or punish elected officials based on performance---whether they want to, of course, is another question. 
 
+\begin{equation}\label{eq:partisangap}
+y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_j + \delta (Rep_i \times Arm)_j + \varepsilon_{ijk}
+\end{equation}
 
 \begin{table}[ht] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Partisan Knowledge Gaps: MTurk}
 	\begin{adjustbox}{max width=\textwidth}
 		\begin{tabular}{l*{6}{D{.}{.}{-1}}}
 			\toprule
@@ -188,7 +198,7 @@ While this is certainly troubling for those who view political knowledge as an e
 			\bottomrule
 		\end{tabular}
 	\end{adjustbox}
-	\caption*{All models are linear probability models where the dependent variable indicates whether response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 \clearpage
@@ -212,14 +222,20 @@ While this is certainly troubling for those who view political knowledge as an e
 \begin{center}
 \begin{figure}[H]
   \centering
+  \caption{Balance test: MTurk}
   \includegraphics[scale=.8]{../figs/baltest-24k-rw.pdf}
-  \label{fig:figbias}
-  \caption*{Balance Test}
+  \label{fig:baltest-24k-rw}
+  \caption*{\footnotesize Figure shows the results from a balance test for the Amazon Mechanical Turk sample. Self-reported characteristics of respondents are compared between the respondents assigned to the 24k arm and the RW arm as described in \nameref{sec:data}. 
+  Rows are self-reported characteristics.
+  Second column reports the correlation between characteristics and the 24k arm, and the 95\% confidence intervals constructed from bootstrapped standard errors (n=10,000).
+  Third column reports the estimated difference between the 24k respondents and the RW respondents.
+  Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
+  }
 \end{figure}
 \end{center}
 
 \clearpage
-\section{Item Text for the MTurk Study}
+\section{Item Text for the MTurk Study}\label{si:mturk}
 
 \textbf{Preface for Different Conditions}
 

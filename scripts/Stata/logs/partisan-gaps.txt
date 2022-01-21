@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  20 Jan 2022, 18:48:16
+ opened on:  21 Jan 2022, 16:10:42
 
 . 
 . version 13              // Still on version 13 :(
@@ -14,11 +14,11 @@
 
 . adopath ++ ./ado                // Add path to ados
   [1]              "./ado"
-  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
-  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
+  [2]  (BASE)      "C:\Program Files\Stata17\ado\base/"
+  [3]  (SITE)      "C:\Program Files\Stata17\ado\site/"
   [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
+  [5]  (PERSONAL)  "C:\Users\lsys\ado\personal/"
+  [6]  (PLUS)      "C:\Users\lsys\ado\plus/"
   [7]  (OLDPLACE)  "c:\ado/"
 
 . 
@@ -32,13 +32,13 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 20 Jan 2022 18:48:16
+Start time: 21 Jan 2022 16:10:42
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
 . **** Basic prep of data
 . import delimited D:/partisan-gaps/data/turk/mturk-recoded.csv
-(344 vars, 1253 obs)
+(344 vars, 1,253 obs)
 
 . do ./mturk/preamble.do
 
@@ -57,7 +57,7 @@ Start time: 20 Jan 2022 18:48:16
 . rename avg avg_str
 
 . destring avg_str, gen(avg) force
-avg_str contains nonnumeric characters; avg generated as double
+avg_str: contains nonnumeric bytes; avg generated as double
 (2 missing values generated)
 
 . 
@@ -86,7 +86,7 @@ avg_str contains nonnumeric characters; avg generated as double
 
 . 
 . replace deficit = 1 - deficit
-(1171 real changes made)
+(1,171 real changes made)
 
 . 
 . *------------------------------------------------------------------------------
@@ -144,10 +144,13 @@ avg_str contains nonnumeric characters; avg generated as double
 end of do-file
 
 . 
-. // **** Figure for raw partisan gaps by items, by survey type
+. **** Figure for raw partisan gaps by items, by survey type
 . do ./mturk/fig-partisan-gap.do
 
 . grstyle init
+Scheme _GRSTYLE_ already active although grstyle is not running
+Press any key to reset default scheme to s2color and overwrite scheme _GRSTYLE_, or Break to abort
+(set scheme preference recorded)
 
 . grstyle set plain, 
 
@@ -280,18 +283,17 @@ end of do-file
 
 . 
 . graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
-(file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf written in PDF format)
+file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf saved as PDF format
 
 . 
 . 
 . * sort(, descending) /// sort by coeff size (by first column) 
-> *       transform(* = min(max(@,-.25),.5)) /// truncate CI, 1st num is lower bound, 2nd num is up
-> per bound
+> *       transform(* = min(max(@,-.25),.5)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound
 
 end of do-file
 
 . 
-. // *** Balance tests (24k vs RW), takes a while
+. *** Balance tests (24k vs RW), takes a while
 . do ./mturk/baltest-24k-rw.do
 
 . preserve
@@ -330,8 +332,7 @@ end of do-file
 
 . qui tabulate educ, gen(d_educ)
 
-. local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vo
-> te_1 pid_strength_1
+. local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
 
 . 
 . eststo clear 
@@ -371,12 +372,14 @@ delimiter now ;
 >                          // est11="Others `others_N' `others_rreport'"
 >                          est11="Political interest $interest_1_N $interest_1_rreport"
 >                          est12="Intention to vote $vote_1_N $vote_1_rreport"
->                          est13="Political leaning $pid_strength_1_N $pid_strength_1_rreport"
+>                          est13="Political leaning $pid_strength_1_N $pid_strength_1_rr
+> eport"
 >                          )
 >         headings(
 >                 "HS diploma $d_educ2_N $d_educ2_rreport"="{bf:Education}"
 >                 "Asian $asian_N $asian_rreport"="{bf:Race}"
->                 "Political interest $interest_1_N $interest_1_rreport"="{bf:Politics}", 
+>                 "Political interest $interest_1_N $interest_1_rreport"="{bf:Politics}"
+> , 
 >                 labsize(vsmall) labgap(-3.5)
 >                 )
 >         asequation /// "set equation to model name or string" make the rows the models
@@ -385,8 +388,8 @@ delimiter now ;
 >         ytick(none) /// remove horizontal grids 
 >         ylabel(, labsize(vsmall))
 >         xlabel(-.3(.1).3, labsize(vsmall))
->         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound, 2nd num i
-> s upper bound  
+>         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound
+> , 2nd num is upper bound  
 >         yscale(noline alt)
 >         plotregion(margin(0 1 0 0) ) ///        
 >         graphregion(margin(3 0 0 0)) ///        
@@ -399,59 +402,60 @@ delimiter now ;
 . #delimit cr
 delimiter now cr
 . 
-. gr_edit .yaxis1.style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy // yaxis1 edits
+. gr_edit .yaxis1.style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy // yaxi
+> s1 edits
 
 . 
 . gr_edit .move yaxis1 leftof 8 5 // yaxis1 grid reposition
 
 . 
-. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N              $female_rr
-> eport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N             
+>  $female_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $age_rreport
-> }}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $
+> age_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N      $hisla_rre
-> port}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N     
+>  $hisla_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N           $d_educ2
-> _rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N        
+>    $d_educ2_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N        $d_educ5_
-> rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N      
+>   $d_educ5_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N    $d_educ1
-> _rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N 
+>    $d_educ1_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N       $d_educ4_
-> rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N     
+>   $d_educ4_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N                $asian_rre
-> port}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N               
+>  $asian_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               $black_rrep
-> ort}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               
+> $black_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               $white_rrep
-> ort}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               
+> $white_rreport}}"', tickset(major)
 
-. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', tickset(maj
-> or)
-. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_1_N  $inter
-> est_1_rreport}}"', tickset(major)
+. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', 
+> tickset(major)
+. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_
+> 1_N  $interest_1_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N   $vote_1_rr
-> eport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N  
+>  $vote_1_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_strength_1_N   $p
-> id_strength_1_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_streng
+> th_1_N   $pid_strength_1_rreport}}"', tickset(major)
 
 . 
 . gr_edit .title.DragBy 0 -31
 
 . 
 . graph export $figsavedir/baltest-24k-rw.pdf, replace    
-(file D:/partisan-gaps/figs/baltest-24k-rw.pdf written in PDF format)
+file D:/partisan-gaps/figs/baltest-24k-rw.pdf saved as PDF format
 
 . 
 . restore
@@ -470,12 +474,12 @@ end of do-file
   3. }
 
 . reshape long item, i(id) j(item_type, string)
-(note: j = birth death deficit fraud illegal increase mmr religion science)
+(j = birth death deficit fraud illegal increase mmr religion science)
 
-Data                               wide   ->   long
+Data                               Wide   ->   Long
 -----------------------------------------------------------------------------
-Number of obs.                     1207   ->   10863
-Number of variables                 406   ->     399
+Number of observations            1,207   ->   10,863      
+Number of variables                 406   ->   399         
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -483,7 +487,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3708 observations deleted)
+(3,708 observations deleted)
 
 . 
 . 
@@ -647,48 +651,79 @@ delimiter now ;
 > ;
 
 Dep. var. is 1(response is congenial)
---------------------------------------------------------------------------------------------
-                          (1)         (2)         (3)         (4)         (5)         (6)   
---------------------------------------------------------------------------------------------
-Republican=1            0.256***                0.375***    0.258***                0.374***
-                      (0.016)                 (0.030)     (0.016)                 (0.029)   
+----------------------------------------------------------------------------------------
+> ----
+                          (1)         (2)         (3)         (4)         (5)         (6
+> )   
+----------------------------------------------------------------------------------------
+> ----
+Republican=1            0.256***                0.375***    0.258***                0.37
+> 4***
+                      (0.016)                 (0.030)     (0.016)                 (0.029
+> )   
 
-14k                                -0.090***   -0.023                  -0.093***   -0.026   
-                                  (0.025)     (0.022)                 (0.025)     (0.021)   
+14k                                -0.090***   -0.023                  -0.093***   -0.02
+> 6   
+                                  (0.025)     (0.022)                 (0.025)     (0.021
+> )   
 
-24k                                -0.165***   -0.064***               -0.166***   -0.066***
-                                  (0.022)     (0.018)                 (0.022)     (0.017)   
+24k                                -0.165***   -0.064***               -0.166***   -0.06
+> 6***
+                                  (0.022)     (0.018)                 (0.022)     (0.017
+> )   
 
-FSR                                -0.074**    -0.000                  -0.075**    -0.004   
-                                  (0.025)     (0.022)                 (0.024)     (0.021)   
+FSR                                -0.074**    -0.000                  -0.075**    -0.00
+> 4   
+                                  (0.025)     (0.022)                 (0.024)     (0.021
+> )   
 
-IPS                                -0.010      -0.000                  -0.014      -0.005   
-                                  (0.028)     (0.022)                 (0.028)     (0.021)   
+IPS                                -0.010      -0.000                  -0.014      -0.00
+> 5   
+                                  (0.028)     (0.022)                 (0.028)     (0.021
+> )   
 
-Republican=1 $\t~14k                           -0.156***                           -0.157***
-                                              (0.044)                             (0.044)   
+Republican=1 $\t~14k                           -0.156***                           -0.15
+> 7***
+                                              (0.044)                             (0.044
+> )   
 
-Republican=1 $\t~24k                           -0.265***                           -0.266***
-                                              (0.042)                             (0.041)   
+Republican=1 $\t~24k                           -0.265***                           -0.26
+> 6***
+                                              (0.042)                             (0.041
+> )   
 
-Republican=1 $\tim~R                           -0.196***                           -0.186***
-                                              (0.042)                             (0.041)   
+Republican=1 $\tim~R                           -0.196***                           -0.18
+> 6***
+                                              (0.042)                             (0.041
+> )   
 
-Republican=1 $\tim~S                           -0.024                              -0.021   
-                                              (0.046)                             (0.045)   
+Republican=1 $\tim~S                           -0.024                              -0.02
+> 1   
+                                              (0.046)                             (0.045
+> )   
 
-Constant                0.165***    0.314***    0.182***   -0.008       1.794+      0.483   
-                      (0.006)     (0.020)     (0.017)     (0.946)     (1.083)     (0.878)   
---------------------------------------------------------------------------------------------
-R$^2$                   0.329       0.270       0.354       0.335       0.277       0.361   
-Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes} 
->    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
-Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \mu
-> lticolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
-Items                       9           9           9           9           9           9   
-Respondents               794         794         794         793         793         793   
-Respondent-items         6,893        6,893        6,893        6,884        6,884        6,884   
---------------------------------------------------------------------------------------------
+Constant                0.165***    0.314***    0.182***   -0.008       1.794+      0.48
+> 3   
+                      (0.006)     (0.020)     (0.017)     (0.946)     (1.083)     (0.878
+> )   
+----------------------------------------------------------------------------------------
+> ----
+R$^2$                   0.329       0.270       0.354       0.335       0.277       0.36
+> 1   
+Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{
+> 1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
+> {Yes}   
+Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c
+> }{.}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes} 
+>   
+Items                       9           9           9           9           9           
+> 9   
+Respondents               794         794         794         793         793         79
+> 3   
+Respondent-items         6,893        6,893        6,893        6,884        6,884      
+>   6,884   
+----------------------------------------------------------------------------------------
+> ----
 Standard errors in parentheses
 + p<0.1, * p<0.05, ** p<0.01, *** p<0.001
 
@@ -731,19 +766,19 @@ end of do-file
 
 . 
 . tictoc toc
----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 20 Jan 2022 18:48:16
-End time: 20 Jan 2022 18:53:11
-Elapsed seconds:       294
-Elapsed minutes:         5
-Elapsed hours:       .08
----------------------------------------------------------------------------------------------------
+Start time: 21 Jan 2022 16:10:41
+End time: 21 Jan 2022 16:13:38
+Elapsed seconds:       176
+Elapsed minutes:         3
+Elapsed hours:       .05
+----------------------------------------------------------------------------------------
 
 . 
 . log close
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  20 Jan 2022, 18:53:11
----------------------------------------------------------------------------------------------------
+ closed on:  21 Jan 2022, 16:13:38
+----------------------------------------------------------------------------------------
