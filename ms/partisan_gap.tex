@@ -42,12 +42,11 @@
 \usepackage[bitstream-charter]{mathdesign}
 
 \usepackage{chngcntr}
-\usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{adjustbox}
 \usepackage{dcolumn}
 
-\usepackage{cleveref}
+\usepackage[nameinlink, capitalize, noabbrev]{cleveref}
 
 \def\citeapos#1{\citeauthor{#1}'s (\citeyear{#1})}
 
@@ -143,6 +142,43 @@ The FSR standard adds a `Don't Know’ and removes from the question stem any ne
 
 The 24k standard asks respondents to rate the claim on a 0 to 10 scale going from `definitely false' to `definitely true.' The question is inspired by other attempts to take account of confidence in distinguishing misinformation from incorrect responses stemming from processes like inference, unlucky guessing, and such (see, for instance, Pasek et al. 2015).
 
+\subsection{MTurk Results}
+\begin{center}
+	\begin{figure}[H]
+		\centering
+		\caption{Partisan Gap by Treatment Arm}
+		\includegraphics[scale=.8]{../figs/partisan-gap-by-item-arm.pdf}
+		\label{fig:partisangaps}
+		\caption*{\footnotesize 
+			Each marker is the estimated gap between Republican partisans and Democratic partisans for how congenial their responses are to their own party.
+			Columns indicate the five different treatment arms described in \nameref{sec:data}. Rows indicate the nine individual survey items described in \cref{si:mturk} plus their average.
+			Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
+		}
+	\end{figure}
+\end{center}
+
+We start by examining the average in partisan gaps for each survey item and each treatment arm. \Cref{fig:partisangaps} shows the results. Each marker represents how much more congenial the responses of the Republicans are to the Democrats.
+In the RW treatment arm (first column), the Republicans are on average 0.3 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns are in \cref{fig:partisangaps} show that while the estimated differences in party-congenial responses are precise (the narrow bars), the differences attenuated substantially depending on the treatment arms. This attenuation is most pronounced if we compare the RW to the 24k arms (first vs second columns).
+
+
+\begin{equation}\label{eq:partisangap}
+	y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_j + \delta (Rep_i \times Arm)_j + \varepsilon_{ijk}
+\end{equation}
+
+\begin{table}[ht] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\caption{Partisan Knowledge Gaps: MTurk}
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{l*{6}{D{.}{.}{-1}}}
+			\toprule
+			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+			\input ../tabs/mturk-reg-table-fragment.tex
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+\end{table}
+
 \subsection{Partisan Cues}
 The aim of the study is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. For the purpose of the study, we examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.  
 
@@ -153,19 +189,6 @@ In the Texas survey, we added another condition to the above design – no parti
 
 \section*{Partisan Knowledge Gaps}
 
-\begin{center}
-\begin{figure}[H]
-  \centering
-  \caption{Partisan Gap by Treatment Arm}
-  \includegraphics[scale=.8]{../figs/partisan-gap-by-item-arm.pdf}
-  \label{fig:partisangaps}
-  \caption*{\footnotesize 
-  	Each marker is the estimated gap between Republican partisans and Democratic partisans for how congenial their responses are to their own party.
-  	Columns indicate the five different treatment arms described in \nameref{sec:data}. Rows indicate the nine individual survey items described in \cref{si:mturk} plus their average.
-  	Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
-  }
-\end{figure}
-\end{center}
 
 We start with data from the YouGov survey that manipulated partisan cues in the stem. To assess how partisan references in the question stem cuing accountability affect responses by partisans, we ran an ordered logit, regressing the response on the budget deficit and unemployment question on partisan identification, partisan cue, and interaction between partisan identification and the cue. As expected, Republicans are much likely than Democrats to say that the unemployment rate and budget deficit are going up (Unemployment: $b = 1.14, p < .001$; Budget Deficit: $b = 2.02, p < .001$; see Table 3). Presumably this is a consequence of the president (a Democrat) being held responsible for unemployment rate and budget deficit. When the question stem highlights Republicans in position of responsibility, versus the Democrats, Republicans are much less likely to say that the unemployment rate has gone up since 2010 ($b = -1.13, p < .001$). We obtain almost identical, only stronger, findings for budget deficit, with question stem highlighting Republican responsibility, vis-a-vis Democratic responsibility, causing Republicans to become less likely to report that the budget deficit is going up. This isn’t a Republican phenomenon for if we split the results by party, we see opposing movement among Democrats and Republicans due to the question stem. The results from the experiment suggest that a number of respondents are using available cues to answer the question, than stored cognitions about the unemployment rate and the budget deficit. 
 
@@ -183,23 +206,7 @@ Based on our results here, we suspect that the vast majority of partisan gaps---
 
 While this is certainly troubling for those who view political knowledge as an essential component of democratic citizenship, there is some reason for optimism. When it comes to knowledge of political facts, more often than not, there do not appear to be large imbalances between what Democrats and Republicans know. When partisan differences do emerge, we suspect that they are often more a product of biased interpretation of survey questions rather than of differential stores of knowledge. This suggests that even in a polarized political context, most Democrats and Republicans can use the same information to make collective judgments about whether to reward or punish elected officials based on performance---whether they want to, of course, is another question. 
 
-\begin{equation}\label{eq:partisangap}
-y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_j + \delta (Rep_i \times Arm)_j + \varepsilon_{ijk}
-\end{equation}
 
-\begin{table}[ht] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{Partisan Knowledge Gaps: MTurk}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{l*{6}{D{.}{.}{-1}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			\input ../tabs/mturk-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
-\end{table}
 
 \clearpage
 \bibliographystyle{apsr}
