@@ -29,17 +29,19 @@ setup "`r(mymacro)'"
 tictoc tic
 
 **** Basic prep of data
-import delimited D:/partisan-gaps/data/turk/mturk-recoded.csv
+import delimited `rootdir'/data/turk/mturk-recoded.csv
 do ./mturk/preamble.do
 
-// **** Fie for raw partisan gaps by items, by survey type
+// **** Figure for raw partisan gaps by items, by survey type
 do ./mturk/fig-partisan-gap.do
 
-//* Balance tests (24k vs RW), takes a while
+// *** Balance tests (24k vs RW), takes a while
 do ./mturk/baltest-24k-rw.do
 
 **** Reg table for effect of party & survey type on response
 do ./mturk/reg-table.do
+
+
 
 tictoc toc
 
