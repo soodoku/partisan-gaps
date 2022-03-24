@@ -161,7 +161,7 @@ In the RW treatment arm (first column), the Republicans are on average 0.3 perce
 
 We formalize the above observation as follows. With the depending variable $y$ as an indicator for whether the response is party-congenial, we regress on the interaction of party and the treatment arm:
 \begin{equation}\label{eq:partisangap-mturk}
-	y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_j + \delta (Rep_i \times Arm)_j + (survey \; item)_j \varepsilon_{ijk}
+	y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_j + \delta (Rep_i \times Arm)_j + (survey \; item)_j + \varepsilon_{ijk}
 \end{equation}
 for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gap which corresponds to \cref{fig:partisangaps-mturk}. A positive estimate here suggests that Republicans are more likely than Democrats to have party-congenial response.
 We focus on $\gamma$ which captures how the different treatment arms affect the observed partisan knowledge gap. The baseline treatment arm is always RW, so that $\gamma$ captures how the treatment arms, how the same question is phrased in different ways, mediates the partisan knowledge gap.
@@ -183,6 +183,7 @@ Standard errors are clustered at the respondent level.
 	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
+
 \cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the Republican variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}. Column (2) includes only the treatment arms, and three of them elicits differences in partisan gaps that are statistically different from the baseline RW arm. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial and evidence as to how variable the estimated knowledge gap can be. Moreover, it is variable in a way that is orthogonal to partisanship. For instance, the average respondent assigned to the 24k arm is 17 percentage point less likely to give party-congenial response compared to the average respondent assigned to the RW arm. This is approximately two-thirds of the estimated effect of partisanship on knowledge gap.
 
 In column (3) of \cref{tab:partisangaps-mturk} we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The republican and treatment arms interaction then tells us how the partisan knowledge gap changes cross the different treatment arms. 
@@ -202,6 +203,44 @@ For exploring the research question, we exploit two datasets – a national surv
 In the YouGov survey, respondents were randomly assigned to factual questions with either a Republican or Democratic cue in the stem. In a question about whether ``since 2010 midterm elections, the unemployment rate [had] gone up, down, or remained the same, or couldn't you say?'', we inserted either the phrase “when Republicans regained control of the U.S. Congress'' or ``when Democrats retained control of the Senate” right after the first phrase. We employed a similar manipulation for the question on budget deficit, asking how the budget deficit had fared “since the 2010 midterm elections, when Republicans regained control of the U.S. Congress (or ``when Democrats retained control of the Senate''), has the budget deficit gone up, gone down, remained the same, or couldn't you say?''
 In the Texas survey, we added another condition to the above design – no partisan cue in the stem. So a third of the respondents were assigned to a question that simply read, ``since the 2010 midterm elections, has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?'' For the second question we changed our design to – no partisan cue, Democratic cue, and Democratic cue plus the following introduction “based on what you have heard”. The question read, ``since January 2009, have federal taxes increased, decreased, or remained the same or couldn’t you say?.'' The second version gave respondents a Democratic cue by changing the initial part of the sentence; the question now read, “Since Barack Obama took office\ldots''  The third version prepended a cue designed to encourage guessing to the second version; the version read, “Based on what you have heard, since Barack Obama took office, \ldots''
 
+\clearpage
+
+\begin{table}[t] \centering \normalsize \setlength\tabcolsep{10 pt} \setlength{\defaultaddspace}{0pt}
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
+	\label{tab:partisangaps-yougov}
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{4}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+			\toprule
+			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+			&\multicolumn{2}{c}{Unemployment has gone up}&\multicolumn{2}{c}{Deficit has gone up}\\
+			\cmidrule(lr){2-3}\cmidrule(l){4-5} 
+			\input ../tabs/yougov-reg-table-fragment.tex
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that unemployment or the budget deficit has gone up since the 2010 midterm elections.
+		Rep. cue is an indicator for whether the question stem includes "when Republicans gained control of the US Congress".
+		The baseline is a Democratic cue for the question stem "when Democrats retained control of the Senate".
+		Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
+		All models are linear probability models. 
+		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+\end{table}
+
+
+\begin{equation}\label{eq:partisangap-yougov}
+y_{i} = \alpha + \beta (Rep)_i + \gamma (Rep. \; cue)_i + \delta (Rep_i \times Rep.\; cue)_i + \varepsilon_{i}
+\end{equation}
+
+\cref{tab:partisangaps-yougov} reports the YouGov survey results from estimating \cref{eq:partisangap-yougov} to assess how manipulated partisan cues in the question stem affect partisan responses to questions about unemployment and the budget deficit.
+As expected, Republicans are much more likely than the Democrats to say that unemployment has gone up. Compared to Democrats, Republics are 25 percentage points more likely to say that unemployment has gone since the 2010 midterm elections when the question cues a Democratic blame using the stem "when Democrats retained control of the Senate" ($p<0.001$). 
+Presumably this is a consequence of the question stem holding the president (a Democrat) responsible for unemployment rate and budget deficit.
+When the question instead cues a Republican blame using the stem "when Republicans regained control of the US Congress," Republicans become 29 percentage points less likely to say that unemployment has gone up. 
+This reversal is so large it eliminates the observed partisan difference in response between Democrats and Republicans (confirmed by t-tests reported in \cref{tab:partisangaps-yougov}).
+
+For the question about whether the budget deficit has gone up, the partisan responses and how they behave with the manipulated partisan cues in the question stem is qualitatively similar to the question about unemployment.
+Republicans are more likely than Democrats to say that the deficit has gone up with a Democratic cue (34 percentage points more likely, $p<0.001$), but this behavior completely reverses when the cue places the blame on Republicans.
+\clearpage
 \section*{Partisan Knowledge Gaps}
 
 

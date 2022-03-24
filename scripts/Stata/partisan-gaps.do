@@ -28,6 +28,9 @@ setup "`r(mymacro)'"
 * -----------------------------------------------------------------------------
 tictoc tic
 
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* MTurk results
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 import delimited `rootdir'/data/turk/mturk-recoded.csv
 do ./mturk/preamble.do
@@ -41,6 +44,19 @@ do ./mturk/baltest-24k-rw.do
 **** Reg table for effect of party & survey type on response
 do ./mturk/reg-table.do
 
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* YouGov results
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**** Basic prep of data
+import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
+do ./survey-exp/preamble.do
+
+**** Reg table for effect of party & survey type on response
+do ./survey-exp/reg-table.do
+
+**** Barplots for effect of party & survey type on response
+do ./survey-exp/unemp-barplot.do
+do ./survey-exp/deficit-barplot.do
 
 
 tictoc toc

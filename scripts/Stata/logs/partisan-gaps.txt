@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  21 Jan 2022, 16:10:42
+ opened on:  24 Mar 2022, 16:06:22
 
 . 
 . version 13              // Still on version 13 :(
@@ -14,11 +14,11 @@
 
 . adopath ++ ./ado                // Add path to ados
   [1]              "./ado"
-  [2]  (BASE)      "C:\Program Files\Stata17\ado\base/"
-  [3]  (SITE)      "C:\Program Files\Stata17\ado\site/"
+  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
+  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
   [4]              "."
-  [5]  (PERSONAL)  "C:\Users\lsys\ado\personal/"
-  [6]  (PLUS)      "C:\Users\lsys\ado\plus/"
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
   [7]  (OLDPLACE)  "c:\ado/"
 
 . 
@@ -32,13 +32,16 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 21 Jan 2022 16:10:42
+Start time: 24 Mar 2022 16:06:22
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * MTurk results
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
-. import delimited D:/partisan-gaps/data/turk/mturk-recoded.csv
-(344 vars, 1,253 obs)
+. import delimited `rootdir'/data/turk/mturk-recoded.csv
+(344 vars, 1253 obs)
 
 . do ./mturk/preamble.do
 
@@ -57,7 +60,7 @@ Start time: 21 Jan 2022 16:10:42
 . rename avg avg_str
 
 . destring avg_str, gen(avg) force
-avg_str: contains nonnumeric bytes; avg generated as double
+avg_str contains nonnumeric characters; avg generated as double
 (2 missing values generated)
 
 . 
@@ -86,7 +89,7 @@ avg_str: contains nonnumeric bytes; avg generated as double
 
 . 
 . replace deficit = 1 - deficit
-(1,171 real changes made)
+(1171 real changes made)
 
 . 
 . *------------------------------------------------------------------------------
@@ -144,13 +147,10 @@ avg_str: contains nonnumeric bytes; avg generated as double
 end of do-file
 
 . 
-. **** Figure for raw partisan gaps by items, by survey type
+. // **** Figure for raw partisan gaps by items, by survey type
 . do ./mturk/fig-partisan-gap.do
 
 . grstyle init
-Scheme _GRSTYLE_ already active although grstyle is not running
-Press any key to reset default scheme to s2color and overwrite scheme _GRSTYLE_, or Break to abort
-(set scheme preference recorded)
 
 . grstyle set plain, 
 
@@ -283,7 +283,7 @@ Press any key to reset default scheme to s2color and overwrite scheme _GRSTYLE_,
 
 . 
 . graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
-file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf saved as PDF format
+(file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf written in PDF format)
 
 . 
 . 
@@ -293,7 +293,7 @@ file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf saved as PDF format
 end of do-file
 
 . 
-. *** Balance tests (24k vs RW), takes a while
+. // *** Balance tests (24k vs RW), takes a while
 . do ./mturk/baltest-24k-rw.do
 
 . preserve
@@ -372,14 +372,12 @@ delimiter now ;
 >                          // est11="Others `others_N' `others_rreport'"
 >                          est11="Political interest $interest_1_N $interest_1_rreport"
 >                          est12="Intention to vote $vote_1_N $vote_1_rreport"
->                          est13="Political leaning $pid_strength_1_N $pid_strength_1_rr
-> eport"
+>                          est13="Political leaning $pid_strength_1_N $pid_strength_1_rreport"
 >                          )
 >         headings(
 >                 "HS diploma $d_educ2_N $d_educ2_rreport"="{bf:Education}"
 >                 "Asian $asian_N $asian_rreport"="{bf:Race}"
->                 "Political interest $interest_1_N $interest_1_rreport"="{bf:Politics}"
-> , 
+>                 "Political interest $interest_1_N $interest_1_rreport"="{bf:Politics}", 
 >                 labsize(vsmall) labgap(-3.5)
 >                 )
 >         asequation /// "set equation to model name or string" make the rows the models
@@ -388,8 +386,7 @@ delimiter now ;
 >         ytick(none) /// remove horizontal grids 
 >         ylabel(, labsize(vsmall))
 >         xlabel(-.3(.1).3, labsize(vsmall))
->         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound
-> , 2nd num is upper bound  
+>         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound  
 >         yscale(noline alt)
 >         plotregion(margin(0 1 0 0) ) ///        
 >         graphregion(margin(3 0 0 0)) ///        
@@ -402,60 +399,57 @@ delimiter now ;
 . #delimit cr
 delimiter now cr
 . 
-. gr_edit .yaxis1.style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy // yaxi
-> s1 edits
+. gr_edit .yaxis1.style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy // yaxis1 edits
 
 . 
 . gr_edit .move yaxis1 leftof 8 5 // yaxis1 grid reposition
 
 . 
-. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N             
->  $female_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N              $female_rreport}}"', tickset(ma
+> jor)
 
-. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $
-> age_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $age_rreport}}"', tickset(major)
 
-. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N     
->  $hisla_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N      $hisla_rreport}}"', tickset(maj
+> or)
 
-. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N        
->    $d_educ2_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N           $d_educ2_rreport}}"', tickset
+> (major)
 
-. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N      
->   $d_educ5_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N        $d_educ5_rreport}}"', tickset(
+> major)
 
-. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N 
->    $d_educ1_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N    $d_educ1_rreport}}"', tickset
+> (major)
 
-. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N     
->   $d_educ4_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N       $d_educ4_rreport}}"', tickset(
+> major)
 
-. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N               
->  $asian_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N                $asian_rreport}}"', tickset(maj
+> or)
 
-. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               
-> $black_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               $black_rreport}}"', tickset(majo
+> r)
 
-. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               
-> $white_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               $white_rreport}}"', tickset(majo
+> r)
 
-. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', 
-> tickset(major)
-. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_
-> 1_N  $interest_1_rreport}}"', tickset(major)
+. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', tickset(major)
+. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_1_N  $interest_1_rreport}}"', ti
+> ckset(major)
 
-. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N  
->  $vote_1_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N   $vote_1_rreport}}"', tickset(ma
+> jor)
 
-. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_streng
-> th_1_N   $pid_strength_1_rreport}}"', tickset(major)
+. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_strength_1_N   $pid_strength_1_rreport
+> }}"', tickset(major)
 
 . 
 . gr_edit .title.DragBy 0 -31
 
 . 
 . graph export $figsavedir/baltest-24k-rw.pdf, replace    
-file D:/partisan-gaps/figs/baltest-24k-rw.pdf saved as PDF format
+(file D:/partisan-gaps/figs/baltest-24k-rw.pdf written in PDF format)
 
 . 
 . restore
@@ -474,12 +468,12 @@ end of do-file
   3. }
 
 . reshape long item, i(id) j(item_type, string)
-(j = birth death deficit fraud illegal increase mmr religion science)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
 
-Data                               Wide   ->   Long
+Data                               wide   ->   long
 -----------------------------------------------------------------------------
-Number of observations            1,207   ->   10,863      
-Number of variables                 406   ->   399         
+Number of obs.                     1207   ->   10863
+Number of variables                 406   ->     399
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -487,7 +481,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3,708 observations deleted)
+(3708 observations deleted)
 
 . 
 . 
@@ -651,79 +645,48 @@ delimiter now ;
 > ;
 
 Dep. var. is 1(response is congenial)
-----------------------------------------------------------------------------------------
-> ----
-                          (1)         (2)         (3)         (4)         (5)         (6
-> )   
-----------------------------------------------------------------------------------------
-> ----
-Republican=1            0.256***                0.375***    0.258***                0.37
-> 4***
-                      (0.016)                 (0.030)     (0.016)                 (0.029
-> )   
+--------------------------------------------------------------------------------------------
+                          (1)         (2)         (3)         (4)         (5)         (6)   
+--------------------------------------------------------------------------------------------
+Republican=1            0.256***                0.375***    0.258***                0.374***
+                      (0.016)                 (0.030)     (0.016)                 (0.029)   
 
-14k                                -0.090***   -0.023                  -0.093***   -0.02
-> 6   
-                                  (0.025)     (0.022)                 (0.025)     (0.021
-> )   
+14k                                -0.090***   -0.023                  -0.093***   -0.026   
+                                  (0.025)     (0.022)                 (0.025)     (0.021)   
 
-24k                                -0.165***   -0.064***               -0.166***   -0.06
-> 6***
-                                  (0.022)     (0.018)                 (0.022)     (0.017
-> )   
+24k                                -0.165***   -0.064***               -0.166***   -0.066***
+                                  (0.022)     (0.018)                 (0.022)     (0.017)   
 
-FSR                                -0.074**    -0.000                  -0.075**    -0.00
-> 4   
-                                  (0.025)     (0.022)                 (0.024)     (0.021
-> )   
+FSR                                -0.074**    -0.000                  -0.075**    -0.004   
+                                  (0.025)     (0.022)                 (0.024)     (0.021)   
 
-IPS                                -0.010      -0.000                  -0.014      -0.00
-> 5   
-                                  (0.028)     (0.022)                 (0.028)     (0.021
-> )   
+IPS                                -0.010      -0.000                  -0.014      -0.005   
+                                  (0.028)     (0.022)                 (0.028)     (0.021)   
 
-Republican=1 $\t~14k                           -0.156***                           -0.15
-> 7***
-                                              (0.044)                             (0.044
-> )   
+Republican=1 $\t~14k                           -0.156***                           -0.157***
+                                              (0.044)                             (0.044)   
 
-Republican=1 $\t~24k                           -0.265***                           -0.26
-> 6***
-                                              (0.042)                             (0.041
-> )   
+Republican=1 $\t~24k                           -0.265***                           -0.266***
+                                              (0.042)                             (0.041)   
 
-Republican=1 $\tim~R                           -0.196***                           -0.18
-> 6***
-                                              (0.042)                             (0.041
-> )   
+Republican=1 $\tim~R                           -0.196***                           -0.186***
+                                              (0.042)                             (0.041)   
 
-Republican=1 $\tim~S                           -0.024                              -0.02
-> 1   
-                                              (0.046)                             (0.045
-> )   
+Republican=1 $\tim~S                           -0.024                              -0.021   
+                                              (0.046)                             (0.045)   
 
-Constant                0.165***    0.314***    0.182***   -0.008       1.794+      0.48
-> 3   
-                      (0.006)     (0.020)     (0.017)     (0.946)     (1.083)     (0.878
-> )   
-----------------------------------------------------------------------------------------
-> ----
-R$^2$                   0.329       0.270       0.354       0.335       0.277       0.36
-> 1   
-Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{
-> 1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
-> {Yes}   
-Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c
-> }{.}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes} 
->   
-Items                       9           9           9           9           9           
-> 9   
-Respondents               794         794         794         793         793         79
-> 3   
-Respondent-items         6,893        6,893        6,893        6,884        6,884      
->   6,884   
-----------------------------------------------------------------------------------------
-> ----
+Constant                0.165***    0.314***    0.182***   -0.008       1.794+      0.483   
+                      (0.006)     (0.020)     (0.017)     (0.946)     (1.083)     (0.878)   
+--------------------------------------------------------------------------------------------
+R$^2$                   0.329       0.270       0.354       0.335       0.277       0.361   
+Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
+> {Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
+Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{Yes} 
+>    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
+Items                       9           9           9           9           9           9   
+Respondents               794         794         794         793         793         793   
+Respondent-items         6,893        6,893        6,893        6,884        6,884        6,884   
+--------------------------------------------------------------------------------------------
 Standard errors in parentheses
 + p<0.1, * p<0.05, ** p<0.01, *** p<0.001
 
@@ -765,20 +728,575 @@ delimiter now cr
 end of do-file
 
 . 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * YouGov results
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. **** Basic prep of data
+. import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
+(262 vars, 2500 obs)
+
+. do ./survey-exp/preamble.do
+
+. encode pid2, gen(rep)
+
+. 
+. /* Unemployment (qpk7)
+> Unemployment rate since the 2010 midterm elections ...
+> 
+> Count Code Label
+> ----- ---- -----
+> 690 1 Gone Up
+> 675 2 Remained the same
+> 847 3 Gone Down
+> 242 4 Can't Say
+> 46 8 Skipped
+> 0 9 Not Asked
+> */
+. gen unempup = (qpk7=="Gone Up") 
+
+. label var unempup "Responded that unempployment has gone up"
+
+. 
+. /* Unemployment (qpk7)
+> Budget deficit since the 2010 midterm elections ...
+> 
+> Count Code Label
+> ----- ---- -----
+> 1576 1 Gone Up
+> 441 2 Remained the same
+> 160 3 Gone Down
+> 284 4 Can't Say
+> 39 8 Skipped
+> 0 9 Not Asked
+> */
+. gen deficitup = (qpk8=="Gone Up")
+
+. label var deficitup "Responded that budget deficit has gone up"
+
+. 
+. 
+. /* Partisan cue (qpk7_insert)
+> when Democrats retained control of  the Senate
+> when Republicans regained control of the US Cong
+> */
+. gen cue = (strpos(qpk7_insert, "Rep")>0)
+
+. label var cue "=1 if Republican cue"
+
+. 
+. 
+. /* Demographics
+> 
+> */
+. global demoX birthyr i.gender i.white i.educ i.marstat i.employ newsint i.faminc
+
+. 
+. rename gender gender_str
+
+. encode gender_str, gen(gender)
+
+. 
+. encode race, gen(white)
+
+. 
+. rename educ educ_str
+
+. encode educ_str, gen(educ)
+
+. 
+. rename marstat marstat_str
+
+. encode marstat_str, gen(marstat)
+
+. 
+. rename employ employ_str
+
+. encode employ_str, gen(employ)
+
+. 
+. rename faminc faminc_str
+
+. encode faminc_str, gen(faminc)
+
+. 
+end of do-file
+
+. 
+. **** Reg table for effect of party & survey type on response
+. do ./survey-exp/reg-table.do
+
+. eststo clear
+
+. eststo: qui reg unempup i.rep##i.cue, vce(hc3)
+(est1 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,104}"
+
+.         * Republican + Republican x (Rep cue) = 0 
+.         qui lincom 2.rep + 2.rep#1.cue
+
+.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
+
+.         local lincompval = L[1,4]
+
+.         estadd local lincompval = round(`lincompval',.001)
+
+added macro:
+         e(lincompval) : ".1"
+
+. 
+. eststo: qui reg unempup i.rep##i.cue $demoX, vce(hc3)
+(est2 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,066}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+.         * Republican + Republican x (Rep cue) = 0 
+.         qui lincom 2.rep + 2.rep#1.cue
+
+.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
+
+.         local lincompval = L[1,4]
+
+.         estadd local lincompval = round(`lincompval',.001)
+
+added macro:
+         e(lincompval) : ".162"
+
+. 
+. eststo: qui reg deficitup i.rep##i.cue , vce(hc3)
+(est3 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,104}"
+
+.         * Republican + Republican x (Rep cue) = 0 
+.         qui lincom 2.rep + 2.rep#1.cue
+
+.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
+
+.         local lincompval = L[1,4]
+
+.         estadd local lincompval = round(`lincompval',.001)
+
+added macro:
+         e(lincompval) : ".096"
+
+. 
+. eststo: qui reg deficitup i.rep##i.cue $demoX, vce(hc3)
+(est4 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,066}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+.         * Republican + Republican x (Rep cue) = 0 
+.         qui lincom 2.rep + 2.rep#1.cue
+
+.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
+
+.         local lincompval = L[1,4]
+
+.         estadd local lincompval = round(`lincompval',.001)
+
+added macro:
+         e(lincompval) : ".349"
+
+. 
+. #delimit;
+delimiter now ;
+. esttab,
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(30)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(2.rep 1.cue 2.rep#1.cue _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(2.rep "Republican"
+>                           1.cue "Rep cue"
+>                       2.rep#1.cue "Republican x (Rep cue)"              
+>                 )
+>         scalar(
+>                 "lincompval P-val: Rep. + Rep. x (Rep cue) = 0"
+>                 "demo Demographic controls"
+>                 "r2 R-square" 
+>                 "nobs Respondent-items"
+>                 ) 
+>         // title("Dep. var. is 1(response is congenial)")
+> ;
+
+------------------------------------------------------------------------------
+                                    (1)         (2)         (3)         (4)   
+------------------------------------------------------------------------------
+Republican                        0.247***    0.254***    0.405***    0.343***
+                                (0.027)     (0.029)     (0.027)     (0.028)   
+
+Rep cue                           0.111***    0.112***    0.182***    0.190***
+                                (0.025)     (0.026)     (0.030)     (0.029)   
+
+Republican x (Rep cue)           -0.291***   -0.295***   -0.355***   -0.371***
+                                (0.038)     (0.039)     (0.040)     (0.039)   
+
+Constant                          0.168***    3.170+      0.443***    7.056***
+                                (0.016)     (1.874)     (0.021)     (1.837)   
+------------------------------------------------------------------------------
+P-val: Rep. + Rep. x (Rep cu~0       .1        .162        .096        .349   
+Demographic controls                            Yes                     Yes   
+R-square                          0.041       0.069       0.090       0.190   
+Respondent-items               \multicolumn{1}{c}{    2,104}    \multicolumn{1}{c}{    2,066}    \multicolumn{1}{c}{    
+> 2,104}    \multicolumn{1}{c}{    2,066}   
+------------------------------------------------------------------------------
+Standard errors in parentheses
++ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
+
+.         esttab using $tabsavedir/yougov-reg-table-fragment.tex, 
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(2.rep 1.cue 2.rep#1.cue _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(2.rep "Republican"
+>                           1.cue "Rep. cue"
+>                       2.rep#1.cue "Republican x (Rep. cue)"             
+>                 )
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "lincompval P-val: Rep. + Rep. x (Rep cue) = 0"
+>                 "demotab Demographic controls"
+>                 "nobs Respondent-items"
+>                 ) 
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+>         ;
+(output written to D:/partisan-gaps/tabs/yougov-reg-table-fragment.tex)
+
+. #delimit cr     
+delimiter now cr
+. 
+end of do-file
+
+. 
+. **** Barplots for effect of party & survey type on response
+. do ./survey-exp/unemp-barplot.do
+
+. eststo: qui reg unempup i.rep##i.cue, vce(hc3)
+(est5 stored)
+
+. 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,9]
+            1b.          2.         0b.          1.     1b.rep#     1b.rep#     2o.rep#      2.rep#            
+           rep         rep         cue         cue      0b.cue      1o.cue      0b.cue       1.cue       _cons
+y1           0   .24710513           0   .11099402           0           0           0  -.29146067   .16757741
+
+. local baseline = coefmat[1, 9] /* _cons */
+
+. local repcoef = coefmat[1,2]  /* 2.rep */
+
+. 
+. preserve
+
+. regsave
+
+. drop if coef==0
+(5 observations deleted)
+
+. 
+. gen effect = `baseline' + coef if var!="_cons"
+(1 missing value generated)
+
+. replace effect = `baseline' if var=="_cons"
+(1 real change made)
+
+. replace effect = effect + `repcoef' if var=="2.rep#1.cue"
+(1 real change made)
+
+. 
+. * Construct CI
+. gen uci = effect + 1.96 * stderr
+
+. gen lci = effect - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(1 real change made)
+
+. replace lci = 0 if var=="_cons"
+(1 real change made)
+
+. 
+. gen porder = 0 if var=="_cons"
+(3 missing values generated)
+
+. replace porder = 1 if var=="1.cue"
+(1 real change made)
+
+. replace porder = 2 if var=="2.rep"
+(1 real change made)
+
+. replace porder = 3 if var=="2.rep#1.cue"
+(1 real change made)
+
+. sort porder
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. label define xlab 0 `""Dem. w/" "Dem. cue""' 1 `""Dem. w/" "Rep. cue""' 2 `""Rep. w/" "Dem. cue""' 3 `""Rep. w/" "Rep.
+>  cue""' 
+
+. label values porder xlab
+
+. 
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+
+. local YRANGE 0.(0.2).8
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medthick
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS          fcolor(none) lwidth(thick)
+
+. local BAR_OPTS_BASE fcolor(none) lwidth(thick)
+
+. 
+. local graphsavedir ./figures
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. #delimit;
+delimiter now ;
+. twoway  
+>                 (bar effect porder if porder==0, color(navy)   `BAR_OPTS_BASE') 
+>                 (bar effect porder if porder==1, color(navy)   `BAR_OPTS') 
+>                 (bar effect porder if porder==2, color(maroon) `BAR_OPTS') 
+>                 (bar effect porder if porder==3, color(maroon) `BAR_OPTS'
+>                         xlabel(,val labsize(`XLAB_SIZE') )
+>                         xtitle("")
+>                 ) 
+>                 (rcap uci lci porder if porder!=0, 
+>                         color(black)
+>                         lwidth(`CI_WIDTH')
+>                         legend(off)
+>                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                         yscale(r(0 .85))
+>                         xlabel(, notick)
+>                         xscale(noextend lcolor(none))
+>                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
+>                         bgcolor(white)
+>                         plotregion(margin(8 8 0 0))
+>                 )               
+>         ;
+
+. #delimit cr     
+delimiter now cr
+. graph export $figsavedir/yougov-unemp.pdf, replace      
+(file D:/partisan-gaps/figs/yougov-unemp.pdf written in PDF format)
+
+. 
+. restore
+
+. 
+end of do-file
+
+. do ./survey-exp/deficit-barplot.do
+
+. eststo: qui reg deficitup i.rep##i.cue, vce(hc3)
+(est6 stored)
+
+. 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,9]
+            1b.          2.         0b.          1.     1b.rep#     1b.rep#     2o.rep#      2.rep#            
+           rep         rep         cue         cue      0b.cue      1o.cue      0b.cue       1.cue       _cons
+y1           0   .40459927           0   .18237705           0           0           0  -.35546485   .44262295
+
+. local baseline = coefmat[1, 9] /* _cons */
+
+. local repcoef = coefmat[1,2]  /* 2.rep */
+
+. 
+. preserve
+
+. regsave
+
+. drop if coef==0
+(5 observations deleted)
+
+. 
+. gen effect = `baseline' + coef if var!="_cons"
+(1 missing value generated)
+
+. replace effect = `baseline' if var=="_cons"
+(1 real change made)
+
+. replace effect = effect + `repcoef' if var=="2.rep#1.cue"
+(1 real change made)
+
+. 
+. * Construct CI
+. gen uci = effect + 1.96 * stderr
+
+. gen lci = effect - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(1 real change made)
+
+. replace lci = 0 if var=="_cons"
+(1 real change made)
+
+. 
+. gen porder = 0 if var=="_cons"
+(3 missing values generated)
+
+. replace porder = 1 if var=="1.cue"
+(1 real change made)
+
+. replace porder = 2 if var=="2.rep"
+(1 real change made)
+
+. replace porder = 3 if var=="2.rep#1.cue"
+(1 real change made)
+
+. sort porder
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. label define xlab 0 `""Dem. w/" "Dem. cue""' 1 `""Dem. w/" "Rep. cue""' 2 `""Rep. w/" "Dem. cue""' 3 `""Rep. w/" "Rep.
+>  cue""' 
+
+. label values porder xlab
+
+. 
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+
+. local YRANGE 0.(0.2).8
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medthick
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS          fcolor(none) lwidth(thick)
+
+. local BAR_OPTS_BASE fcolor(none) lwidth(thick)
+
+. 
+. local graphsavedir ./figures
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. #delimit;
+delimiter now ;
+. twoway  
+>                 (bar effect porder if porder==0, color(navy)   `BAR_OPTS_BASE') 
+>                 (bar effect porder if porder==1, color(navy)   `BAR_OPTS') 
+>                 (bar effect porder if porder==2, color(maroon) `BAR_OPTS') 
+>                 (bar effect porder if porder==3, color(maroon) `BAR_OPTS'
+>                         xlabel(,val labsize(`XLAB_SIZE') )
+>                         xtitle("")
+>                 ) 
+>                 (rcap uci lci porder if porder!=0, 
+>                         color(black)
+>                         lwidth(`CI_WIDTH')
+>                         legend(off)
+>                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                         yscale(r(0 .85))
+>                         xlabel(, notick)
+>                         xscale(noextend lcolor(none))
+>                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
+>                         bgcolor(white)
+>                         plotregion(margin(8 8 0 0))
+>                 )               
+>         ;
+
+. #delimit cr     
+delimiter now cr
+. graph export $figsavedir/yougov-deficit.pdf, replace    
+(file D:/partisan-gaps/figs/yougov-deficit.pdf written in PDF format)
+
+. 
+. restore
+
+. 
+end of do-file
+
+. 
+. 
 . tictoc toc
-----------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 21 Jan 2022 16:10:41
-End time: 21 Jan 2022 16:13:38
-Elapsed seconds:       176
-Elapsed minutes:         3
-Elapsed hours:       .05
-----------------------------------------------------------------------------------------
+Start time: 24 Mar 2022 16:06:22
+End time: 24 Mar 2022 16:11:11
+Elapsed seconds:       288
+Elapsed minutes:         5
+Elapsed hours:       .08
+------------------------------------------------------------------------------------------------------------------------
 
 . 
 . log close
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  21 Jan 2022, 16:13:38
-----------------------------------------------------------------------------------------
+ closed on:  24 Mar 2022, 16:11:11
+------------------------------------------------------------------------------------------------------------------------
