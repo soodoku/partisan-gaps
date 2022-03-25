@@ -205,6 +205,40 @@ In the Texas survey, we added another condition to the above design – no parti
 
 \clearpage
 
+\begin{figure}[ht]
+	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}	
+	\centering
+	\begin{subfigure}{.495\textwidth}\centering
+		\includegraphics[width=\textwidth]{../figs/yougov-unemp.pdf}
+		\caption{Unemployment has gone up}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{.495\textwidth}\centering
+		\includegraphics[width=\textwidth]{../figs/yougov-deficit.pdf}
+		\caption{Deficit has gone up}
+	\end{subfigure}	
+	\caption*{\footnotesize Bars indicate the predicted percent of responses saying that unemployment have gone up or the budget deficit has gone up, by partisanship of respondent and partisan cue of question, as retrieved from the estimates in \cref{tab:partisangaps-yougov} (columns (1) and (3)).  
+	Capped vertical bars indicate 95\% confidence intervals.
+	}
+	\label{fig:yougov-reg-results}
+\end{figure}
+
+
+
+
+\begin{equation}\label{eq:partisangap-yougov}
+y_{i} = \alpha + \beta (Rep)_i + \gamma (Rep. \; cue)_i + \delta (Rep_i \times Rep.\; cue)_i + \varepsilon_{i}
+\end{equation}
+
+\cref{fig:yougov-reg-results} and \cref{tab:partisangaps-yougov} report the YouGov survey results from estimating \cref{eq:partisangap-yougov} to assess how manipulated partisan cues in the question stem affect partisan responses to questions about unemployment and the budget deficit.
+As expected, Republicans are more likely than Democrats to say that unemployment has gone up. Compared to Democrats, Republics are 25 percentage points more likely to say that unemployment has gone since the 2010 midterm elections when the question cues Democratic blame using the stem "when Democrats retained control of the Senate" ($p<0.001$). 
+Presumably, this is a consequence of the question stem holding the president (a Democrat) responsible for the unemployment rate and the budget deficit.
+When the question instead cues Republican blame using the stem "when Republicans regained control of the US Congress," Republicans become 29 percentage points less likely to say that unemployment has gone up. 
+This reversal is so large it eliminates the observed partisan difference in response between Democrats and Republicans (confirmed by t-tests reported in \cref{tab:partisangaps-yougov}).
+
+Regarding whether the budget deficit has gone up, partisan responses and how they behave with the manipulated partisan cues in the question stem is qualitatively similar to the question about unemployment.
+Republicans are more likely than Democrats to say that the deficit has gone up with a Democratic cue (34 percentage points more likely, $p<0.001$), but this behavior completely reverses when the cue blames Republicans.
+
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{10 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
@@ -228,18 +262,6 @@ In the Texas survey, we added another condition to the above design – no parti
 \end{table}
 
 
-\begin{equation}\label{eq:partisangap-yougov}
-y_{i} = \alpha + \beta (Rep)_i + \gamma (Rep. \; cue)_i + \delta (Rep_i \times Rep.\; cue)_i + \varepsilon_{i}
-\end{equation}
-
-\cref{tab:partisangaps-yougov} reports the YouGov survey results from estimating \cref{eq:partisangap-yougov} to assess how manipulated partisan cues in the question stem affect partisan responses to questions about unemployment and the budget deficit.
-As expected, Republicans are much more likely than the Democrats to say that unemployment has gone up. Compared to Democrats, Republics are 25 percentage points more likely to say that unemployment has gone since the 2010 midterm elections when the question cues a Democratic blame using the stem "when Democrats retained control of the Senate" ($p<0.001$). 
-Presumably this is a consequence of the question stem holding the president (a Democrat) responsible for unemployment rate and budget deficit.
-When the question instead cues a Republican blame using the stem "when Republicans regained control of the US Congress," Republicans become 29 percentage points less likely to say that unemployment has gone up. 
-This reversal is so large it eliminates the observed partisan difference in response between Democrats and Republicans (confirmed by t-tests reported in \cref{tab:partisangaps-yougov}).
-
-For the question about whether the budget deficit has gone up, the partisan responses and how they behave with the manipulated partisan cues in the question stem is qualitatively similar to the question about unemployment.
-Republicans are more likely than Democrats to say that the deficit has gone up with a Democratic cue (34 percentage points more likely, $p<0.001$), but this behavior completely reverses when the cue places the blame on Republicans.
 \clearpage
 \section*{Partisan Knowledge Gaps}
 

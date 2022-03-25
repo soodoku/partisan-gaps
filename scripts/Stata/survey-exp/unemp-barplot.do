@@ -12,7 +12,6 @@ drop if coef==0
 gen effect = `baseline' + coef if var!="_cons"
 replace effect = `baseline' if var=="_cons"
 replace effect = effect + `repcoef' if var=="2.rep#1.cue"
-
 * Construct CI
 gen uci = effect + 1.96 * stderr
 gen lci = effect - 1.96 * stderr
@@ -31,7 +30,7 @@ label define xlab 0 `""Dem. w/" "Dem. cue""' 1 `""Dem. w/" "Rep. cue""' 2 `""Rep
 label values porder xlab
 
 set scheme s2mono
-local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
 local YRANGE 0.(0.2).8
 local BASELINE_XLIM = _N+.5
 local CI_WIDTH medthick
@@ -60,7 +59,7 @@ twoway
 			xscale(noextend lcolor(none))
 			graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
 			bgcolor(white)
-			plotregion(margin(8 8 0 0))
+			plotregion(margin(12 12 0 0))
 		)		
 	;
 #delimit cr	
