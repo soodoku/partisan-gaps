@@ -60,7 +60,7 @@ twoway
 			xscale(noextend lcolor(none))
 			graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
 			bgcolor(white)
-			plotregion(margin(8 8 0 0))
+			plotregion(margin(12 12 0 0))
 		)		
 	;
 #delimit cr	
