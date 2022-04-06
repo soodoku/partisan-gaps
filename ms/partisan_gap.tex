@@ -157,16 +157,37 @@ The 24k standard asks respondents to rate the claim on a 0 to 10 scale going fro
 \end{center}
 
 We start by examining the average in partisan gaps for each survey item and each treatment arm. \Cref{fig:partisangaps-mturk} shows the results. Each marker represents how much more congenial the responses of the Republicans are to the Democrats.
-In the RW treatment arm (first column), the Republicans are on average 0.3 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns are in \cref{fig:partisangaps-mturk} show that while the estimated differences in party-congenial responses are precise (the narrow bars), the differences attenuated substantially depending on the treatment arms. This attenuation is most pronounced if we compare the RW to the 24k arms (first vs second columns).
+In the RW treatment arm (first column), the Republicans are on average 0.3 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns are in \cref{fig:partisangaps-mturk} show that while the estimated differences in party-congenial responses are precise (the narrow bars), the differences attenuated substantially depending on the treatment arms. This attenuation is most pronounced when comparing the RW to the 24k arms (first vs second columns).
 
-We formalize the above observation as follows. With the depending variable $y$ as an indicator for whether the response is party-congenial, we regress on the interaction of party and the treatment arm:
+We formalize the above observation as follows. We regress the dependent variable, which is an indicator for whether the response is party-congenial, on the interaction of partisanship and the treatment arm:
 \begin{equation}\label{eq:partisangap-mturk}
-	y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_j + \delta (Rep_i \times Arm)_j + (survey \; item)_j + \varepsilon_{ijk}
+	y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_k + \delta_k (Rep_i \times Arm_k) + (survey \; item)_j + \varepsilon_{ijk}
 \end{equation}
-for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gap which corresponds to \cref{fig:partisangaps-mturk}. A positive estimate here suggests that Republicans are more likely than Democrats to have party-congenial response.
-We focus on $\gamma$ which captures how the different treatment arms affect the observed partisan knowledge gap. The baseline treatment arm is always RW, so that $\gamma$ captures how the treatment arms, how the same question is phrased in different ways, mediates the partisan knowledge gap.
+for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gaps, which corresponds to \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response.
+We focus on the $\delta$'s, which capture how the different treatment arms affect observed partisan knowledge gaps. The baseline treatment arm is always RW, so that $\delta$ captures how the treatment arms---how the same question is phrased in different ways---mediates partisan knowledge gaps.
 $(survey \; item)_j$ is the fixed effects for the nine survey items.
 Standard errors are clustered at the respondent level.
+
+\begin{figure}[!t]
+	\centering
+	\caption{Partisan Gap by Treatment Arm}
+	\includegraphics[scale=.6]{../figs/mturk-pgag-surveyarms.pdf}
+	\label{fig:partisangaps-mturk-reg}
+	\caption*{\footnotesize 
+	Bars indicate the predicted partisan gap by the treatment arms. 
+	Bars are reconstructed from the interactions of the Republican indicator with the treatment arms as reported in column (3) of \cref{tab:partisangaps-mturk}.
+	Capped vertical bars are 95\% confidence intervals.
+	}
+\end{figure}
+\cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the Republican variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
+Column (2) includes only the treatment arms, and three of them elicit differences in partisan gaps that are statistically different from the baseline RW arm. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be.
+Moreover, it is variable in a way that is orthogonal to partisanship. For instance, the average respondent assigned to the 24k arm is 17 percentage points less likely to give a party-congenial response than the RW arm ($p<0.001$). This gap is approximately two-thirds of the estimated effect of partisanship on the partisan knowledge gap.
+
+In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The republican and treatment arms interactions then tell us how the extent to which partisan knowledge gap changes across the different treatment arms. 
+
+\cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms.
+For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by half ($p<0.001$).
+The largest reduction comes from the 24k arm, which allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option. Here, the estimated partisan knowledge gap reduction is 71 percent ($p<0.001$). Including self-reported characteristics of respondents in columns (4)--(6) does not change this conclusion. Estimated partisan knowledge gaps are highly variable to how the same question is posed to respondents.
 
 \begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
@@ -182,18 +203,6 @@ Standard errors are clustered at the respondent level.
 	\end{adjustbox}
 	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
-
-
-\cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the Republican variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}. Column (2) includes only the treatment arms, and three of them elicits differences in partisan gaps that are statistically different from the baseline RW arm. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial and evidence as to how variable the estimated knowledge gap can be. Moreover, it is variable in a way that is orthogonal to partisanship. For instance, the average respondent assigned to the 24k arm is 17 percentage point less likely to give party-congenial response compared to the average respondent assigned to the RW arm. This is approximately two-thirds of the estimated effect of partisanship on knowledge gap.
-
-In column (3) of \cref{tab:partisangaps-mturk} we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The republican and treatment arms interaction then tells us how the partisan knowledge gap changes cross the different treatment arms. 
-For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by half.
-The largest reduction comes from the 24k arm, which allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option. Here the reduction in estimated partisan knowledge gap is 71 percent. Including self-reported characteristics of respondents in columns (4)--(6) do not change this conclusion. Estimated partisan knowledge gaps are highly variable to the way that the same question is posed to respondents.
-
-
-
-
-
 
 \subsection{Partisan Cues}\label{subsec:partisan-cues}
 The aim of the study is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. For the purpose of the study, we examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.  
@@ -267,7 +276,7 @@ Presumably, we observe this congenial cue effect because the question stem holds
 	Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
-
+\clearpage
 We further supplement our results with the Texas Lyceum survey, which affords a neutral cue. In this survey, in addition to congenial and uncongenial cues, individuals can also be randomly assigned a neutral cue where the additional question stem assigning blame to a party is absent, giving us a total of three groups: (i) no cue, (ii) congenial cue, and (iii) uncongenial cue.
 
 
