@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  24 Mar 2022, 16:06:22
+ opened on:   6 Apr 2022, 16:08:43
 
 . 
 . version 13              // Still on version 13 :(
@@ -32,7 +32,7 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 24 Mar 2022 16:06:22
+Start time:  6 Apr 2022 16:08:43
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
@@ -458,7 +458,7 @@ delimiter now cr
 end of do-file
 
 . 
-. **** Reg table for effect of party & survey type on response
+. **** Reg results for effect of party & survey type on response
 . do ./mturk/reg-table.do
 
 . 
@@ -727,6 +727,320 @@ delimiter now cr
 . 
 end of do-file
 
+. do ./mturk/barplot.do
+
+. local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+
+. cd `rootdir'
+D:\partisan-gaps
+
+. cd scripts/Stata
+D:\partisan-gaps\scripts\Stata
+
+. **** Basic prep of data
+. import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
+(344 vars, 1253 obs)
+
+. do ./mturk/preamble.do
+
+. global items    birth religion illegal death increase science fraud mmr deficit
+
+. global arms             RW IPS FSR 14k 24k
+
+. global demo     age i.female i.educ i.hisla $races
+
+. 
+. rename v1 id
+
+. label var id "Participant ID"
+
+. 
+. rename avg avg_str
+
+. destring avg_str, gen(avg) force
+avg_str contains nonnumeric characters; avg generated as double
+(2 missing values generated)
+
+. 
+. *------------------------------------------------------------------------------
+. *** Response for the 9 items
+. label define itemResponseLabel 1 "Correct" 0 "Incorrect"
+
+. 
+. foreach var of varlist $items {
+  2.         tempvar _`var'
+  3.         gen `_`var'' = `var'
+  4.         drop `var'
+  5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
+  6.         label variable `var' "=1 if response is congenial to party for `var' item"
+  7.         label values `var' itemResponseLabel
+  8. }
+(24 missing values generated)
+(35 missing values generated)
+(113 missing values generated)
+(115 missing values generated)
+(18 missing values generated)
+(12 missing values generated)
+(18 missing values generated)
+(31 missing values generated)
+(82 missing values generated)
+
+. 
+. replace deficit = 1 - deficit
+(1171 real changes made)
+
+. 
+. *------------------------------------------------------------------------------
+. *** pid
+. rename pid pid_str
+
+. drop if pid_str =="Something else"
+(46 observations deleted)
+
+. 
+. label define pidLabel 1 "Democrat" 2 "Independent" 3 "Republican"
+
+. encode pid_str, gen(pid) label(pidLabel)
+
+. 
+. fvset base 2 pid // permanently set Independent as base
+
+. 
+. gen rep = (pid_str=="Republican") if !missing(pid_str)
+
+. 
+. *------------------------------------------------------------------------------
+. *** Demo
+. rename gender gender_str
+
+. label define genderLabel 0 "Male" 1 "Female"
+
+. encode gender_str, gen(female) label(genderLabel)
+
+. 
+. foreach demo in educ hisla race {
+  2.         rename `demo' `demo'_str
+  3.         encode `demo'_str, gen(`demo')
+  4. }
+
+. 
+. gen asian = strmatch(race_str, "Asian*")
+
+. gen black = strmatch(race_str, "Black*")
+
+. gen white = strmatch(race_str, "White*")
+
+. gen others = strmatch(race_str, "Other*")
+
+. global races asian black white others
+
+. 
+. *------------------------------------------------------------------------------
+. *** Survey types
+. encode question_type, gen(survey)
+
+. fvset base 5 survey // permanently set RW as base
+
+. 
+end of do-file
+
+. 
+. * Reshape from wide to long to stack participant-item observations
+. foreach item of varlist $items {
+  2.         rename `item' item`item'
+  3. }
+
+. reshape long item, i(id) j(item_type, string)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     1207   ->   10863
+Number of variables                 356   ->     349
+j variable (9 values)                     ->   item_type
+xij variables:
+    itembirth itemdeath ... itemscience   ->   item
+-----------------------------------------------------------------------------
+
+. 
+. drop if pid_str=="Independent"
+(3708 observations deleted)
+
+. 
+. eststo: qui reghdfe item i.rep##i.survey $demo, absorb(item_type) vce(cluster id)
+(est7 stored)
+
+. 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,32]
+            0b.          1.          1.          2.          3.          4.         5b.     0b.rep#     0b.rep#
+           rep         rep      survey      survey      survey      survey      survey   1o.survey   2o.survey
+y1           0   .38351127  -.02260659  -.06382917   -.0037427  -.00360187           0           0           0
+
+        0b.rep#     0b.rep#     0b.rep#      1.rep#      1.rep#      1.rep#      1.rep#     1o.rep#            
+     3o.survey   4o.survey   5b.survey    1.survey    2.survey    3.survey    4.survey   5b.survey         age
+y1           0           0           0   -.1569754  -.26645049  -.18803882  -.02275678           0  -.00028675
+
+            0b.          1.         1b.          2.          3.          4.          5.         1b.          2.
+        female      female        educ        educ        educ        educ        educ       hisla       hisla
+y1           0   .01730912           0    .0243345   .24794014   -.0294332   .02978312           0   .00281798
+
+                                                               
+         asian       black       white      others       _cons
+y1  -.07846987  -.03329282  -.09986147  -.06673277   .82192409
+
+. local baseline = coefmat[1, 2] /* 1.rep */
+
+. 
+. // preserve
+. regsave
+
+. drop if var=="_cons"
+(1 observation deleted)
+
+. drop if strpos(var, "0b.rep")
+(6 observations deleted)
+
+. drop if var=="1.survey"
+(1 observation deleted)
+
+. drop if var=="2.survey"
+(1 observation deleted)
+
+. drop if var=="3.survey"
+(1 observation deleted)
+
+. drop if var=="4.survey"
+(1 observation deleted)
+
+. drop if var=="5b.survey"
+(1 observation deleted)
+
+. drop if var=="1o.rep#5b.survey"
+(1 observation deleted)
+
+. drop if strpos(var, "female")
+(2 observations deleted)
+
+. drop if strpos(var, "educ")
+(5 observations deleted)
+
+. drop if strpos(var, "hisla")
+(2 observations deleted)
+
+. drop if var=="age"
+(1 observation deleted)
+
+. drop if var=="asian"
+(1 observation deleted)
+
+. drop if var=="black"
+(1 observation deleted)
+
+. drop if var=="white"
+(1 observation deleted)
+
+. drop if var=="others"
+(1 observation deleted)
+
+. 
+. * Gen coef for plotting (add estimates back to baseline)
+. gen est = coef
+
+. label var est "Original reg estimate (before adding back to baseline)"
+
+. replace coef = `baseline' + coef if var!="1.rep"
+(4 real changes made)
+
+. 
+. * Construct CI
+. gen uci = coef + 1.96 * stderr
+
+. gen lci = coef - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(0 real changes made)
+
+. replace lci = 0 if var=="_cons"
+(0 real changes made)
+
+. 
+. 
+. * Create plot order var by treat dummies and label values with sample size
+. gen porder = _n
+
+. replace porder = 0 if var=="_cons"
+(0 real changes made)
+
+. sort porder
+
+. 
+. label define xlab 1 "RW" 2 "14k" 3 "24k" 4 "FSR" 5 "IPS"
+
+. label values porder xlab
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+
+. local YRANGE 0.1(0.1).4
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medthick
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS          color(purple) fcolor(none) lwidth(medthick)
+
+. local BAR_OPTS_BASE color(gs5) fcolor(none) lwidth(medthick)
+
+. 
+. local graphsavedir ./figures
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. 
+. #delimit;
+delimiter now ;
+.         twoway  
+>                         (bar coef porder if porder==1, `BAR_OPTS_BASE') 
+>                         (bar coef porder if porder==2, `BAR_OPTS') 
+>                         (bar coef porder if porder==3, `BAR_OPTS') 
+>                         (bar coef porder if porder==4, `BAR_OPTS') 
+>                         (bar coef porder if porder==5, `BAR_OPTS'
+>                                 xlabel(,val labsize(`XLAB_SIZE') )
+>                         ) 
+>                         (rcap uci lci porder if porder!=1, 
+>                                 color(black)
+>                                 lwidth(`CI_WIDTH')
+>                                 legend(off)
+>                                 ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                 xlabel(, notick)
+>                                 xscale(noextend lcolor(none))
+>                                 graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                 bgcolor(white)
+>                                 plotregion(margin(12 12 0 0))
+>                         )               
+>                         (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                 xlabel(1 2 3 4 5)
+>                                 recast(line) color(black) lpattern(dash)
+>                         )
+>                 ;
+
+.         #delimit cr     
+delimiter now cr
+. graph export $figsavedir/mturk-pgag-surveyarms.pdf, replace     
+(file D:/partisan-gaps/figs/mturk-pgag-surveyarms.pdf written in PDF format)
+
+. 
+end of do-file
+
+. 
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * YouGov results
@@ -737,7 +1051,18 @@ end of do-file
 
 . do ./survey-exp/preamble.do
 
-. encode pid2, gen(rep)
+. **** Basic prep of data
+. import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
+(262 vars, 2500 obs)
+
+. 
+. gen rep = (pid2=="Republican")
+
+. gen dem = (pid2=="Democrat")
+
+. gen ind = (pid3=="Independent")
+
+. encode pid3, gen(partisanship)
 
 . 
 . /* Unemployment (qpk7)
@@ -779,15 +1104,13 @@ end of do-file
 > when Democrats retained control of  the Senate
 > when Republicans regained control of the US Cong
 > */
-. gen cue = (strpos(qpk7_insert, "Rep")>0)
+. gen repcue = (strpos(qpk7_insert, "Rep")>0)
 
-. label var cue "=1 if Republican cue"
+. label var repcue "=1 if Republican cue"
 
 . 
 . 
-. /* Demographics
-> 
-> */
+. /* Demographics*/
 . global demoX birthyr i.gender i.white i.educ i.marstat i.employ newsint i.faminc
 
 . 
@@ -819,7 +1142,22 @@ end of do-file
 . encode faminc_str, gen(faminc)
 
 . 
+. 
+. /* Congenial cues 
+> Cue is congenial when the cue makes a partisan more likely to get the correct response (unemp went up)
+> This is when:
+>         * a R sees a D cue
+>         * a D sees a R cue
+> */
+. gen congenialcue = (rep==1 & repcue==0) | (dem==1 & repcue==1)
+
+. gen uncongenialcue = (rep==1 & repcue==1) | (dem==1 & repcue==0)
+
+. 
 end of do-file
+
+. drop if ind==1
+(396 observations deleted)
 
 . 
 . **** Reg table for effect of party & survey type on response
@@ -827,7 +1165,7 @@ end of do-file
 
 . eststo clear
 
-. eststo: qui reg unempup i.rep##i.cue, vce(hc3)
+. eststo: qui reg unempup i.congenialcue, vce(hc3)
 (est1 stored)
 
 .         local nobs: display %9.0fc `e(N)'
@@ -837,54 +1175,14 @@ end of do-file
 added macro:
                e(nobs) : "\multicolumn{1}{c}{    2,104}"
 
-.         * Republican + Republican x (Rep cue) = 0 
-.         qui lincom 2.rep + 2.rep#1.cue
-
-.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
-
-.         local lincompval = L[1,4]
-
-.         estadd local lincompval = round(`lincompval',.001)
+.         estadd local demotab "\multicolumn{1}{c}{.}"
 
 added macro:
-         e(lincompval) : ".1"
+            e(demotab) : "\multicolumn{1}{c}{.}"
 
 . 
-. eststo: qui reg unempup i.rep##i.cue $demoX, vce(hc3)
+. eststo: qui reg unempup i.congenialcue##i.rep, vce(hc3)
 (est2 stored)
-
-.         local nobs: display %9.0fc `e(N)'
-
-.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
-
-added macro:
-               e(nobs) : "\multicolumn{1}{c}{    2,066}"
-
-.         estadd local demotab "\multicolumn{1}{c}{Yes}"
-
-added macro:
-            e(demotab) : "\multicolumn{1}{c}{Yes}"
-
-.         estadd local demo "Yes"
-
-added macro:
-               e(demo) : "Yes"
-
-.         * Republican + Republican x (Rep cue) = 0 
-.         qui lincom 2.rep + 2.rep#1.cue
-
-.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
-
-.         local lincompval = L[1,4]
-
-.         estadd local lincompval = round(`lincompval',.001)
-
-added macro:
-         e(lincompval) : ".162"
-
-. 
-. eststo: qui reg deficitup i.rep##i.cue , vce(hc3)
-(est3 stored)
 
 .         local nobs: display %9.0fc `e(N)'
 
@@ -893,21 +1191,14 @@ added macro:
 added macro:
                e(nobs) : "\multicolumn{1}{c}{    2,104}"
 
-.         * Republican + Republican x (Rep cue) = 0 
-.         qui lincom 2.rep + 2.rep#1.cue
-
-.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
-
-.         local lincompval = L[1,4]
-
-.         estadd local lincompval = round(`lincompval',.001)
+.         estadd local demotab "\multicolumn{1}{c}{.}"
 
 added macro:
-         e(lincompval) : ".096"
+            e(demotab) : "\multicolumn{1}{c}{.}"
 
 . 
-. eststo: qui reg deficitup i.rep##i.cue $demoX, vce(hc3)
-(est4 stored)
+. eststo: qui reg unempup i.congenialcue##i.rep $demoX, vce(hc3)
+(est3 stored)
 
 .         local nobs: display %9.0fc `e(N)'
 
@@ -926,17 +1217,58 @@ added macro:
 added macro:
                e(demo) : "Yes"
 
-.         * Republican + Republican x (Rep cue) = 0 
-.         qui lincom 2.rep + 2.rep#1.cue
+. 
+. eststo: qui reg deficitup i.congenialcue, vce(hc3)
+(est4 stored)
 
-.         mat L = (r(estimate), r(se),r(estimate)/r(se) , 2*ttail(r(df),abs(r(estimate)/r(se) ))) 
+.         local nobs: display %9.0fc `e(N)'
 
-.         local lincompval = L[1,4]
-
-.         estadd local lincompval = round(`lincompval',.001)
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 
 added macro:
-         e(lincompval) : ".349"
+               e(nobs) : "\multicolumn{1}{c}{    2,104}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. 
+. eststo: qui reg deficitup i.congenialcue##i.rep, vce(hc3)
+(est5 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,104}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. 
+. eststo: qui reg deficitup i.congenialcue##i.rep $demoX, vce(hc3)
+(est6 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,066}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes" 
+
+added macro:
+               e(demo) : "Yes"
 
 . 
 . #delimit;
@@ -947,46 +1279,41 @@ delimiter now ;
 >         varwidth(30)
 >         modelwidth(8)   
 >         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
->         keep(2.rep 1.cue 2.rep#1.cue _cons)
+>         keep(1.congenialcue 1.rep 1.congenialcue#1.rep _cons)
 >         obslast
 >         label
 >         nobase  
->         noobs
 >         nomtitle
->         coeflabel(2.rep "Republican"
->                           1.cue "Rep cue"
->                       2.rep#1.cue "Republican x (Rep cue)"              
+>         coeflabel(1.congenialcue "Congenial cue"
+>                           1.rep "Republican"
+>                       1.congenialcue#1.rep "Congenial cue x Republican"         
 >                 )
 >         scalar(
->                 "lincompval P-val: Rep. + Rep. x (Rep cue) = 0"
 >                 "demo Demographic controls"
 >                 "r2 R-square" 
->                 "nobs Respondent-items"
 >                 ) 
 >         // title("Dep. var. is 1(response is congenial)")
 > ;
 
-------------------------------------------------------------------------------
-                                    (1)         (2)         (3)         (4)   
-------------------------------------------------------------------------------
-Republican                        0.247***    0.254***    0.405***    0.343***
-                                (0.027)     (0.029)     (0.027)     (0.028)   
+------------------------------------------------------------------------------------------------------
+                                    (1)         (2)         (3)         (4)         (5)         (6)   
+------------------------------------------------------------------------------------------------------
+Congenial cue                     0.144***    0.111***    0.112***    0.178***    0.182***    0.190***
+                                (0.019)     (0.025)     (0.026)     (0.021)     (0.030)     (0.029)   
 
-Rep cue                           0.111***    0.112***    0.182***    0.190***
-                                (0.025)     (0.026)     (0.030)     (0.029)   
+Republican                                    0.067**     0.071**                 0.232***    0.162***
+                                            (0.025)     (0.027)                 (0.030)     (0.031)   
 
-Republican x (Rep cue)           -0.291***   -0.295***   -0.355***   -0.371***
-                                (0.038)     (0.039)     (0.040)     (0.039)   
+Congenial cue x Republican                    0.069+      0.071+                 -0.009      -0.009   
+                                            (0.038)     (0.039)                 (0.040)     (0.039)   
 
-Constant                          0.168***    3.170+      0.443***    7.056***
-                                (0.016)     (1.874)     (0.021)     (1.837)   
-------------------------------------------------------------------------------
-P-val: Rep. + Rep. x (Rep cu~0       .1        .162        .096        .349   
-Demographic controls                            Yes                     Yes   
-R-square                          0.041       0.069       0.090       0.190   
-Respondent-items               \multicolumn{1}{c}{    2,104}    \multicolumn{1}{c}{    2,066}    \multicolumn{1}{c}{    
-> 2,104}    \multicolumn{1}{c}{    2,066}   
-------------------------------------------------------------------------------
+Constant                          0.199***    0.168***    3.170+      0.552***    0.443***    7.056***
+                                (0.012)     (0.016)     (1.874)     (0.015)     (0.021)     (1.837)   
+------------------------------------------------------------------------------------------------------
+Demographic controls                                        Yes                                 Yes   
+R-square                          0.026       0.041       0.069       0.035       0.090       0.190   
+Observations                       2104        2104        2066        2104        2104        2066   
+------------------------------------------------------------------------------------------------------
 Standard errors in parentheses
 + p<0.1, * p<0.05, ** p<0.01, *** p<0.001
 
@@ -996,19 +1323,19 @@ Standard errors in parentheses
 >         varwidth(20)
 >         modelwidth(8)   
 >         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
->         keep(2.rep 1.cue 2.rep#1.cue _cons)
+>         keep(1.congenialcue 1.rep 1.congenialcue#1.rep _cons)
 >         obslast
 >         label
 >         nobase  
 >         noobs
 >         nomtitle
->         coeflabel(2.rep "Republican"
->                           1.cue "Rep. cue"
->                       2.rep#1.cue "Republican x (Rep. cue)"             
+>         coeflabel(1.congenialcue "Congenial cue"
+>                           1.rep "Republican"
+>                       1.congenialcue#1.rep "Congenial cue $\times$ Republican"          
+>                       _cons "Constant"  
 >                 )
 >         scalar(
 >                 "r2 R$^2$" 
->                 "lincompval P-val: Rep. + Rep. x (Rep cue) = 0"
 >                 "demotab Demographic controls"
 >                 "nobs Respondent-items"
 >                 ) 
@@ -1025,10 +1352,121 @@ end of do-file
 
 . 
 . **** Barplots for effect of party & survey type on response
-. do ./survey-exp/unemp-barplot.do
+. do ./survey-exp/unemp-barplots.do
 
-. eststo: qui reg unempup i.rep##i.cue, vce(hc3)
-(est5 stored)
+. qui reg unempup i.congenialcue, vce(hc3)
+
+. 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,3]
+              0b.            1.              
+    congenialcue  congenialcue         _cons
+y1             0     .14400665     .19903846
+
+. local baseline = coefmat[1, 3] /* _cons */
+
+. local repcoef = coefmat[1,2]  /* 1.congenialcue */
+
+. 
+. preserve
+
+. regsave
+
+. drop if coef==0
+(1 observation deleted)
+
+. 
+. gen effect = `baseline' + coef if var!="_cons"
+(1 missing value generated)
+
+. replace effect = `baseline' if var=="_cons"
+(1 real change made)
+
+. 
+. * Construct CI
+. gen uci = effect + 1.96 * stderr
+
+. gen lci = effect - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(1 real change made)
+
+. replace lci = 0 if var=="_cons"
+(1 real change made)
+
+. 
+. gen porder = 0 if var=="_cons"
+(1 missing value generated)
+
+. replace porder = 1 if var=="1.congenialcue"
+(1 real change made)
+
+. sort porder
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. label define xlab 0 `""Uncongenial" "cue""' 1 `""Congenial" "cue""'
+
+. label values porder xlab
+
+. 
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
+
+. local YRANGE 0.(0.1).4
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medthick
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS          color(gs7) fcolor(none) lwidth(thick)
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. #delimit;
+delimiter now ;
+. twoway  
+>                 (bar effect porder if porder==0, `BAR_OPTS') 
+>                 (bar effect porder if porder==1, `BAR_OPTS'
+>                         xlabel(,val labsize(`XLAB_SIZE') )
+>                         xtitle("")
+>                 ) 
+>                 (rcap uci lci porder if porder!=0, 
+>                         color(black)
+>                         lwidth(`CI_WIDTH')
+>                         legend(off)
+>                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                         yscale(r(0 .41))
+>                         xlabel(0 1,val labsize(`XLAB_SIZE') noticks)
+>                         xscale(noextend lcolor(none))
+>                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
+>                         bgcolor(white)
+>                         plotregion(margin(30 30 0 0))
+>                 )               
+>         ;
+
+. #delimit cr     
+delimiter now cr
+. 
+. graph export $figsavedir/yougov-unemp-congenialcue.pdf, replace 
+(file D:/partisan-gaps/figs/yougov-unemp-congenialcue.pdf written in PDF format)
+
+. restore
+
+. 
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Congenial cue interacted with partisanship
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. qui reg unempup i.congenialcue##i.rep, vce(hc3)
 
 . 
 . mat coefmat = e(b)
@@ -1036,13 +1474,19 @@ end of do-file
 . mat list coefmat
 
 coefmat[1,9]
-            1b.          2.         0b.          1.     1b.rep#     1b.rep#     2o.rep#      2.rep#            
-           rep         rep         cue         cue      0b.cue      1o.cue      0b.cue       1.cue       _cons
-y1           0   .24710513           0   .11099402           0           0           0  -.29146067   .16757741
+               0b.             1.            0b.             1.  0b.congeni~e#  0b.congeni~e#  1o.congeni~e#
+     congenialcue   congenialcue            rep            rep         0b.rep         1o.rep         0b.rep
+y1              0      .11099402              0      .06663847              0              0              0
+
+     1.congenia~e#               
+            1.rep          _cons
+y1      .06947264      .16757741
 
 . local baseline = coefmat[1, 9] /* _cons */
 
-. local repcoef = coefmat[1,2]  /* 2.rep */
+. local congcoef = coefmat[1,2]  /* 1.congenialcue */
+
+. local repcoef = coefmat[1,4]  /* 1.rep */
 
 . 
 . preserve
@@ -1059,7 +1503,7 @@ y1           0   .24710513           0   .11099402           0           0      
 . replace effect = `baseline' if var=="_cons"
 (1 real change made)
 
-. replace effect = effect + `repcoef' if var=="2.rep#1.cue"
+. replace effect = effect + `congcoef' + `repcoef' if var=="1.congenialcue#1.rep"
 (1 real change made)
 
 . 
@@ -1078,13 +1522,13 @@ y1           0   .24710513           0   .11099402           0           0      
 . gen porder = 0 if var=="_cons"
 (3 missing values generated)
 
-. replace porder = 1 if var=="1.cue"
+. replace porder = 1 if var=="1.congenialcue"
 (1 real change made)
 
-. replace porder = 2 if var=="2.rep"
+. replace porder = 2 if var=="1.rep"
 (1 real change made)
 
-. replace porder = 3 if var=="2.rep#1.cue"
+. replace porder = 3 if var=="1.congenialcue#1.rep"
 (1 real change made)
 
 . sort porder
@@ -1092,17 +1536,17 @@ y1           0   .24710513           0   .11099402           0           0      
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
-. label define xlab 0 `""Dem. w/" "Dem. cue""' 1 `""Dem. w/" "Rep. cue""' 2 `""Rep. w/" "Dem. cue""' 3 `""Rep. w/" "Rep.
->  cue""' 
+. label define xlab 0 `""Dem. w/" "uncongenial" "cue""' 1 `""Dem. w/" "congenial" "cue""' 2 `""Rep. w/" "uncongenial" "c
+> ue""' 3 `""Rep. w/" "congenial" "cue""' 
 
 . label values porder xlab
 
 . 
 . set scheme s2mono
 
-. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
 
-. local YRANGE 0.(0.2).8
+. local YRANGE 0.(0.1).5
 
 . local BASELINE_XLIM = _N+.5
 
@@ -1110,18 +1554,13 @@ y1           0   .24710513           0   .11099402           0           0      
 
 . local XLAB_SIZE large
 
-. local BAR_OPTS          fcolor(none) lwidth(thick)
-
-. local BAR_OPTS_BASE fcolor(none) lwidth(thick)
-
-. 
-. local graphsavedir ./figures
+. local BAR_OPTS           fcolor(none) lwidth(thick)
 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . #delimit;
 delimiter now ;
 . twoway  
->                 (bar effect porder if porder==0, color(navy)   `BAR_OPTS_BASE') 
+>                 (bar effect porder if porder==0, color(navy)   `BAR_OPTS') 
 >                 (bar effect porder if porder==1, color(navy)   `BAR_OPTS') 
 >                 (bar effect porder if porder==2, color(maroon) `BAR_OPTS') 
 >                 (bar effect porder if porder==3, color(maroon) `BAR_OPTS'
@@ -1133,19 +1572,19 @@ delimiter now ;
 >                         lwidth(`CI_WIDTH')
 >                         legend(off)
 >                         ylabel(`YRANGE', `YLAB_OPTS' ) 
->                         yscale(r(0 .85))
+>                         yscale(r(0 .51))
 >                         xlabel(, notick)
 >                         xscale(noextend lcolor(none))
->                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
+>                         graphregion(color(white) lc(white) lw(medium) margin(0 0 10 0)) 
 >                         bgcolor(white)
->                         plotregion(margin(8 8 0 0))
+>                         plotregion(margin(12 12 0 0))
 >                 )               
 >         ;
 
 . #delimit cr     
 delimiter now cr
-. graph export $figsavedir/yougov-unemp.pdf, replace      
-(file D:/partisan-gaps/figs/yougov-unemp.pdf written in PDF format)
+. graph export $figsavedir/yougov-unemp-congenialcue-partisan.pdf, replace        
+(file D:/partisan-gaps/figs/yougov-unemp-congenialcue-partisan.pdf written in PDF format)
 
 . 
 . restore
@@ -1153,10 +1592,120 @@ delimiter now cr
 . 
 end of do-file
 
-. do ./survey-exp/deficit-barplot.do
+. do ./survey-exp/deficit-barplots.do
 
-. eststo: qui reg deficitup i.rep##i.cue, vce(hc3)
-(est6 stored)
+. qui reg deficitup i.congenialcue, vce(hc3)
+
+. 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,3]
+              0b.            1.              
+    congenialcue  congenialcue         _cons
+y1             0     .17834008     .55192308
+
+. local baseline = coefmat[1, 3] /* _cons */
+
+. local repcoef = coefmat[1,2]  /* 1.congenialcue */
+
+. 
+. preserve
+
+. regsave
+
+. drop if coef==0
+(1 observation deleted)
+
+. 
+. gen effect = `baseline' + coef if var!="_cons"
+(1 missing value generated)
+
+. replace effect = `baseline' if var=="_cons"
+(1 real change made)
+
+. 
+. * Construct CI
+. gen uci = effect + 1.96 * stderr
+
+. gen lci = effect - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(1 real change made)
+
+. replace lci = 0 if var=="_cons"
+(1 real change made)
+
+. 
+. gen porder = 0 if var=="_cons"
+(1 missing value generated)
+
+. replace porder = 1 if var=="1.congenialcue"
+(1 real change made)
+
+. sort porder
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. label define xlab 0 `""Uncongenial" "cue""' 1 `""Congenial" "cue""'
+
+. label values porder xlab
+
+. 
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
+
+. local YRANGE 0.(0.2).8
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medthick
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS          color(gs7) fcolor(none) lwidth(thick)
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. #delimit;
+delimiter now ;
+. twoway  
+>                 (bar effect porder if porder==0, `BAR_OPTS') 
+>                 (bar effect porder if porder==1, `BAR_OPTS'
+>                         xlabel(,val labsize(`XLAB_SIZE') )
+>                         xtitle("")
+>                 ) 
+>                 (rcap uci lci porder if porder!=0, 
+>                         color(black)
+>                         lwidth(`CI_WIDTH')
+>                         legend(off)
+>                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                         yscale(r(0 .82))
+>                         xlabel(0 1,val labsize(`XLAB_SIZE') noticks)
+>                         xscale(noextend lcolor(none))
+>                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
+>                         bgcolor(white)
+>                         plotregion(margin(30 30 0 0))
+>                 )               
+>         ;
+
+. #delimit cr     
+delimiter now cr
+. 
+. graph export $figsavedir/yougov-deficit-congenialcue.pdf, replace       
+(file D:/partisan-gaps/figs/yougov-deficit-congenialcue.pdf written in PDF format)
+
+. restore
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Congenial cue interacted with partisanship
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. qui reg deficitup i.congenialcue##i.rep, vce(hc3)
 
 . 
 . mat coefmat = e(b)
@@ -1164,13 +1713,19 @@ end of do-file
 . mat list coefmat
 
 coefmat[1,9]
-            1b.          2.         0b.          1.     1b.rep#     1b.rep#     2o.rep#      2.rep#            
-           rep         rep         cue         cue      0b.cue      1o.cue      0b.cue       1.cue       _cons
-y1           0   .40459927           0   .18237705           0           0           0  -.35546485   .44262295
+               0b.             1.            0b.             1.  0b.congeni~e#  0b.congeni~e#  1o.congeni~e#
+     congenialcue   congenialcue            rep            rep         0b.rep         1o.rep         0b.rep
+y1              0      .18237705              0      .23151147              0              0              0
+
+     1.congenia~e#               
+            1.rep          _cons
+y1     -.00928925      .44262295
 
 . local baseline = coefmat[1, 9] /* _cons */
 
-. local repcoef = coefmat[1,2]  /* 2.rep */
+. local congcoef = coefmat[1,2]  /* 1.congenialcue */
+
+. local repcoef = coefmat[1,4]  /* 1.rep */
 
 . 
 . preserve
@@ -1187,7 +1742,7 @@ y1           0   .40459927           0   .18237705           0           0      
 . replace effect = `baseline' if var=="_cons"
 (1 real change made)
 
-. replace effect = effect + `repcoef' if var=="2.rep#1.cue"
+. replace effect = effect + `congcoef' + `repcoef' if var=="1.congenialcue#1.rep"
 (1 real change made)
 
 . 
@@ -1206,13 +1761,13 @@ y1           0   .40459927           0   .18237705           0           0      
 . gen porder = 0 if var=="_cons"
 (3 missing values generated)
 
-. replace porder = 1 if var=="1.cue"
+. replace porder = 1 if var=="1.congenialcue"
 (1 real change made)
 
-. replace porder = 2 if var=="2.rep"
+. replace porder = 2 if var=="1.rep"
 (1 real change made)
 
-. replace porder = 3 if var=="2.rep#1.cue"
+. replace porder = 3 if var=="1.congenialcue#1.rep"
 (1 real change made)
 
 . sort porder
@@ -1220,15 +1775,15 @@ y1           0   .40459927           0   .18237705           0           0      
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
-. label define xlab 0 `""Dem. w/" "Dem. cue""' 1 `""Dem. w/" "Rep. cue""' 2 `""Rep. w/" "Dem. cue""' 3 `""Rep. w/" "Rep.
->  cue""' 
+. label define xlab 0 `""Dem. w/" "uncongenial" "cue""' 1 `""Dem. w/" "congenial" "cue""' 2 `""Rep. w/" "uncongenial" "c
+> ue""' 3 `""Rep. w/" "congenial" "cue""' 
 
 . label values porder xlab
 
 . 
 . set scheme s2mono
 
-. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
 
 . local YRANGE 0.(0.2).8
 
@@ -1238,18 +1793,13 @@ y1           0   .40459927           0   .18237705           0           0      
 
 . local XLAB_SIZE large
 
-. local BAR_OPTS          fcolor(none) lwidth(thick)
-
-. local BAR_OPTS_BASE fcolor(none) lwidth(thick)
-
-. 
-. local graphsavedir ./figures
+. local BAR_OPTS           fcolor(none) lwidth(thick)
 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . #delimit;
 delimiter now ;
 . twoway  
->                 (bar effect porder if porder==0, color(navy)   `BAR_OPTS_BASE') 
+>                 (bar effect porder if porder==0, color(navy)   `BAR_OPTS') 
 >                 (bar effect porder if porder==1, color(navy)   `BAR_OPTS') 
 >                 (bar effect porder if porder==2, color(maroon) `BAR_OPTS') 
 >                 (bar effect porder if porder==3, color(maroon) `BAR_OPTS'
@@ -1261,19 +1811,19 @@ delimiter now ;
 >                         lwidth(`CI_WIDTH')
 >                         legend(off)
 >                         ylabel(`YRANGE', `YLAB_OPTS' ) 
->                         yscale(r(0 .85))
+>                         yscale(r(0 .81))
 >                         xlabel(, notick)
 >                         xscale(noextend lcolor(none))
->                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
+>                         graphregion(color(white) lc(white) lw(medium) margin(0 0 10 0)) 
 >                         bgcolor(white)
->                         plotregion(margin(8 8 0 0))
+>                         plotregion(margin(12 12 0 0))
 >                 )               
 >         ;
 
 . #delimit cr     
 delimiter now cr
-. graph export $figsavedir/yougov-deficit.pdf, replace    
-(file D:/partisan-gaps/figs/yougov-deficit.pdf written in PDF format)
+. graph export $figsavedir/yougov-deficit-congenialcue-partisan.pdf, replace      
+(file D:/partisan-gaps/figs/yougov-deficit-congenialcue-partisan.pdf written in PDF format)
 
 . 
 . restore
@@ -1281,14 +1831,15 @@ delimiter now cr
 . 
 end of do-file
 
+. 
 . 
 . 
 . tictoc toc
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 24 Mar 2022 16:06:22
-End time: 24 Mar 2022 16:11:11
-Elapsed seconds:       288
+Start time:  6 Apr 2022 16:08:42
+End time:  6 Apr 2022 16:13:38
+Elapsed seconds:       295
 Elapsed minutes:         5
 Elapsed hours:       .08
 ------------------------------------------------------------------------------------------------------------------------
@@ -1298,5 +1849,5 @@ Elapsed hours:       .08
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  24 Mar 2022, 16:11:11
+ closed on:   6 Apr 2022, 16:13:38
 ------------------------------------------------------------------------------------------------------------------------
