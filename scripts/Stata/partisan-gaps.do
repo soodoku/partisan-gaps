@@ -41,8 +41,10 @@ do ./mturk/fig-partisan-gap.do
 // *** Balance tests (24k vs RW), takes a while
 do ./mturk/baltest-24k-rw.do
 
-**** Reg table for effect of party & survey type on response
+**** Reg results for effect of party & survey type on response
 do ./mturk/reg-table.do
+do ./mturk/barplot.do
+
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * YouGov results
@@ -50,13 +52,15 @@ do ./mturk/reg-table.do
 **** Basic prep of data
 import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
 do ./survey-exp/preamble.do
+drop if ind==1
 
 **** Reg table for effect of party & survey type on response
 do ./survey-exp/reg-table.do
 
 **** Barplots for effect of party & survey type on response
-do ./survey-exp/unemp-barplot.do
-do ./survey-exp/deficit-barplot.do
+do ./survey-exp/unemp-barplots.do
+do ./survey-exp/deficit-barplots.do
+
 
 
 tictoc toc

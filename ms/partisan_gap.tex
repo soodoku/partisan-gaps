@@ -195,7 +195,7 @@ The largest reduction comes from the 24k arm, which allows respondents to rate t
 
 
 
-\subsection{Partisan Cues}
+\subsection{Partisan Cues}\label{subsec:partisan-cues}
 The aim of the study is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. For the purpose of the study, we examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.  
 
 For exploring the research question, we exploit two datasets – a national survey conducted by YouGov, and a telephone survey of a random sample of adults in Texas and. The YouGov survey interviewed 2000 respondents between July 10th and 12th, 2012.  In Texas, a total of 1003 interviews were conducted between September 10th and 21st, 2012. 
@@ -203,73 +203,75 @@ For exploring the research question, we exploit two datasets – a national surv
 In the YouGov survey, respondents were randomly assigned to factual questions with either a Republican or Democratic cue in the stem. In a question about whether ``since 2010 midterm elections, the unemployment rate [had] gone up, down, or remained the same, or couldn't you say?'', we inserted either the phrase “when Republicans regained control of the U.S. Congress'' or ``when Democrats retained control of the Senate” right after the first phrase. We employed a similar manipulation for the question on budget deficit, asking how the budget deficit had fared “since the 2010 midterm elections, when Republicans regained control of the U.S. Congress (or ``when Democrats retained control of the Senate''), has the budget deficit gone up, gone down, remained the same, or couldn't you say?''
 In the Texas survey, we added another condition to the above design – no partisan cue in the stem. So a third of the respondents were assigned to a question that simply read, ``since the 2010 midterm elections, has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?'' For the second question we changed our design to – no partisan cue, Democratic cue, and Democratic cue plus the following introduction “based on what you have heard”. The question read, ``since January 2009, have federal taxes increased, decreased, or remained the same or couldn’t you say?.'' The second version gave respondents a Democratic cue by changing the initial part of the sentence; the question now read, “Since Barack Obama took office\ldots''  The third version prepended a cue designed to encourage guessing to the second version; the version read, “Based on what you have heard, since Barack Obama took office, \ldots''
 
-\clearpage
-
-\begin{figure}[ht]
-	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}	
-	\centering
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-unemp.pdf}
-		\caption{Unemployment has gone up}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-deficit.pdf}
-		\caption{Deficit has gone up}
-	\end{subfigure}	
-	\caption*{\footnotesize Bars indicate the predicted percent of responses saying that unemployment have gone up or the budget deficit has gone up, by partisanship of respondent and partisan cue of question, as retrieved from the estimates in \cref{tab:partisangaps-yougov} (columns (1) and (3)).  
-	Capped vertical bars indicate 95\% confidence intervals.
-	}
-	\label{fig:yougov-reg-results}
-\end{figure}
 
 
-
-
-\begin{equation}\label{eq:partisangap-yougov}
-y_{i} = \alpha + \beta (Rep)_i + \gamma (Rep. \; cue)_i + \delta (Rep_i \times Rep.\; cue)_i + \varepsilon_{i}
-\end{equation}
-
-\cref{fig:yougov-reg-results} and \cref{tab:partisangaps-yougov} report the YouGov survey results from estimating \cref{eq:partisangap-yougov} to assess how manipulated partisan cues in the question stem affect partisan responses to questions about unemployment and the budget deficit.
-As expected, Republicans are more likely than Democrats to say that unemployment has gone up. Compared to Democrats, Republics are 25 percentage points more likely to say that unemployment has gone since the 2010 midterm elections when the question cues Democratic blame using the stem "when Democrats retained control of the Senate" ($p<0.001$). 
-Presumably, this is a consequence of the question stem holding the president (a Democrat) responsible for the unemployment rate and the budget deficit.
-When the question instead cues Republican blame using the stem "when Republicans regained control of the US Congress," Republicans become 29 percentage points less likely to say that unemployment has gone up. 
-This reversal is so large it eliminates the observed partisan difference in response between Democrats and Republicans (confirmed by t-tests reported in \cref{tab:partisangaps-yougov}).
-
-Regarding whether the budget deficit has gone up, partisan responses and how they behave with the manipulated partisan cues in the question stem is qualitatively similar to the question about unemployment.
-Republicans are more likely than Democrats to say that the deficit has gone up with a Democratic cue (34 percentage points more likely, $p<0.001$), but this behavior completely reverses when the cue blames Republicans.
-
-\begin{table}[t] \centering \normalsize \setlength\tabcolsep{10 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
-	\label{tab:partisangaps-yougov}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{4}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{2}{c}{Unemployment has gone up}&\multicolumn{2}{c}{Deficit has gone up}\\
-			\cmidrule(lr){2-3}\cmidrule(l){4-5} 
-			\input ../tabs/yougov-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that unemployment or the budget deficit has gone up since the 2010 midterm elections.
-		Rep. cue is an indicator for whether the question stem includes "when Republicans gained control of the US Congress".
-		The baseline is a Democratic cue for the question stem "when Democrats retained control of the Senate".
-		Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
-		All models are linear probability models. 
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
-\end{table}
 
 
 \clearpage
 \section*{Partisan Knowledge Gaps}
+\begin{figure}[ht]
+	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov Survey}	
+	\centering
+	\begin{subfigure}{.495\textwidth}\centering
+		\includegraphics[width=\textwidth]{../figs/yougov-unemp-congenialcue.pdf}
+		\caption{Unemployment}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{.495\textwidth}\centering
+		\includegraphics[width=\textwidth]{../figs/yougov-deficit-congenialcue.pdf}
+		\caption{Budget deficit}
+	\end{subfigure}	
+	\caption*{\footnotesize Bars indicate the predicted percent of responses saying that unemployment or the budget deficit have gone up (correct responses) as reported in \cref{tab:partisangaps-yougov} (columns (1) and (4)).  
+	Capped vertical bars indicate 95\% confidence intervals.
+	}
+	\label{fig:yougov-reg}
+\end{figure}
+
+We start with the YouGov survey to provide experimental evidence that cues in survey questions can affect responses to questions about policy-relevant and objectively verifiable facts. This survey includes questions about changes in unemployment and the budget deficit since the 2010 midterm elections, with manipulated partisan cues in the stem. 
+
+Using the YouGov survey responses, we estimate
+\begin{equation}\label{eq:pgap-yougov}
+\text{correct response}_{i} = \alpha + \beta (congenial \; cue)_i  +\varepsilon_{i},
+\end{equation}
+where the dependent variable is the indicator for whether the response to the question is correct.
+As discussed above in \cref{subsec:partisan-cues}, we model correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly.
+Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response.
+The reverse happens for Republicans, where the congenial cue is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
+
+Panel (a) of \cref{fig:yougov-reg} shows that, by manipulating the partisan cue that respondents receive, the probability of getting the correct response for the unemployment question differs by 14 percentage points ($p < 0.001$, reported in \cref{tab:partisangaps-yougov}).
+
+Panel (b) of \cref{fig:yougov-reg} shows that this systematic difference is not unique to the unemployment question. We reestimate \cref{eq:pgap-yougov} where the dependent variable is getting the correct response that the budget deficit has gone up. When the individuals get a congenial cue, they are 18 percentage points more likely to get the correct response ($p<0.001$).
+Presumably, we observe this congenial cue effect because the question stem holds the other party responsible for the increase in unemployment and deficit, which are both undesirable.
+
+\cref{fig:yougov-reg-by-partisanship} show that there is some heterogeneity in how the congenial cue affects Republicans as opposed to Democrats. However, the effect is not unique to either party since partisans of both types are more likely to get the correct response when randomly assigned the congenial cue.
+
+\begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
+	\label{tab:partisangaps-yougov}
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+			\toprule
+			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+			&\multicolumn{3}{c}{Unemployment has gone up}&\multicolumn{3}{c}{Deficit has gone up}\\
+			\cmidrule(lr){2-4}\cmidrule(l){5-7} 
+			\input ../tabs/yougov-reg-table-fragment.tex
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that unemployment or the budget deficit has gone up since the 2010 midterm elections (which are the correct responses).
+	Congenial cue is an indicator for whether the question stem includes the cue towards getting the correct response. For Democrats, this is when the question stem includes the cue ``when Republicans gained control of the US Congress.''
+	For Republicans, this is when the question stem includes the cue ``when Democrats retained control of the Senate.''
+	Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
+	All models are linear probability models. 
+	Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+\end{table}
 
 
-We start with data from the YouGov survey that manipulated partisan cues in the stem. To assess how partisan references in the question stem cuing accountability affect responses by partisans, we ran an ordered logit, regressing the response on the budget deficit and unemployment question on partisan identification, partisan cue, and interaction between partisan identification and the cue. As expected, Republicans are much likely than Democrats to say that the unemployment rate and budget deficit are going up (Unemployment: $b = 1.14, p < .001$; Budget Deficit: $b = 2.02, p < .001$; see Table 3). Presumably this is a consequence of the president (a Democrat) being held responsible for unemployment rate and budget deficit. When the question stem highlights Republicans in position of responsibility, versus the Democrats, Republicans are much less likely to say that the unemployment rate has gone up since 2010 ($b = -1.13, p < .001$). We obtain almost identical, only stronger, findings for budget deficit, with question stem highlighting Republican responsibility, vis-a-vis Democratic responsibility, causing Republicans to become less likely to report that the budget deficit is going up. This isn’t a Republican phenomenon for if we split the results by party, we see opposing movement among Democrats and Republicans due to the question stem. The results from the experiment suggest that a number of respondents are using available cues to answer the question, than stored cognitions about the unemployment rate and the budget deficit. 
+We further supplement our results with the Texas Lyceum survey, which affords a neutral cue. In this survey, in addition to congenial and uncongenial cues, individuals can also be randomly assigned a neutral cue where the additional question stem assigning blame to a party is absent, giving us a total of three groups: (i) no cue, (ii) congenial cue, and (iii) uncongenial cue.
 
-Next we move to data from the Texas survey which in addition to including partisan cues in the question stem also had a condition in which questions had no partisan cues. With this ``control'' condition, we can assess how addition of partisan cues changes how partisans respond to these questions. We once again ran an ordered logit predicting responses to the knowledge questions using partisanship, experimental conditions and interaction between experimental conditions and partisanship. Once again we see that Republicans are likelier to report, vis-a-vis Democrats, that the unemployment rate and taxes have gone up since 2010 elections (Unemployment: $b = 1.24, p < .001$;  Tax rates: $b= 1.77, p < .001$; see Table 4). Compared to the no cue condition, addition of a Republican responsibility cue makes Republicans much less likelier to report that unemployment is going up ($b = -1.00, p < .05$). Reverse happens with the Democratic cue, as Republicans become more likely to say that the unemployment rate has gone up ($b= .98, p < .05$). Democratic cue on taxes doesn't do as much vis-a-vis no-cue but solicitation of opinion makes Republicans much more likely to reports that taxes have gone up ($b = .86; p < .05$). In all, we have fair evidence that uninformed partisans use partisan cues to either infer incorrectly, or respond in a manner that reflects well on their partisan identity. 
 
+\clearpage
 \section*{Discussion and Conclusion}
 
 Our results clarify our understanding of partisan knowledge gaps in important ways. First, partisan knowledge gaps are less ubiquitous than what conventional wisdom in political science suggests. For three in ten items, partisans either know \textit{less} party-congenial information or \textit{more} party-\textit{un}congenial information than their opponents. Among gaps occurring in the correct direction, we can only be certain that Democrats and Republicans actually differ from one another in their factual understanding of politics less than half the time. Secondly, the average knowledge gap in our data is small, with a mean gap of six percentage points and a median gap of about three percentage points. Third, many question features like the number of response options or question wording weakly predict the size of partisan knowledge gaps; instead, it is question difficulty and the \textit{content} of response options that influence the size of the gap.
@@ -296,12 +298,14 @@ While this is certainly troubling for those who view political knowledge as an e
 \setcounter{figure}{0}\renewcommand\thefigure{\thesection.\arabic{figure}}
 \counterwithin{figure}{section}
 
+
 \begin{center}
 \Large \textbf{SUPPORTING INFORMATION}
 \end{center}
 \singlespacing
 \vspace{-.4in}
 
+\section{Supporting figures}
 \begin{center}
 \begin{figure}[H]
   \centering
@@ -316,6 +320,28 @@ While this is certainly troubling for those who view political knowledge as an e
   }
 \end{figure}
 \end{center}
+
+
+\begin{figure}[ht]
+	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}	
+	\centering
+	\begin{subfigure}{.495\textwidth}\centering
+		\includegraphics[width=\textwidth]{../figs/yougov-unemp-congenialcue-partisan.pdf}
+		\caption{Unemployment}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{.495\textwidth}\centering
+		\includegraphics[width=\textwidth]{../figs/yougov-deficit-congenialcue-partisan.pdf}
+		\caption{Budget deficit}
+	\end{subfigure}	
+	\caption*{\footnotesize Figure shows the effect of congenial cues for the YouGov survey by partisanship. Bars indicate the predicted percent of responses saying that unemployment have gone up (correct response) as retrieved from the estimates in \cref{tab:partisangaps-yougov} (columns (2) and (5)).  The estimates are obtained by estimating:\\
+		
+	$\qquad\text{correct response}_{i} = \alpha + \beta (congenial \; cue)_i + \gamma (Rep)_i + \delta (congenial\; cue \times Rep)_i + \varepsilon_{i}$.\\
+	
+	Capped vertical bars indicate 95\% confidence intervals.
+	}
+	\label{fig:yougov-reg-by-partisanship}
+\end{figure}
 
 \clearpage
 \section{Item Text for the MTurk Study}\label{si:mturk}

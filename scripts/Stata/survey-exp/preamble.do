@@ -1,4 +1,10 @@
-encode pid2, gen(rep)
+**** Basic prep of data
+import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
+
+gen rep = (pid2=="Republican")
+gen dem = (pid2=="Democrat")
+gen ind = (pid3=="Independent")
+encode pid3, gen(partisanship)
 
 /* Unemployment (qpk7)
 Unemployment rate since the 2010 midterm elections ...
@@ -35,13 +41,11 @@ label var deficitup "Responded that budget deficit has gone up"
 when Democrats retained control of  the Senate
 when Republicans regained control of the US Cong
 */
-gen cue = (strpos(qpk7_insert, "Rep")>0)
-label var cue "=1 if Republican cue"
+gen repcue = (strpos(qpk7_insert, "Rep")>0)
+label var repcue "=1 if Republican cue"
 
 
-/* Demographics
-
-*/
+/* Demographics*/
 global demoX birthyr i.gender i.white i.educ i.marstat i.employ newsint i.faminc
 
 rename gender gender_str
@@ -60,3 +64,13 @@ encode employ_str, gen(employ)
 
 rename faminc faminc_str
 encode faminc_str, gen(faminc)
+
+
+/* Congenial cues 
+Cue is congenial when the cue makes a partisan more likely to get the correct response (unemp went up)
+This is when:
+	* a R sees a D cue
+	* a D sees a R cue
+*/
+gen congenialcue = (rep==1 & repcue==0) | (dem==1 & repcue==1)
+gen uncongenialcue = (rep==1 & repcue==1) | (dem==1 & repcue==0)
