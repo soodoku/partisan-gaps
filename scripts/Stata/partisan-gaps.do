@@ -29,8 +29,8 @@ setup "`r(mymacro)'"
 tictoc tic
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* MTurk results
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// * MTurk results
+// *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 import delimited `rootdir'/data/turk/mturk-recoded.csv
 do ./mturk/preamble.do
@@ -60,6 +60,20 @@ do ./survey-exp/reg-table.do
 **** Barplots for effect of party & survey type on response
 do ./survey-exp/unemp-barplots.do
 do ./survey-exp/deficit-barplots.do
+
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* YouGov results
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**** Basic prep of data
+use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
+do ./tx-lyceum/preamble.do
+
+**** Reg table for effect of party & survey type on response
+do ./tx-lyceum/reg-table.do
+
+**** Barplots for effect of party & survey type on response
+do ./tx-lyceum/unemp-barplot.do
 
 
 
