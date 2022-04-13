@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:   6 Apr 2022, 16:08:43
+ opened on:  13 Apr 2022, 16:31:50
 
 . 
 . version 13              // Still on version 13 :(
@@ -14,11 +14,11 @@
 
 . adopath ++ ./ado                // Add path to ados
   [1]              "./ado"
-  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
-  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
+  [2]  (BASE)      "C:\Program Files\Stata17\ado\base/"
+  [3]  (SITE)      "C:\Program Files\Stata17\ado\site/"
   [4]              "."
-  [5]  (PERSONAL)  "c:\ado\personal/"
-  [6]  (PLUS)      "c:\ado\plus/"
+  [5]  (PERSONAL)  "C:\Users\lsys\ado\personal/"
+  [6]  (PLUS)      "C:\Users\lsys\ado\plus/"
   [7]  (OLDPLACE)  "c:\ado/"
 
 . 
@@ -32,16 +32,16 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time:  6 Apr 2022 16:08:43
+Start time: 13 Apr 2022 16:31:50
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. * MTurk results
-. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. // * MTurk results
+. // *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . import delimited `rootdir'/data/turk/mturk-recoded.csv
-(344 vars, 1253 obs)
+(344 vars, 1,253 obs)
 
 . do ./mturk/preamble.do
 
@@ -60,7 +60,7 @@ Start time:  6 Apr 2022 16:08:43
 . rename avg avg_str
 
 . destring avg_str, gen(avg) force
-avg_str contains nonnumeric characters; avg generated as double
+avg_str: contains nonnumeric bytes; avg generated as double
 (2 missing values generated)
 
 . 
@@ -89,7 +89,7 @@ avg_str contains nonnumeric characters; avg generated as double
 
 . 
 . replace deficit = 1 - deficit
-(1171 real changes made)
+(1,171 real changes made)
 
 . 
 . *------------------------------------------------------------------------------
@@ -283,7 +283,7 @@ end of do-file
 
 . 
 . graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
-(file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf written in PDF format)
+file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf saved as PDF format
 
 . 
 . 
@@ -449,7 +449,7 @@ delimiter now cr
 
 . 
 . graph export $figsavedir/baltest-24k-rw.pdf, replace    
-(file D:/partisan-gaps/figs/baltest-24k-rw.pdf written in PDF format)
+file D:/partisan-gaps/figs/baltest-24k-rw.pdf saved as PDF format
 
 . 
 . restore
@@ -468,12 +468,12 @@ end of do-file
   3. }
 
 . reshape long item, i(id) j(item_type, string)
-(note: j = birth death deficit fraud illegal increase mmr religion science)
+(j = birth death deficit fraud illegal increase mmr religion science)
 
-Data                               wide   ->   long
+Data                               Wide   ->   Long
 -----------------------------------------------------------------------------
-Number of obs.                     1207   ->   10863
-Number of variables                 406   ->     399
+Number of observations            1,207   ->   10,863      
+Number of variables                 406   ->   399         
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -481,7 +481,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3708 observations deleted)
+(3,708 observations deleted)
 
 . 
 . 
@@ -739,7 +739,7 @@ D:\partisan-gaps\scripts\Stata
 
 . **** Basic prep of data
 . import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
-(344 vars, 1253 obs)
+(344 vars, 1,253 obs)
 
 . do ./mturk/preamble.do
 
@@ -758,7 +758,7 @@ D:\partisan-gaps\scripts\Stata
 . rename avg avg_str
 
 . destring avg_str, gen(avg) force
-avg_str contains nonnumeric characters; avg generated as double
+avg_str: contains nonnumeric bytes; avg generated as double
 (2 missing values generated)
 
 . 
@@ -787,7 +787,7 @@ avg_str contains nonnumeric characters; avg generated as double
 
 . 
 . replace deficit = 1 - deficit
-(1171 real changes made)
+(1,171 real changes made)
 
 . 
 . *------------------------------------------------------------------------------
@@ -851,12 +851,12 @@ end of do-file
   3. }
 
 . reshape long item, i(id) j(item_type, string)
-(note: j = birth death deficit fraud illegal increase mmr religion science)
+(j = birth death deficit fraud illegal increase mmr religion science)
 
-Data                               wide   ->   long
+Data                               Wide   ->   Long
 -----------------------------------------------------------------------------
-Number of obs.                     1207   ->   10863
-Number of variables                 356   ->     349
+Number of observations            1,207   ->   10,863      
+Number of variables                 356   ->   349         
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -864,7 +864,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3708 observations deleted)
+(3,708 observations deleted)
 
 . 
 . eststo: qui reghdfe item i.rep##i.survey $demo, absorb(item_type) vce(cluster id)
@@ -1035,7 +1035,7 @@ delimiter now ;
 .         #delimit cr     
 delimiter now cr
 . graph export $figsavedir/mturk-pgag-surveyarms.pdf, replace     
-(file D:/partisan-gaps/figs/mturk-pgag-surveyarms.pdf written in PDF format)
+file D:/partisan-gaps/figs/mturk-pgag-surveyarms.pdf saved as PDF format
 
 . 
 end of do-file
@@ -1047,13 +1047,13 @@ end of do-file
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
-(262 vars, 2500 obs)
+(262 vars, 2,500 obs)
 
 . do ./survey-exp/preamble.do
 
 . **** Basic prep of data
 . import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
-(262 vars, 2500 obs)
+(262 vars, 2,500 obs)
 
 . 
 . gen rep = (pid2=="Republican")
@@ -1455,7 +1455,7 @@ delimiter now ;
 delimiter now cr
 . 
 . graph export $figsavedir/yougov-unemp-congenialcue.pdf, replace 
-(file D:/partisan-gaps/figs/yougov-unemp-congenialcue.pdf written in PDF format)
+file D:/partisan-gaps/figs/yougov-unemp-congenialcue.pdf saved as PDF format
 
 . restore
 
@@ -1584,7 +1584,7 @@ delimiter now ;
 . #delimit cr     
 delimiter now cr
 . graph export $figsavedir/yougov-unemp-congenialcue-partisan.pdf, replace        
-(file D:/partisan-gaps/figs/yougov-unemp-congenialcue-partisan.pdf written in PDF format)
+file D:/partisan-gaps/figs/yougov-unemp-congenialcue-partisan.pdf saved as PDF format
 
 . 
 . restore
@@ -1695,7 +1695,7 @@ delimiter now ;
 delimiter now cr
 . 
 . graph export $figsavedir/yougov-deficit-congenialcue.pdf, replace       
-(file D:/partisan-gaps/figs/yougov-deficit-congenialcue.pdf written in PDF format)
+file D:/partisan-gaps/figs/yougov-deficit-congenialcue.pdf saved as PDF format
 
 . restore
 
@@ -1823,9 +1823,679 @@ delimiter now ;
 . #delimit cr     
 delimiter now cr
 . graph export $figsavedir/yougov-deficit-congenialcue-partisan.pdf, replace      
-(file D:/partisan-gaps/figs/yougov-deficit-congenialcue-partisan.pdf written in PDF format)
+file D:/partisan-gaps/figs/yougov-deficit-congenialcue-partisan.pdf saved as PDF format
 
 . 
+. restore
+
+. 
+end of do-file
+
+. 
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * YouGov results
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. **** Basic prep of data
+. use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
+
+. do ./tx-lyceum/preamble.do
+
+. /* Demographics */
+. global demoX news agecohort i.married i.children i.schoolm1 i.income i.edu i.religion i.race i.libcon i.gender
+
+. 
+. encode ageo, gen(agecohort)
+
+. 
+. gen rep = 0
+
+. replace rep = (pid==2) 
+(433 real changes made)
+
+. replace rep = . if pid >=3 /* drop party DK or neither*/ 
+(440 real changes made, 440 to missing)
+
+. label var rep "=1 if Republican"
+
+. drop if missing(rep)
+(440 observations deleted)
+
+. 
+. /* Defining unempup = dep. var. for Q45 (Unemployment)
+> Since the 2010 midterm elections...
+> Q45a = ..., has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?
+> Q45b = ... when Republicans regained control of the U.S. Congress, has the unemployment rate gone up, gone down, or re
+> mained the same?  Or couldn’t you say?
+> Q45C = ... when the Democrats retained control of the Senate, has the unemployment rate gone up, gone down, or remaine
+> d the same?  Or couldn’t you say?
+> 
+> 1.  Gone up
+> 2.  Gone down
+> 3.  Stayed the same
+> 4.  Couldn’t say
+> */
+. gen unempup = (q45a==1) | (q45b==1) | (q45c==1)
+
+. label var unempup "Responded that unemployment rate has gone up"
+
+. 
+. gen unempdk = (q45a==4) | (q45b==4) | (q45c==4)
+
+. label var unempdk "Responded DK for unemployment"
+
+. 
+. /* Congenial cues 
+> Cue is congenial when the cue makes a partisan more likely to get the correct response (unemp went up)
+> This is when:
+>         * a R sees a D cue
+>         * a D sees a R cue
+> */
+. rename sel03 q45arm
+
+. 
+. gen unempcongenial = (rep==1 & q45arm==3) | (rep==0 & q45arm==2)
+
+. gen unempuncongenial = (rep==1 & q45arm==2) | (rep==0 & q45arm==3)
+
+. gen unempneutral = (q45arm==1)
+
+. assert (unempcongenial + unempuncongenial + unempneutral)==1
+
+. 
+. 
+. /* Defining fedtaxup = dep. var. for Q46 (Fed taxes)
+> Since the 2010 midterm elections...
+> Q46a = Since January 2009, have federal taxes increased, decreased, or remained the same.
+> Q46b = Since Barack Obama took office, have federal taxes increased, decreased, or remained the same.
+> Q46C = Based on what you have heard, since Barack Obama took office, have federal taxes increased, decreased, or remai
+> ned the same.
+> 
+> 1.  Increased
+> 2.  Decreased
+> 3.  Remained the same
+> 4.  Couldn’t say
+> */
+. gen fedtaxup = (q46a==1) | (q46b==1) | (q46c==1)
+
+. label var fedtaxup "Responded that federal taxes has gone up"
+
+. 
+. gen fedtaxdk = (q46a==4) | (q46b==4) | (q46c==4)
+
+. label var fedtaxdk "Responded DK for has federal taxes has gone up?"
+
+. 
+. 
+. /* Cues 
+> 
+> Cue is congenial when a Rep sees the Dem cue (Q46b)
+> 
+> Cue is congenial w guessing encouraged when Rep sees the Dem cue with "based on what you have heard" (Q46C)
+> 
+> Note: Only Rep can have congenial guess. Dem will have only neutral or uncongenial cues
+> */
+. rename sel04 q46arm
+
+. 
+. gen fedtaxcongenial = (rep==1 & q46arm==2)
+
+. gen fedtaxuncongenial = (rep==0 & q46arm==2)
+
+. gen fedtaxcongenialguess = (rep==1 & q46arm==3)
+
+. gen fedtaxuncongenialguess = (rep==0 & q46arm==3)
+
+. gen fedtaxneutral = (q46arm==1)
+
+. 
+. 
+. assert (fedtaxcongenial + fedtaxuncongenial + fedtaxcongenialguess + fedtaxuncongenialguess + fedtaxneutral)==1
+
+. 
+. 
+end of do-file
+
+. 
+. **** Reg table for effect of party & survey type on response
+. do ./tx-lyceum/reg-table.do
+
+. eststo clear
+
+. eststo: qui reg unempup i.unempcongenial i.unempuncongenial, vce(hc3)
+(est1 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg unempup i.(unempcongenial unempuncongenial)##i.rep, vce(hc3)
+(est2 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg unempup i.(unempcongenial unempuncongenial)##i.rep $demoX, vce(hc3)
+(est3 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      752}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+. 
+. #delimit;
+delimiter now ;
+. esttab,
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(30)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.unempcongenial 1.unempuncongenial 1.rep 1.unempcongenial#1.rep 1.unempuncongenial#1.rep _cons)
+>         obslast
+>         label
+>         nobase  
+>         nomtitle
+>         coeflabel(1.unempcongenial "Congenial cue"
+>                           1.unempuncongenial "Uncongenial cue"
+>                           1.rep "Republican"
+>                       1.unempcongenial#1.rep "Congenial cue x Republican"       
+>                       1.unempuncongenial#1.rep "Uncongenial cue x Republican"           
+>                       )
+>         scalar(
+>                 "demo Demographic controls"
+>                 "r2 R-square" 
+>                 ) 
+>         // title("Dep. var. is 1(response is congenial)")
+> ;
+
+------------------------------------------------------------------
+                                    (1)         (2)         (3)   
+------------------------------------------------------------------
+Congenial cue                     0.084+      0.088       0.072   
+                                (0.044)     (0.061)     (0.066)   
+
+Uncongenial cue                  -0.172***   -0.134**    -0.164** 
+                                (0.040)     (0.050)     (0.058)   
+
+Republican                                    0.273***    0.203** 
+                                            (0.058)     (0.074)   
+
+Congenial cue x Republican                    0.009       0.030   
+                                            (0.085)     (0.091)   
+
+Uncongenial cue x Republican                 -0.065      -0.042   
+                                            (0.075)     (0.084)   
+
+Constant                          0.395***    0.236***    0.056   
+                                (0.030)     (0.041)     (0.170)   
+------------------------------------------------------------------
+Demographic controls                                        Yes   
+R-square                          0.048       0.118       0.170   
+Observations                        758         758         752   
+------------------------------------------------------------------
+Standard errors in parentheses
++ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
+
+.         esttab using $tabsavedir/texas-unemp-reg-table-fragment.tex, 
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.unempcongenial 1.unempuncongenial 1.rep 1.unempcongenial#1.rep 1.unempuncongenial#1.rep _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(1.unempcongenial "Congenial cue"
+>                           1.unempuncongenial "Uncongenial cue"
+>                           1.rep "Republican"
+>                       1.unempcongenial#1.rep "Congenial cue x Republican"       
+>                       1.unempuncongenial#1.rep "Uncongenial cue x Republican"           
+>                       )
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "demotab Demographic controls"
+>                 "nobs Respondent-items"
+>                 ) 
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+>         ;
+(output written to D:/partisan-gaps/tabs/texas-unemp-reg-table-fragment.tex)
+
+. #delimit cr     
+delimiter now cr
+. 
+. 
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Make the reg table for federal taxes
+. 
+. global congguess fedtaxcongenial fedtaxuncongenial fedtaxcongenialguess fedtaxuncongenialguess
+
+. 
+. eststo clear
+
+. eststo: qui reg fedtaxup $congguess, vce(hc3)
+(est1 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg fedtaxup $congguess $demoX, vce(hc3)
+(est2 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      752}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+. eststo: qui reg fedtaxdk $congguess, vce(hc3)
+(est3 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg fedtaxdk $congguess $demoX, vce(hc3)
+(est4 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      752}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+. 
+. #delimit;
+delimiter now ;
+. esttab,
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(30)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep($congguess _cons)
+>         obslast
+>         label
+>         nobase  
+>         nomtitle
+>         coeflabel(fedtaxcongenial "Congenial cue"
+>                           fedtaxuncongenial "Uncongenial cue"
+>                           fedtaxcongenialguess "Congenial cue w/ guess"
+>                       fedtaxuncongenialguess "Uncongenial cue w/ guess" 
+>                       )
+>         scalar(
+>                 "demo Demographic controls"
+>                 "r2 R-square" 
+>                 ) 
+> ;
+
+------------------------------------------------------------------------------
+                                    (1)         (2)         (3)         (4)   
+------------------------------------------------------------------------------
+Congenial cue                     0.215***    0.171**    -0.077*     -0.081*  
+                                (0.051)     (0.056)     (0.036)     (0.038)   
+
+Uncongenial cue                  -0.298***   -0.228***   -0.063      -0.077   
+                                (0.042)     (0.048)     (0.042)     (0.050)   
+
+Congenial cue w/ guess            0.091+      0.042      -0.074*     -0.066+  
+                                (0.052)     (0.057)     (0.036)     (0.038)   
+
+Uncongenial cue w/ guess         -0.290***   -0.234***   -0.038      -0.051   
+                                (0.040)     (0.047)     (0.041)     (0.043)   
+
+Constant                          0.381***   -0.223       0.187***    0.884***
+                                (0.031)     (0.177)     (0.025)     (0.180)   
+------------------------------------------------------------------------------
+Demographic controls                            Yes                     Yes   
+R-square                          0.151       0.219       0.009       0.126   
+Observations                        758         752         758         752   
+------------------------------------------------------------------------------
+Standard errors in parentheses
++ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
+
+.         esttab using $tabsavedir/texas-fedtax-reg-table-fragment.tex, 
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep($congguess _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(fedtaxcongenial "Congenial cue"
+>                           fedtaxuncongenial "Uncongenial cue"
+>                           fedtaxcongenialguess "Congenial w/ guessing cue"
+>                       fedtaxuncongenialguess "Uncongenial w/ guessing cue"      
+>                       )
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "demotab Demographic controls"
+>                 "nobs Respondent-items"
+>                 ) 
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+>         ;
+(output written to D:/partisan-gaps/tabs/texas-fedtax-reg-table-fragment.tex)
+
+. #delimit cr     
+delimiter now cr
+. 
+end of do-file
+
+. 
+. **** Barplots for effect of party & survey type on response
+. do ./tx-lyceum/unemp-barplot.do
+
+. use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
+
+. do ./tx-lyceum/preamble.do
+
+. /* Demographics */
+. global demoX news agecohort i.married i.children i.schoolm1 i.income i.edu i.religion i.race i.libcon i.gender
+
+. 
+. encode ageo, gen(agecohort)
+
+. 
+. gen rep = 0
+
+. replace rep = (pid==2) 
+(433 real changes made)
+
+. replace rep = . if pid >=3 /* drop party DK or neither*/ 
+(440 real changes made, 440 to missing)
+
+. label var rep "=1 if Republican"
+
+. drop if missing(rep)
+(440 observations deleted)
+
+. 
+. /* Defining unempup = dep. var. for Q45 (Unemployment)
+> Since the 2010 midterm elections...
+> Q45a = ..., has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?
+> Q45b = ... when Republicans regained control of the U.S. Congress, has the unemployment rate gone up, gone down, or re
+> mained the same?  Or couldn’t you say?
+> Q45C = ... when the Democrats retained control of the Senate, has the unemployment rate gone up, gone down, or remaine
+> d the same?  Or couldn’t you say?
+> 
+> 1.  Gone up
+> 2.  Gone down
+> 3.  Stayed the same
+> 4.  Couldn’t say
+> */
+. gen unempup = (q45a==1) | (q45b==1) | (q45c==1)
+
+. label var unempup "Responded that unemployment rate has gone up"
+
+. 
+. gen unempdk = (q45a==4) | (q45b==4) | (q45c==4)
+
+. label var unempdk "Responded DK for unemployment"
+
+. 
+. /* Congenial cues 
+> Cue is congenial when the cue makes a partisan more likely to get the correct response (unemp went up)
+> This is when:
+>         * a R sees a D cue
+>         * a D sees a R cue
+> */
+. rename sel03 q45arm
+
+. 
+. gen unempcongenial = (rep==1 & q45arm==3) | (rep==0 & q45arm==2)
+
+. gen unempuncongenial = (rep==1 & q45arm==2) | (rep==0 & q45arm==3)
+
+. gen unempneutral = (q45arm==1)
+
+. assert (unempcongenial + unempuncongenial + unempneutral)==1
+
+. 
+. 
+. /* Defining fedtaxup = dep. var. for Q46 (Fed taxes)
+> Since the 2010 midterm elections...
+> Q46a = Since January 2009, have federal taxes increased, decreased, or remained the same.
+> Q46b = Since Barack Obama took office, have federal taxes increased, decreased, or remained the same.
+> Q46C = Based on what you have heard, since Barack Obama took office, have federal taxes increased, decreased, or remai
+> ned the same.
+> 
+> 1.  Increased
+> 2.  Decreased
+> 3.  Remained the same
+> 4.  Couldn’t say
+> */
+. gen fedtaxup = (q46a==1) | (q46b==1) | (q46c==1)
+
+. label var fedtaxup "Responded that federal taxes has gone up"
+
+. 
+. gen fedtaxdk = (q46a==4) | (q46b==4) | (q46c==4)
+
+. label var fedtaxdk "Responded DK for has federal taxes has gone up?"
+
+. 
+. 
+. /* Cues 
+> 
+> Cue is congenial when a Rep sees the Dem cue (Q46b)
+> 
+> Cue is congenial w guessing encouraged when Rep sees the Dem cue with "based on what you have heard" (Q46C)
+> 
+> Note: Only Rep can have congenial guess. Dem will have only neutral or uncongenial cues
+> */
+. rename sel04 q46arm
+
+. 
+. gen fedtaxcongenial = (rep==1 & q46arm==2)
+
+. gen fedtaxuncongenial = (rep==0 & q46arm==2)
+
+. gen fedtaxcongenialguess = (rep==1 & q46arm==3)
+
+. gen fedtaxuncongenialguess = (rep==0 & q46arm==3)
+
+. gen fedtaxneutral = (q46arm==1)
+
+. 
+. 
+. assert (fedtaxcongenial + fedtaxuncongenial + fedtaxcongenialguess + fedtaxuncongenialguess + fedtaxneutral)==1
+
+. 
+. 
+end of do-file
+
+. 
+. 
+. qui reg unempup i.unempcongenial i.unempuncongenial, vce(hc3)
+
+. 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,5]
+              0b.            1.           0b.            1.              
+    unempconge~l  unempconge~l  unempuncon~l  unempuncon~l         _cons
+y1             0      .0837294             0    -.17190785     .39543726
+
+. local baseline = coefmat[1, 5] /* _cons */
+
+. local congcoef = coefmat[1,2]  /* 1.unempcongenial */
+
+. local uncongcoef = coefmat[1,4]  /* 1.unempuncongenial */
+
+. 
+. preserve
+
+. regsave
+
+. drop if coef==0
+(2 observations deleted)
+
+. 
+. gen effect = `baseline' + coef if var!="_cons"
+(1 missing value generated)
+
+. replace effect = `baseline' if var=="_cons"
+(1 real change made)
+
+. 
+. * Construct CI
+. gen uci = effect + 1.96 * stderr
+
+. gen lci = effect - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(1 real change made)
+
+. replace lci = 0 if var=="_cons"
+(1 real change made)
+
+. 
+. gen porder = 0 if var=="_cons"
+(2 missing values generated)
+
+. replace porder = 1 if var=="1.unempuncongenial"
+(1 real change made)
+
+. replace porder = 2 if var=="1.unempcongenial"
+(1 real change made)
+
+. sort porder
+
+. 
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. label define xlab 0 `""Neutral" "cue""' 1 `""Uncongenial" "cue""' 2 `""Congenial" "cue""' 
+
+. label values porder xlab
+
+. 
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
+
+. local YRANGE 0.(0.2).6
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medthick
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS          color(gs7) fcolor(none) lwidth(thick)
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. #delimit;
+delimiter now ;
+. twoway  
+>                 (bar effect porder if porder==0, `BAR_OPTS') 
+>                 (bar effect porder if porder==1, `BAR_OPTS') 
+>                 (bar effect porder if porder==2, `BAR_OPTS'
+>                         xlabel(,val labsize(`XLAB_SIZE') )
+>                         xtitle("")
+>                 ) 
+>                 (rcap uci lci porder if porder!=0, 
+>                         color(black)
+>                         lwidth(`CI_WIDTH')
+>                         legend(off)
+>                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                         yscale(r(0 .61))
+>                         xlabel(0 1 2,val labsize(`XLAB_SIZE') noticks)
+>                         xscale(noextend lcolor(none))
+>                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
+>                         bgcolor(white)
+>                         plotregion(margin(25 25 0 0))
+>                 )               
+>         ;
+
+. #delimit cr     
+delimiter now cr
+. graph export $figsavedir/texas-unemp-congenialcue.pdf, replace  
+file D:/partisan-gaps/figs/texas-unemp-congenialcue.pdf saved as PDF format
+
 . restore
 
 . 
@@ -1837,11 +2507,11 @@ end of do-file
 . tictoc toc
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time:  6 Apr 2022 16:08:42
-End time:  6 Apr 2022 16:13:38
-Elapsed seconds:       295
-Elapsed minutes:         5
-Elapsed hours:       .08
+Start time: 13 Apr 2022 16:31:49
+End time: 13 Apr 2022 16:39:41
+Elapsed seconds:       472
+Elapsed minutes:         8
+Elapsed hours:       .13
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
@@ -1849,5 +2519,5 @@ Elapsed hours:       .08
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:   6 Apr 2022, 16:13:38
+ closed on:  13 Apr 2022, 16:39:41
 ------------------------------------------------------------------------------------------------------------------------
