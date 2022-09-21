@@ -9,7 +9,7 @@ setwd("partisan-gaps/")
 
 # Load libraries
 #install.packages("devtools")
-devtools::install_github("soodoku/goji")
+#devtools::install_github("soodoku/goji")
 library(goji)
 library(stringr)
 library(dplyr)
