@@ -3,8 +3,9 @@
 #
 
 # Set Working dir 
-setwd(basedir) 
-setwd("hidden")
+setwd(basedir)   # Gaurav's path
+setwd(githubdir) # Daniel's path
+setwd("hidden")  # folder
 
 # Load libaries
 library(plyr)
@@ -12,10 +13,9 @@ library(broom)
 library(lme4)
 library(lmerTest) #masks lmer; Satterthwaite approximation
 
+
 # Source Recode Files
-source("scripts/01_arep_recode.R")
-source("scripts/02_srep_recode.R")
-source("scripts/04_mturk_recode.R")
+source("scripts/07_mturk_hk_recode.R")
 
 ## MTurk
 ## ----------
@@ -86,7 +86,7 @@ mmv_p  <- tidy(prop.test(c(mturk_vmm_gc,  sum(mturk$fvs_mmc_10)), n = rep(nrow(m
 peas_2   <- c(aca_p, aca2_p, gg_p, dt_p, amt_p, mmt_p, amv_p, mmv_p)
 
 # Combine
-res_conf_clsd <- data.frame(closed, mean_10, gc = mturk_gc, p_c_10 = peas_1, p_gc_10 = peas_2)
+res_conf_clsd <- data.frame(closed, mean_10_1, gc = mturk_gc, p_c_10 = peas_1, p_gc_10 = peas_2)
 
 # Diff. cols
 res_conf_clsd$diff_c_10   <-  res_conf_clsd$closed - res_conf_clsd$mean_10
