@@ -7,7 +7,7 @@ setwd(basedir)
 setwd(githubdir)
 setwd("hidden") 
 
-# Load libaries
+# Load libraries
  
 # Read in recoded data 
 source("scripts/07_mturk_hk_recode.R")
