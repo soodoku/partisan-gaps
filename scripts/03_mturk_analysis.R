@@ -3,13 +3,11 @@
 # 
 
 # Set working directory
-setwd(basedir)
+setwd(basedir) # gaurav's path
 setwd("misinfo_misinfo")
 
-
-setwd(githubdir)
+setwd(githubdir) # Daniel's path 
 setwd("partisan-gaps")
-
 
 # Loading libraries
 library(dplyr)
