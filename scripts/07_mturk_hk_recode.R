@@ -3,11 +3,11 @@
 #
 
 # Set dir
-setwd(basedir)
-setwd("partisan-gaps")
+#setwd(basedir)
+#setwd("partisan-gaps")
 
-setwd(githubdir)
-setwd("partisan-gaps")
+#setwd(githubdir)
+#setwd("partisan-gaps")
 
 # Load libraries
 #install.packages("devtools")
