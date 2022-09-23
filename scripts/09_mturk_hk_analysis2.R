@@ -4,6 +4,8 @@
 
 # Set Working dir 
 setwd(basedir)   # Gaurav's path
+setwd("partisan-gaps")  # folder
+
 setwd(githubdir) # Daniel's path
 setwd("partisan-gaps")  # folder
 

@@ -14,7 +14,7 @@
 #devtools::install_github("soodoku/goji")
 library(goji)
 library(stringr)
-library(dplyr)
+library(tidyverse)
 library(mosaic)
 
 # Load functions
@@ -42,25 +42,24 @@ mturk <- read.csv("data/mturk_hk/hidden_knowledge_March 28, 2017_20.29.csv",
   filter(!is.na(valid) & ccode=="US" & cheat_no_cheat != "")
 
 
-                                        # --------------------------------
+# --------------------------------
+# Randomizing variables:
+# cheat_no_cheat: cheat / no_cheat
+# visual: text / photo
+# reticence_guessing: closed / scale 
+# fugitive: photo / text
+# probe: open / closed 
+# fugitive_visual: closed / asses 
 
-                                        # Randomizing variables:
-                                        # cheat_no_cheat: cheat / no_cheat
-                                        # visual: text / photo
-                                        # reticence_guessing: closed / scale 
-                                        # fugitive: photo / text
-                                        # probe: open / closed 
-                                        # fugitive_visual: closed / asses 
+# 1. Check that there are no missing values in randomization variables
+# Included in the crosstabs below
 
-                                        # 1. Check that there are no missing values in randomization variables
-                                        # Included in the crosstabs below
-
-                                        # 2. Check that the randomization is producing roughly balanced data
+# 2. Check that the randomization is producing roughly balanced data
 
 
-                                        # Randomization in Cheat_no_cheat
-                                        # 1/3--2/3
-                                        # Crosstab needs to produce: 2/3 receive treatment and 1/3 do not receive treatment
+# Randomization in Cheat_no_cheat
+# 1/3--2/3
+# Crosstab needs to produce: 2/3 receive treatment and 1/3 do not receive treatment
 crosstab(mturk, row.vars = "valid", col.vars = "cnc_test", type = "f")
 
 # Randomization in Visualization
@@ -87,6 +86,8 @@ crosstab(mturk, row.vars = "valid", col.vars = "fugivisual", type = "f")
 
 # Probe and CNC
 crosstab(mturk, row.vars = c("valid", "cnc_test"), col.vars = "probe_test", type = "f", subtotals = FALSE)
+
+
 
 # Visual cues in form of portraits 
 # --------------------------------------

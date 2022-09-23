@@ -3,8 +3,13 @@
 # 
 
 # Set working directory
-setwd(basedir)
-setwd("misinfo_misinfo")
+# commented paths for call in the 03_mturk_analysis.R script
+#setwd(basedir)
+#setwd("misinfo_misinfo")
+
+#setwd(githubdir)
+#setwd("partisan-gaps")
+
 
 # Loading libraries
 library(dplyr)
@@ -13,7 +18,7 @@ library(goji)
 library(broom)
 
 # Read in data
-mturk <- read.csv("data/survey_exp/mam_mturk_070917.csv", header = TRUE, stringsAsFactors = FALSE)
+mturk <- read.csv("data/turk/mam_mturk_070917.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # Preparing data for analysis
 mturk <- mturk[-c(1:2),] 
