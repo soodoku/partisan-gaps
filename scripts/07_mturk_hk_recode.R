@@ -4,6 +4,8 @@
 
 # Set dir
 setwd(basedir)
+setwd("partisan-gaps")
+
 setwd(githubdir)
 setwd("partisan-gaps")
 
