@@ -5,7 +5,7 @@
 # Set dir
 setwd(basedir)
 setwd(githubdir)
-setwd("partisan-gaps/")
+setwd("partisan-gaps")
 
 # Load libraries
 #install.packages("devtools")

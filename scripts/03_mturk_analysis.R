@@ -6,6 +6,11 @@
 setwd(basedir)
 setwd("misinfo_misinfo")
 
+
+setwd(githubdir)
+setwd("partisan-gaps")
+
+
 # Loading libraries
 library(dplyr)
 library(reshape2)

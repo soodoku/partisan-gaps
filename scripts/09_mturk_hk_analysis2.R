@@ -5,7 +5,8 @@
 # Set Working dir 
 setwd(basedir)   # Gaurav's path
 setwd(githubdir) # Daniel's path
-setwd("hidden")  # folder
+setwd("partisan-gaps")  # folder
+
 
 # Load libaries
 library(plyr)
