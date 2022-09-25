@@ -289,7 +289,7 @@ For the FSR interaction term, just adding a `Don't Know' response option reduces
 The largest reduction is 71 percent ($p<0.001$), which comes from the 24k arm. This arm allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option. Including self-reported characteristics of respondents in columns (4)--(6) does not change this conclusion. Overall, the MTurk sample reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artefacts in the same questions.
 
 
-\section*{Partisan Knowledge Gaps (YouGov)}
+\section*{Partisan Knowledge Gaps via Partisan Cues}
 
 \subsection*{Partisan Cues}\label{subsec:partisan-cues}
 The aim of the study is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. For the purpose of the study, we examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.  
@@ -297,8 +297,11 @@ The aim of the study is to present experimental evidence about effect of partisa
 For exploring the research question, we exploit two datasets---a national survey conducted by YouGov, and a telephone survey of a random sample of adults in Texas. The YouGov survey interviewed 2000 respondents between July 10th and 12th, 2012.  In Texas, a total of 1003 interviews were conducted between September 10th and 21st, 2012. 
 
 In the YouGov survey, respondents were randomly assigned to factual questions with either a Republican or Democratic cue in the stem. In a question about whether ``since 2010 midterm elections, the unemployment rate [had] gone up, down, or remained the same, or couldn't you say?'', we inserted either the phrase “when Republicans regained control of the U.S. Congress'' or ``when Democrats retained control of the Senate” right after the first phrase. We employed a similar manipulation for the question on budget deficit, asking how the budget deficit had fared “since the 2010 midterm elections, when Republicans regained control of the U.S. Congress (or ``when Democrats retained control of the Senate''), has the budget deficit gone up, gone down, remained the same, or couldn't you say?''
+
 In the Texas survey, we added another condition to the above design – no partisan cue in the stem. So a third of the respondents were assigned to a question that simply read, ``since the 2010 midterm elections, has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?'' For the second question we changed our design to – no partisan cue, Democratic cue, and Democratic cue plus the following introduction “based on what you have heard”. The question read, ``since January 2009, have federal taxes increased, decreased, or remained the same or couldn’t you say?.'' The second version gave respondents a Democratic cue by changing the initial part of the sentence; the question now read, “Since Barack Obama took office\ldots''  The third version prepended a cue designed to encourage guessing to the second version; the version read, “Based on what you have heard, since Barack Obama took office, \ldots''
 
+
+\subsection*{Results: Partisan Knowledge Gaps with Partisan Cues (YouGov)}
 \begin{figure}[t]
 	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov Survey}	
 	\centering
@@ -312,7 +315,7 @@ In the Texas survey, we added another condition to the above design – no parti
 		\caption{Budget deficit}
 	\end{subfigure}	
 	\caption*{\footnotesize Bars indicate the predicted percent of responses saying that unemployment or the budget deficit have gone up (correct responses) as reported in \cref{tab:partisangaps-yougov} (columns (1) and (4)).  
-	Capped vertical bars indicate 95\% confidence intervals.
+		Capped vertical bars indicate 95\% confidence intervals.
 	}
 	\label{fig:yougov-reg}
 \end{figure}
@@ -324,9 +327,9 @@ Using the YouGov survey responses, we estimate
 \text{correct response}_{i} = \alpha + \beta (congenial \; cue)_i  +\varepsilon_{i},
 \end{equation}
 where the dependent variable is the indicator for whether the response to the question is correct.
-As discussed above in \cref{subsec:partisan-cues}, we model correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly.
+As discussed above in \cref{subsec:partisan-cues}, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly.
 Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response.
-The reverse happens for Republicans, where the congenial cue is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
+The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
 
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
@@ -342,8 +345,8 @@ The reverse happens for Republicans, where the congenial cue is coded as one whe
 			\bottomrule
 		\end{tabular}
 	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that unemployment or the budget deficit has gone up since the 2010 midterm elections (which are the correct responses).
-		Congenial cue is an indicator for whether the question stem includes the cue towards getting the correct response. For Democrats, this is when the question stem includes the cue ``when Republicans gained control of the US Congress.''
+	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that unemployment or the budget deficit had gone up since the 2010 midterm elections (which are the correct responses).
+		Congenial cue is an indicator of whether the question stem includes the cue towards getting the correct response. For Democrats, this is when the question stem includes the cue ``when Republicans gained control of the US Congress.''
 		For Republicans, this is when the question stem includes the cue ``when Democrats retained control of the Senate.''
 		Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
 		All models are linear probability models. 
@@ -352,14 +355,14 @@ The reverse happens for Republicans, where the congenial cue is coded as one whe
 Panel (a) of \cref{fig:yougov-reg} shows that, by manipulating the partisan cue that respondents receive, the probability of getting the correct response for the unemployment question differs by 14 percentage points ($p < 0.001$, reported in \cref{tab:partisangaps-yougov}).
 
 Panel (b) of \cref{fig:yougov-reg} shows that this systematic difference is not unique to the unemployment question. We reestimate \cref{eq:pgap-yougov} where the dependent variable is getting the correct response that the budget deficit has gone up. When the individuals get a congenial cue, they are 18 percentage points more likely to get the correct response ($p<0.001$).
-Presumably, we observe this congenial cue effect because the question stem holds the other party responsible for the increase in unemployment and deficit, which are both undesirable.
+Presumably, we observe this congenial cue effect because the question stem holds the other party responsible for the increase in unemployment and deficit, which are both undesirable.\footnote{\cref{fig:yougov-reg-by-partisanship} show that there is some heterogeneity in how the congenial cue affects Republicans as opposed to Democrats. However, the effect is not unique to either party since partisans of both types are more likely to get the correct response when randomly assigned the congenial cue.}
 
-\cref{fig:yougov-reg-by-partisanship} show that there is some heterogeneity in how the congenial cue affects Republicans as opposed to Democrats. However, the effect is not unique to either party since partisans of both types are more likely to get the correct response when randomly assigned the congenial cue.
 
+\subsection*{Results: Partisan Knowledge Gaps with Partisan Cues (Texas Lyceum)}
 \begin{figure}[!t]
 	\centering
 	\caption{Partisan Gap by Treatment Arm: Texas Lyceum, Unemployment}
-	\includegraphics[scale=.6]{../figs/texas-unemp-congenialcue.pdf}
+	\includegraphics[width=.55\textwidth]{../figs/texas-unemp-congenialcue.pdf}
 	\label{fig:partisangaps-texas-unemp}
 	\caption*{\footnotesize 
 		Bars indicate the predicted percent of responses saying that unemployment has gone up (correct response) as reported in column (1) of \cref{tab:partisangaps-texas-unemp}.  
@@ -369,7 +372,7 @@ Presumably, we observe this congenial cue effect because the question stem holds
 
 We further supplement our results with the Texas Lyceum survey, which includes a third cue: a neutral cue. For the question about unemployment in this survey, in addition to congenial and uncongenial cues, individuals can also be randomly assigned a neutral cue where the additional question stem assigning blame to a party is absent, giving us a total of three groups: (i) no cue, (ii) congenial cue, and (iii) uncongenial cue.
 
-\cref{fig:partisangaps-texas-unemp} shows that our results above still hold when we include a neutral cue. Compared to individuals who received a neutral cue, individuals who receive an uncongenial cue are 17 percentage points less likely to get the correct answer ($p<0.001$), and individuals who receive a congenial cue are 8 percentage points more likely to get the correct answer ($p<0.1$). These results are tabulated in \cref{tab:partisangaps-texas-unemp}, which suggests little heterogeneity in how the congenial cues affect Republicans as opposed to the Democrats when a neutral cue is present.
+\cref{fig:partisangaps-texas-unemp} shows that our results above still hold when we include a neutral cue. Compared to individuals who received a neutral cue, individuals who receive an uncongenial cue are 17 percentage points less likely to get the correct answer that unemployment has gone up ($p<0.001$). Individuals who receive a congenial cue are 8 percentage points more likely to get the correct answer ($p<0.1$). These results are tabulated in \cref{tab:partisangaps-texas-unemp}.
 
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
@@ -386,12 +389,12 @@ We further supplement our results with the Texas Lyceum survey, which includes a
 		\end{tabular}
 	\end{adjustbox}
 	\caption*{\footnotesize Dependent variable is an indicator for whether the individual responded that unemployment has gone up since the 2010 midterm elections (which is the correct response).
-	Congenial cue is an indicator for whether the question stem includes the cue towards getting the correct response. 
-	For Democrats, this is when the question stem includes the cue ``when Republicans regained control of the U.S. Congress.''
-	For Republicans, this is when the question stem includes the cue ``when the Democrats retained control of the Senate.''
-	Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
-	All models are linear probability models. 
-	Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+		Congenial cue is an indicator of whether the question stem includes the cue towards getting the correct response. 
+		For Democrats, this is when the question stem includes the cue ``when Republicans regained control of the US Congress.''
+		For Republicans, this is when the question stem includes the cue ``when the Democrats retained control of the Senate.''
+		Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
+		All models are linear probability models. 
+		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 
@@ -409,22 +412,23 @@ We further supplement our results with the Texas Lyceum survey, which includes a
 			\bottomrule
 		\end{tabular}
 	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that federal taxes have gone up since the 2010 midterm elections (which are the correct responses) or ``don't know''.
-	Congenial cue is an indicator for whether the question stem includes the cue towards getting the correct response. 
-	Only Republicans are able to get a congenial cue for this questions.
-	This happens when Republicans receive the question stem that includes the cue ``since Barack Obama took office.''
-	Separately, individuals can also be assigned a cue that encourages guessing. This happens when the question stem includes ``Based on what you have heard, since Barack Obama took office...''
-	Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
-	All models are linear probability models. 
-	Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that federal taxes had gone up since the 2010 midterm elections (which are the correct responses) or ``don't know''.
+		Congenial cue is an indicator of whether the question stem includes the cue towards getting the correct response. 
+		Only Republicans are able to get a congenial cue for these questions.
+		This happens when Republicans receive the question stem that includes the cue ``since Barack Obama took office.''
+		Separately, individuals can also be assigned a cue that encourages guessing. This happens when the question stem includes ``Based on what you have heard, since Barack Obama took office...''
+		Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
+		All models are linear probability models. 
+		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 
 Finally, we examine the federal taxes question in the Texas Lyceum survey, where individuals are asked whether federal taxes have increased, decreased, or remained the same. For this question, individuals are randomly assigned (i) the Democratic cue ``Since Barack Obama took office'', (ii) the Democratic cue with an additional cue that encourages guessing ``Based on what you have heard, since Barack Obama took office...'', and (iii) a neutral stem.
 
 Based on the estimates in \cref{tab:partisangaps-texas-fedtax}, we observe that randomly receiving a congenial cue still leads to a higher correct response rate of 21.5 percentage points relative to receiving a neutral cue ($p<0.001$). On the other hand, an uncongenial cue leads to a lower correct response of 29.8 percentage points ($p<0.001$).
-We also estimate how the cues that encourage guessing affect the ``Don't Know'' response rate. Presumably, a cue that encourages guessing would lead to a lower response rate for Don't Know. We find that the guessing cues do not have a very different effect from cues that do not. 
+We also estimate how the cue that encourages guessing affects the ``Don't Know'' response rate. Presumably, a cue that encourages guessing would lead to a lower response rate for Don't Know. We find that the guessing cues do not have a very different effect from cues that do not. 
 
+Overall, we find again using the YouGov survey and Texas Lyceum survey that questionnaire artifacts, via the addition of partisan cues in the same questions, affects the measured gaps in political knowledge. 
 
 
 \clearpage
