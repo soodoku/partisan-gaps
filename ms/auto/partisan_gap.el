@@ -11,6 +11,7 @@
     "../tabs/yougov-reg-table-fragment"
     "../tabs/texas-unemp-reg-table-fragment"
     "../tabs/texas-fedtax-reg-table-fragment"
+    "./sections/appendix"
     "article"
     "art12"
     "appendix"
@@ -63,15 +64,7 @@
     "tab:partisangaps-yougov"
     "fig:partisangaps-texas-unemp"
     "tab:partisangaps-texas-unemp"
-    "tab:partisangaps-texas-fedtax"
-    "fig:baltest-24k-rw"
-    "fig:yougov-reg-by-partisanship"
-    "si:mturk"
-    "si:mturk2"
-    "fig:aca1"
-    "fig:gg1"
-    "fig:aca2"
-    "fig:eo1")
+    "tab:partisangaps-texas-fedtax")
    (LaTeX-add-bibliographies
     "pgap"))
  :latex)
