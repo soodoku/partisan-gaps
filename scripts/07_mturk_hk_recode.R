@@ -345,3 +345,5 @@ mturk_hk$hisla     <- recode(mturk_hk$hisla, "Yes"  = 1, .default = 0)
 
 
 write.csv(mturk_hk, "data/mturk_hk/mturk_hk_recoded.csv")
+mturk_hk <- read.csv("data/mturk_hk/mturk_hk_recoded.csv")
+
