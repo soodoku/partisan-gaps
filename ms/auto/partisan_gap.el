@@ -1,0 +1,78 @@
+(TeX-add-style-hook
+ "partisan_gap"
+ (lambda ()
+   (TeX-add-to-alist 'LaTeX-provided-class-options
+                     '(("article" "12pt" "letterpaper")))
+   (TeX-add-to-alist 'LaTeX-provided-package-options
+                     '(("appendix" "titletoc" "title") ("xcolor" "usenames" "dvipsnames" "svgnames" "table") ("geometry" "margin=1in") ("hyperref" "linkcolor=blue" "			colorlinks=true" "			urlcolor=blue" "			pdfstartview={XYZ null null 1.00}" "			pdfpagemode=UseNone" "			citecolor={bluish}" "			pdftitle={partisan_gap}") ("multibib" "resetlabels" "labeled") ("fontenc" "T1") ("mathdesign" "bitstream-charter") ("cleveref" "nameinlink" "capitalize" "noabbrev") ("caption" "hang" "font=small" "skip=0pt" "labelfont={bf}")))
+   (TeX-run-style-hooks
+    "latex2e"
+    "../tabs/mturk-reg-table-fragment"
+    "../tabs/yougov-reg-table-fragment"
+    "../tabs/texas-unemp-reg-table-fragment"
+    "../tabs/texas-fedtax-reg-table-fragment"
+    "article"
+    "art12"
+    "appendix"
+    "color"
+    "booktabs"
+    "xcolor"
+    "geometry"
+    "hyperref"
+    "multibib"
+    "natbib"
+    "float"
+    "graphicx"
+    "amsfonts"
+    "amssymb"
+    "amsbsy"
+    "amsxtra"
+    "verbatim"
+    "setspace"
+    "sectsty"
+    "pdflscape"
+    "fancyhdr"
+    "url"
+    "fullpage"
+    "multirow"
+    "rotating"
+    "fontenc"
+    "mathdesign"
+    "chngcntr"
+    "longtable"
+    "adjustbox"
+    "dcolumn"
+    "cleveref"
+    "footmisc"
+    "caption"
+    "subcaption"
+    "lscape")
+   (TeX-add-symbols
+    "phantomcaption"
+    "citeapos"
+    "sym")
+   (LaTeX-add-labels
+    "sec:data"
+    "fig:partisangaps-mturk"
+    "eq:partisangap-mturk"
+    "fig:partisangaps-mturk-reg"
+    "tab:partisangaps-mturk"
+    "subsec:partisan-cues"
+    "fig:yougov-reg"
+    "eq:pgap-yougov"
+    "tab:partisangaps-yougov"
+    "fig:partisangaps-texas-unemp"
+    "tab:partisangaps-texas-unemp"
+    "tab:partisangaps-texas-fedtax"
+    "fig:baltest-24k-rw"
+    "fig:yougov-reg-by-partisanship"
+    "si:mturk"
+    "si:mturk2"
+    "fig:aca1"
+    "fig:gg1"
+    "fig:aca2"
+    "fig:eo1")
+   (LaTeX-add-bibliographies
+    "pgap"))
+ :latex)
+
