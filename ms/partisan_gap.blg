@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: partisan_gap.aux
+The style file: apsr.bst
+Database file #1: pgap.bib
+Warning--I didn't find a database entry for "prior"
+Warning--I didn't find a database entry for "bullock"
+Warning--I didn't find a database entry for "pasek2015"
+You've used 16 entries,
+            2874 wiz_defined-function locations,
+            738 strings with 7206 characters,
+and the built_in function-call counts, 65688 in all, are:
+= -- 10778
+> -- 729
+< -- 0
++ -- 5049
+- -- 261
+* -- 5604
+:= -- 13204
+add.period$ -- 64
+call.type$ -- 16
+change.case$ -- 208
+chr.to.int$ -- 16
+cite$ -- 16
+duplicate$ -- 236
+empty$ -- 534
+format.name$ -- 279
+if$ -- 11802
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 17
+newline$ -- 69
+num.names$ -- 180
+pop$ -- 60
+preamble$ -- 1
+purify$ -- 240
+quote$ -- 0
+skip$ -- 204
+stack$ -- 0
+substring$ -- 15216
+swap$ -- 29
+text.length$ -- 224
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 60
+warning$ -- 0
+while$ -- 367
+width$ -- 0
+write$ -- 220
+(There were 3 warnings)
