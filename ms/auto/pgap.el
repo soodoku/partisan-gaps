@@ -178,6 +178,7 @@
     "Stroud2008"
     "jerit2012partisan"
     "jerit_2006"
+    "barabas2014question"
     "Gallagher2003"
     "KuklinskiEtAl2000"
     "AngristPischke2009"
@@ -311,6 +312,9 @@
     "sood2013"
     "stonecash2003"
     "taber2006"
-    "pasek2015"))
+    "pasek2015"
+    "dolan2011women"
+    "abrajano2015reexamining"
+    "stroud2008media"))
  '(or :bibtex :latex))
 
