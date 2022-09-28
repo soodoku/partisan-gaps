@@ -21,19 +21,21 @@
 
 \usepackage{float}
 
-\usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
-\geometry{letterpaper}               % This is 8.5x11 paper. Options are a4paper or a5paper or other... 
-\usepackage{graphicx}                % Handles inclusion of major graphics formats and allows use of 
+\usepackage{geometry}  % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{letterpaper} % This is 8.5x11 paper. Options are a4paper or a5paper or other...
+\usepackage{graphicx}  % Handles inclusion of major graphics formats and allows use of
 \usepackage{amsfonts,amssymb,amsbsy}
 \usepackage{amsxtra}
 \usepackage{verbatim}
 \setcitestyle{round,semicolon,aysep={},yysep={;}}
-\usepackage{setspace}		     % Permits line spacing control. Options are \doublespacing, \onehalfspace
-\usepackage{sectsty}		     % Permits control of section header styles
+\usepackage{setspace} % Permits line spacing control. Options are:
+%\doublespacing
+%\onehalfspace
+\usepackage{sectsty}    % Permits control of section header styles
 \usepackage{pdflscape}
-\usepackage{fancyhdr}		     % Permits header customization. See header section below.
-\usepackage{url}                     % Correctly formats URLs with the \url{} tag
-\usepackage{fullpage}		%1-inch margins
+\usepackage{fancyhdr}   % Permits header customization. See header section below.
+\usepackage{url}        % Correctly formats URLs with the \url{} tag
+\usepackage{fullpage}   %1-inch margins
 \usepackage{multirow}
 \usepackage{verbatim}
 \usepackage{rotating}
@@ -110,6 +112,9 @@ setwd(githubdir)
 
 \doublespacing
 
+Intro
+
+
 %Factual knowledge about politics has long been viewed by scholars as key to democratic competence. Higher levels of political knowledge correspond to a number of normatively desirable outcomes, including higher levels of political tolerance and support for democratic norms, more active participation in politics, and more stable and consistent opinions on political matters \citep{Converse1964,dellicarpini,galston_2001}. Political knowledge also helps facilitate connections between individual group identities and policy views, which can then be applied to evaluations of public officials and parties in a way that increases democratic accountability \citep{dellicarpini}.
 
 %Political knowledge's centrality to democratic health is perhaps why so many are troubled by the fact that Democrats and Republicans appear to differ in their knowledge of politics. Partisans' biased interpretation and retention of political facts appears in public opinion data reaching at least as far back as the 1980s \citep[e.g.,][]{bartels_2002,jerit2012partisan}. As such, the idea of large partisan knowledge gaps---differences in the types of information that Democrats and Republicans know---has become axiomatic in the political science. Indeed, as \citet{bullocketal_2015} note, conventional wisdom in the discipline that ``a persistent pattern in American public opinion is the presence of large differences between Democrats and Republicans in statements of factual beliefs'' (520). Everyday Americans seem to be catching on as well. A poll conducted by the Pew Research Center in 2018 demonstated that nearly eight in ten Americans believe that Democrats and Republicans not only disagree on plans and policies, but on facts as well \citep{pew2018disagree}.
@@ -119,6 +124,8 @@ setwd(githubdir)
 %Given the long shadow that these gaps cast on the health of democracy, understanding how often and to what extent partisans differ in their knowledge of political facts is vital. To study the issue, we assembled a large dataset of partisan-relevant knowledge items. To do so, we made use of data from three prominent studies on the nature and pervasiveness of partisan knowledge gaps \citep{bullocketal_2015,jerit2012partisan,prior2015you}. We find that partisan knowledge gaps are highly variable, and that large differences in what Democrats and Republicans believe are less common than conventional wisdom suggests. In fact, fewer than one in three partisan knowledge gaps are larger than ten percentage points. In addition, nearly one in three partisan knowledge gaps are in the ``wrong'' direction, that is, partisans know less party-congenial information than their opponents. In addition, more than half of the gaps in the expected direction are not statistically significant at conventional levels, despite large sample sizes. On the whole, the average knowledge gap between Democrats and Republicans is six percentage points.
 
 %We attempt to reconcile these findings with the conventional wisdom that partisan knowledge gaps are large and pervasive. We find little evidence that features of question wording systematically affect the size of such gaps; only questions that ask about topics about which there is significant misinformation or questions that are asked during presidential election campaigns appear to meaningfully influence the size of such gaps. We do, find, however, that the wording of response options matters. Specifically, we find that much of the conventional wisdom surrounding the ubiquity and size of knowledge gaps can be traced to  \citet{anes_gen} (ANES) questions, which include vague response options that encourage respondents to interpret meaning based on their own partisan biases. In a companion paper, using an original experiment, we demonstrate that vague response options of this type can produce partisan knowledge gaps \textit{even when} Democrats and Republicans know the answer \citep{roush_2021}. Taken together, our results support the conclusion that partisan knowledge gaps---when they do exist---are more an artifact of ``partisan cheerleading'' \citep{bullocketal_2015,prior2015you} or motivated guessing than a reflection of genuine differences in knowledge.
+
+\newpage
 
 \section*{Two Theories of Partisan Gaps}
 % Theories in a nutshell:
@@ -134,17 +141,17 @@ setwd(githubdir)
 
 Research shows that partisan gaps in politicial knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}.
 
-There are two broad ways partisan gaps in political knowledge can come into existence. It could be that partisan gaps are a result of the fact that partisans know different things---be it knowledge or misinformation. Or partisans gaps could be an artifact of the survey design. 
+There are two broad ways partisan gaps in political knowledge can come into existence. It could be that partisan gaps are a result of the fact that partisans know different things -- be it knowledge or misinformation. Or partisans gaps could be an artifact of the survey and questionnaire design.
 
 \subsection*{Partisan Gaps in Knowledge}
-Partisan gaps in survey measures of political knowledge may reflect actual gaps in the political knowledge of partisans. These gaps in political knowledge could be to do two factors. First, partisans know different things because they are in different filter bubbles (\emph{CITES}) or echo chambers (\emph{CITES}). Selective exposure (even conditional on no biases in memory, etc.) can lead partisans to know different correct and incorrect things about the world.
+On the other hand, partisan gaps in survey measures of political knowledge may reflect \emph{actual gaps} in the political knowledge of partisans. These gaps in political knowledge could be due do three factors. First, partisans know different correct things about politics. Second, partisan know different incorrect things. And lastly, partisans might be ignorant about different aspects of politics. These knowledge differentials might stem from different filter bubbles (\emph{CITES}), echo chambers (\emph{CITES}) or because partisans pay attention to different issues, topics, and politicians (\emph{CITES}). In this last way partisan gaps in political knowledge are similar to other types of gaps.\footnote{See research on the conditionality of gender \citep{dolan2011women, barabas2014question} or racial \citep{abrajano2015reexamining} gaps in political knowledge.} All these options are form of selective exposure, in this case differences in knowledge between partisans emerge because they know different (correct or incorrect) things about the world. Selective exposure (even conditional on no biases in memory, etc.) can lead partisans to know different correct and incorrect things about the world.
 
-Selective exposure is generally made worse by ``motivated skepticism'' (\emph{CITES}). People are more skeptical of uncongenial than congenial information and thus may be more likely to follow-up and do the due diligence to disprove an uncongenial fact or may just take uncongenial information to be untrue and move past it.
+Selective exposure is generally made worse by ``motivated skepticism'' \citep{taber2006, stroud2008media}. People are more skeptical of uncongenial than congenial information and thus may be more likely to follow-up and do the due diligence to disprove an uncongenial fact or may just take uncongenial information to be untrue and move past it. People may be less likely to remember uncongenial information.
 
-Lastly, people may be less likely to remember uncongenial information.
+To summarize, it is possible that the observed partisan gaps in political knowledge in survey research reflect actually excisiting knowledge gaps, which originate in partisans knowing different things, holding different types of misinformation or being ignorant about different aspects of politics.
 
 \subsection*{Partian Gaps As Artifact of Survey Design}
-Partisan gaps in survey responses may also emerge as an artefact of questionnaire design. Following this argument, knowledge gaps emerge because questionnairs are designed in a way that they encourage respondents to provide answers that are congenial with their ideological or partisan predispositions. 
+Partisan gaps in survey responses may also emerge as an \emph{artefact of questionnaire design}. Following this argument, knowledge gaps emerge because questionnairs are designed in a way that they encourage respondents to provide answers that are congenial with their ideological or partisan predispositions.
 
 
 Some respondents who don’t know the answer make an educated guess from other things they do know.  This is hard to tell from both knowledge and blind guessing but not the same as either.  Some inferences, for closed-ended questions, are a matter of eliminating options.  A respondent who does not know the correct option to be correct but does know all the others to be incorrect will choose the correct one despite not having previously known it to be true.  A respondent who likewise does not know the correct option to be correct but knows fewer than C – 1 of C (e.g., only one or two of four) response options to be incorrect, increases his or her chance of choosing the correct one despite not knowing it to be true.  In this case, his or her response is presumably a compound of inference, in reducing the choice set, and blind guessing among the remaining options.  Other inferences are from side information—on the basis of other knowledge.  The “logic” is typically a matter of either stereotypical or hedonic thinking.  Either will sometimes produce a correct response.  Asked about what happened to the federal deficit during the Obama administration, some people, regarding Democrats as generally insouciant about deficits, may infer, without actually knowing, that it increased.  So may some Republicans, preferring to think ill of Democratic administrations (and frowning on an increased deficit). 
