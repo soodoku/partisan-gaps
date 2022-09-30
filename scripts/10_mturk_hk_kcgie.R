@@ -75,7 +75,10 @@ lm_expr_r37  <- lm_robust(expressive ~ democrat_leaners_37, data = mturk_hk_anal
 screenreg(list(lm_know_r37, lm_cheat_r37, lm_guess_r37, lm_infer_r37, lm_expr_r37))
 
 ## Results combined
-screenreg(list(lm_know_rnl, lm_cheat_rnl, lm_guess_rnl, lm_infer_rnl, lm_expr_rnl))
-screenreg(list(lm_know_r46, lm_cheat_r46, lm_guess_r46, lm_infer_r46, lm_expr_r46))
-screenreg(list(lm_know_r37, lm_cheat_r37, lm_guess_r37, lm_infer_r37, lm_expr_r37))
+screenreg(list(lm_know_rnl, lm_cheat_rnl, lm_guess_rnl, lm_infer_rnl, lm_expr_rnl),
+          custom.model.names = c("Knowledge", "Cheating", "Guessing", "Inference", "Expressive"))
+screenreg(list(lm_know_r46, lm_cheat_r46, lm_guess_r46, lm_infer_r46, lm_expr_r46),
+          custom.model.names = c("Knowledge", "Cheating", "Guessing", "Inference", "Expressive"))
+screenreg(list(lm_know_r37, lm_cheat_r37, lm_guess_r37, lm_infer_r37, lm_expr_r37),
+          custom.model.names = c("Knowledge", "Cheating", "Guessing", "Inference", "Expressive"))
 
