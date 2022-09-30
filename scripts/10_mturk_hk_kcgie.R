@@ -13,9 +13,19 @@ library("tidyverse")
 library("texreg")
 library("DeclareDesign")
 
-# load the data 
+# Load the data 
 mturk_hk <- read.csv("data/mturk_hk/mturk_hk_recoded.csv") 
 
+# Clean and transform the data
+# Notes:
+# - only rgc_c_aca2_p, rgc_c_dt_p, obama_c_p, bush_c_p have the necessary probes and can be used 
+# - I code three partisanship variables. One drops all independents, one codes weak leaners to their parties (pid strength unequal 5)
+#   and one codes strong leaners (pid_strength unequal 4,5,6)
+# - knowledge == "I’ve read, seen, or heard that"
+# - cheating == "I asked someone I know", "I looked it up"
+# - guessing == "I just thought I’d take a shot"
+# - inference == "It makes sense, in view of other things I know"
+# - expressive == "It makes me feel good to think that"
 mturk_hk_analysis <-
   mturk_hk |> 
   dplyr::select(X, democrat, republican, independent, rgc_c_aca2_p, rgc_c_dt_p, obama_c_p, bush_c_p, pid, pid_strength_1) |> 
