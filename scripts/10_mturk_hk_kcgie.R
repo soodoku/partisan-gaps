@@ -28,6 +28,7 @@ mturk_hk <- read_csv("data/mturk_hk/mturk_hk_recoded.csv") |>
 # - guessing == "I just thought I’d take a shot"
 # - inference == "It makes sense, in view of other things I know"
 # - expressive == "It makes me feel good to think that"
+
 mturk_hk_analysis <-
   mturk_hk |> 
   dplyr::select(X, democrat, republican, independent, rgc_c_aca2_p, rgc_c_dt_p, obama_c_p, bush_c_p, pid, pid_strength_1, rgc_c_aca2) |> 
@@ -59,18 +60,23 @@ mturk_hk_analysis <-
                              ifelse(is.na(responses), NA, 0))) |> 
   rename(respondent = X)
 
+table(mturk_hk$rgc_c_aca)
+
 mturk_hk_analysis2 <-
   mturk_hk |> 
   dplyr::select(X, democrat, republican, independent, pid, pid_strength_1, 
+                rgc_o_aca, rgc_c_aca,
                 rgc_o_aca2, rgc_o_aca2_p, rgc_c_aca2, rgc_c_aca2_p,
-                rgc_o_aca, rgc_o_aca_p, rgc_c_aca, rgc_c_aca_p,
+                rgc_o_gg, rgc_c_gg,
                 rgc_o_dt, rgc_o_dt_p, rgc_c_dt, rgc_c_dt_p,
                 obama_o, obama_o_p, obama_c, obama_c_p, 
                 bush_o, bush_o_p, bush_c, bush_c_p) |> 
   mutate(obama = coalesce(obama_o, obama_c),
          bush  = coalesce(bush_o, bush_c),
+         gg    = coalesce(rgc_o_gg, rgc_c_gg),
+         aca   = coalesce(rgc_o_aca, rgc_c_aca),
          aca2  = coalesce(rgc_o_aca2, rgc_c_aca2),
-         dt    = coalesce(rgc_o_dt, rgc_o_dt_p),
+         dt    = coalesce(rgc_o_dt, rgc_c_dt),
          pid_leaners_4_6 = ifelse(pid %in% c("Independent", "Something else") & pid_strength_1 < 5, "Democrat",
                                   ifelse(pid  %in% c("Independent", "Something else") & pid_strength_1 > 5, "Republican", pid)),
          pid_leaners_3_7 = ifelse(pid %in% c("Independent", "Something else") & pid_strength_1 < 5, "Democrat",
@@ -82,14 +88,21 @@ mturk_hk_analysis2 <-
                                      ifelse(pid == "Republican", 0, NA)),
          democrat_leaners_46 = ifelse(pid_leaners_4_6 == "Democrat", 1, 0),
          democrat_leaners_37 = ifelse(pid_leaners_3_7 == "Democrat", 1, 0),
-         rgc_c_aca2_correct = if_else(rgc_c_aca2 == "Limit future increases in payments to Medicare providers", 1, 
-                                     ifelse(rgc_c_aca2 == "", NA, 0)),
-         rgc_c_aca2_false = if_else(rgc_c_aca2 == "Create government panels to make end-of-life decisions for people on Medicare", 1, 
-                                      ifelse(rgc_c_aca2 == "", NA, 0)),
+         aca_correct = if_else(aca == "Increase the Medicare payroll tax for upper-income Americans", 1, 
+                                ifelse(aca == "", NA, 0)),
+         aca2_correct = if_else(aca2 == "Limit future increases in payments to Medicare providers", 1, 
+                                     ifelse(aca2 == "", NA, 0)),
+         gg_correct = if_else(gg == "A cause of rising sea levels", 1,
+                              ifelse(gg == "", NA, 0)),
+         dt_correct = if_else(dt == "Temporarily ban immigrants from several majority-Muslim countries", 1,
+                             ifelse(dt == "", NA, 0)),
+        
          obama_correct = if_else(obama == "Increased", 1, 
                                       ifelse(obama == "", NA, 0)),
          bush_correct = if_else(bush == "Increased", 1, 
                                       ifelse(bush == "", NA, 0)))
+#rgc_c_aca2_false = if_else(rgc_c_aca2 == "Create government panels to make end-of-life decisions for people on Medicare", 1, 
+#                              ifelse(rgc_c_aca2 == "", NA, 0)),
   
 obama_c_p, bush_c_p rgc_c_dt_p
 table(mturk_hk$rgc_c_aca2, useNA = "always")
