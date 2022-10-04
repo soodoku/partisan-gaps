@@ -5,45 +5,45 @@ The style file: apsr.bst
 Database file #1: pgap.bib
 Warning--I didn't find a database entry for "prior"
 Warning--I didn't find a database entry for "bullock"
-You've used 22 entries,
+You've used 34 entries,
             2874 wiz_defined-function locations,
-            776 strings with 8179 characters,
-and the built_in function-call counts, 88820 in all, are:
-= -- 14541
-> -- 1000
+            836 strings with 9509 characters,
+and the built_in function-call counts, 129027 in all, are:
+= -- 21064
+> -- 1451
 < -- 0
-+ -- 6793
-- -- 358
-* -- 7588
-:= -- 17860
-add.period$ -- 88
-call.type$ -- 22
-change.case$ -- 286
-chr.to.int$ -- 22
-cite$ -- 22
-duplicate$ -- 326
-empty$ -- 747
-format.name$ -- 385
-if$ -- 15949
-int.to.chr$ -- 5
++ -- 9791
+- -- 523
+* -- 10925
+:= -- 26103
+add.period$ -- 136
+call.type$ -- 34
+change.case$ -- 442
+chr.to.int$ -- 33
+cite$ -- 34
+duplicate$ -- 503
+empty$ -- 1120
+format.name$ -- 565
+if$ -- 23156
+int.to.chr$ -- 6
 int.to.str$ -- 0
-missing$ -- 23
-newline$ -- 93
-num.names$ -- 247
-pop$ -- 76
+missing$ -- 38
+newline$ -- 145
+num.names$ -- 380
+pop$ -- 128
 preamble$ -- 1
-purify$ -- 330
+purify$ -- 510
 quote$ -- 0
-skip$ -- 284
+skip$ -- 426
 stack$ -- 0
-substring$ -- 20529
-swap$ -- 41
-text.length$ -- 308
+substring$ -- 29604
+swap$ -- 62
+text.length$ -- 476
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 84
+type$ -- 124
 warning$ -- 0
-while$ -- 510
+while$ -- 778
 width$ -- 0
-write$ -- 302
+write$ -- 469
 (There were 2 warnings)
