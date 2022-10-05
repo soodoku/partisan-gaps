@@ -56,9 +56,9 @@
    (LaTeX-add-labels
     "sec:data"
     "fig:partisangaps-mturk"
-    "tab:partisangaps-mturk"
     "eq:partisangap-mturk"
     "fig:partisangaps-mturk-reg"
+    "tab:partisangaps-mturk"
     "subsec:partisan-cues"
     "fig:yougov-reg"
     "eq:pgap-yougov"
