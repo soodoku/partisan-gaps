@@ -161,7 +161,8 @@ mturk_hk_scale <-
                             ifelse(questions %in% c("rg_s_dt_4") & democrat_leaners_46 == 0, 1, 0))) 
 
 
-## Analysis of the closed ended questions
+####################################################
+## Analysis of multiple choice questions 
 mturk_hk_closed_correct |> 
   dplyr::select(responses, congenial, democrat_leaners_46) |>
   mutate(democrat_leaners_46 = ifelse(democrat_leaners_46 == 1, "Democrat", "Republican"),
@@ -182,8 +183,6 @@ mturk_hk_closed_correct |>
   theme_bw() + 
   theme(legend.position = "bottom") + facet_grid(~democrat_leaners_46)
 
-
-## Analysis of multiple choice questions 
 lm_closed_correct   <- lm_robust(responses  ~ congenial + questions, data = mturk_hk_closed_correct, clusters = respondent, se_type = "stata")
 lm_closed_correct2  <- lm_robust(responses_noinflation  ~ congenial + questions, data = mturk_hk_closed_correct, clusters = respondent, se_type = "stata")
 lm_closed_correct3  <- lm_robust(response_onlyinflation  ~ congenial + questions, data = mturk_hk_closed_correct, clusters = respondent, se_type = "stata")
@@ -193,8 +192,6 @@ screenreg(list(lm_closed_correct, lm_closed_correct2, lm_closed_correct3),
           custom.model.names = c("W Inflation", "WO Inflation", "Only Inflation"))
 
 ## Analysis of the scale questions
-## TODO: Check N
-
 mturk_hk_scale |> 
   dplyr::select(scale_mc_c_10, democrat_leaners_46) |> 
   drop_na() |> 
@@ -233,6 +230,16 @@ screenreg(list(lm_correct_10,lm_correct_7),
 screenreg(list(lm_correct_mc10, lm_correct_10),
           omit.coef = "questions",
           custom.model.names = c("MC_C10", "All_C10"))
+
+
+texreg(list(lm_closed_correct2, lm_correct_mc10),
+          omit.coef = "questions",
+          custom.coef.names = c("(Intercept)", "Congenial"),
+          custom.gof.rows = list("Survey item FE" = c("Yes", "Yes")),
+          reorder.gof = c(2,1,6,4,3,5),
+          reorder.coef = c(2,1),
+          custom.model.names = c("Multiple Choice", "Likert Scale"))
+
 
 
 ## Analysis for the probes
