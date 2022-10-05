@@ -15,6 +15,10 @@ library("DeclareDesign")
 
 
 # Clean and transform the data
+# This script generates three data sets for the analysis:
+# - mturk_hk_probes focuses on the questions probing the reasons for a correct answer to multiple choice questions
+# - mturk_hk_closed_correct focuses on the correct answers to multiple choice questions 
+# - mturk_hk_scale focuses on the correct answers to likert scale questions (integer feeling questions)
 # Notes:
 # - only rgc_c_aca2_p, rgc_c_dt_p, obama_c_p, bush_c_p have probes about why a correct answer was given 
 # - I code three partisanship variables. One drops all independents, one codes weak leaners to their parties (pid strength unequal 5)
@@ -27,12 +31,12 @@ library("DeclareDesign")
 
 
 # Load the data 
+# This block drops unnecessary variables and generates the PID leaner variables for the other data sets
 mturk_hk <- read_csv("data/mturk_hk/mturk_hk_recoded.csv") |> 
   rename(X = ...1) |> 
   dplyr::select(-c(ends_with("Click"),
                    ends_with("Submit"), 
                    ends_with("Count"), 
-                   contains("gg2"), 
                    StartDate:meta_info_Resolution)) |> 
   mutate(pid_leaners_4_6 = ifelse(pid %in% c("Independent", "Something else") & pid_strength_1 < 5, "Democrat",
                                   ifelse(pid  %in% c("Independent", "Something else") & pid_strength_1 > 5, "Republican", pid)),
@@ -44,14 +48,14 @@ mturk_hk <- read_csv("data/mturk_hk/mturk_hk_recoded.csv") |>
          democrat_noleaners = ifelse(pid == "Democrat", 1, 
                                      ifelse(pid == "Republican", 0, NA)),
          democrat_leaners_46 = ifelse(pid_leaners_4_6 == "Democrat", 1, 0),
-         democrat_leaners_37 = ifelse(pid_leaners_3_7 == "Democrat", 1, 0))
+         democrat_leaners_37 = ifelse(pid_leaners_3_7 == "Democrat", 1, 0)) |> 
+  rename(respondent = X)
   
 
-
-## Generating a dataset with the probes 
-mturk_hk_correct_probes <-
+## Generating a data set with the probes 
+mturk_hk_probes <-
   mturk_hk |> 
-  dplyr::select(X, democrat, republican, independent, 
+  dplyr::select(respondent, democrat, republican, independent, 
                 democrat_noleaners, democrat_leaners_46, democrat_leaners_37,
                 rgc_c_aca2_p, rgc_c_dt_p, obama_c_p, bush_c_p,
                 pid, pid_strength_1) |> 
@@ -68,14 +72,15 @@ mturk_hk_correct_probes <-
          inference  = ifelse(responses %in% c("It makes sense, in view of other things I know"), 1, 
                              ifelse(is.na(responses), NA, 0)),
          expressive = ifelse(responses %in% c("It makes me feel good to think that"), 1, 
-                             ifelse(is.na(responses), NA, 0))) |> 
-  rename(respondent = X)
-
+                             ifelse(is.na(responses), NA, 0)),
+         congenial = ifelse(questions %in% c("rgc_c_aca2_p", "obama_c_p") & democrat_leaners_46 == 1, 1,
+                            ifelse(questions %in% c("rgc_c_dt_p", "bush_c_p") & democrat_leaners_46 == 0, 1, 0)),
+         congenial_noinflation = ifelse(questions %in% c("obama_c_p", "bush_c_p"), NA, congenial))
 
 ## MTurk closed responses correct
 mturk_hk_closed_correct <-
   mturk_hk |> 
-  dplyr::select(X, democrat, republican, independent,
+  dplyr::select(respondent, democrat, republican, independent,
                 democrat_noleaners, democrat_leaners_46, democrat_leaners_37,
                 rgc_o_aca, rgc_c_aca,
                 rgc_o_aca2, rgc_o_aca2_p, rgc_c_aca2, rgc_c_aca2_p,
@@ -83,7 +88,6 @@ mturk_hk_closed_correct <-
                 rgc_o_dt, rgc_o_dt_p, rgc_c_dt, rgc_c_dt_p,
                 obama_o, obama_o_p, obama_c, obama_c_p, 
                 bush_o, bush_o_p, bush_c, bush_c_p) |> 
-  rename(respondent = X) |> 
   mutate(obama = coalesce(obama_o, obama_c),
          bush  = coalesce(bush_o, bush_c),
          gg    = coalesce(rgc_o_gg, rgc_c_gg),
@@ -107,71 +111,86 @@ mturk_hk_closed_correct <-
                names_to = "questions",
                values_to = "responses") |> 
   mutate(congenial = ifelse(questions %in% c("aca_correct", "aca2_correct", "gg_correct", "obama_correct") & democrat_leaners_46 == 1, 1,
-                            ifelse(questions %in% c("dt_correct", "bush_correct") & democrat_leaners_46 == 0, 1, 0)))
-#rgc_c_aca2_false = if_else(rgc_c_aca2 == "Create government panels to make end-of-life decisions for people on Medicare", 1, 
-#                              ifelse(rgc_c_aca2 == "", NA, 0)),
-  
-
+                            ifelse(questions %in% c("dt_correct", "bush_correct") & democrat_leaners_46 == 0, 1, 0))) |> 
+  dplyr::select(-c(rgc_o_aca:dt)) |> 
+  mutate(responses_noinflation = ifelse(questions %in% c("obama_correct", "bush_correct"), NA, responses),
+         response_onlyinflation = ifelse(questions %in% c("obama_correct", "bush_correct"), responses, NA))
 
 ## MTurk scale correct
 mturk_hk_scale <-
   mturk_hk |> 
-  dplyr::select(X, democrat, republican, independent, 
+  dplyr::select(respondent, democrat, republican, independent, 
                 democrat_noleaners, democrat_leaners_46, democrat_leaners_37,
                 contains("_s_")) |> 
   pivot_longer(cols = contains("_s_"),
                names_to = "questions",
                values_to = "responses") |> 
-  rename(respondent = X) |> 
   mutate(scale_correct_10 = ifelse(responses > 0 | responses < 10, 0, NA),
          scale_correct_10 = ifelse(questions == "rg_s_aca_3" & responses == 10, 1, scale_correct_10),
          scale_correct_10 = ifelse(questions == "rg_s_aca2_3" & responses == 10, 1, scale_correct_10),
-         scale_correct_10 = ifelse(questions == "rg_s_gg_2" & responses == 10, 1, scale_correct_10),
          scale_correct_10 = ifelse(questions == "rg_s_gg_4" & responses == 10, 1, scale_correct_10),
+         scale_correct_10 = ifelse(questions == "rg_s_gg2_2" & responses == 10, 1, scale_correct_10),
+         scale_correct_10 = ifelse(questions == "rg_s_gg2_4" & responses == 10, 1, scale_correct_10),
          scale_correct_10 = ifelse(questions == "rg_s_dt_4" & responses == 10, 1, scale_correct_10),
-         scale_correct_10 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_2", "rg_s_gg_4", "rg_s_dt_4") & responses == 0,1, scale_correct_10),
+         scale_correct_10 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
+                                                     "rg_s_gg2_2", "rg_s_gg2_4", "rg_s_dt_4") & responses == 0,1, scale_correct_10),
          scale_correct_7 = ifelse(responses > 0 | responses < 7, 0, NA),
          scale_correct_7 = ifelse(questions == "rg_s_aca_3" & responses > 7, 1, scale_correct_7),
          scale_correct_7 = ifelse(questions == "rg_s_aca2_3" & responses > 7, 1, scale_correct_7),
-         scale_correct_7 = ifelse(questions == "rg_s_gg_2" & responses > 7, 1, scale_correct_7),
          scale_correct_7 = ifelse(questions == "rg_s_gg_4" & responses > 7, 1, scale_correct_7),
+         scale_correct_7 = ifelse(questions == "rg_s_gg2_2" & responses > 7, 1, scale_correct_7),
+         scale_correct_7 = ifelse(questions == "rg_s_gg2_4" & responses > 7, 1, scale_correct_7),
          scale_correct_7 = ifelse(questions == "rg_s_dt_4" & responses > 7, 1, scale_correct_7),
-         scale_correct_7 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_2", "rg_s_gg_4", "rg_s_dt_4") & responses < 3,1, scale_correct_7),
+         scale_correct_7 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
+                                                    "rg_s_gg2_2", "rg_s_gg2_4", "rg_s_dt_4") & responses < 3,1, scale_correct_7),
          scale_mc_c_10 = ifelse(responses < 10, 0, NA),
          scale_mc_c_10 = ifelse(questions == "rg_s_aca_3" & responses == 10, 1, scale_mc_c_10),
          scale_mc_c_10 = ifelse(questions == "rg_s_aca2_3" & responses == 10, 1, scale_mc_c_10),
-         scale_mc_c_10 = ifelse(questions == "rg_s_gg_2" & responses == 10, 1, scale_mc_c_10),
          scale_mc_c_10 = ifelse(questions == "rg_s_gg_4" & responses == 10, 1, scale_mc_c_10),
          scale_mc_c_10 = ifelse(questions == "rg_s_dt_4" & responses == 10, 1, scale_mc_c_10),
-         scale_mc_c_10 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_2", "rg_s_gg_4", "rg_s_dt_4"), NA, scale_mc_c_10),
+         scale_mc_c_10 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
+                                                  "rg_s_dt_4"), NA, scale_mc_c_10),
          scale_mc_c_7 = ifelse(responses < 7, 0, NA),
          scale_mc_c_7 = ifelse(questions == "rg_s_aca_3" & responses > 7, 1, scale_mc_c_7),
          scale_mc_c_7 = ifelse(questions == "rg_s_aca2_3" & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(questions == "rg_s_gg_2" & responses > 7, 1, scale_mc_c_7),
          scale_mc_c_7 = ifelse(questions == "rg_s_gg_4" & responses > 7, 1, scale_mc_c_7),
          scale_mc_c_7 = ifelse(questions == "rg_s_dt_4" & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_2", "rg_s_gg_4", "rg_s_dt_4"), NA, scale_mc_c_7)) |> 
-  mutate(congenial = ifelse(questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_2", "rg_s_gg_4") & democrat_leaners_46 == 1, 1,
-                            ifelse(questions %in% c("rg_s_dt_4") & democrat_leaners_46 == 0, 1, 0)))
+         scale_mc_c_7 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
+                                                 "rg_s_dt_4"), NA, scale_mc_c_7)) |> 
+  mutate(congenial = ifelse(questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", "rg_s_gg2_2", "rg_s_gg2_4") & democrat_leaners_46 == 1, 1,
+                            ifelse(questions %in% c("rg_s_dt_4") & democrat_leaners_46 == 0, 1, 0))) 
 
 
 ## Analysis of the closed ended questions
 mturk_hk_closed_correct |> 
-  dplyr::select(responses, congenial, democrat_leaners_46) |> 
-  rename(correct = responses) |> 
+  dplyr::select(responses, congenial, democrat_leaners_46) |>
+  mutate(democrat_leaners_46 = ifelse(democrat_leaners_46 == 1, "Democrat", "Republican"),
+         responses = ifelse(responses == 1, "Correct", "Incorrect"),
+         congenial = ifelse(congenial == 1, "Congenial", "Not Congenial")) |> 
   drop_na() |> 
-  ggplot(aes(x = as.factor(correct), fill = as.factor(congenial))) + geom_bar()  +
+  ggplot(aes(x = responses, fill = congenial)) + geom_bar()  +
+  theme_bw() + 
+  theme(legend.position = "bottom") + facet_grid(~democrat_leaners_46)
+
+mturk_hk_closed_correct |> 
+  dplyr::select(responses_noinflation, congenial, democrat_leaners_46) |>
+  mutate(democrat_leaners_46 = ifelse(democrat_leaners_46 == 1, "Democrat", "Republican"),
+         responses_noinflation = ifelse(responses_noinflation == 1, "Correct", "Incorrect"),
+         congenial = ifelse(congenial == 1, "Congenial", "Not Congenial")) |> 
+  drop_na() |> 
+  ggplot(aes(x = responses_noinflation, fill = congenial)) + geom_bar()  +
   theme_bw() + 
   theme(legend.position = "bottom") + facet_grid(~democrat_leaners_46)
 
 
-lm_closed_correct  <- lm_robust(responses  ~ congenial + questions, data = mturk_hk_closed_correct, clusters = respondent, se_type = "stata")
+## Analysis of multiple choice questions 
+lm_closed_correct   <- lm_robust(responses  ~ congenial + questions, data = mturk_hk_closed_correct, clusters = respondent, se_type = "stata")
+lm_closed_correct2  <- lm_robust(responses_noinflation  ~ congenial + questions, data = mturk_hk_closed_correct, clusters = respondent, se_type = "stata")
+lm_closed_correct3  <- lm_robust(response_onlyinflation  ~ congenial + questions, data = mturk_hk_closed_correct, clusters = respondent, se_type = "stata")
 
-screenreg(lm_closed_correct,
-          omit.coef = "questions")
-
-
-          custom.model.names = c("MC_C10", "MC_C7"))
+screenreg(list(lm_closed_correct, lm_closed_correct2, lm_closed_correct3),
+          omit.coef = "questions",
+          custom.model.names = c("W Inflation", "WO Inflation", "Only Inflation"))
 
 ## Analysis of the scale questions
 ## TODO: Check N
@@ -183,6 +202,12 @@ mturk_hk_scale |>
   theme_bw() + 
   theme(legend.position = "bottom")
   
+mturk_hk_scale |> 
+  dplyr::select(scale_mc_c_10, congenial) |> 
+  drop_na() |> 
+  ggplot(aes(x = as.factor(scale_mc_c_10), fill = as.factor(congenial))) + geom_bar()  +
+  theme_bw() + 
+  theme(legend.position = "bottom")
 
 mturk_hk_scale |> 
   dplyr::select(scale_mc_c_7, democrat) |> 
@@ -205,72 +230,31 @@ screenreg(list(lm_correct_10,lm_correct_7),
           omit.coef = "questions",
           custom.model.names = c("All_C10", "All_C7"))
 
+screenreg(list(lm_correct_mc10, lm_correct_10),
+          omit.coef = "questions",
+          custom.model.names = c("MC_C10", "All_C10"))
 
 
+## Analysis for the probes
+lm_knowledge   <- lm_robust(knowledge   ~ congenial + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_cheating    <- lm_robust(cheating    ~ congenial + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_guessing    <- lm_robust(guessing    ~ congenial + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_inference   <- lm_robust(inference   ~ congenial + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_expressive  <- lm_robust(expressive  ~ congenial + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
 
-
-obama_c_p, bush_c_p rgc_c_dt_p
-table(mturk_hk$rgc_c_aca2, useNA = "always")
-table(mturk_hk$obama_c_p, useNA = "always")
-table(mturk_hk$bush_c_p, useNA = "always")
-table(mturk_hk$rgc_c_dt_p, useNA = "always")
-
-table(mturk_hk_analysis2$rgc_c_aca2_correct)
-table(mturk_hk_analysis2$obama_o_correct)
-table(mturk_hk_analysis2$bush_o_correct)
-
-
-table(mturk_hk_analysis2$rgc_c_aca2_false)
-mean(mturk_hk_analysis2$rgc_c_aca2_correct)
-rgc_c_aca2_correct
-
-lm_aca2 <- lm(rgc_c_aca2_correct ~ democrat_leaners_46, data = mturk_hk_analysis2)
-lm_aca2 <- lm(rgc_c_aca2_false ~ democrat_leaners_46, data = mturk_hk_analysis2)
-screenreg(lm_aca2)
-
-
-lm_obama <- lm(obama_correct ~ democrat_leaners_46, data = mturk_hk_analysis2)
-lm_bush  <- lm(bush_correct  ~ democrat_leaners_46, data = mturk_hk_analysis2)
-
-screenreg(list(lm_obama,lm_bush),
-          custom.model.names = c("Obama", "Bush"))
-
-
-table(mturk_hk_analysis2$democrat_leaners_46)
-table(mturk_hk_analysis2$rgc_c_aca2)
-
-## Robust regression model for: NO LEANERS
-lm_know_rnl  <- lm_robust(knowledge  ~ democrat_noleaners, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_cheat_rnl <- lm_robust(cheating   ~ democrat_noleaners, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_guess_rnl <- lm_robust(guessing   ~ democrat_noleaners, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_infer_rnl <- lm_robust(inference  ~ democrat_noleaners, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_expr_rnl  <- lm_robust(expressive ~ democrat_noleaners, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-
-screenreg(list(lm_know_rnl, lm_cheat_rnl, lm_guess_rnl, lm_infer_rnl, lm_expr_rnl))
-
-## Robust regression model for: LEANERS, Independents or something else that had PID leaning lower or greater than 5
-lm_know_r46  <- lm_robust(knowledge  ~ democrat_leaners_46, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_cheat_r46 <- lm_robust(cheating   ~ democrat_leaners_46, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_guess_r46 <- lm_robust(guessing   ~ democrat_leaners_46, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_infer_r46 <- lm_robust(inference  ~ democrat_leaners_46, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_expr_r46  <- lm_robust(expressive ~ democrat_leaners_46, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-
-screenreg(list(lm_know_r46, lm_cheat_r46, lm_guess_r46, lm_infer_r46, lm_expr_r46))
-
-## Robust regression model for: LEANERS, Independents or something else that had PID leaning lower or greater than 4 or 6
-lm_know_r37  <- lm_robust(knowledge  ~ democrat_leaners_37, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_cheat_r37 <- lm_robust(cheating   ~ democrat_leaners_37, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_guess_r37 <- lm_robust(guessing   ~ democrat_leaners_37, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_infer_r37 <- lm_robust(inference  ~ democrat_leaners_37, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-lm_expr_r37  <- lm_robust(expressive ~ democrat_leaners_37, data = mturk_hk_analysis, clusters = respondent, se_type = "stata")
-
-screenreg(list(lm_know_r37, lm_cheat_r37, lm_guess_r37, lm_infer_r37, lm_expr_r37))
-
-## Results combined
-screenreg(list(lm_know_rnl, lm_cheat_rnl, lm_guess_rnl, lm_infer_rnl, lm_expr_rnl),
-          custom.model.names = c("Knowledge", "Cheating", "Guessing", "Inference", "Expressive"))
-screenreg(list(lm_know_r46, lm_cheat_r46, lm_guess_r46, lm_infer_r46, lm_expr_r46),
-          custom.model.names = c("Knowledge", "Cheating", "Guessing", "Inference", "Expressive"))
-screenreg(list(lm_know_r37, lm_cheat_r37, lm_guess_r37, lm_infer_r37, lm_expr_r37),
+screenreg(list(lm_knowledge, lm_cheating, lm_guessing, lm_inference, lm_expressive),
+          omit.coef = "questions",
           custom.model.names = c("Knowledge", "Cheating", "Guessing", "Inference", "Expressive"))
 
+lm_knowledge   <- lm_robust(knowledge   ~ congenial_noinflation + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_cheating    <- lm_robust(cheating    ~ congenial_noinflation + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_guessing    <- lm_robust(guessing    ~ congenial_noinflation + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_inference   <- lm_robust(inference   ~ congenial_noinflation + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+lm_expressive  <- lm_robust(expressive  ~ congenial_noinflation + questions, data = mturk_hk_probes, clusters = respondent, se_type = "stata")
+
+screenreg(list(lm_knowledge, lm_cheating, lm_guessing, lm_inference, lm_expressive),
+          omit.coef = "questions",
+          custom.model.names = c("Knowledge", "Cheating", "Guessing", "Inference", "Expressive"))
+
+
+      
