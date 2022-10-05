@@ -199,20 +199,9 @@ The attenuation is most pronounced when comparing the RW to the 24k arms (first 
 
 \subsection*{Results: MTurk 1}
 
-\begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Partisan Knowledge Gaps: MTurk 1}
-	\label{tab:partisangaps-mturk}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{l*{6}{D{.}{.}{-1}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-                  \input ../tabs/mturk_hk_mc_likert.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether the response to a survey item is correct. The independent variable indicates whether the partisanship of the respondent is congenial with the content of the questions. The multiple choice model includes four items. Each of these items had four substantive response options with one correct option. All multiple choice questions included ``Don't know''. The Likert Scale items included the same questions as the Multiple Choice items. Here the four substantive questions were presented to the respondents and they were asked to rate on a scale from 0-10 how true each statement is. Answers were coded as correct for individuals that indicated 10 for the correct statement. Results are robust to a specification that codes \(>\) as correct.  All models include survey item fixed effects. Standard errors are clustered at the respondent level.}
-\end{table}
+
+ \input ../tabs/mturk_hk_mc_likert.tex
+
 
 
 \subsection*{Results: MTurk}
