@@ -32,6 +32,13 @@ screenreg(list(lm_closed_c, lm_closed_c_probe),
 ## Here we are running two models 
 ## First model is coding Likert scale at 10 as correct
 ## Second model is coding Likert scale at 7 as correct
+lm_c10  <- lm_robust(scale_correct_10 ~ congenial + questions, data = mturk_hk_scale, clusters = respondent, se_type = "stata")
+lm_c7   <- lm_robust(scale_correct_7  ~ congenial + questions, data = mturk_hk_scale, clusters = respondent, se_type = "stata")
+
+screenreg(list(lm_c10, lm_c7),
+          omit.coef = "questions",
+          custom.model.names =  c("C10", "C 7"))
+
 lm_mc10_c  <- lm_robust(scale_mc_c_10 ~ congenial + questions, data = mturk_hk_scale, clusters = respondent, se_type = "stata")
 lm_mc7_c   <- lm_robust(scale_mc_c_7  ~ congenial + questions, data = mturk_hk_scale, clusters = respondent, se_type = "stata")
 

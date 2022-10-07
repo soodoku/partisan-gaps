@@ -59,7 +59,7 @@ mturk_hk_closed_correct <-
          aca   = coalesce(rgc_o_aca, rgc_c_aca),
          aca2  = coalesce(rgc_o_aca2, rgc_c_aca2),
          dt    = coalesce(rgc_o_dt, rgc_c_dt),
-        # aca2  = coalesce( rgc_c_aca2),
+         #aca2  = coalesce(rgc_c_aca2),
          #dt    = coalesce(rgc_c_dt),
          aca_correct = if_else(aca == "Increase the Medicare payroll tax for upper-income Americans", 1, 
                                 ifelse(aca == "", NA, 0)),
@@ -75,7 +75,8 @@ mturk_hk_closed_correct <-
   mutate(congenial = ifelse(questions %in% c("aca_correct", "aca2_correct", "gg_correct") & democrat_leaners == 1, 1,
                             ifelse(questions %in% c("dt_correct") & democrat_leaners == 0, 1, 0)),
          response_probe = ifelse(questions %in% c("aca2_correct", "dt_correct"), responses, NA)) |> 
-  dplyr::select(-c(rgc_o_aca:dt)) 
+  dplyr::select(-c(rgc_o_aca:dt)) |> 
+  drop_na(responses)
 
 ## Generating a data set with the probes 
 mturk_hk_probes <-
@@ -87,36 +88,30 @@ mturk_hk_probes <-
   mutate(aca2_correct = if_else(rgc_c_aca2 == "Limit future increases in payments to Medicare providers", 1, 
                                 ifelse(rgc_c_aca2 == "", NA, 0)),
          dt_correct = if_else(rgc_c_dt == "Temporarily ban immigrants from several majority-Muslim countries", 1,
-                              ifelse(rgc_c_dt == "", NA, 0))) 
-
-# TODO: Daniel continue here. apparently not onlt correct but ALL answers get coded
-# fix this so only knowledge is for correct answers 
-
-|> 
-  dplyr::select(-c(rgc_c_aca2,rgc_c_dt)) |> 
+                              ifelse(rgc_c_dt == "", NA, 0))) |> 
+  #dplyr::select(-c(rgc_c_aca2,rgc_c_dt)) |> 
   pivot_longer(cols = c(rgc_c_aca2_p, rgc_c_dt_p),
                names_to = "questions",
                values_to = "responses") |> 
   mutate(responses    = ifelse(responses == "", NA_character_, responses),
          aca2_correct = ifelse(questions == "rgc_c_aca2_p", aca2_correct, NA),
          dt_correct   = ifelse(questions == "rgc_c_dt_p", dt_correct, NA),
-         knowledge    = coalesce(aca2_correct, dt_correct),
-         knowledge    = 
-         knowledge  = ifelse(responses %in% c("I’ve read, seen, or heard that"), 1, 
-                             ifelse(is.na(rgc_c_aca2) & questions == "rgc_c_aca2_p", NA, 
-                                    ifelse(is.na(rgc_c_dt) & questions == "rgc_c_dt_p" , NA, 0))),
-         #cheating   = ifelse(responses %in% c("I asked someone I know", "I looked it up"), 1, 
-         #                   ifelse(is.na(responses), NA, 0)),
-         #guessing   = ifelse(responses %in% c("I just thought I’d take a shot"), 1, 
-         #                   ifelse(is.na(responses), NA, 0)),
-         #inference  = ifelse(responses %in% c("It makes sense, in view of other things I know"), 1, 
-         #                   ifelse(is.na(responses), NA, 0)),
-         #expressive = ifelse(responses %in% c("It makes me feel good to think that"), 1, 
-         #                   ifelse(is.na(responses), NA, 0)),
+         correct    = coalesce(aca2_correct, dt_correct),
+         knowledge    = ifelse(correct == 1 & responses %in% c("I’ve read, seen, or heard that"), 1,
+                               ifelse(is.na(correct), NA, 0)),
+         cheating   = ifelse(correct == 1 & responses %in% c("I asked someone I know", "I looked it up"), 1, 
+                            ifelse(is.na(correct), NA, 0)),
+         guessing   = ifelse(correct == 1 & responses %in% c("I just thought I’d take a shot"), 1, 
+                            ifelse(is.na(correct), NA, 0)),
+         inference  = ifelse(correct == 1 & responses %in% c("It makes sense, in view of other things I know"), 1, 
+                            ifelse(is.na(correct), NA, 0)),
+         expressive = ifelse(correct == 1 & responses %in% c("It makes me feel good to think that"), 1, 
+                            ifelse(is.na(correct), NA, 0)),
          congenial = ifelse(questions %in% c("rgc_c_aca2_p") & democrat_leaners == 1, 1,
-                            ifelse(questions %in% c("rgc_c_dt_p") & democrat_leaners == 0, 1, 0)))
-
-
+                            ifelse(questions %in% c("rgc_c_dt_p") & democrat_leaners == 0, 1, 0))) |> 
+  drop_na(correct) |> 
+  dplyr::select(respondent, pid, pid_strength_1, democrat:democrat_leaners, questions, rgc_c_aca2, rgc_c_dt, 
+                responses, aca2_correct, dt_correct, everything())
 
 ## MTurk scale correct
 mturk_hk_scale <-
@@ -128,38 +123,40 @@ mturk_hk_scale <-
                names_to = "questions",
                values_to = "responses") |> 
   mutate(scale_correct_10 = ifelse(responses > 0 | responses < 10, 0, NA),
-         scale_correct_10 = ifelse(questions == "rg_s_aca_3" & responses == 10, 1, scale_correct_10),
+         scale_correct_10 = ifelse(questions == "rg_s_aca_3"  & responses == 10, 1, scale_correct_10),
          scale_correct_10 = ifelse(questions == "rg_s_aca2_3" & responses == 10, 1, scale_correct_10),
-         scale_correct_10 = ifelse(questions == "rg_s_gg_4" & responses == 10, 1, scale_correct_10),
-         scale_correct_10 = ifelse(questions == "rg_s_gg2_2" & responses == 10, 1, scale_correct_10),
-         scale_correct_10 = ifelse(questions == "rg_s_gg2_4" & responses == 10, 1, scale_correct_10),
-         scale_correct_10 = ifelse(questions == "rg_s_dt_4" & responses == 10, 1, scale_correct_10),
+         scale_correct_10 = ifelse(questions == "rg_s_gg_4"   & responses == 10, 1, scale_correct_10),
+         scale_correct_10 = ifelse(questions == "rg_s_gg2_2"  & responses == 10, 1, scale_correct_10),
+         scale_correct_10 = ifelse(questions == "rg_s_gg2_4"  & responses == 10, 1, scale_correct_10),
+         scale_correct_10 = ifelse(questions == "rg_s_dt_4"   & responses == 10, 1, scale_correct_10),
          scale_correct_10 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
                                                      "rg_s_gg2_2", "rg_s_gg2_4", "rg_s_dt_4") & responses == 0,1, scale_correct_10),
-         scale_correct_7 = ifelse(responses > 0 | responses < 7, 0, NA),
-         scale_correct_7 = ifelse(questions == "rg_s_aca_3" & responses > 7, 1, scale_correct_7),
+         scale_correct_7 = ifelse(responses > 0 | responses <= 7, 0, NA),
+         scale_correct_7 = ifelse(questions == "rg_s_aca_3"  & responses > 7, 1, scale_correct_7),
          scale_correct_7 = ifelse(questions == "rg_s_aca2_3" & responses > 7, 1, scale_correct_7),
-         scale_correct_7 = ifelse(questions == "rg_s_gg_4" & responses > 7, 1, scale_correct_7),
-         scale_correct_7 = ifelse(questions == "rg_s_gg2_2" & responses > 7, 1, scale_correct_7),
-         scale_correct_7 = ifelse(questions == "rg_s_gg2_4" & responses > 7, 1, scale_correct_7),
-         scale_correct_7 = ifelse(questions == "rg_s_dt_4" & responses > 7, 1, scale_correct_7),
+         scale_correct_7 = ifelse(questions == "rg_s_gg_4"   & responses > 7, 1, scale_correct_7),
+         scale_correct_7 = ifelse(questions == "rg_s_gg2_2"  & responses > 7, 1, scale_correct_7),
+         scale_correct_7 = ifelse(questions == "rg_s_gg2_4"  & responses > 7, 1, scale_correct_7),
+         scale_correct_7 = ifelse(questions == "rg_s_dt_4"   & responses > 7, 1, scale_correct_7),
          scale_correct_7 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
                                                     "rg_s_gg2_2", "rg_s_gg2_4", "rg_s_dt_4") & responses < 3,1, scale_correct_7),
          scale_mc_c_10 = ifelse(responses < 10, 0, NA),
-         scale_mc_c_10 = ifelse(questions == "rg_s_aca_3" & responses == 10, 1, scale_mc_c_10),
+         scale_mc_c_10 = ifelse(questions == "rg_s_aca_3"  & responses == 10, 1, scale_mc_c_10),
          scale_mc_c_10 = ifelse(questions == "rg_s_aca2_3" & responses == 10, 1, scale_mc_c_10),
-         scale_mc_c_10 = ifelse(questions == "rg_s_gg_4" & responses == 10, 1, scale_mc_c_10),
-         scale_mc_c_10 = ifelse(questions == "rg_s_dt_4" & responses == 10, 1, scale_mc_c_10),
+         scale_mc_c_10 = ifelse(questions == "rg_s_gg_4"   & responses == 10, 1, scale_mc_c_10),
+         scale_mc_c_10 = ifelse(questions == "rg_s_dt_4"   & responses == 10, 1, scale_mc_c_10),
          scale_mc_c_10 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
                                                   "rg_s_dt_4"), NA, scale_mc_c_10),
-         scale_mc_c_7 = ifelse(responses < 7, 0, NA),
-         scale_mc_c_7 = ifelse(questions == "rg_s_aca_3" & responses > 7, 1, scale_mc_c_7),
+         scale_mc_c_7 = ifelse(responses <= 7, 0, NA),
+         scale_mc_c_7 = ifelse(questions == "rg_s_aca_3"  & responses > 7, 1, scale_mc_c_7),
          scale_mc_c_7 = ifelse(questions == "rg_s_aca2_3" & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(questions == "rg_s_gg_4" & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(questions == "rg_s_dt_4" & responses > 7, 1, scale_mc_c_7),
+         scale_mc_c_7 = ifelse(questions == "rg_s_gg_4"   & responses > 7, 1, scale_mc_c_7),
+         scale_mc_c_7 = ifelse(questions == "rg_s_dt_4"   & responses > 7, 1, scale_mc_c_7),
          scale_mc_c_7 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
                                                  "rg_s_dt_4"), NA, scale_mc_c_7)) |> 
   mutate(congenial = ifelse(questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", "rg_s_gg2_2", "rg_s_gg2_4") & democrat_leaners == 1, 1,
-                            ifelse(questions %in% c("rg_s_dt_4") & democrat_leaners == 0, 1, 0))) 
+                            ifelse(questions %in% c("rg_s_dt_4") & democrat_leaners == 0, 1, 0))) |> 
+  drop_na(scale_correct_10)
 
+## Remove original file which is not required anymore
 rm(mturk_hk)

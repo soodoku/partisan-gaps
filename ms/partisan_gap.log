@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.4.27)  5 OCT 2022 17:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.16)  6 OCT 2022 19:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -12,23 +12,23 @@ Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count181
-\c@section=\count182
-\c@subsection=\count183
-\c@subsubsection=\count184
-\c@paragraph=\count185
-\c@subparagraph=\count186
-\c@figure=\count187
-\c@table=\count188
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
 (/usr/share/texlive/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2020/02/08 v1.2c extra appendix facilities
-\c@@pps=\count189
-\c@@ppsavesec=\count190
-\c@@ppsaveapp=\count191
+\c@@pps=\count193
+\c@@ppsavesec=\count194
+\c@@ppsaveapp=\count195
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2021/12/07 v1.3c Standard LaTeX Color (DPC)
@@ -36,10 +36,10 @@ Package: color 2021/12/07 v1.3c Standard LaTeX Color (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package color Info: Driver file: xetex.def on input line 149.
+Package color Info: Driver file: pdftex.def on input line 149.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
@@ -53,12 +53,12 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen146
 \cmidrulekern=\dimen147
 \defaultaddspace=\dimen148
-\@cmidla=\count192
-\@cmidlb=\count193
+\@cmidla=\count196
+\@cmidlb=\count197
 \@aboverulesep=\dimen149
 \@belowrulesep=\dimen150
-\@thisruleclass=\count194
-\@lastruleclass=\count195
+\@thisruleclass=\count198
+\@lastruleclass=\count199
 \@thisrulewidth=\dimen151
 )
 (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
@@ -68,7 +68,7 @@ Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Package option `usenames' ignored on input line 218.
-Package xcolor Info: Driver file: xetex.def on input line 227.
+Package xcolor Info: Driver file: pdftex.def on input line 227.
 
 (/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
@@ -87,8 +87,9 @@ Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
 \minrowclearance=\skip51
 )
 LaTeX Info: Redefining \color on input line 711.
-\rownum=\count196
+\rownum=\count266
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
 Package xcolor Info: Model `RGB' extended on input line 1368.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
 Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
@@ -116,9 +117,9 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count197
-\Gm@cntv=\count198
-\c@Gm@tempcnt=\count199
+\Gm@cnth=\count267
+\Gm@cntv=\count268
+\c@Gm@tempcnt=\count269
 \Gm@bindingoffset=\dimen154
 \Gm@wd@mp=\dimen155
 \Gm@odd@mp=\dimen156
@@ -144,7 +145,7 @@ Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode not found.
+Package pdftexcmds Info: \pdfdraftmode found.
 )
 (/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
@@ -168,11 +169,13 @@ Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 )
 \@linkdim=\dimen162
-\Hy@linkcounter=\count266
-\Hy@pagecounter=\count267
+\Hy@linkcounter=\count270
+\Hy@pagecounter=\count271
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
 )
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def
 File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel la
@@ -184,10 +187,12 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count268
+\Hy@SavedSpaceFactor=\count272
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 4073.
 
@@ -202,7 +207,7 @@ Package hyperref Info: Plain pages OFF on input line 4207.
 Package hyperref Info: Backreferencing OFF on input line 4212.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4445.
-\c@Hy@tempcnt=\count269
+\c@Hy@tempcnt=\count273
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -217,7 +222,7 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count270
+\Fld@menulength=\count274
 \Field@Width=\dimen164
 \Fld@charsize=\dimen165
 Package hyperref Info: Hyper figures OFF on input line 6076.
@@ -234,33 +239,26 @@ LaTeX Info: Redefining \pageref on input line 6150.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count271
-\c@Item=\count272
-\c@Hfootnote=\count273
+\Hy@abspage=\count275
+\c@Item=\count276
+\c@Hfootnote=\count277
 )
-Package hyperref Info: Driver (autodetected): hxetex.
+Package hyperref Info: Driver (autodetected): hpdftex.
 
-(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2021-06-07 v7.00m Hyperref driver for XeTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty
-Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
-)
-)
-\pdfm@box=\box52
-\c@Hy@AnnotLevel=\count274
-\HyField@AnnotCount=\count275
-\Fld@listcount=\count276
-\c@bookmark@seq@number=\count277
-
-(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
-Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
+\Fld@listcount=\count278
+\c@bookmark@seq@number=\count279
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
 (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
@@ -271,7 +269,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multibib/multibib.sty
 Package: multibib 2008/12/10 v1.4 Multiple bibliographies for one document.
-\mb@biblabelwidth=\count278
+\mb@biblabelwidth=\count280
 )
 \@auxoutSI=\write3
  (./SI.aux)
@@ -283,15 +281,15 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip53
 \bibsep=\skip54
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count279
+\c@NAT@ctr=\count281
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count280
+\c@float@type=\count282
 \float@exts=\toks20
-\float@box=\box53
+\float@box=\box52
 \@float@everytoks=\toks21
-\@floatcapt=\box54
+\@floatcapt=\box53
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
@@ -305,7 +303,7 @@ Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: xetex.def on input line 107.
+Package graphics Info: Driver file: pdftex.def on input line 107.
 )
 \Gin@req@height=\dimen166
 \Gin@req@width=\dimen167
@@ -346,30 +344,30 @@ Package: amstext 2021/08/26 v2.01 AMS text
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2021/08/26 v2.02 operator names
 )
-\inf@bad=\count281
+\inf@bad=\count283
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count282
-\leftroot@=\count283
+\uproot@=\count284
+\leftroot@=\count285
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count284
-\DOTSCASE@=\count285
+\classnum@=\count286
+\DOTSCASE@=\count287
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box55
-\strutbox@=\box56
+\Mathstrutbox@=\box54
+\strutbox@=\box55
 \big@size=\dimen170
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count286
-\c@MaxMatrixCols=\count287
+\macc@depth=\count288
+\c@MaxMatrixCols=\count289
 \dotsspace@=\muskip17
-\c@parentequation=\count288
-\dspbrk@lvl=\count289
+\c@parentequation=\count290
+\dspbrk@lvl=\count291
 \tag@help=\toks24
-\row@=\count290
-\column@=\count291
-\maxfields@=\count292
+\row@=\count292
+\column@=\count293
+\maxfields@=\count294
 \andhelp@=\toks25
 \eqnshift@=\dimen171
 \alignsep@=\dimen172
@@ -413,8 +411,7 @@ Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
-Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
-
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
@@ -436,7 +433,7 @@ Package: fullpage 1999/02/23 1.1 (PWD)
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip68
-\multirow@cntb=\count293
+\multirow@cntb=\count295
 \multirow@dima=\skip69
 \bigstrutjot=\dimen177
 )
@@ -446,20 +443,15 @@ Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\c@r@tfl@t=\count294
+\c@r@tfl@t=\count296
 \rotFPtop=\skip70
 \rotFPbot=\skip71
-\rot@float@box=\box57
+\rot@float@box=\box56
 \rot@mess@toks=\toks30
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
-2.
-
-(/usr/share/texmf/tex/latex/lm/t1lmr.fd
-File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-))
+)
 (/usr/share/texlive/texmf-dist/tex/latex/mathdesign/mathdesign.sty
 Package: mathdesign 2013/08/29 v2.31 Math Design Project
 
@@ -594,9 +586,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> T1/mdbch/m/it on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> T1/lmss/m/n on input line 134.
+(Font)                  OT1/cmss/m/n --> T1/cmss/m/n on input line 134.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> T1/lmtt/m/n on input line 135.
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/m/n on input line 135.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
 (Font)                  OT1/mdbch/b/n --> T1/mdbch/b/n on input line 137.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
@@ -604,9 +596,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> T1/mdbch/b/it on input line 139.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> T1/lmss/b/n on input line 140.
+(Font)                  OT1/cmss/bx/n --> T1/cmss/b/n on input line 140.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> T1/lmtt/b/n on input line 141.
+(Font)                  OT1/cmtt/m/n --> T1/cmtt/b/n on input line 141.
 \symlettersupright=\mathgroup8
 LaTeX Font Info:    Overwriting symbol font `lettersupright' in version `bold'
 (Font)                  OML/mdbch/m/n --> OML/mdbch/b/n on input line 144.
@@ -622,7 +614,7 @@ Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
 \XKV@toks=\toks31
 \XKV@tempa@toks=\toks32
 )
-\XKV@depth=\count295
+\XKV@depth=\count297
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 LaTeX Font Info:    Trying to load font information for T1+mdbch on input line 
@@ -635,11 +627,15 @@ LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 11.52008pt on input line 186.
 LaTeX Font Info:    Redeclaring math accent \widetilde on input line 449.
 LaTeX Font Info:    Redeclaring math accent \widehat on input line 450.
+Now handling font encoding MDA ...
+... no UTF-8 mapping file for font encoding MDA
 \symmathdesignA=\mathgroup9
 LaTeX Font Info:    Overwriting symbol font `mathdesignA' in version `bold'
 (Font)                  MDA/mdbch/m/n --> MDA/mdbch/b/n on input line 491.
 LaTeX Font Info:    Overwriting encoding scheme math defaults on input line 493
 .
+Now handling font encoding MDB ...
+... no UTF-8 mapping file for font encoding MDB
 \symmathdesignB=\mathgroup10
 LaTeX Font Info:    Overwriting symbol font `mathdesignB' in version `bold'
 (Font)                  MDB/mdbch/m/n --> MDB/mdbch/b/n on input line 498.
@@ -662,17 +658,17 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LTright=\skip74
 \LTpre=\skip75
 \LTpost=\skip76
-\LTchunksize=\count296
+\LTchunksize=\count298
 \LTcapwidth=\dimen178
-\LT@head=\box58
-\LT@firsthead=\box59
-\LT@foot=\box60
-\LT@lastfoot=\box61
-\LT@gbox=\box62
-\LT@cols=\count297
-\LT@rows=\count298
-\c@LT@tables=\count299
-\c@LT@chunks=\count300
+\LT@head=\box57
+\LT@firsthead=\box58
+\LT@foot=\box59
+\LT@lastfoot=\box60
+\LT@gbox=\box61
+\LT@cols=\count299
+\LT@rows=\count300
+\c@LT@tables=\count301
+\c@LT@chunks=\count302
 \LT@p@ftn=\toks33
 )
 (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
@@ -687,16 +683,16 @@ Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
 
 (/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
-\collectedbox=\box63
+\collectedbox=\box62
 )
 \tc@llx=\dimen179
 \tc@lly=\dimen180
 \tc@urx=\dimen181
 \tc@ury=\dimen182
-Package trimclip Info: Using driver 'tc-xetex.def'.
+Package trimclip Info: Using driver 'tc-pdftex.def'.
 
-(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-xetex.def
-File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
 ))
 \adjbox@Width=\dimen183
 \adjbox@Height=\dimen184
@@ -709,12 +705,12 @@ File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
 
 (/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count301
+\c@checkoddpage=\count303
 )
 (/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box64
-\sift@deathcycles=\count302
+\@vwid@box=\box63
+\sift@deathcycles=\count304
 \@vwid@loff=\dimen191
 \@vwid@roff=\dimen192
 ))
@@ -748,7 +744,7 @@ Package cleveref Info: no abbreviation of names on input line 7852.
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
 \FN@temptoken=\toks34
 \footnotemargin=\dimen193
-\c@pp@next@reset=\count303
+\c@pp@next@reset=\count305
 Package footmisc Info: Declaring symbol style bringhurst on input line 855.
 Package footmisc Info: Declaring symbol style chicago on input line 863.
 Package footmisc Info: Declaring symbol style wiley on input line 872.
@@ -772,8 +768,8 @@ Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
 \caption@hangindent=\dimen256
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count304
-\c@continuedfloat=\count305
+\c@caption@flags=\count306
+\c@continuedfloat=\count307
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
@@ -785,22 +781,15 @@ Package caption Info: rotating package is loaded.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
-\c@subfigure=\count306
-\c@subtable=\count307
+\c@subfigure=\count308
+\c@subtable=\count309
 )
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2022-01-12 L3 backend support: XeTeX
-
-(|extractbb --version)
-\c__kernel_sys_dvipdfmx_version_int=\count308
-\l__color_backend_stack_int=\count309
-\g__color_backend_stack_int=\count310
-\g__graphics_track_int=\count311
-\l__pdf_internal_box=\box65
-\g__pdf_backend_object_int=\count312
-\g__pdf_backend_annotation_int=\count313
-\g__pdf_backend_link_int=\count314
-) (./partisan_gap.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count310
+\l__pdf_internal_box=\box64
+)
+(./partisan_gap.aux)
 \openout1 = `partisan_gap.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
@@ -812,14 +801,6 @@ LaTeX Font Info:    ... okay on input line 99.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
 LaTeX Font Info:    ... okay on input line 99.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 99.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 9
-9.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
-File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    ... okay on input line 99.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 99.
 LaTeX Font Info:    ... okay on input line 99.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
 LaTeX Font Info:    ... okay on input line 99.
@@ -846,10 +827,32 @@ File: mdbcmr.fd
 )
 LaTeX Font Info:    ... okay on input line 99.
 
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count311
+\scratchdimen=\dimen257
+\scratchbox=\box65
+\nofMPsegments=\count312
+\nofMParguments=\count313
+\everyMPshowfont=\toks35
+\MPscratchCnt=\count314
+\MPscratchDim=\dimen258
+\MPnumerator=\count315
+\makeMPintoPDFobject=\count316
+\everyMPtoPDFconversion=\toks36
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 *geometry* driver: auto-detecting
-*geometry* detected driver: xetex
+*geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
-* driver: xetex
+* driver: pdftex
 * paper: letterpaper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
@@ -890,7 +893,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count315
+\c@section@level=\count317
 )
 LaTeX Info: Redefining \ref on input line 99.
 LaTeX Info: Redefining \pageref on input line 99.
@@ -900,9 +903,6 @@ LaTeX Info: Redefining \nameref on input line 99.
 \@outlinefile=\write4
 \openout4 = `partisan_gap.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 
 Package mathdesign/mdbch Warning: Package 'amssymb' shouldn't be used in conjon
@@ -1013,95 +1013,18 @@ LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 (Font)              scaled to size 10.51207pt on input line 103.
  [0
 
-]
-[1]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1]
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 16.58891pt on input line 128.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 (Font)              scaled to size 16.58891pt on input line 128.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 11.52008pt on input line 130.
-
-
-Package natbib Warning: Citation `bartels_2002' on page 2 undefined on input li
-ne 130.
-
-
-Package natbib Warning: Citation `jerit2012partisan' on page 2 undefined on inp
-ut line 130.
-
-
-Package natbib Warning: Citation `lodgetaber_2013' on page 2 undefined on input
- line 130.
-
-
-Package natbib Warning: Citation `achen2016democracy' on page 2 undefined on in
-put line 130.
-
-LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 (Font)              scaled to size 13.82408pt on input line 133.
 LaTeX Font Info:    Font shape `T1/mdbch/m/it' will be
 (Font)              scaled to size 11.52008pt on input line 134.
-
-Package natbib Warning: Citation `Stroud2008' on page 2 undefined on input line
- 134.
-
-
-Package natbib Warning: Citation `stroud_2010' on page 2 undefined on input lin
-e 134.
-
-
-Package natbib Warning: Citation `dolan2011women' on page 2 undefined on input 
-line 134.
-
-
-Package natbib Warning: Citation `barabas2014question' on page 2 undefined on i
-nput line 134.
-
-
-Package natbib Warning: Citation `abrajano2015reexamining' on page 2 undefined 
-on input line 134.
-
-
-Package natbib Warning: Citation `taber2006' on page 2 undefined on input line 
-136.
-
-
-Package natbib Warning: Citation `stroud2008media' on page 2 undefined on input
- line 136.
-
-
-Package natbib Warning: Citation `abelson1959modes' on page 2 undefined on inpu
-t line 138.
-
-
-Package natbib Warning: Citation `festinger1962theory' on page 2 undefined on i
-nput line 138.
-
-
-Package natbib Warning: Citation `bartels_2002' on page 2 undefined on input li
-ne 138.
-
-
-Package natbib Warning: Citation `jerit2012partisan' on page 2 undefined on inp
-ut line 138.
-
-
-Package natbib Warning: Citation `lodgetaber_2013' on page 2 undefined on input
- line 138.
-
-
-Package natbib Warning: Citation `campbell1960' on page 2 undefined on input li
-ne 138.
-
-
-Package natbib Warning: Citation `Zaller1992' on page 2 undefined on input line
- 138.
-
-[2]
-
-Package natbib Warning: Citation `Zaller1992' on page 3 undefined on input line
- 147.
+ [2]
+LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
+(Font)              scaled to size 11.52008pt on input line 147.
 
 
 Package natbib Warning: Citation `prior' on page 3 undefined on input line 147.
@@ -1120,74 +1043,37 @@ File: ts1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for TS1/mdbch.
 LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
 (Font)              scaled to size 11.52008pt on input line 157.
 
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-[4]
+[4] [5] [6] [7] [8]
 
-Package natbib Warning: Citation `pasek2015' on page 5 undefined on input line 
-165.
-
-[5]
-
-LaTeX Warning: Reference `si:mturk2' on page 1 undefined on input line 176.
-
-Missing character: There is no — ("2014) in font mdbchr8t!
-
-LaTeX Warning: Reference `si:mturk' on page 1 undefined on input line 178.
-
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-
-LaTeX Warning: Reference `si:mturk' on page 1 undefined on input line 178.
-
+pdfTeX warning: pdflatex (file ../figs/partisan-gap-by-item-arm.pdf): PDF inclu
+sion: found PDF version <1.6>, but at most version <1.5> allowed
+<../figs/partisan-gap-by-item-arm.pdf, id=139, 397.485pt x 289.08pt>
 File: ../figs/partisan-gap-by-item-arm.pdf Graphic file (type pdf)
 <use ../figs/partisan-gap-by-item-arm.pdf>
+Package pdftex.def Info: ../figs/partisan-gap-by-item-arm.pdf  used on input li
+ne 211.
+(pdftex.def)             Requested size: 469.75502pt x 341.64957pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 191.
-LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 191.
-
-LaTeX Warning: Reference `sec:data' on page 6 undefined on input line 191.
-
-
-LaTeX Warning: Reference `si:mturk' on page 1 undefined on input line 191.
-
+(Font)              scaled to size 9.60007pt on input line 218.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 191.
+(Font)              scaled to size 4.80003pt on input line 218.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 4.80003pt on input line 191.
+(Font)              scaled to size 4.80003pt on input line 218.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 191.
+(Font)              scaled to size 4.80003pt on input line 218.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 191.
+(Font)              scaled to size 4.80003pt on input line 218.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 191.
+(Font)              scaled to size 4.80003pt on input line 218.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 191.
+(Font)              scaled to size 4.80003pt on input line 218.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 191.
+(Font)              scaled to size 4.80003pt on input line 218.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 191.
+(Font)              scaled to size 6.72005pt on input line 218.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 191.
-
-LaTeX Warning: Reference `sec:data' on page 6 undefined on input line 191.
-
-
-LaTeX Warning: Reference `si:mturk' on page 1 undefined on input line 191.
-
-
-LaTeX Warning: Reference `fig:partisangaps-mturk' on page 1 undefined on input 
-line 195.
-
-
-LaTeX Warning: Reference `fig:partisangaps-mturk' on page 1 undefined on input 
-line 195.
-
-[6]
-
-LaTeX Warning: Reference `fig:partisangaps-mturk' on page 1 undefined on input 
-line 197.
-
-[7] (../tabs/mturk_hk_mc_likert.tex
+(Font)              scaled to size 4.80003pt on input line 218.
+(../tabs/mturk_hk_mc_likert.tex
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
 (Font)              scaled to size 11.52008pt on input line 3.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
@@ -1232,287 +1118,106 @@ LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
 (Font)              scaled to size 5.76004pt on input line 3.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 7.68005pt on input line 18.
-)
+) [9] [10 <../figs/partisan-gap-by-item-arm.pdf>]
 
-LaTeX Warning: Reference `fig:partisangaps-mturk' on page 1 undefined on input 
-line 212.
-
-
-LaTeX Warning: Reference `fig:partisangaps-mturk' on page 1 undefined on input 
-line 212.
-
-[8]
+pdfTeX warning: pdflatex (file ../figs/mturk-pgag-surveyarms.pdf): PDF inclusio
+n: found PDF version <1.6>, but at most version <1.5> allowed
+<../figs/mturk-pgag-surveyarms.pdf, id=187, 397.485pt x 289.08pt>
 File: ../figs/mturk-pgag-surveyarms.pdf Graphic file (type pdf)
 <use ../figs/mturk-pgag-surveyarms.pdf>
-
-
-LaTeX Warning: Reference `tab:partisangaps-mturk' on page 1 undefined on input 
-line 225.
-
-
-LaTeX Warning: Reference `tab:partisangaps-mturk' on page 1 undefined on input 
-line 225.
-
+Package pdftex.def Info: ../figs/mturk-pgag-surveyarms.pdf  used on input line 
+239.
+(pdftex.def)             Requested size: 258.36668pt x 187.90858pt.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 234.
+(Font)              scaled to size 10.51207pt on input line 255.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 10.51207pt on input line 234.
+(Font)              scaled to size 10.51207pt on input line 255.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 234.
+(Font)              scaled to size 10.51207pt on input line 255.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 234.
+(Font)              scaled to size 10.51207pt on input line 255.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 234.
+(Font)              scaled to size 10.51207pt on input line 255.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 234.
+(Font)              scaled to size 10.51207pt on input line 255.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 234.
-(../tabs/mturk-reg-table-fragment.tex)
+(Font)              scaled to size 10.51207pt on input line 255.
+(../tabs/mturk-reg-table-fragment.tex) [11 <../figs/mturk-pgag-surveyarms.pdf>]
+[12]
 
-LaTeX Warning: Reference `tab:partisangaps-mturk' on page 1 undefined on input 
-line 245.
-
-
-LaTeX Warning: Reference `eq:partisangap-mturk' on page 1 undefined on input li
-ne 245.
-
-
-Package natbib Warning: Citation `bullocketal_2015' on page 9 undefined on inpu
-t line 245.
-
-
-Package natbib Warning: Citation `pew2018disagree' on page 9 undefined on input
- line 245.
-
-
-LaTeX Warning: Reference `tab:partisangaps-mturk' on page 1 undefined on input 
-line 250.
-
-
-LaTeX Warning: Reference `fig:baltest-24k-rw' on page 1 undefined on input line
- 250.
-
-[9]
-
-LaTeX Warning: Reference `fig:partisangaps-mturk-reg' on page 1 undefined on in
-put line 252.
-
-[10]
-Missing character: There is no “ ("201C) in font mdbchr8t!
-Missing character: There is no ” ("201D) in font mdbchr8t!
-Missing character: There is no “ ("201C) in font mdbchr8t!
-[11]
-Missing character: There is no – ("2013) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no – ("2013) in font mdbchr8t!
-Missing character: There is no “ ("201C) in font mdbchr8t!
-Missing character: There is no ” ("201D) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no “ ("201C) in font mdbchr8t!
-Missing character: There is no “ ("201C) in font mdbchr8t!
+pdfTeX warning: pdflatex (file ../figs/yougov-unemp-congenialcue.pdf): PDF incl
+usion: found PDF version <1.6>, but at most version <1.5> allowed
+<../figs/yougov-unemp-congenialcue.pdf, id=230, 397.485pt x 289.08pt>
 File: ../figs/yougov-unemp-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/yougov-unemp-congenialcue.pdf>
+Package pdftex.def Info: ../figs/yougov-unemp-congenialcue.pdf  used on input l
+ine 287.
+(pdftex.def)             Requested size: 232.52643pt x 169.11331pt.
+LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
+(Font)              scaled to size 9.60007pt on input line 288.
+
+
+pdfTeX warning: pdflatex (file ../figs/yougov-deficit-congenialcue.pdf): PDF in
+clusion: found PDF version <1.6>, but at most version <1.5> allowed
+<../figs/yougov-deficit-congenialcue.pdf, id=231, 397.485pt x 289.08pt>
 File: ../figs/yougov-deficit-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/yougov-deficit-congenialcue.pdf>
-
-LaTeX Warning: Reference `tab:partisangaps-yougov' on page 1 undefined on input
- line 283.
-
-
-LaTeX Warning: Reference `tab:partisangaps-yougov' on page 1 undefined on input
- line 283.
-
+Package pdftex.def Info: ../figs/yougov-deficit-congenialcue.pdf  used on input
+ line 292.
+(pdftex.def)             Requested size: 232.52643pt x 169.11331pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 291.
+(Font)              scaled to size 5.76004pt on input line 305.
+[13 <../figs/yougov-unemp-congenialcue.pdf> <../figs/yougov-deficit-congenialcu
+e.pdf>] (../tabs/yougov-reg-table-fragment.tex) [14]
 
-LaTeX Warning: Reference `subsec:partisan-cues' on page 1 undefined on input li
-ne 294.
-
-[12] (../tabs/yougov-reg-table-fragment.tex)
-
-LaTeX Warning: Reference `fig:yougov-reg' on page 1 undefined on input line 317
-.
-
-
-LaTeX Warning: Reference `tab:partisangaps-yougov' on page 1 undefined on input
- line 317.
-
-
-LaTeX Warning: Reference `fig:yougov-reg' on page 1 undefined on input line 319
-.
-
-
-LaTeX Warning: Reference `eq:pgap-yougov' on page 1 undefined on input line 319
-.
-
-
-LaTeX Warning: Reference `fig:yougov-reg-by-partisanship' on page 1 undefined o
-n input line 320.
-
-[13]
+pdfTeX warning: pdflatex (file ../figs/texas-unemp-congenialcue.pdf): PDF inclu
+sion: found PDF version <1.6>, but at most version <1.5> allowed
+<../figs/texas-unemp-congenialcue.pdf, id=282, 397.485pt x 289.08pt>
 File: ../figs/texas-unemp-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/texas-unemp-congenialcue.pdf>
-
-
-LaTeX Warning: Reference `tab:partisangaps-texas-unemp' on page 1 undefined on 
-input line 332.
-
-
-LaTeX Warning: Reference `tab:partisangaps-texas-unemp' on page 1 undefined on 
-input line 332.
-
-
-LaTeX Warning: Reference `fig:partisangaps-texas-unemp' on page 1 undefined on 
-input line 337.
-
-
-LaTeX Warning: Reference `tab:partisangaps-texas-unemp' on page 1 undefined on 
-input line 337.
-
-[14] (../tabs/texas-unemp-reg-table-fragment.tex)
-(../tabs/texas-fedtax-reg-table-fragment.tex)
-
-LaTeX Warning: Reference `tab:partisangaps-texas-fedtax' on page 1 undefined on
- input line 390.
-
-[15] [16] [17]
-
-Package natbib Warning: Citation `Prior2007' on page 18 undefined on input line
- 399.
-
-
-Package natbib Warning: Citation `flaxmanetal_2016' on page 18 undefined on inp
-ut line 399.
-
-
-Package natbib Warning: Citation `flaxmanetal_2016' on page 18 undefined on inp
-ut line 399.
-
-
-Package natbib Warning: Citation `garzetal_2018' on page 18 undefined on input 
-line 399.
-
-
-Package natbib Warning: Citation `gentzkowshapiro_2011' on page 18 undefined on
- input line 399.
-
-
-Package natbib Warning: Citation `guess_2020' on page 18 undefined on input lin
-e 399.
-
-
-Package natbib Warning: Citation `hill_2017' on page 18 undefined on input line
- 399.
-
-
-Package natbib Warning: Citation `jerit2012partisan' on page 18 undefined on in
-put line 399.
-
-
-Package natbib Warning: Citation `khanna2018motivated' on page 18 undefined on 
-input line 399.
-
-
-Package natbib Warning: Citation `khanna2018motivated' on page 18 undefined on 
-input line 399.
-
-
-Package natbib Warning: Citation `gerber_annual_review' on page 18 undefined on
- input line 399.
-
-
-Package natbib Warning: Citation `kernell_2019' on page 18 undefined on input l
-ine 399.
-
-
-Package natbib Warning: Citation `anes_gen' on page 18 undefined on input line 
-401.
-
-
-Package natbib Warning: Citation `bartels_2002' on page 18 undefined on input l
-ine 401.
-
-
-Package natbib Warning: Citation `bullocklenz_2019' on page 18 undefined on inp
-ut line 401.
-
-
-Package natbib Warning: Citation `bisgaard_slothuus_2018' on page 18 undefined 
-on input line 403.
-
-
-Package natbib Warning: Citation `bisgaard_slothuus_2018' on page 18 undefined 
-on input line 403.
-
-
-Package natbib Warning: Citation `bullocketal_2015' on page 18 undefined on inp
-ut line 403.
-
-
-Package natbib Warning: Citation `bullocketal_2015' on page 18 undefined on inp
-ut line 403.
-
-
-Package natbib Warning: Citation `prior2015you' on page 18 undefined on input l
-ine 403.
-
-
-Package natbib Warning: Citation `prior2015you' on page 18 undefined on input l
-ine 403.
-
-
-Package natbib Warning: Citation `schaffner_luks' on page 18 undefined on input
- line 403.
-
-
-Package natbib Warning: Citation `schaffner_luks' on page 18 undefined on input
- line 403.
-
-
-Package natbib Warning: Citation `berinsky_2017' on page 18 undefined on input 
-line 403.
-
-
-Package natbib Warning: Citation `berinsky_2017' on page 18 undefined on input 
-line 403.
-
-
-Package natbib Warning: Citation `peterson_iyengar_forth' on page 18 undefined 
-on input line 403.
-
-
-Package natbib Warning: Citation `peterson_iyengar_forth' on page 18 undefined 
-on input line 403.
-
-[18
-
-] [19] (./partisan_gap.bbl
+Package pdftex.def Info: ../figs/texas-unemp-congenialcue.pdf  used on input li
+ne 341.
+(pdftex.def)             Requested size: 258.36668pt x 187.90858pt.
+[15 <../figs/texas-unemp-congenialcue.pdf>]
+(../tabs/texas-unemp-reg-table-fragment.tex)
+(../tabs/texas-fedtax-reg-table-fragment.tex) [16] [17] [18] [19
+
+] [20]
+(./partisan_gap.bbl
 LaTeX Font Info:    Font shape `T1/pcr/m/n' will be
 (Font)              scaled to size 10.84pt on input line 22.
- [20
+ [21
 
-] [21] [22]) [23] (./sections/appendix.tex
+] [22] [23]) [24] (./sections/appendix.tex
+
+pdfTeX warning: pdflatex (file ../figs/baltest-24k-rw.pdf): PDF inclusion: foun
+d PDF version <1.6>, but at most version <1.5> allowed
+<../figs/baltest-24k-rw.pdf, id=418, 397.485pt x 289.08pt>
 File: ../figs/baltest-24k-rw.pdf Graphic file (type pdf)
 <use ../figs/baltest-24k-rw.pdf>
+Package pdftex.def Info: ../figs/baltest-24k-rw.pdf  used on input line 20.
+(pdftex.def)             Requested size: 317.98842pt x 231.2643pt.
 
 
-LaTeX Warning: Reference `sec:data' on page 24 undefined on input line 27.
-
-
-LaTeX Warning: Reference `sec:data' on page 24 undefined on input line 27.
-
+pdfTeX warning: pdflatex (file ../figs/yougov-unemp-congenialcue-partisan.pdf):
+ PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+<../figs/yougov-unemp-congenialcue-partisan.pdf, id=421, 397.485pt x 289.08pt>
 File: ../figs/yougov-unemp-congenialcue-partisan.pdf Graphic file (type pdf)
 <use ../figs/yougov-unemp-congenialcue-partisan.pdf>
+Package pdftex.def Info: ../figs/yougov-unemp-congenialcue-partisan.pdf  used o
+n input line 36.
+(pdftex.def)             Requested size: 232.52643pt x 169.11331pt.
+
+
+pdfTeX warning: pdflatex (file ../figs/yougov-deficit-congenialcue-partisan.pdf
+): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
+<../figs/yougov-deficit-congenialcue-partisan.pdf, id=422, 397.485pt x 289.08pt
+>
 File: ../figs/yougov-deficit-congenialcue-partisan.pdf Graphic file (type pdf)
 <use ../figs/yougov-deficit-congenialcue-partisan.pdf>
-
-LaTeX Warning: Reference `tab:partisangaps-yougov' on page 1 undefined on input
- line 49.
-
-
-LaTeX Warning: Reference `tab:partisangaps-yougov' on page 1 undefined on input
- line 49.
-
+Package pdftex.def Info: ../figs/yougov-deficit-congenialcue-partisan.pdf  used
+ on input line 41.
+(pdftex.def)             Requested size: 232.52643pt x 169.11331pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 49--49
 
@@ -1523,16 +1228,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--49
 
  []
 
-[24
+[25
 
-] [25]
-Missing character: There is no — ("2014) in font mdbchr8t!
-
+ <../figs/baltest-24k-rw.pdf>] [26 <../figs/yougov-unemp-congenialcue-partisan.
+pdf> <../figs/yougov-deficit-congenialcue-partisan.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
-[26
+[27
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 110--111
@@ -1559,7 +1263,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 146--147
 
  []
 
-[27]
+[28]
 Underfull \hbox (badness 10000) in paragraph at lines 155--157
 
  []
@@ -1574,8 +1278,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 175--176
 
  []
 
-Missing character: There is no — ("2014) in font mdbchr8t!
-[28]
+[29]
 Underfull \hbox (badness 10000) in paragraph at lines 201--202
 
  []
@@ -1585,77 +1288,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 211--212
 
  []
 
-Missing character: There is no — ("2014) in font mdbchr8t!
-[29]
+[30]
 Underfull \hbox (badness 10000) in paragraph at lines 251--252
 
  []
 
-Missing character: There is no — ("2014) in font mdbchr8t!
-[30] [31] [32]
-Missing character: There is no — ("2014) in font mdbchr8t!
-
+[31] [32] [33]
 Underfull \hbox (badness 10000) in paragraph at lines 416--417
 
  []
 
-[33]
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-
-LaTeX Warning: Reference `fig:aca1' on page 34 undefined on input line 501.
-
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-
-LaTeX Warning: Reference `fig:gg1' on page 34 undefined on input line 506.
-
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-
-LaTeX Warning: Reference `fig:aca2' on page 34 undefined on input line 511.
-
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-
-LaTeX Warning: Reference `fig:eo1' on page 34 undefined on input line 516.
-
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-[34
+[34] [35
 
 ]
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-File: ../figs/hk_aca1.png Graphic file (type bmp)
-<../figs/hk_aca1.png>
-File: ../figs/hk_gg1.png Graphic file (type bmp)
-<../figs/hk_gg1.png>
-[35]
-File: ../figs/hk_aca2.png Graphic file (type bmp)
-<../figs/hk_aca2.png>
- [36]
-File: ../figs/hk_eo1.png Graphic file (type bmp)
-<../figs/hk_eo1.png>
- [37] [38]
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-Missing character: There is no ’ ("2019) in font mdbchr8t!
-)
+<../figs/hk_aca1.png, id=535, 688.5725pt x 623.32875pt>
+File: ../figs/hk_aca1.png Graphic file (type png)
+<use ../figs/hk_aca1.png>
+Package pdftex.def Info: ../figs/hk_aca1.png  used on input line 530.
+(pdftex.def)             Requested size: 469.75502pt x 425.24658pt.
+<../figs/hk_gg1.png, id=537, 688.5725pt x 490.83376pt>
+File: ../figs/hk_gg1.png Graphic file (type png)
+<use ../figs/hk_gg1.png>
+Package pdftex.def Info: ../figs/hk_gg1.png  used on input line 541.
+(pdftex.def)             Requested size: 469.75502pt x 334.856pt.
+ [36 <../figs/hk_aca1.png>]
+<../figs/hk_aca2.png, id=544, 687.56876pt x 607.26875pt>
+File: ../figs/hk_aca2.png Graphic file (type png)
+<use ../figs/hk_aca2.png>
+Package pdftex.def Info: ../figs/hk_aca2.png  used on input line 552.
+(pdftex.def)             Requested size: 469.75502pt x 414.89246pt.
+ [37 <../figs/hk_gg1.png>]
+<../figs/hk_eo1.png, id=550, 690.58pt x 665.48625pt>
+File: ../figs/hk_eo1.png Graphic file (type png)
+<use ../figs/hk_eo1.png>
+Package pdftex.def Info: ../figs/hk_eo1.png  used on input line 563.
+(pdftex.def)             Requested size: 469.75502pt x 452.68713pt.
+ [38 <../figs/hk_aca2.png>] [39 <../figs/hk_eo1.png>])
 
 Package natbib Warning: There were undefined citations.
 
-[39] (./partisan_gap.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
-
-LaTeX Warning: There were undefined references.
-
+[40] (./partisan_gap.aux)
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
@@ -1665,16 +1337,73 @@ Package rerunfilecheck Warning: File `partisan_gap.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `partisan_gap.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
+(rerunfilecheck)             Before: 2EEDA70377170050486E31A039061886;765
 (rerunfilecheck)             After:  F5277D9173825422D711F5BD73EFB9A0;583.
  ) 
 Here is how much of TeX's memory you used:
- 17842 strings out of 476191
- 304039 string characters out of 5812072
- 624315 words of memory out of 5000000
- 38229 multiletter control sequences out of 15000+600000
- 534706 words of font info for 121 fonts, out of 8000000 for 9000
- 1348 hyphenation exceptions out of 8191
- 69i,18n,117p,1328b,639s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 18171 strings out of 478287
+ 306558 string characters out of 5849289
+ 636216 words of memory out of 5000000
+ 35836 multiletter control sequences out of 15000+600000
+ 546632 words of font info for 167 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 69i,18n,117p,1328b,669s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.caption.27} has been referenced but does n
+ot exist, replaced by a fixed one
 
-Output written on partisan_gap.pdf (40 pages).
+pdfTeX warning (dest): name{table.caption.23} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.21} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.22} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.18} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{section*.16} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.19} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.13} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.26} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{table.caption.14} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.10} has been referenced but does not
+ exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.0.0.2} has been referenced but does n
+ot exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsubsection.0.0.1} has been referenced but does n
+ot exist, replaced by a fixed one
+
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/
+texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}</usr/share/texlive/texmf-dist/font
+s/type1/bitstrea/charter/bchb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+bitstrea/charter/bchr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/bitstrea
+/charter/bchri8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathdesi
+gn/mdbch/md-chr7t.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathdes
+ign/mdbch/md-chr7y.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathde
+sign/mdbch/md-chr8t.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathd
+esign/mdbch/md-chri7m.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courie
+r/ucrr8a.pfb>
+Output written on partisan_gap.pdf (41 pages, 654462 bytes).
+PDF statistics:
+ 638 PDF objects out of 1000 (max. 8388607)
+ 517 compressed objects within 6 object streams
+ 130 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+
