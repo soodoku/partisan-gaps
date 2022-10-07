@@ -165,3 +165,5 @@ rm(mturk_hk)
 write_csv(mturk_hk_closed_correct, "data/mturk_hk/mturk_hk_MC.csv")
 write_csv(mturk_hk_probes, "data/mturk_hk/mturk_hk_PROBES.csv")
 write_csv(mturk_hk_scale, "data/mturk_hk/mturk_hk_LIKERT.csv")
+
+# fin
