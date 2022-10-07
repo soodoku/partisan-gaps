@@ -1,0 +1,749 @@
+respondent,pid,pid_strength_1,democrat,republican,independent,democrat_noleaners,democrat_leaners,questions,rgc_c_aca2,rgc_c_dt,responses,aca2_correct,dt_correct,correct,knowledge,cheating,guessing,inference,expressive,congenial
+4,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+4,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+5,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,1
+5,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,0
+8,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+8,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+12,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+12,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+13,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+13,Republican,10,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+15,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Don’t know,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,NA
+15,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Don’t know,NA,NA,0,0,0,0,0,0,0,NA
+18,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Strip immigrants from several Muslim-majority countries of their green cards,NA,0,NA,0,0,0,0,0,0,0
+18,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+22,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+22,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+25,Republican,5,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,0
+25,Republican,5,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+27,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+27,Republican,9,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+28,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Strip immigrants from countries supporting terrorism of their green cards,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+28,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Strip immigrants from countries supporting terrorism of their green cards,I just thought I’d take a shot,NA,0,0,0,0,0,0,0,0
+31,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,NA
+31,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,NA
+35,NA,7,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+35,NA,7,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+37,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+37,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+38,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+38,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+39,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+39,Republican,9,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+40,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+40,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+44,NA,2,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,1
+44,NA,2,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+45,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Strip immigrants from several Muslim-majority countries of their green cards,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+45,Republican,9,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Strip immigrants from several Muslim-majority countries of their green cards,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,1
+47,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+47,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+48,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+48,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+51,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+51,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+56,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+56,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+59,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+59,Republican,10,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+62,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+62,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+63,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,NA
+63,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,NA
+66,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+66,Republican,8,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+67,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+67,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+68,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+68,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+69,NA,2,1,0,0,NA,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+69,NA,2,1,0,0,NA,1,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+71,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+71,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+73,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+73,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+78,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+78,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+82,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+82,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+89,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+89,Republican,9,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+90,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Don’t know,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+90,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Don’t know,NA,NA,0,0,0,0,0,0,0,NA
+94,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,NA
+94,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+99,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+99,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+101,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+101,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+104,Republican,4,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+104,Republican,4,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+106,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+106,Republican,9,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+107,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,NA
+107,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,NA
+111,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Strip immigrants from several Muslim-majority countries of their green cards,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+111,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Strip immigrants from several Muslim-majority countries of their green cards,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+114,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+114,Republican,9,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+115,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+115,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+117,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,NA
+117,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+121,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,1
+121,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+126,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+126,NA,3,1,0,0,NA,1,rgc_c_dt_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+128,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+128,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+129,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+129,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+130,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+130,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+131,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+131,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+138,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+138,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+141,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+141,NA,3,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+144,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+144,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+146,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+146,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+151,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+151,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,1
+152,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+152,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+153,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+153,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+156,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,1
+156,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,NA,1,1,0,0,1,0,0,0
+158,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+158,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+162,NA,1,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+162,NA,1,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+167,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+167,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+168,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+168,Republican,7,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+171,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+171,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+173,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+173,Republican,7,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+176,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+176,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+181,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+181,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+186,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+186,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+196,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+196,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+200,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+200,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+201,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+201,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+205,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+205,Republican,6,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+206,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+206,NA,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+207,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+207,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+209,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+209,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+211,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+211,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+212,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+212,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+219,Democrat,7,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+219,Democrat,7,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+221,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+221,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+223,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+223,NA,4,1,0,0,NA,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+225,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,NA
+225,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+232,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,NA
+232,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,NA
+237,NA,2,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+237,NA,2,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+240,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,0
+240,Republican,6,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+246,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+246,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+247,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+247,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+248,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,NA
+248,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,NA
+251,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+251,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+252,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+252,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+253,NA,1,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+253,NA,1,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+254,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+254,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+257,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,NA
+257,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,NA
+261,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+261,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+266,Something else,0,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+266,Something else,0,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+267,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,0
+267,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,1
+271,NA,7,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+271,NA,7,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+276,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+276,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+278,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,NA
+278,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,NA
+281,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+281,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+284,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+284,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+285,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+285,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+287,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+287,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+288,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+288,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+290,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,NA
+290,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,NA
+291,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Don’t know,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,NA
+291,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Cut benefits to existing Medicare patients,Don’t know,NA,NA,0,0,0,0,0,0,0,NA
+292,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+292,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+299,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+299,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+304,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+304,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+307,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+307,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+309,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+309,Republican,10,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+310,Something else,5,0,0,1,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+310,Something else,5,0,0,1,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+316,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,0
+316,Republican,9,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+324,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+324,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+326,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+326,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+327,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+327,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+328,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+328,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+329,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+329,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+330,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+330,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+336,Something else,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+336,Something else,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+337,Republican,5,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+337,Republican,5,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+340,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,It makes me feel good to think that,1,NA,1,0,0,0,0,1,1
+340,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+342,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+342,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+345,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+345,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+346,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+346,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+347,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+347,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+349,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+349,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+350,Something else,5,0,0,1,NA,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+350,Something else,5,0,0,1,NA,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+352,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+352,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+353,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+353,Republican,8,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+358,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+358,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+359,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+359,Republican,6,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,1
+370,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+370,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+371,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+371,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+372,NA,2,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+372,NA,2,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+379,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+379,NA,3,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+381,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+381,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+386,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Strip immigrants from several Muslim-majority countries of their green cards,NA,0,NA,0,0,0,0,0,0,1
+386,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Don’t know,Strip immigrants from several Muslim-majority countries of their green cards,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+387,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+387,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+394,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,NA
+394,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,NA
+395,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+395,Republican,9,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+399,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+399,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+400,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+400,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+401,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+401,NA,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+402,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+402,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+405,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+405,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+408,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,1
+408,NA,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+411,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,NA
+411,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+412,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+412,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+414,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+414,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+416,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+416,NA,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+418,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+418,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,NA,1,1,0,0,1,0,0,0
+420,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+420,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+423,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+423,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+426,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+426,Republican,8,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+428,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+428,Republican,10,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+434,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+434,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+436,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+436,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+441,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+441,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+444,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+444,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+445,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+445,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+449,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,0
+449,Republican,8,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+455,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+455,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+456,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+456,Republican,9,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+457,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+457,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+458,NA,7,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+458,NA,7,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+460,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+460,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,1
+461,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+461,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+464,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+464,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+466,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+466,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+469,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+469,Republican,9,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+477,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+477,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+479,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+479,NA,4,1,0,0,NA,1,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+481,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+481,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+484,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+484,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+486,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+486,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+488,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+488,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+489,Democrat,7,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+489,Democrat,7,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+490,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+490,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+494,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+494,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+496,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,0
+496,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,1
+498,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+498,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+499,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+499,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+501,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+501,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+504,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+504,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+507,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+507,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+509,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+509,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+510,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+510,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+511,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+511,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+512,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+512,Republican,10,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+515,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,0
+515,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+516,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,0
+516,Republican,7,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+518,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+518,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+527,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+527,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+529,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,NA
+529,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+530,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+530,Republican,6,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+531,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+531,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+533,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+533,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+539,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+539,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+544,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+544,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,I looked it up,NA,0,0,0,0,0,0,0,0
+546,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+546,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+555,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+555,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+556,Republican,3,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+556,Republican,3,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+561,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+561,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+564,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+564,Republican,6,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,1
+565,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+565,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+568,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+568,Republican,6,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+569,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+569,NA,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+570,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+570,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+572,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+572,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+574,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+574,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+577,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,0
+577,Republican,6,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+584,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+584,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+588,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+588,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+591,Something else,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+591,Something else,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+597,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,0
+597,Republican,6,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+598,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+598,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+600,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+600,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+601,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Don’t know,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+601,NA,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Don’t know,NA,NA,0,0,0,0,0,0,0,0
+603,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+603,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+608,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+608,Republican,6,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+610,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+610,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+614,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+614,Republican,6,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+615,NA,7,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+615,NA,7,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+617,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+617,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+621,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+621,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+623,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+623,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+624,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+624,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Cut benefits to existing Medicare patients,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+625,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+625,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+626,Democrat,10,1,0,0,1,1,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+626,Democrat,10,1,0,0,1,1,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+630,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,0
+630,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+632,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+632,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+635,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Strip immigrants from several Muslim-majority countries of their green cards,NA,0,NA,0,0,0,0,0,0,1
+635,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+638,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+638,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,1
+639,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+639,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+642,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+642,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+648,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,NA
+648,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+649,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+649,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,NA,1,1,0,0,1,0,0,1
+650,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+650,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+652,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+652,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,NA
+654,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,NA
+654,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+660,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+660,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+662,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+662,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+667,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+667,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+669,NA,2,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+669,NA,2,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,I just thought I’d take a shot,NA,0,0,0,0,0,0,0,0
+676,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,It makes me feel good to think that,0,NA,0,0,0,0,0,0,NA
+676,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+677,Something else,5,0,0,1,NA,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Strip immigrants from countries supporting terrorism of their green cards,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+677,Something else,5,0,0,1,NA,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Strip immigrants from countries supporting terrorism of their green cards,I just thought I’d take a shot,NA,0,0,0,0,0,0,0,1
+683,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+683,NA,3,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+684,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+684,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+688,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,NA
+688,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,NA
+690,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,0
+690,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+692,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,0
+692,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+695,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+695,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+698,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+698,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+705,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+705,Republican,8,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+709,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,NA
+709,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+710,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+710,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+715,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+715,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+717,Democrat,5,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+717,Democrat,5,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+722,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,0
+722,Republican,9,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+725,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,1
+725,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+726,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,NA
+726,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,NA
+729,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+729,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+731,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+731,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+736,Something else,8,NA,NA,NA,NA,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+736,Something else,8,NA,NA,NA,NA,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+737,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+737,Republican,8,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+744,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+744,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+746,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+746,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+752,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+752,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+754,Democrat,4,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+754,Democrat,4,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+755,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+755,NA,3,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+756,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,It makes me feel good to think that,1,NA,1,0,0,0,0,1,0
+756,Republican,8,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+757,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+757,NA,4,1,0,0,NA,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+762,NA,2,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+762,NA,2,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,0
+765,Republican,4,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,0
+765,Republican,4,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+767,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,NA
+767,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+776,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+776,Republican,10,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+779,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+779,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,I just thought I’d take a shot,NA,0,0,0,0,0,0,0,NA
+780,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,1
+780,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+781,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+781,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+785,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+785,Republican,10,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+786,Something else,5,0,0,1,NA,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+786,Something else,5,0,0,1,NA,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+792,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+792,Republican,10,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+793,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,0
+793,Republican,10,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,I looked it up,NA,1,1,0,1,0,0,0,1
+795,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,NA
+795,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,NA
+796,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+796,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+797,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+797,Republican,9,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+799,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+799,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+801,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,It makes me feel good to think that,0,NA,0,0,0,0,0,0,0
+801,Republican,7,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+803,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+803,Republican,7,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+804,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+804,Republican,10,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+807,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+807,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+814,Democrat,8,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+814,Democrat,8,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Strip immigrants from several Muslim-majority countries of their green cards,I looked it up,NA,0,0,0,0,0,0,0,0
+819,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+819,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Strip immigrants from several Muslim-majority countries of their green cards,It makes me feel good to think that,NA,0,0,0,0,0,0,0,1
+820,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+820,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+824,Something else,0,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+824,Something else,0,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+825,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+825,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+834,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+834,Republican,6,0,1,0,0,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+835,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+835,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+838,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+838,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+840,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+840,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+841,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,1
+841,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,0
+844,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+844,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+846,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+846,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+848,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+848,NA,4,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+849,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+849,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,I just thought I’d take a shot,NA,0,0,0,0,0,0,0,1
+852,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+852,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+855,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+855,NA,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+863,Something else,5,0,0,1,NA,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Don’t know,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+863,Something else,5,0,0,1,NA,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Don’t know,NA,NA,0,0,0,0,0,0,0,1
+864,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+864,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+869,Something else,3,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+869,Something else,3,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+870,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+870,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+875,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,1
+875,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+876,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+876,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+878,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+878,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+881,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,0
+881,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+887,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+887,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+891,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+891,Republican,7,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+892,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Don’t know,NA,0,NA,0,0,0,0,0,0,1
+892,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Don’t know,NA,NA,0,0,0,0,0,0,0,0
+895,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+895,Republican,10,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,1
+898,Republican,5,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+898,Republican,5,0,1,0,0,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,1
+902,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,1,NA,1,0,0,1,0,0,0
+902,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+903,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+903,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+906,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+906,Republican,6,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+907,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+907,Republican,9,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+912,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+912,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+920,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+920,Republican,7,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,It makes me feel good to think that,NA,1,1,0,0,0,0,1,1
+933,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+933,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+934,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+934,Republican,9,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+935,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+935,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+936,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+936,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+939,Republican,5,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Strip immigrants from countries supporting terrorism of their green cards,NA,0,NA,0,0,0,0,0,0,0
+939,Republican,5,0,1,0,0,0,rgc_c_dt_p,Don’t know,Strip immigrants from countries supporting terrorism of their green cards,It makes me feel good to think that,NA,0,0,0,0,0,0,0,1
+941,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,0
+941,Republican,10,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+944,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,0
+944,Republican,8,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,I looked it up,NA,1,1,0,1,0,0,0,1
+949,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+949,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+952,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+952,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+955,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+955,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+956,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+956,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+961,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,NA
+961,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+967,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+967,Republican,7,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+970,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+970,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+973,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+973,Republican,9,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+974,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+974,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+976,Republican,5,0,1,0,0,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+976,Republican,5,0,1,0,0,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+979,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+979,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,1
+981,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Replace Medicare with a “public option”,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,NA
+981,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Replace Medicare with a “public option”,Strip immigrants from several Muslim-majority countries of their green cards,I just thought I’d take a shot,NA,0,0,0,0,0,0,0,NA
+984,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+984,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+989,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,1
+989,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+991,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+991,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,1
+994,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+994,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+999,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+999,Republican,10,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+1000,Democrat,2,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+1000,Democrat,2,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,0
+1002,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+1002,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,NA
+1005,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+1005,Republican,6,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+1007,NA,7,NA,NA,NA,NA,0,rgc_c_aca2_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+1007,NA,7,NA,NA,NA,NA,0,rgc_c_dt_p,Create government panels to make end-of-life decisions for people on Medicare,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+1010,NA,6,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+1010,NA,6,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+1012,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+1012,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+1015,Republican,6,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,0
+1015,Republican,6,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+1016,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,"I’ve read, seen, or heard that",1,NA,1,1,0,0,0,0,1
+1016,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Subject immigrants living in the U.S. illegally to deportation,I just thought I’d take a shot,NA,0,0,0,0,0,0,0,0
+1017,NA,7,NA,NA,NA,NA,0,rgc_c_aca2_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,NA,0,NA,0,0,0,0,0,0,0
+1017,NA,7,NA,NA,NA,NA,0,rgc_c_dt_p,Don’t know,Subject immigrants living in the U.S. illegally to deportation,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,1
+1018,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",0,NA,0,0,0,0,0,0,1
+1018,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Replace Medicare with a “public option”,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+1019,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+1019,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+1027,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+1027,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,NA,1,1,0,0,1,0,0,0
+1028,Republican,8,0,1,0,0,0,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,0
+1028,Republican,8,0,1,0,0,0,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+1029,Democrat,3,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+1029,Democrat,3,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+1031,NA,3,1,0,0,NA,1,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,1
+1031,NA,3,1,0,0,NA,1,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+1035,Democrat,0,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+1035,Democrat,0,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+1038,NA,4,1,0,0,NA,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+1038,NA,4,1,0,0,NA,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,0
+1040,Democrat,1,1,0,0,1,1,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,1
+1040,Democrat,1,1,0,0,1,1,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",NA,1,1,0,0,0,1,0,0
+1045,NA,5,0,0,1,NA,NA,rgc_c_aca2_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,NA,0,NA,0,0,0,0,0,0,NA
+1045,NA,5,0,0,1,NA,NA,rgc_c_dt_p,Don’t know,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,NA
+1046,Republican,9,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Strip immigrants from several Muslim-majority countries of their green cards,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+1046,Republican,9,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Strip immigrants from several Muslim-majority countries of their green cards,"I’ve read, seen, or heard that",NA,0,0,0,0,0,0,0,1
+1057,Republican,5,0,1,0,0,0,rgc_c_aca2_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"It makes sense, in view of other things I know",0,NA,0,0,0,0,0,0,0
+1057,Republican,5,0,1,0,0,0,rgc_c_dt_p,Replace Medicare with a “public option”,Strip immigrants from countries supporting terrorism of their green cards,"It makes sense, in view of other things I know",NA,0,0,0,0,0,0,0,1
+1058,Republican,10,0,1,0,0,0,rgc_c_aca2_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,I just thought I’d take a shot,0,NA,0,0,0,0,0,0,0
+1058,Republican,10,0,1,0,0,0,rgc_c_dt_p,Cut benefits to existing Medicare patients,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
+1059,Republican,7,0,1,0,0,0,rgc_c_aca2_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"It makes sense, in view of other things I know",1,NA,1,0,0,0,1,0,0
+1059,Republican,7,0,1,0,0,0,rgc_c_dt_p,Limit future increases in payments to Medicare providers,Temporarily ban immigrants from several majority-Muslim countries,"I’ve read, seen, or heard that",NA,1,1,1,0,0,0,0,1
