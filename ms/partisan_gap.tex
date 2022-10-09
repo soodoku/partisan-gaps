@@ -121,7 +121,6 @@ In this paper, we extend the investigation into the role of survey design in exp
 
 Research shows that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term in 1996 about whether the budget deficits increased, decreased, or remained the same, 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}. There are two broad explanations for these gaps. The first is that partisan gaps on partisan consequential knowledge and misinformation items are a result of the fact that partisans know different things. The second theory is that partisans gaps are an artifact of the survey design.
 
-
 \subsection*{Partisan Gaps in Knowledge}
 Research shows that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term about whether the budget deficits increased, decreased, or remained the same during the last four years, while 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}. 
 
@@ -143,7 +142,17 @@ The extent to which survey responses are contaminated by responses other than st
 
 \subsection*{Empirical Implications of the Theories}
 
-If partisan gaps are a result of actual differences, minor differences in question wording and response options stem should principally have little effect on the gap. On the other hand if the gaps are sensitive to question and response attributes, it suggests that some of the partisan gaps may not be founded in differences in strongly held beliefs. The argument goes that partisan gaps emerge because surveys are designed in a way that encourage respondents to provide answers that are congenial to them even when they don't have strongly held beliefs about the question at hand. Inflationary features --- not including don't know (cite bullock who prices DK), social proof, guessing encouraging, and not accounting for guessing. Our hunch is that if you take out the inflationary features, the partisan gaps go down.
+If partisan gaps are a result of actual differences, minor differences in question wording and response options stem should principally have little effect on the gap. On the other hand if the gaps are sensitive to question and response attributes, it suggests that some of the partisan gaps may not be founded in differences in beliefs. In particular, we contend that political surveys regularly include features that inflate partisan gaps to produce sensational results. Surveys regularly exclude don't know \citep{luskin2011don}, include guessing encouraging features such as providing background information and social proof in the stem that likely makes people think that they know something about the topic or give them extra information that they can use to guess the answer. Often enough, surveys also include partisan cues. And the scoring rules used by analysts doesn't disambiguate between respondents who are confident about their answers and those who aren't. Our hunch is that if you take out the inflationary features, the partisan gaps go down.
+
+\section*{Data and Research Design}\label{sec:data}
+
+To test the conditionality of partisan knowledge gaps in survey data we fielded four surveys that test the effect different aspects of survey and question design can have on (partisan) response patterns. In studies 1 and 2, we used Amazon Mechanical Turk (MTurk) to ask participants a variety of knowledge questions in different designs. These items aim at examining how survey instructions, question wording, response options, and response design in the survey affect partisans to respond to questions in specific ways. In studies 3 and 4, we examine the role of question wording on response behavior in more detail by focusing on the effect that partisan-related auxilliary information can have on response patterns.
+
+\subsubsection*{Studies 1 and 2}
+
+Both surveys were fielded on Amazon's Mechanical Turk \citep{BerinskyHuberLenz2012} in the second quarter of 2017. In the first study, we randomly assigned 1,253 respondents to one of five conditions—Real World (RW), Iron Pyrite Standard (IP), Fewer Substantive Responses (FSR), 14k Gold Standard (14k), and the 24k Gold Standard (24k). In each condition respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not. (The exact question wording for each of the items is presented in \cref{si:mturk}.) Respondents assigned to RW and IP saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they don’t know. (Again, see \cref{si:mturk} for the specific wording.)
+
+In the second study, we randomly assigned 1,059 respondents to either closed-ended or confidence coding questions of four items. The topics and answer options of these questions were indentical to study 1 and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received five options as answers, including a ``Don't Know'' option. In the confidence coding version of the survey respondents were asked to report the confidence with which they knew an item to be correct or incorrect. In this treatment the individuals were asked the same questions as in the multiple choice treatment and they had to report the confidence with which they considered each of the four statements that were answer options in the multiple choice questions to be correct or incorrect. The exact question wording for each of the items is presented in \cref{si:mturk2}.
 
 \begin{itemize}
 
@@ -151,28 +160,13 @@ If partisan gaps are a result of actual differences, minor differences in questi
 	
 	\item No DK +  SP + GE: It never includes the 'Don't Know,' it always includes neutral information that encourages people to take a guess, and it also includes social proof about the incorrect answer.
 	
-	\item DK + SP + No GE: The FSR standard adds a `Don't Know’ and removes from the question stem any neutral information that is likely to cause people to offer a substantive response when they don't know.
+	\item DK + SP + No GE: This condition adds a `Don't Know’ and removes from the question stem any neutral information that is likely to cause people to offer a substantive response when they don't know.
 	
 	\item DK + No SP + No GE: The best version of the multiple-choice question---no social proof, no guessing encouraging neutral wording, and a don't know---while maintaining commensurability with other items. 
 	
 	\item Confidence Scoring: Respondents rate the claim on a 0 to 10 scale going from `definitely false' to `definitely true.' The question is inspired by other attempts to take account of confidence in distinguishing misinformation from incorrect responses stemming from processes like inference, unlucky guessing, and such (see, for instance, \citep{pasek2015}).
 
 \end{itemize}
-
-\section*{Partisan Knowledge Gaps (MTurk)}
-\subsection*{Data and Research Design}\label{sec:data}
-
-In order to test the conditionality of partisan knowledge gaps in survey data we fielded four surveys that test the effect different aspects of survey and question design can have on (partisan) response patters. In studies 1 and 2, we used Amazon Mechanical Turk (MTurk) to ask participants a variety of knowledge questions in different designs. These items aim at examining how survey instructions, question wording, response options, and response design in the survey affect partisans to respond to questions in specific ways. In studies 3 and 4, we examine the role of question wording on response behavior in more detail by focusing on the effect that partisan-related auxilliary information can have on response patterns.
-
-\subsubsection*{Studies 1 and 2}
-
-Both surveys were fielded in the second quarter of 2017. In the first study, we randomly assigned 1,253 respondents to one of five conditions—Real World (RW), Iron Pyrite Standard (IP), Fewer Substantive Responses (FSR), 14k Gold Standard (14k), and the 24k Gold Standard (24k). In each condition respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not. (The exact question wording for each of the items is presented in \cref{si:mturk}.) Respondents assigned to RW and IP saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they don’t know. (Again, see \cref{si:mturk} for the specific wording.)
-
-In the second study, we randomly assigned 1,059 respondents to either closed-ended or confidence coding questions of four items. The topics and answer options of these questions were indentical to study 1 and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received five options as answers, including a ``Don't Know'' option. In the confidence coding version of the survey respondents were asked to report the confidence with which they knew an item to be correct of incorrect. In this treatment the individuals were asked the same questions as in the multiple choice treatment and they had to report the confidence with which they considered each of the four statements that were answer options in the multiple choice questions to be correct or incorrect.
-% Delete this section if we are not using the deficit questions in the survey
-% We further asked all participants two closed-ended questions about the development of the federal deficit under presidents Bush and Obama. Respondents had the following response options: increased (correct in both cases), remained about the same, descreased, and don't know. Both questions were then followed by a probe.
-Participants were also randomly assigned to an open-ended follow-up question that asked them why they chose this response or a closed-ended ended version that gave them eight options to choose. The exact question wording for each of the items is presented in
-\cref{si:mturk2}.
 
 \subsubsection*{Studies 3 and 4}
 
