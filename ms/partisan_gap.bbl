@@ -16,11 +16,6 @@ Achen, Christopher~H. \harvardand\ Larry~M. Bartels. 2016.
   Government}.
 \newblock Princeton:  Princeton University Press.
 
-\harvarditem{{American National Election Studies}}{N.d.}{anes_gen}
-{American National Election Studies}. N.d.
-\newblock ``American National Election Studies.'' Available at
-  \begin{footnotesize}\url{http://electionstudies.org/}\end{footnotesize}.
-
 \harvarditem[Barabas et~al.]{Barabas, Jerit, Pollock \harvardand\
   Rainey}{2014}{barabas2014question}
 Barabas, Jason, Jennifer Jerit, William Pollock \harvardand\ Carlisle Rainey.
@@ -39,11 +34,11 @@ Berinsky, Adam~J. 2017.
   Limited Prevalence of Expressive Survey Responding.'' {\em Journal of
   Politics} 80(1):211--224.
 
-\harvarditem{Bisgaard \harvardand\ Slothuus}{2018}{bisgaard_slothuus_2018}
-Bisgaard, Martin \harvardand\ Rune Slothuus. 2018.
-\newblock ``Partisan Elites as Culprits? How Party Cues Shape Partisan
-  Perceptual Gaps.'' {\em American Journal of Political Science}
-  62(2):456--469.
+\harvarditem[Berinsky, Huber \harvardand\ Lenz]{Berinsky, Huber \harvardand\
+  Lenz}{2012}{BerinskyHuberLenz2012}
+Berinsky, Adam~J., Gergory~A. Huber \harvardand\ Gabriel~S. Lenz. 2012.
+\newblock ``Evaluating Online Labor Markets for Experimental Research:
+  Amazon.com's Mechanical Turk.'' {\em Political Analysis} 20(2):351--368.
 
 \harvarditem[Bullock et~al.]{Bullock, Gerber, Hill \harvardand\
   Huber}{2015}{bullocketal_2015}
@@ -51,11 +46,6 @@ Bullock, John~G., Alan~S. Gerber, Seth~J. Hill \harvardand\ Gregory~A. Huber.
   2015.
 \newblock ``Partisan Bias in Factual Beliefs About Politics.'' {\em Quarterly
   Journal of Political Science} 10:519--578.
-
-\harvarditem{Bullock \harvardand\ Lenz}{2019}{bullocklenz_2019}
-Bullock, John~G. \harvardand\ Gabriel Lenz. 2019.
-\newblock ``Partisan Bias in Surveys.'' {\em Annual Review of Political
-  Science} 22:325--342.
 
 \harvarditem{Dolan}{2011}{dolan2011women}
 Dolan, Kathleen. 2011.
@@ -95,10 +85,12 @@ Guess, Andrew~M. 2020.
   Online Media Diets.'' {\em American Journal of Political Science}
   forthcoming.
 
-\harvarditem{Hill}{2017}{hill_2017}
-Hill, Seth~J. 2017.
-\newblock ``Learning Together Slowly: Bayesian Learning about Political
-  Facts.'' {\em Journal of Politics} 79(4):1403--1418.
+\harvarditem{Huber \harvardand\ Yair}{2018}{huber_yair_2018}
+Huber, Gregory~A. \harvardand\ Omer Yair. 2018.
+\newblock How Robust is Evidence of Partisan Perceptual Bias in Survey
+  Responses? A New Approach for Studying Expressive Responding.  In {\em Annual
+  Meeting of the Midwest Political Science Association}.
+\newblock Chicago: .
 
 \harvarditem{Jerit \harvardand\ Barabas}{2012}{jerit2012partisan}
 Jerit, Jennifer \harvardand\ Jason Barabas. 2012.
@@ -110,11 +102,6 @@ Kernell, Georgia \harvardand\ Samuel Kernell. 2019.
 \newblock ``Monitoring the Economy.'' {\em Journal of Elections, Public
   Opinion, and Parties} forthcoming.
 
-\harvarditem{Khanna \harvardand\ Sood}{2018}{khanna2018motivated}
-Khanna, Kabir \harvardand\ Gaurav Sood. 2018.
-\newblock ``Motivated Responding in Studies of Factual Learning.'' {\em
-  Political Behavior} 40(1):79--101.
-
 \harvarditem{Laloggia}{2018}{pew2018disagree}
 Laloggia, John. 2018.
 \newblock ``Republicans and Democrats Agree: They Can't Agree on Basic Facts.''
@@ -124,6 +111,11 @@ Laloggia, John. 2018.
 Lodge, Milton \harvardand\ Charles~S. Taber. 2013.
 \newblock {\em The Rationalizing Voter}.
 \newblock New York:  Cambridge University Press.
+
+\harvarditem{Luskin \harvardand\ Bullock}{2011}{luskin2011don}
+Luskin, Robert~C. \harvardand\ John~G. Bullock. 2011.
+\newblock ````Don't Know'' Means ``Don't Know'': DK Responses and the Public's
+  Level of Political Knowledge.'' {\em The Journal of Politics} 73(2):547--557.
 
 \harvarditem[Pasek, Sood \harvardand\ Krosnick]{Pasek, Sood \harvardand\
   Krosnick}{2015}{pasek2015}

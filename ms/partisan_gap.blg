@@ -3,47 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: partisan_gap.aux
 The style file: apsr.bst
 Database file #1: pgap.bib
-Warning--I didn't find a database entry for "prior"
-Warning--I didn't find a database entry for "bullock"
-You've used 31 entries,
+You've used 29 entries,
             2874 wiz_defined-function locations,
-            821 strings with 9176 characters,
-and the built_in function-call counts, 116257 in all, are:
-= -- 18950
-> -- 1336
+            811 strings with 9179 characters,
+and the built_in function-call counts, 110531 in all, are:
+= -- 17986
+> -- 1342
 < -- 0
-+ -- 8797
-- -- 481
-* -- 9831
-:= -- 23567
-add.period$ -- 124
-call.type$ -- 31
-change.case$ -- 403
-chr.to.int$ -- 31
-cite$ -- 31
-duplicate$ -- 457
-empty$ -- 1019
-format.name$ -- 516
-if$ -- 20856
++ -- 8383
+- -- 479
+* -- 9367
+:= -- 22398
+add.period$ -- 117
+call.type$ -- 29
+change.case$ -- 377
+chr.to.int$ -- 29
+cite$ -- 29
+duplicate$ -- 433
+empty$ -- 955
+format.name$ -- 510
+if$ -- 19830
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 34
-newline$ -- 132
-num.names$ -- 349
-pop$ -- 116
+missing$ -- 33
+newline$ -- 125
+num.names$ -- 331
+pop$ -- 110
 preamble$ -- 1
-purify$ -- 465
+purify$ -- 435
 quote$ -- 0
-skip$ -- 389
+skip$ -- 363
 stack$ -- 0
-substring$ -- 26593
-swap$ -- 55
-text.length$ -- 434
+substring$ -- 25226
+swap$ -- 51
+text.length$ -- 406
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 114
+type$ -- 106
 warning$ -- 0
-while$ -- 713
+while$ -- 670
 width$ -- 0
-write$ -- 427
-(There were 2 warnings)
+write$ -- 405
