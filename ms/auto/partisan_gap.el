@@ -56,6 +56,7 @@
    (LaTeX-add-labels
     "sec:data"
     "fig:partisangaps-mturk"
+    "fig:xxx"
     "eq:partisangap-mturk"
     "fig:partisangaps-mturk-reg"
     "tab:partisangaps-mturk"
