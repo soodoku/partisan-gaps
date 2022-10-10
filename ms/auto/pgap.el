@@ -321,6 +321,7 @@
     "campbell1980american"
     "peterson2021partisan"
     "slothuus2021political"
-    "hochschild2015isn"))
+    "hochschild2015isn"
+    "malka2022expressive"))
  '(or :bibtex :latex))
 
