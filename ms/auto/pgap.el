@@ -318,6 +318,7 @@
     "abrajano2015reexamining"
     "stroud2008media"
     "schattschneider-1960"
-    "campbell1980american"))
+    "campbell1980american"
+    "peterson2021partisan"))
  '(or :bibtex :latex))
 
