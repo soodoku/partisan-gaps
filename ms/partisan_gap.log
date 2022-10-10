@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.16)  10 OCT 2022 13:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.16)  10 OCT 2022 14:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1070,7 +1070,7 @@ LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 
 pdfTeX warning: pdflatex (file ../figs/partisan-gap-by-item-arm.pdf): PDF inclu
 sion: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/partisan-gap-by-item-arm.pdf, id=155, 397.485pt x 289.08pt>
+<../figs/partisan-gap-by-item-arm.pdf, id=156, 397.485pt x 289.08pt>
 File: ../figs/partisan-gap-by-item-arm.pdf Graphic file (type pdf)
 <use ../figs/partisan-gap-by-item-arm.pdf>
 Package pdftex.def Info: ../figs/partisan-gap-by-item-arm.pdf  used on input li
@@ -1078,7 +1078,7 @@ ne 200.
 (pdftex.def)             Requested size: 469.75502pt x 341.64957pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 4.80003pt on input line 207.
-<../figs/mturk-hk-MC-LIKERT.pdf, id=160, 397.485pt x 289.08pt>
+<../figs/mturk-hk-MC-LIKERT.pdf, id=161, 397.485pt x 289.08pt>
 File: ../figs/mturk-hk-MC-LIKERT.pdf Graphic file (type pdf)
 <use ../figs/mturk-hk-MC-LIKERT.pdf>
 Package pdftex.def Info: ../figs/mturk-hk-MC-LIKERT.pdf  used on input line 215
@@ -1134,7 +1134,7 @@ LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 
 pdfTeX warning: pdflatex (file ../figs/mturk-pgag-surveyarms.pdf): PDF inclusio
 n: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/mturk-pgag-surveyarms.pdf, id=205, 397.485pt x 289.08pt>
+<../figs/mturk-pgag-surveyarms.pdf, id=206, 397.485pt x 289.08pt>
 File: ../figs/mturk-pgag-surveyarms.pdf Graphic file (type pdf)
 <use ../figs/mturk-pgag-surveyarms.pdf>
 Package pdftex.def Info: ../figs/mturk-pgag-surveyarms.pdf  used on input line 
@@ -1159,7 +1159,7 @@ LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
 
 pdfTeX warning: pdflatex (file ../figs/yougov-unemp-congenialcue.pdf): PDF incl
 usion: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/yougov-unemp-congenialcue.pdf, id=250, 397.485pt x 289.08pt>
+<../figs/yougov-unemp-congenialcue.pdf, id=251, 397.485pt x 289.08pt>
 File: ../figs/yougov-unemp-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/yougov-unemp-congenialcue.pdf>
 Package pdftex.def Info: ../figs/yougov-unemp-congenialcue.pdf  used on input l
@@ -1171,7 +1171,7 @@ LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
 
 pdfTeX warning: pdflatex (file ../figs/yougov-deficit-congenialcue.pdf): PDF in
 clusion: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/yougov-deficit-congenialcue.pdf, id=251, 397.485pt x 289.08pt>
+<../figs/yougov-deficit-congenialcue.pdf, id=252, 397.485pt x 289.08pt>
 File: ../figs/yougov-deficit-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/yougov-deficit-congenialcue.pdf>
 Package pdftex.def Info: ../figs/yougov-deficit-congenialcue.pdf  used on input
@@ -1189,7 +1189,7 @@ pdf> <../figs/yougov-deficit-congenialcue.pdf>]
 
 pdfTeX warning: pdflatex (file ../figs/texas-unemp-congenialcue.pdf): PDF inclu
 sion: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/texas-unemp-congenialcue.pdf, id=297, 397.485pt x 289.08pt>
+<../figs/texas-unemp-congenialcue.pdf, id=298, 397.485pt x 289.08pt>
 File: ../figs/texas-unemp-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/texas-unemp-congenialcue.pdf>
 Package pdftex.def Info: ../figs/texas-unemp-congenialcue.pdf  used on input li
@@ -1210,7 +1210,7 @@ Overfull \hbox (4.11115pt too wide) in paragraph at lines 416--417
 
 pdfTeX warning: pdflatex (file ../figs/baltest-24k-rw.pdf): PDF inclusion: foun
 d PDF version <1.6>, but at most version <1.5> allowed
-<../figs/baltest-24k-rw.pdf, id=402, 397.485pt x 289.08pt>
+<../figs/baltest-24k-rw.pdf, id=403, 397.485pt x 289.08pt>
 File: ../figs/baltest-24k-rw.pdf Graphic file (type pdf)
 <use ../figs/baltest-24k-rw.pdf>
 Package pdftex.def Info: ../figs/baltest-24k-rw.pdf  used on input line 20.
@@ -1219,7 +1219,7 @@ Package pdftex.def Info: ../figs/baltest-24k-rw.pdf  used on input line 20.
 
 pdfTeX warning: pdflatex (file ../figs/yougov-unemp-congenialcue-partisan.pdf):
  PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/yougov-unemp-congenialcue-partisan.pdf, id=405, 397.485pt x 289.08pt>
+<../figs/yougov-unemp-congenialcue-partisan.pdf, id=406, 397.485pt x 289.08pt>
 File: ../figs/yougov-unemp-congenialcue-partisan.pdf Graphic file (type pdf)
 <use ../figs/yougov-unemp-congenialcue-partisan.pdf>
 Package pdftex.def Info: ../figs/yougov-unemp-congenialcue-partisan.pdf  used o
@@ -1229,7 +1229,7 @@ n input line 36.
 
 pdfTeX warning: pdflatex (file ../figs/yougov-deficit-congenialcue-partisan.pdf
 ): PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/yougov-deficit-congenialcue-partisan.pdf, id=406, 397.485pt x 289.08pt
+<../figs/yougov-deficit-congenialcue-partisan.pdf, id=407, 397.485pt x 289.08pt
 >
 File: ../figs/yougov-deficit-congenialcue-partisan.pdf Graphic file (type pdf)
 <use ../figs/yougov-deficit-congenialcue-partisan.pdf>
@@ -1319,24 +1319,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 416--417
 [33] [34
 
 ]
-<../figs/hk_aca1.png, id=520, 688.5725pt x 623.32875pt>
+<../figs/hk_aca1.png, id=521, 688.5725pt x 623.32875pt>
 File: ../figs/hk_aca1.png Graphic file (type png)
 <use ../figs/hk_aca1.png>
 Package pdftex.def Info: ../figs/hk_aca1.png  used on input line 530.
 (pdftex.def)             Requested size: 469.75502pt x 425.24658pt.
-<../figs/hk_gg1.png, id=522, 688.5725pt x 490.83376pt>
+<../figs/hk_gg1.png, id=523, 688.5725pt x 490.83376pt>
 File: ../figs/hk_gg1.png Graphic file (type png)
 <use ../figs/hk_gg1.png>
 Package pdftex.def Info: ../figs/hk_gg1.png  used on input line 541.
 (pdftex.def)             Requested size: 469.75502pt x 334.856pt.
  [35 <../figs/hk_aca1.png>]
-<../figs/hk_aca2.png, id=528, 687.56876pt x 607.26875pt>
+<../figs/hk_aca2.png, id=529, 687.56876pt x 607.26875pt>
 File: ../figs/hk_aca2.png Graphic file (type png)
 <use ../figs/hk_aca2.png>
 Package pdftex.def Info: ../figs/hk_aca2.png  used on input line 552.
 (pdftex.def)             Requested size: 469.75502pt x 414.89246pt.
  [36 <../figs/hk_gg1.png>]
-<../figs/hk_eo1.png, id=535, 690.58pt x 665.48625pt>
+<../figs/hk_eo1.png, id=536, 690.58pt x 665.48625pt>
 File: ../figs/hk_eo1.png Graphic file (type png)
 <use ../figs/hk_eo1.png>
 Package pdftex.def Info: ../figs/hk_eo1.png  used on input line 563.
@@ -1346,16 +1346,13 @@ Package pdftex.def Info: ../figs/hk_eo1.png  used on input line 563.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `partisan_gap.out' has not changed.
 (rerunfilecheck)             Checksum: F5277D9173825422D711F5BD73EFB9A0;583.
  ) 
 Here is how much of TeX's memory you used:
  18165 strings out of 478287
  306713 string characters out of 5849289
- 637580 words of memory out of 5000000
+ 637638 words of memory out of 5000000
  35844 multiletter control sequences out of 15000+600000
  552485 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1371,10 +1368,10 @@ ype1/public/mathdesign/mdbch/md-chr7t.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/mathdesign/mdbch/md-chr7y.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/mathdesign/mdbch/md-chr8t.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/mathdesign/mdbch/md-chri7m.pfb>
-Output written on partisan_gap.pdf (40 pages, 653506 bytes).
+Output written on partisan_gap.pdf (40 pages, 653569 bytes).
 PDF statistics:
- 612 PDF objects out of 1000 (max. 8388607)
- 494 compressed objects within 5 object streams
+ 613 PDF objects out of 1000 (max. 8388607)
+ 495 compressed objects within 5 object streams
  111 named destinations out of 1000 (max. 500000)
  90 words of extra memory for PDF output out of 10000 (max. 10000000)
 
