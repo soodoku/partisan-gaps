@@ -2,6 +2,7 @@
  "pgap"
  (lambda ()
    (LaTeX-add-bibitems
+    "graham2021measuring"
     "roush_2021"
     "cia_2004"
     "lopezhillygus_2018"
@@ -315,6 +316,8 @@
     "pasek2015"
     "dolan2011women"
     "abrajano2015reexamining"
-    "stroud2008media"))
+    "stroud2008media"
+    "schattschneider-1960"
+    "campbell1980american"))
  '(or :bibtex :latex))
 
