@@ -127,7 +127,7 @@ Across two experiments and YY items, we find that about YY\% of the knowledge di
 \section*{Two Theories of Partisan Gaps}
 
 Research has repeatedly shown that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term in 1996 about whether the budget deficits increased, decreased, or remained the same, 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}.
-% Should we add a more recent example here?
+% TODO: Should we add a more recent example here?
 
 There are two broad explanations for these gaps: The first is that partisan gaps on partisan consequential knowledge and misinformation items are a result of the fact that partisans know different things. The second theory is that partisans gaps are an artifact of the survey design.
 
