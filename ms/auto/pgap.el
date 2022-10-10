@@ -319,6 +319,8 @@
     "stroud2008media"
     "schattschneider-1960"
     "campbell1980american"
-    "peterson2021partisan"))
+    "peterson2021partisan"
+    "slothuus2021political"
+    "hochschild2015isn"))
  '(or :bibtex :latex))
 
