@@ -55,6 +55,7 @@
     "sym")
    (LaTeX-add-labels
     "sec:data"
+    "tab:conditions"
     "fig:partisangaps-mturk"
     "fig:xxx"
     "eq:partisangap-mturk"
