@@ -324,6 +324,10 @@
     "hochschild2015isn"
     "malka2022expressive"
     "rahn1993role"
-    "goggin2020goes"))
+    "goggin2020goes"
+    "bayes2020and"
+    "flynn2017nature"
+    "hill2017learning"
+    "merkley2018party"))
  '(or :bibtex :latex))
 

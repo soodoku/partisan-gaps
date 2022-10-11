@@ -3,44 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: partisan_gap.aux
 The style file: apsr.bst
 Database file #1: pgap.bib
-You've used 38 entries,
+You've used 42 entries,
             2874 wiz_defined-function locations,
-            859 strings with 10524 characters,
-and the built_in function-call counts, 151847 in all, are:
-= -- 24836
-> -- 1766
+            883 strings with 11205 characters,
+and the built_in function-call counts, 169697 in all, are:
+= -- 27744
+> -- 2005
 < -- 0
-+ -- 11613
-- -- 630
-* -- 12888
-:= -- 30602
-add.period$ -- 153
-call.type$ -- 38
-change.case$ -- 494
-chr.to.int$ -- 38
-cite$ -- 38
-duplicate$ -- 578
-empty$ -- 1262
-format.name$ -- 670
-if$ -- 27280
++ -- 12987
+- -- 713
+* -- 14440
+:= -- 34159
+add.period$ -- 169
+call.type$ -- 42
+change.case$ -- 546
+chr.to.int$ -- 42
+cite$ -- 42
+duplicate$ -- 638
+empty$ -- 1409
+format.name$ -- 758
+if$ -- 30488
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 43
-newline$ -- 163
-num.names$ -- 434
-pop$ -- 156
+missing$ -- 47
+newline$ -- 179
+num.names$ -- 481
+pop$ -- 166
 preamble$ -- 1
-purify$ -- 570
+purify$ -- 630
 quote$ -- 0
-skip$ -- 490
+skip$ -- 544
 stack$ -- 0
-substring$ -- 34940
-swap$ -- 78
-text.length$ -- 532
+substring$ -- 39070
+swap$ -- 86
+text.length$ -- 588
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 138
+type$ -- 154
 warning$ -- 0
-while$ -- 883
+while$ -- 980
 width$ -- 0
-write$ -- 528
+write$ -- 584
