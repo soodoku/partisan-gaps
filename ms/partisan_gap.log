@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.16)  11 OCT 2022 17:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.16)  11 OCT 2022 18:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1115,47 +1115,48 @@ LaTeX Font Info:    Font shape `TS1/mdbch/m/n' will be
 
 pdfTeX warning: pdflatex (file ../figs/partisan-gap-by-item-arm.pdf): PDF inclu
 sion: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/partisan-gap-by-item-arm.pdf, id=211, 397.485pt x 289.08pt>
+<../figs/partisan-gap-by-item-arm.pdf, id=210, 397.485pt x 289.08pt>
 File: ../figs/partisan-gap-by-item-arm.pdf Graphic file (type pdf)
 <use ../figs/partisan-gap-by-item-arm.pdf>
 Package pdftex.def Info: ../figs/partisan-gap-by-item-arm.pdf  used on input li
-ne 250.
+ne 248.
 (pdftex.def)             Requested size: 469.75502pt x 341.64957pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 257.
-<../figs/mturk-hk-MC-LIKERT.pdf, id=216, 397.485pt x 289.08pt>
+(Font)              scaled to size 4.80003pt on input line 255.
+[10 <../figs/partisan-gap-by-item-arm.pdf>]
+<../figs/mturk-hk-MC-LIKERT.pdf, id=247, 397.485pt x 289.08pt>
 File: ../figs/mturk-hk-MC-LIKERT.pdf Graphic file (type pdf)
 <use ../figs/mturk-hk-MC-LIKERT.pdf>
-Package pdftex.def Info: ../figs/mturk-hk-MC-LIKERT.pdf  used on input line 265
+Package pdftex.def Info: ../figs/mturk-hk-MC-LIKERT.pdf  used on input line 266
 .
 (pdftex.def)             Requested size: 281.85587pt x 204.99239pt.
-(../tabs/mturk_hk_mc_likert.tex) [10] [11 <../figs/partisan-gap-by-item-arm.pdf
->]
+ (../tabs/mturk_hk_mc_likert.tex)
+[11 <../figs/mturk-hk-MC-LIKERT.pdf>]
 
 pdfTeX warning: pdflatex (file ../figs/mturk-pgag-surveyarms.pdf): PDF inclusio
 n: found PDF version <1.6>, but at most version <1.5> allowed
-<../figs/mturk-pgag-surveyarms.pdf, id=257, 397.485pt x 289.08pt>
+<../figs/mturk-pgag-surveyarms.pdf, id=259, 397.485pt x 289.08pt>
 File: ../figs/mturk-pgag-surveyarms.pdf Graphic file (type pdf)
 <use ../figs/mturk-pgag-surveyarms.pdf>
 Package pdftex.def Info: ../figs/mturk-pgag-surveyarms.pdf  used on input line 
-287.
+288.
 (pdftex.def)             Requested size: 258.36668pt x 187.90858pt.
 LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 303.
+(Font)              scaled to size 10.51207pt on input line 304.
 LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
-(Font)              scaled to size 10.51207pt on input line 303.
+(Font)              scaled to size 10.51207pt on input line 304.
 LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 303.
+(Font)              scaled to size 10.51207pt on input line 304.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 303.
+(Font)              scaled to size 10.51207pt on input line 304.
 LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 303.
+(Font)              scaled to size 10.51207pt on input line 304.
 LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 303.
+(Font)              scaled to size 10.51207pt on input line 304.
 LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 303.
-(../tabs/mturk-reg-table-fragment.tex) [12 <../figs/mturk-hk-MC-LIKERT.pdf> <..
-/figs/mturk-pgag-surveyarms.pdf>] [13] [14] [15]
+(Font)              scaled to size 10.51207pt on input line 304.
+(../tabs/mturk-reg-table-fragment.tex) [12 <../figs/mturk-pgag-surveyarms.pdf>]
+[13] [14] [15]
 
 pdfTeX warning: pdflatex (file ../figs/yougov-unemp-congenialcue.pdf): PDF incl
 usion: found PDF version <1.6>, but at most version <1.5> allowed
@@ -1163,10 +1164,10 @@ usion: found PDF version <1.6>, but at most version <1.5> allowed
 File: ../figs/yougov-unemp-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/yougov-unemp-congenialcue.pdf>
 Package pdftex.def Info: ../figs/yougov-unemp-congenialcue.pdf  used on input l
-ine 342.
+ine 343.
 (pdftex.def)             Requested size: 232.52643pt x 169.11331pt.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 343.
+(Font)              scaled to size 9.60007pt on input line 344.
 
 
 pdfTeX warning: pdflatex (file ../figs/yougov-deficit-congenialcue.pdf): PDF in
@@ -1175,15 +1176,15 @@ clusion: found PDF version <1.6>, but at most version <1.5> allowed
 File: ../figs/yougov-deficit-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/yougov-deficit-congenialcue.pdf>
 Package pdftex.def Info: ../figs/yougov-deficit-congenialcue.pdf  used on input
- line 347.
+ line 348.
 (pdftex.def)             Requested size: 232.52643pt x 169.11331pt.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 360.
+(Font)              scaled to size 5.76004pt on input line 361.
 [16 <../figs/yougov-unemp-congenialcue.pdf> <../figs/yougov-deficit-congenialcu
 e.pdf>]
 
 LaTeX Warning: cref reference format for label type `' undefined on input line 
-363.
+364.
 
 (../tabs/yougov-reg-table-fragment.tex) [17]
 
@@ -1193,12 +1194,12 @@ sion: found PDF version <1.6>, but at most version <1.5> allowed
 File: ../figs/texas-unemp-congenialcue.pdf Graphic file (type pdf)
 <use ../figs/texas-unemp-congenialcue.pdf>
 Package pdftex.def Info: ../figs/texas-unemp-congenialcue.pdf  used on input li
-ne 395.
+ne 396.
 (pdftex.def)             Requested size: 258.36668pt x 187.90858pt.
 [18 <../figs/texas-unemp-congenialcue.pdf>]
 (../tabs/texas-unemp-reg-table-fragment.tex)
 (../tabs/texas-fedtax-reg-table-fragment.tex) [19] [20]
-Overfull \hbox (4.11115pt too wide) in paragraph at lines 468--469
+Overfull \hbox (4.11115pt too wide) in paragraph at lines 469--470
 [][]\T1/mdbch/m/n/12 2015[][]; [][]Schaffner and Luks[][] [][]2018[][]) (though
  see [][]Berin-sky[][] ([][]2017[][]) and [][]Pe-ter-son and Iyen-gar[][] ([][]
 2020[][])),
@@ -1353,7 +1354,7 @@ Package rerunfilecheck Info: File `partisan_gap.out' has not changed.
 Here is how much of TeX's memory you used:
  18218 strings out of 478287
  307761 string characters out of 5849289
- 638288 words of memory out of 5000000
+ 639288 words of memory out of 5000000
  35879 multiletter control sequences out of 15000+600000
  552485 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1378,7 +1379,7 @@ ype1/public/mathdesign/mdbch/md-chr7t.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/mathdesign/mdbch/md-chr7y.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/mathdesign/mdbch/md-chr8t.pfb></usr/share/texlive/texmf-dist/font
 s/type1/public/mathdesign/mdbch/md-chri7m.pfb>
-Output written on partisan_gap.pdf (44 pages, 665653 bytes).
+Output written on partisan_gap.pdf (44 pages, 665717 bytes).
 PDF statistics:
  681 PDF objects out of 1000 (max. 8388607)
  558 compressed objects within 6 object streams
