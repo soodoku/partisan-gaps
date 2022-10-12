@@ -106,7 +106,7 @@ setwd(githubdir)
 
 \begin{abstract}
 
-\noindent Conventional wisdom suggests large, persistent gaps between partisans' stores of political knowledge, fanning concerns about democratic accountability. We reconsider the frequency and size of these ``partisan knowledge gaps,'' in  series of experiments. Manipulating frequently used survey items we demonstrate that survey design can inflate the partisan gap by YY\%. Our findings suggest that knowledge gaps---when they do exist---stem more from motivated responding than genuine differences in factual knowledge.
+\noindent Conventional wisdom suggests large, persistent gaps between partisans' stores of political knowledge, fanning concerns about democratic accountability. We reconsider the frequency and size of these ``partisan knowledge gaps,'' in  series of experiments. Manipulating frequently used survey items we demonstrate that survey design can inflate the partisan gap by 71\%. Our findings suggest that knowledge gaps---when they do exist---stem more from motivated responding than genuine differences in factual knowledge.
 
 \end{abstract}
 
@@ -122,7 +122,12 @@ The idea of a well-functioning representative democracy rests on the assumption 
 
 In this paper, we extend the investigation into the role of survey design in explaining partisan differences. We propose two theories of partisan knowledge gaps. The first argues that partisan gaps reflect actual differences in beliefs about the world. The second proposes that partisan gaps are, to a large part, artifacts of survey and questionnaire design. We report results from a new set of experiments that manipulate common features of frequently used survey items. The features we focus on plausibly encourage people to guess when they don't know or report attitudes instead of knowledge, and thereby encourage partisan inference causing inflated partisan gaps in knowledge. We also assess what difference items that not only assess knowledge but also confidence in that knowledge make on the prevelance and size of partisan gaps. After all, knowledge is a confidently held correct belief about something. Do the partisan gaps persist if only survey responses that participants are confident in are coded as correct?
 %more stringent way to code the answers---only coding responses that respondents are confident about as correct---makes to observed differences.
-Across two experiments and YY items, we find that about YY\% of the knowledge differences between partisans are due to survey measures that encourage respondents to guess when they don't know. Across two other experiments, we find that features that encourage partisan inferences inflate the observed differences by KK\%. Lastly, we find that a coding scheme that only codes answers that respondents are confident in reduces partisan gaps by BB\% to LL\%. Our findings support the second theory of partisan knowledge gap formation. Current designs of survey items can encourage participants to not report confidently held knowledge but use partisan cues to express attitudes and opinions about the world. In contrast to incentive-based experimental designs that use (monetary) rewards to encourage respondents to overcome their perceptual screen of partisanship when it comes to answering knowledge questions \citep[for example, see][]{bullocketal_2015, peterson2021partisan} our research design examines the effect that question design has on increasing the partisan gaps in knowledge. Our findings offer practical advice on how to, with no additional costs, decrease the gap through simple and senseable adjustments to the questionnaire design.
+
+% 52% = Table 2 RepXFSR
+% 72% = Table 4 column 1
+% 43% = Table 3
+% 71% = Table 2 colum 3
+Across two experiments and thirteen items, we find that about 52\% of the knowledge differences between partisans are due to survey measures that encourage respondents to guess when they don't know. Across two other experiments, we find that survey features that encourage partisan inferences inflate the observed differences by up to 72\%. Lastly, we find that a coding scheme that only codes answers that respondents are confident in reduces partisan gaps by 43\% to 72\%. Our findings support the second theory of partisan knowledge gap formation. Current designs of survey items can encourage participants to not report confidently held knowledge but use partisan cues to express attitudes and opinions about the world. In contrast to incentive-based experimental designs that use (monetary) rewards to encourage respondents to overcome their perceptual screen of partisanship when it comes to answering knowledge questions \citep[for example, see][]{bullocketal_2015, peterson2021partisan} our research design examines the effect that question design has on increasing the partisan gaps in knowledge. Our findings offer practical advice on how to, with no additional costs, decrease the gap through simple and senseable adjustments to the questionnaire design.
 
 \newpage
 
@@ -242,7 +247,7 @@ We start by summarising the average partisan gap for each survey item and each t
 %\input{../tabs/unstandardized-pg-mturk.tex}
 
 \begin{center}
-	\begin{figure}[h]
+	\begin{figure}[t]
 		\centering
 		\caption{Partisan Gap by Treatment Arm (MTurk)}
 		\includegraphics[width=\textwidth]{../figs/partisan-gap-by-item-arm.pdf}
@@ -258,31 +263,14 @@ We start by summarising the average partisan gap for each survey item and each t
 
 The attenuation is most pronounced when comparing the Condition 1 to the Condition 5 arms (first vs. last columns). In the Condition 5 arm, Republicans are, on average, only about 10 percentage points more likely to have party-congenial responses, a drop larger than 50 percent. \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey arms.
 
-% TODO: What to do with this stuff?
-\begin{center}
-	\begin{figure}[h]
-		\centering
-		\caption{Partisan Gaps in Knowledge in different question designs}
-		\includegraphics[width=.6\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
-		\label{fig:xxx}
-		\caption*{\footnotesize 
-		}
-	\end{figure}
-\end{center}
-
-\input{../tabs/mturk_hk_mc_likert.tex}
-
-
-\subsubsection*{Study 2}
-
 We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is party-congenial, on the interaction of partisanship and the treatment arm:
 \begin{equation}\label{eq:partisangap-mturk}
 y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_k + \delta_k (Rep_i \times Arm_k) + (survey \; item)_j + \varepsilon_{ijk}
 \end{equation}
-for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gaps, which corresponds to \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different treatment arms affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always RW, so $\delta$ captures how the four treatment arms---having the same questions with different questionnaire artefacts---mediates partisan knowledge gaps.
+for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gaps, which corresponds to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different treatment arms affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always RW, so $\delta$ captures how the four treatment arms---having the same questions with different questionnaire artefacts---mediates partisan knowledge gaps.
 We include the survey item fixed effects to allow each item to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
 
-\begin{figure}[!t]
+\begin{figure}[t]
 	\centering
 	\caption{Partisan Gap by Treatment Arm: MTurk}
 	\includegraphics[width=.55\textwidth]{../figs/mturk-pgag-surveyarms.pdf}
@@ -315,13 +303,29 @@ We include the survey item fixed effects to allow each item to elicit some const
 \cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the Republican variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
 Column (2) includes only the treatment arms, and three of them elicit differences in partisan gaps that are statistically different from the baseline RW arm. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artefacts.
 
-Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the 24k arm is 17 percentage points less likely to give a party-congenial response than the RW arm ($p<0.001$). This gap is approximately two-thirds of the estimated effect of partisanship on the partisan knowledge gap.
+Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the 24k arm is 17 percentage points less likely to give a party-congenial response than the RW arm ($p<0.001$). This estimated is non-trivial.
+Compared to the gap arising from partisanship (in column (1)), a survey artifact in terms of differences in survey feature (in column (2)) elicits a gap two-thirds as large.
 
 In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The Republican and treatment arms interactions reveal the extent to which partisan knowledge gap changes across the different treatment arms. 
 
-\cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by half ($p<0.001$).
-The largest reduction is 71 percent ($p<0.001$), which comes from the 24k arm. This arm allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option. Including self-reported characteristics of respondents in columns (4)--(6) does not change this conclusion. Overall, the MTurk sample reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artefacts in the same questions.
+\cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by more than half ($p<0.001$).
+The largest reduction is 71 percent ($p<0.001$), which comes from the 24k arm. This arm allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. In columns (4)--(6), including the self-reported characteristics of respondents does not change the conclusion. Overall, the MTurk sample of study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
 
+
+\subsubsection*{Study 2}
+% TODO: What to do with this stuff?
+\begin{center}
+	\begin{figure}[h]
+		\centering
+		\caption{Partisan Gaps in Knowledge in different question designs}
+		\includegraphics[width=.6\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
+		\label{fig:xxx}
+		\caption*{\footnotesize 
+		}
+	\end{figure}
+\end{center}
+
+\input{../tabs/mturk_hk_mc_likert.tex}
 
 \newpage
 
