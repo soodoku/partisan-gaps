@@ -184,11 +184,11 @@ Studies 1 and 2 focus on three survey design features that we suspect might infl
 
 \subsection*{Data and Research Design}\label{sec:data}
 
-Both surveys were fielded on Amazon's Mechanical Turk \citep{BerinskyHuberLenz2012} in the second quarter of 2017. In the first study, we randomly assigned 1,253 respondents to one of five conditions with varying experimental treaments testing the effect of inflationary components of survey questions.
+Both surveys were fielded on Amazon's Mechanical Turk \citep{BerinskyHuberLenz2012} in the second quarter of 2017. In the survey for Study 1, we randomly assigned 1,253 respondents to one of five conditions with varying experimental treaments testing the effect of inflationary components of survey questions.
 
 In each condition respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk}.} Respondents assigned to RW and IP saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they, as research has shown is frequently the case, in fact don’t know the correct answer to a question.\footnote{Again, see \cref{si:mturk} for the specific wording.}
 
-In the second study, we randomly assigned 1,059 respondents to either closed-ended or confidence coding questions of four items. The topics and answer options of these questions were indentical to study 1 and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received five options as answers, including a ``Don't Know'' option. In the confidence coding version of the survey respondents were asked to report the confidence with which they knew an item to be correct or incorrect. In this treatment the individuals were asked the same questions as in the multiple choice treatment and they had to report the confidence with which they considered each of the four statements that were answer options in the multiple choice questions to be correct.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
+In the survey for Study 2, we randomly assigned 1,059 respondents to either closed-ended or confidence coding questions of four items. The topics and answer options of these questions were indentical to Study 1 and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received five options as answers, including a ``Don't Know'' option. In the confidence coding version of the survey respondents were asked to report the confidence with which they knew an item to be correct or incorrect. In this treatment the individuals were asked the same questions as in the multiple choice treatment and they had to report the confidence with which they considered each of the four statements that were answer options in the multiple choice questions to be correct.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
 
 % TODO: How exactly are things different here? In the original text there was no difference between Real World (RW), Iron Pyrite Standard (IP),
 % TODO 1: better labels for conditions
@@ -240,7 +240,7 @@ We test the effect of these five different conditions on the partisan gaps in po
 
 
 \subsubsection*{Study 1}
-We start by summarising the average partisan gap for each survey item and each treatment arm from the MTurk sample of study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. In the Condition 1 treatment arm (first column), the Republicans are, on average, 30 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow bars), the differences attenuated substantially depending on the treatment arms. Removing more and more inflationary features from the questions decreases the partisan gap in political knowledge.
+We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. In the Condition 1 treatment arm (first column), the Republicans are, on average, 30 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow bars), the differences attenuated substantially depending on the treatment arms. Removing more and more inflationary features from the questions decreases the partisan gap in political knowledge.
 
 % Table for the unstandardized partisan gap estimates from study 1
 % results are presented in the partisan-gap-by-item-arm.pdf figure
@@ -253,8 +253,8 @@ We start by summarising the average partisan gap for each survey item and each t
 		\includegraphics[width=\textwidth]{../figs/partisan-gap-by-item-arm.pdf}
 		\label{fig:partisangaps-mturk}
 		\caption*{\footnotesize 
-			Each point is the estimated gap between Republicans and Democrats for how congenial their responses are to their own party.
-			Columns indicate the five different treatment arms described in \nameref{sec:data}. Rows indicate the nine individual survey items described in \cref{si:mturk} plus their average.
+			Each marker is the estimated difference in proportions for how congenial their responses are to their own party.
+			Columns indicate the five different conditions described in \nameref{sec:data}. Rows indicate the nine individual survey question items described in \cref{si:mturk} plus their average.
 			Each point is the estimated $\beta$ from estimating $1\{party\text{-}congenial\, response\}_i = \alpha + \beta Rep_i + \varepsilon_i$ for each of items and each of the five arms.			
 			Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
 		}
@@ -309,7 +309,7 @@ Compared to the gap arising from partisanship (in column (1)), a survey artifact
 In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The Republican and treatment arms interactions reveal the extent to which partisan knowledge gap changes across the different treatment arms. 
 
 \cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by more than half ($p<0.001$).
-The largest reduction is 71 percent ($p<0.001$), which comes from the 24k arm. This arm allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. In columns (4)--(6), including the self-reported characteristics of respondents does not change the conclusion. Overall, the MTurk sample of study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
+The largest reduction is 71 percent ($p<0.001$), which comes from the 24k arm. This arm allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. In columns (4)--(6), including the self-reported characteristics of respondents does not change the conclusion. Overall, the MTurk sample of Study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
 
 
 \subsubsection*{Study 2}
@@ -318,9 +318,14 @@ The largest reduction is 71 percent ($p<0.001$), which comes from the 24k arm. T
 	\begin{figure}[h]
 		\centering
 		\caption{Partisan Gaps in Knowledge in different question designs}
-		\includegraphics[width=.6\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
-		\label{fig:xxx}
-		\caption*{\footnotesize 
+		\includegraphics[width=.55\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
+		\label{fig:mturk_hk}
+		\caption*{\scriptsize 
+			Figure shows the estimated partisan gaps in knowledge from the MTurk sample for Study 2 for two different survey conditions.
+			The multiple choice condition provides five closed-ended options, including the correct answer and a ``Don't Know''.
+			The Likert scale condition only considers the selection of the correct answer with a full confidence of 10 (see \cref{si:mturk2}). 
+			Estimates correspond to those reported in \cref{tab:mturk_hk}.
+			Horizontal bars are 95\% confidence intervals.
 		}
 	\end{figure}
 \end{center}
