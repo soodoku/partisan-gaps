@@ -190,6 +190,7 @@ In each condition respondents answered 9 misinformation items, ranging from citi
 
 In the survey for Study 2, we randomly assigned 1,059 respondents to either closed-ended or confidence coding questions of four items. The topics and answer options of these questions were indentical to Study 1 and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received five options as answers, including a ``Don't Know'' option. In the confidence coding version of the survey respondents were asked to report the confidence with which they knew an item to be correct or incorrect. In this treatment the individuals were asked the same questions as in the multiple choice treatment and they had to report the confidence with which they considered each of the four statements that were answer options in the multiple choice questions to be correct.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
 
+
 % TODO: How exactly are things different here? In the original text there was no difference between Real World (RW), Iron Pyrite Standard (IP),
 % TODO 1: better labels for conditions
 % TODO 2: if table is okay for doc add as own .tex to tabs folder
@@ -197,41 +198,35 @@ In the survey for Study 2, we randomly assigned 1,059 respondents to either clos
 \centering
 \caption{Experimental Treatments}
 \label{tab:conditions}
-\begin{tabular}{lcccc}
+\begin{tabular}{ccccccc}
 \hline
-            & \multicolumn{4}{c}{\textbf{Treatments}}              \\
-            & Don't Know & Neutral Stem & No Guessing & Confidence \\ \hline
-Condition 1 & No         & No           & No          & No          \\
-Condition 2 & Yes        & No           & Yes         & No          \\
-Condition 3 & Yes        & Yes          & Yes         & No          \\
-Condition 4 & Yes        & Yes          & Yes         & No          \\
-Condition 5 & No         & Yes          & Yes         & Yes          \\ \hline
+           & \multicolumn{6}{c}{\textbf{Treatments}}              \\
+ Condition & Label & Don't Know & Social Proof & Guessing   & Neutral     & Confidence \\
+           &       &            &              & Encouraged & Information & \\ \hline
+ 1        & IDA    & No         & Yes          & Yes        &  Yes        & No         \\
+ 2        & CU     & No         & No           & Yes        &  Yes        & No         \\
+ 3        & FSR    & Yes        & No           & No         &  Yes        & No         \\
+ 4        & IMC    & Yes        & No           & No         &  No         & No         \\
+ 5        & CC     & No         & No           & No         &  No         & Yes        \\ \hline
 \end{tabular}
 \end{table}
 
 %Real World (RW), Iron Pyrite Standard (IP), Fewer Substantive Responses (FSR), 14k Gold Standard (14k), and the 24k Gold Standard (24k).
 
-In total this yields five conditions, four multiple choice versions and one Likert scale, that successively remove inflationary survey design features, as shown in \Cref{tab:conditions}. Each condition is explained in detail below:
+In total this yields five conditions, four multiple choice and one Likert scale design, that successively remove inflationary survey design features, as shown in \Cref{tab:conditions}. Items can include a `Don't Know' option, offer social proof of the incorrect answer (such as ``some people belief that Barack Obama was not born in the U.S.''), have neutral information that encourages people to guess, and ask people about the confidence with which they know something. Each condition is explained in detail below:
 
 
 \begin{itemize}
 
-\item Condition 1: This condition reflects the real-world standards most closely--it does not feature a `Don't Know' option, it lacks a neutral question stem and often features social proof about the incorrect answer, for instance, ``Some people believe Barack Obama was not born in the United States, but was born in another country'' on a question about where Mr. Obama was born, and some neutral information about the topic, like ``According to the Constitution, American presidents must be `natural born citizens''' on the birthplace question, that may encourage the ignorant to take a guess. This condition does not score the confidence with which knowledge is held.
+  \item Condition 1: The \textit{Inflationary Design Approach} (IDA), in this version we replicate design features from highly partisan surveys that do not have the goal of collecting representative opinion data but push an agenda. In this design, `Don't Know' options are never presented and respondents can't indicate lack of knowledge. These questions also include social proof  about the incorrect answer, for instance, ``Some people believe Barack Obama was not born in the United States, but was born in another country'' on a question about where Mr. Obama was born, and some neutral information about the topic, like ``According to the Constitution, American presidents must be `natural born citizens''' on the birthplace question, that may encourage the ignorant to take a guess.  This condition does not score the confidence with which knowledge is held.
 
-%\item Real World (RW): The RW condition reflects the real-world standards most closely–it does not feature a ‘Don’t Know’, it often features social proof about the incorrect answer, for instance, “Some people believe Barack Obama was not born in the United States, but was born in another country” on a question about where Mr. Obama was born, and some neutral information about the topic, like “According to the Constitution, American presidents must be ‘natural born citizens”’ on the birthplace question, that may encourage the ignorant to take a guess.
+  \item Condition 2: The \textit{Commonly Used Design} (CUD), reflects the real-world standards in (nonacademic) polling most closely. These questions are very similar to the IDA questions but usually do not include social proof. In our experiments, these questions do not feature a `Don't Know' option, include neutral information in the question stem, encourage guessing, and do not ask respondents to report how confidently they hold the knowledge.
 
-\item Condition 2
+\item Condition 3: The \textit{Fewer Substantive Responses} (FSR) design likely reduces the number of substantive responses to survey questions by including a `Don't Know' option and thereby offering participants the option to reveal ignorance. In doing so, respondents are not forced to pick a substantive answer category when they don't have an opinion. Since research has repeatedly shown how prevelant the absence of political knowledge is we consider this an important feature for designing non-inflationary partisan knowledge surveys. These questions do not provide social poof but have encourage guessing and have a neutral question stem that might provide people information to base that guess on.
 
-%	\item No DK +  SP + GE: It never includes the 'Don't Know,' it always includes neutral information that encourages people to take a guess, and it also includes social proof about the incorrect answer.
+	\item Condition 4: The \textit{Improved Multiple Choice} condition is the best version of multiple choice questions. It offers individuals a `Don't Know' option, does not include any social proof, and does not encourage guessing. These changes to question formulation and design have been done while maintaining commensurability with other items. This approach minimizes inflationary features in questions with minimal changes to questionnaire and survey design.
 
-	
-\item Condition 3
-
-  %DK + SP + No GE: This condition adds a `Don't Know’ and removes from the question stem any neutral information that is likely to cause people to offer a substantive response when they don't know.
-	
-	\item Condition 4: This condition is the best version of multiple choice questions. It offers individuals a ``Don't Know'' option, does not include any social proof, and does not encourage guessing. These changes to question formulation and design have been done while maintaining commensurability with other items.
-	
-	\item Condition 5: This condition focuses on the confidence scoring of knowledge. Respondents rate a series of claims on a 0 to 10 scale going from `definitely false' to `definitely true.' The question is inspired by other attempts to take account of confidence in distinguishing misinformation from incorrect responses stemming from processes like inference, unlucky guessing, and such (see, for instance, \citet{pasek2015}). While we consider this to be the gold standard when it comes to removing inflationary features from the survey design it is a larger deviation from common survey design features.
+	\item Condition 5: The \textit{Confidence Coding} (CC) condition focuses on the confidence scoring of knowledge. Respondents rate a series of claims on a 0 to 10 scale going from `definitely false' to `definitely true.' The question is inspired by other attempts to take account of confidence in distinguishing misinformation from incorrect responses stemming from processes like inference, unlucky guessing, and such (see, for instance, \citet{pasek2015}). While we consider this to be the gold standard when it comes to removing inflationary features from the survey design it is a larger deviation from common survey design features. This question design does not encourage guessing and features no social proof.
 
 \end{itemize}
 
