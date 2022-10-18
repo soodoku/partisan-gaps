@@ -261,13 +261,13 @@ We start by summarizing the average partisan gap for each survey item and each t
 	\end{figure}
 \end{center}
 
-The attenuation is most pronounced when comparing the Condition 1 to the Condition 5 arms (first vs. last columns). In the Condition 5 arm, Republicans are, on average, only about 10 percentage points more likely to have party-congenial responses, a drop larger than 50 percent. \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey arms.
+The attenuation is most pronounced when comparing Condition 1 to Condition 5 (first vs. last columns). In the Condition 5 arm, Republicans are, on average, only about 10 percentage points more likely to have party-congenial responses, a drop larger than 50 percent. \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey arms.
 
 We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is party-congenial, on the interaction of partisanship and the treatment arm:
 \begin{equation}\label{eq:partisangap-mturk}
 y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_k + \delta_k (Rep_i \times Arm_k) + (survey \; item)_j + \varepsilon_{ijk}
 \end{equation}
-for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gaps, which corresponds to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different treatment arms affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always RW, so $\delta$ captures how the four treatment arms---having the same questions with different questionnaire artefacts---mediates partisan knowledge gaps.
+for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gaps, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different treatment arms affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always RW, so $\delta$ captures how the four treatment arms---having the same questions with different questionnaire artifacts ---mediates partisan knowledge gaps.
 We include the survey item fixed effects to allow each item to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
 
 \begin{figure}[t]
@@ -301,12 +301,12 @@ We include the survey item fixed effects to allow each item to elicit some const
 
 
 \cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the Republican variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
-Column (2) includes only the treatment arms, and three of them elicit differences in partisan gaps that are statistically different from the baseline RW arm. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artefacts.
+Column (2) includes only the treatment arms, and three of them elicit differences in partisan gaps that are statistically different from the baseline RW arm. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artifacts.
 
-Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the 24k arm is 17 percentage points less likely to give a party-congenial response than the RW arm ($p<0.001$). This estimated is non-trivial.
-Compared to the gap arising from partisanship (in column (1)), a survey artifact in terms of differences in survey feature (in column (2)) elicits a gap two-thirds as large.
+Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the 24k arm is 17 percentage points less likely to give a party-congenial response than the RW arm ($p<0.001$). This estimate is non-trivial.
+Compared to the gap arising from partisanship (in column (1)), a survey artifact in terms of differences in survey features (in column (2)) elicits a gap two-thirds as large.
 
-In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The Republican and treatment arms interactions reveal the extent to which partisan knowledge gap changes across the different treatment arms. 
+In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The Republican and treatment arms interactions reveal the extent to which partisan knowledge gaps change across the different treatment arms. 
 
 \cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by more than half ($p<0.001$).
 The largest reduction is 71 percent ($p<0.001$), which comes from the 24k arm. This arm allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. In columns (4)--(6), including the self-reported characteristics of respondents does not change the conclusion. Overall, the MTurk sample of Study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
@@ -369,7 +369,7 @@ Using the YouGov survey responses, we estimate
 \begin{equation}\label{eq:pgap-yougov}
 \text{correct response}_{i} = \alpha + \beta (congenial \; cue)_i  +\varepsilon_{i},
 \end{equation}
-where the dependent variable is the indicator for whether the response to the question is correct.
+where the dependent variable is the indicator of whether the response to the question is correct.
 As discussed above in \cref{subsec:partisan-cues}, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly. Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response. The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
 
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
@@ -386,8 +386,8 @@ As discussed above in \cref{subsec:partisan-cues}, we model the correct response
 			\bottomrule
 		\end{tabular}
 	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that unemployment or the budget deficit had gone up since the 2010 midterm elections (which are the correct responses).
-		Congenial cue is an indicator of whether the question stem includes the cue towards getting the correct response. For Democrats, this is when the question stem includes the cue ``when Republicans gained control of the US Congress.''
+	\caption*{\footnotesize Dependent variables indicate whether the individual responded that unemployment or the budget deficit had gone up since the 2010 midterm elections (which are the correct responses).
+		Congenial cue indicates whether the question stem includes the cue towards getting the correct response. For Democrats, this is when the question stem includes the cue ``when Republicans gained control of the US Congress.''
 		For Republicans, this is when the question stem includes the cue ``when Democrats retained control of the Senate.''
 		Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
 		All models are linear probability models. 
@@ -428,8 +428,8 @@ We further supplement our results with the Texas Lyceum survey, which includes a
 			\bottomrule
 		\end{tabular}
 	\end{adjustbox}
-	\caption*{\footnotesize Dependent variable is an indicator for whether the individual responded that unemployment has gone up since the 2010 midterm elections (which is the correct response).
-		Congenial cue is an indicator of whether the question stem includes the cue towards getting the correct response. 
+	\caption*{\footnotesize Dependent variable indicates whether the individual responded that unemployment has gone up since the 2010 midterm elections (which is the correct response).
+		Congenial cue indicates whether the question stem includes the cue towards getting the correct response. 
 		For Democrats, this is when the question stem includes the cue ``when Republicans regained control of the US Congress.''
 		For Republicans, this is when the question stem includes the cue ``when the Democrats retained control of the Senate.''
 		Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
@@ -452,9 +452,9 @@ We further supplement our results with the Texas Lyceum survey, which includes a
 			\bottomrule
 		\end{tabular}
 	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables are indicators for whether the individual responded that federal taxes had gone up since the 2010 midterm elections (which are the correct responses) or ``don't know''.
-		Congenial cue is an indicator of whether the question stem includes the cue towards getting the correct response. 
-		Only Republicans are able to get a congenial cue for these questions.
+	\caption*{\footnotesize Dependent variables indicate whether the individual responded that federal taxes had gone up since the 2010 midterm elections (which are the correct responses) or ``don't know''.
+		Congenial cue indicates whether the question stem includes the cue towards getting the correct response. 
+		Only Republicans can get a congenial cue for these questions.
 		This happens when Republicans receive the question stem that includes the cue ``since Barack Obama took office.''
 		Separately, individuals can also be assigned a cue that encourages guessing. This happens when the question stem includes ``Based on what you have heard, since Barack Obama took office...''
 		Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
@@ -469,6 +469,7 @@ Based on the estimates in \cref{tab:partisangaps-texas-fedtax}, we observe that 
 We also estimate how the cue that encourages guessing affects the ``Don't Know'' response rate. Presumably, a cue that encourages guessing would lead to a lower response rate for Don't Know. We find that the guessing cues do not have a very different effect from cues that do not. 
 
 Overall, we find again using the YouGov survey and Texas Lyceum survey that questionnaire artifacts, via the addition of partisan cues in the same questions, affects the measured gaps in political knowledge. 
+
 
 \section*{Discussion and Conclusion}
 
