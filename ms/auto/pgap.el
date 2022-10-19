@@ -330,6 +330,7 @@
     "hill2017learning"
     "merkley2018party"
     "klar2014partisanship"
-    "redlawsk2002hot"))
+    "redlawsk2002hot"
+    "klar2016independent"))
  '(or :bibtex :latex))
 
