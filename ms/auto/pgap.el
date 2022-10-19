@@ -329,6 +329,7 @@
     "flynn2017nature"
     "hill2017learning"
     "merkley2018party"
-    "klar2014partisanship"))
+    "klar2014partisanship"
+    "redlawsk2002hot"))
  '(or :bibtex :latex))
 
