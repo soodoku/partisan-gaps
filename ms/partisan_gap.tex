@@ -186,32 +186,44 @@ Studies 1 and 2 focus on three survey design features that we suspect might infl
 
 Both surveys were fielded on Amazon's Mechanical Turk \citep{BerinskyHuberLenz2012} in the second quarter of 2017. In the survey for Study 1, we randomly assigned 1,253 respondents to one of five conditions with varying experimental treaments testing the effect of inflationary components of survey questions.
 
-In each condition respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk}.} Respondents assigned to RW and IP saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they, as research has shown is frequently the case, in fact don’t know the correct answer to a question.\footnote{Again, see \cref{si:mturk} for the specific wording.}
+In each condition respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk}.} Respondents assigned to the first two conditions (inflationary and real-world design) saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they, as research has shown is frequently the case, in fact don’t know the correct answer to a question.\footnote{Again, see \cref{si:mturk} for the specific wording.}
 
 In the survey for Study 2, we randomly assigned 1,059 respondents to either closed-ended or confidence coding questions of four items. The topics and answer options of these questions were indentical to Study 1 and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received five options as answers, including a ``Don't Know'' option. In the confidence coding version of the survey respondents were asked to report the confidence with which they knew an item to be correct or incorrect. In this treatment the individuals were asked the same questions as in the multiple choice treatment and they had to report the confidence with which they considered each of the four statements that were answer options in the multiple choice questions to be correct.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
 
 
-% TODO: How exactly are things different here? In the original text there was no difference between Real World (RW), Iron Pyrite Standard (IP),
-% TODO 1: better labels for conditions
-% TODO 2: if table is okay for doc add as own .tex to tabs folder
-\begin{table}[H]
+\begin{table}[]
 \centering
-\caption{Experimental Treatments}
-\label{tab:conditions}
-\begin{tabular}{ccccccc}
+\caption{Features of Media Poll Misinformation Items}
+\label{tab:features}
+\begin{tabular}{lc}
 \hline
-           & \multicolumn{6}{c}{\textbf{Treatments}}              \\
- Condition & Label & Don't Know & Social Proof & Guessing   & Neutral     & Confidence \\
-           &       &            &              & Encouraged & Information & \\ \hline
- 1        & IDA    & No         & Yes          & Yes        &  Yes        & No         \\
- 2        & CUD     & No         & No           & Yes        &  Yes        & No         \\
- 3        & FSR    & Yes        & No           & No         &  Yes        & No         \\
- 4        & IMC    & Yes        & No           & No         &  No         & No         \\
- 5        & CCD     & No         & No           & No         &  No         & Yes        \\ \hline
+\textbf{Design Feature} & \textbf{Proportion of Items} \\ \hline
+Explicit DK/Not Sure    &                              \\
+DK                      & .067                         \\
+Not Sure                & .022                         \\
+                        &                              \\
+SR-Encouraging wording  &                              \\
+TBYK                    & .167                         \\
+DYT                     & .400                         \\
+AFYK                    & .117                         \\
+Other                   & .318                         \\
+                        &                              \\
+Number of options       &                              \\
+2                       & .417                         \\
+3                       & .172                         \\
+4                       & .139                         \\
+5 or more               & .161                         \\
+                        &                              \\
+IRE                     & .061                         \\ \hline
+\multicolumn{2}{l}{\textit{Notes: n = 180}}
 \end{tabular}
 \end{table}
 
-%Real World (RW), Iron Pyrite Standard (IP), Fewer Substantive Responses (FSR), 14k Gold Standard (14k), and the 24k Gold Standard (24k).
+% TODO: How exactly are things different here? In the original text there was no difference between Real World (RW), Iron Pyrite Standard (IP),
+% TODO 1: better labels for conditions
+% TODO 2: if table is okay for doc add as own .tex to tabs folder
+
+\input{../tabs/treatment_labels.tex}
 
 In total this yields five conditions, four multiple choice and one Likert scale design, that successively remove inflationary survey design features, as shown in \Cref{tab:conditions}. Items can include a `Don't Know' option, offer social proof of the incorrect answer (such as ``some people belief that Barack Obama was not born in the U.S.''), have neutral information that encourages people to guess, explicitly encourage guessing, and ask people about the confidence with which they know something. Each condition is explained in detail below:
 
