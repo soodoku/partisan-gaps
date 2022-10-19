@@ -7,6 +7,7 @@
                      '(("appendix" "titletoc" "title") ("xcolor" "usenames" "dvipsnames" "svgnames" "table") ("geometry" "margin=1in") ("hyperref" "linkcolor=blue" "			colorlinks=true" "			urlcolor=blue" "			pdfstartview={XYZ null null 1.00}" "			pdfpagemode=UseNone" "			citecolor={bluish}" "			pdftitle={partisan_gap}") ("multibib" "resetlabels" "labeled") ("fontenc" "T1") ("mathdesign" "bitstream-charter") ("cleveref" "nameinlink" "capitalize" "noabbrev") ("caption" "hang" "font=small" "skip=0pt" "labelfont={bf}")))
    (TeX-run-style-hooks
     "latex2e"
+    "../tabs/treatment_labels"
     "../tabs/mturk-reg-table-fragment"
     "../tabs/mturk_hk_mc_likert"
     "../tabs/yougov-reg-table-fragment"
@@ -56,7 +57,7 @@
    (LaTeX-add-labels
     "sec:inflationary_measures"
     "sec:data"
-    "tab:conditions"
+    "tab:features"
     "fig:partisangaps-mturk"
     "eq:partisangap-mturk"
     "fig:partisangaps-mturk-reg"
