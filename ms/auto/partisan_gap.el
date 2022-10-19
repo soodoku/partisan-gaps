@@ -8,11 +8,8 @@
    (TeX-run-style-hooks
     "latex2e"
     "../tabs/treatment_labels"
-    "../tabs/mturk-reg-table-fragment"
+    "."
     "../tabs/mturk_hk_mc_likert"
-    "../tabs/yougov-reg-table-fragment"
-    "../tabs/texas-unemp-reg-table-fragment"
-    "../tabs/texas-fedtax-reg-table-fragment"
     "./sections/appendix"
     "article"
     "art12"

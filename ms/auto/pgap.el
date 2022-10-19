@@ -328,6 +328,7 @@
     "bayes2020and"
     "flynn2017nature"
     "hill2017learning"
-    "merkley2018party"))
+    "merkley2018party"
+    "klar2014partisanship"))
  '(or :bibtex :latex))
 
