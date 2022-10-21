@@ -58,7 +58,6 @@
    (LaTeX-add-labels
     "sec:inflationary_measures"
     "sec:data"
-    "tab:features"
     "fig:partisangaps-mturk"
     "eq:partisangap-mturk"
     "fig:partisangaps-mturk-reg"
