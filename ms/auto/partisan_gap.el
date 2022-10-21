@@ -58,6 +58,11 @@
    (LaTeX-add-labels
     "sec:inflationary_measures"
     "sec:data"
+    "txt:IDA"
+    "txt:CUD"
+    "txt:FSR"
+    "txt:IMC"
+    "txt:CCD"
     "fig:partisangaps-mturk"
     "eq:partisangap-mturk"
     "fig:partisangaps-mturk-reg"

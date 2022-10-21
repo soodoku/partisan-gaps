@@ -43,14 +43,18 @@ mturk_hk <- read_csv("data/mturk_hk/mturk_hk_recoded.csv") |>
          pid_leaners = ifelse(pid_leaners == "Independent", NA_character_, pid_leaners),
          democrat_noleaners = ifelse(pid == "Democrat", 1, 
                                      ifelse(pid == "Republican", 0, NA)),
-         democrat_leaners = ifelse(pid_leaners == "Democrat", 1, 0)) |> 
+         democrat_leaners = ifelse(pid_leaners == "Democrat", 1, 0),
+         republican_noleaners = ifelse(pid == "Democrat", 0, 
+                                     ifelse(pid == "Republican", 1, NA)),
+         republican_leaners = ifelse(pid_leaners == "Republican", 1, 0)) |> 
   rename(respondent = X)
   
 ## MTurk closed responses correct
 mturk_hk_closed_correct <-
   mturk_hk |> 
   dplyr::select(respondent, democrat, republican, independent,
-                democrat_noleaners, democrat_leaners, probe, 
+                democrat_noleaners, democrat_leaners, republican_leaners,
+                probe, 
                 rgc_o_aca, rgc_c_aca,
                 rgc_o_aca2, rgc_o_aca2_p, rgc_c_aca2, rgc_c_aca2_p,
                 rgc_o_gg, rgc_c_gg,
