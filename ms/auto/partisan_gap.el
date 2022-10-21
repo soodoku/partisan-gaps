@@ -48,6 +48,10 @@
     "subcaption"
     "lscape")
    (TeX-add-symbols
+    "bch"
+    "ying"
+    "bgcd"
+    "ech"
     "phantomcaption"
     "citeapos"
     "sym")
