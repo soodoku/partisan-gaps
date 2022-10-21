@@ -331,6 +331,7 @@
     "merkley2018party"
     "klar2014partisanship"
     "redlawsk2002hot"
-    "klar2016independent"))
+    "klar2016independent"
+    "petersen2013motivated"))
  '(or :bibtex :latex))
 
