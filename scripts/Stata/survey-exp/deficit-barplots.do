@@ -24,7 +24,7 @@ sort porder
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Graph settings
-label define xlab 0 `""Uncongenial" "cue""' 1 `""Congenial" "cue""'
+label define xlab 0 `""Uncongenial" """' 1 `""Congenial" """'
 label values porder xlab
 
 set scheme s2mono
@@ -95,7 +95,7 @@ sort porder
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Graph settings
-label define xlab 0 `""Dem. w/" "uncongenial" "cue""' 1 `""Dem. w/" "congenial" "cue""' 2 `""Rep. w/" "uncongenial" "cue""' 3 `""Rep. w/" "congenial" "cue""' 
+label define xlab 0 `""Dem. " "uncongenial" """' 1 `""Dem. " "congenial" """' 2 `""Rep. " "uncongenial" """' 3 `""Rep. " "congenial" """' 
 label values porder xlab
 
 set scheme s2mono

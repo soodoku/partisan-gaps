@@ -26,9 +26,9 @@ drop if strpos(var, "0b.rep")
 drop if var=="1.survey"
 drop if var=="2.survey"
 drop if var=="3.survey"
-drop if var=="4.survey"
-drop if var=="5b.survey"
-drop if var=="1o.rep#5b.survey"
+drop if var=="4b.survey"
+drop if var=="5.survey"
+drop if var=="1o.rep#4b.survey"
 drop if strpos(var, "female")
 drop if strpos(var, "educ")
 drop if strpos(var, "hisla")
@@ -37,7 +37,6 @@ drop if var=="asian"
 drop if var=="black"
 drop if var=="white"
 drop if var=="others"
-
 * Gen coef for plotting (add estimates back to baseline)
 gen est = coef
 label var est "Original reg estimate (before adding back to baseline)"
@@ -51,22 +50,36 @@ replace lci = 0 if var=="_cons"
 
 
 * Create plot order var by treat dummies and label values with sample size
-gen porder = _n
-replace porder = 0 if var=="_cons"
+/* In order that should appear
+IDA = IPS _n == 1
+CUD = RW 1 _n==5
+FSR = FSR 4 _n==3
+IMC = 14k 2 _n==2
+CCD = 24k 3 _n==3
+*/
+
+gen porder = .
+replace porder = 1 if _n==1
+replace porder = 4 if _n==2 
+replace porder = 5 if _n==3
+replace porder = 3 if _n==4
+replace porder = 2 if _n==5
 sort porder
 
-label define xlab 1 "RW" 2 "14k" 3 "24k" 4 "FSR" 5 "IPS"
+label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC" 5 "CCD"
 label values porder xlab
+
+
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Graph settings
 set scheme s2mono
 local YLAB_OPTS angle(horizontal) labsize(large) nogrid
 local YRANGE 0.1(0.1).4
 local BASELINE_XLIM = _N+.5
-local CI_WIDTH medthick
+local CI_WIDTH thick
 local XLAB_SIZE large
-local BAR_OPTS 		color(purple) fcolor(none) lwidth(medthick)
-local BAR_OPTS_BASE color(gs5) fcolor(none) lwidth(medthick)
+local BAR_OPTS 		color(gs10) fcolor(none) lwidth(medthick)
+local BAR_OPTS_BASE color(black) fcolor(none) lwidth(medthick)
 
 local graphsavedir ./figures
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,7 +94,7 @@ local graphsavedir ./figures
 				xlabel(,val labsize(`XLAB_SIZE') )
 			) 
 			(rcap uci lci porder if porder!=1, 
-				color(black)
+				color(gs7)
 				lwidth(`CI_WIDTH')
 				legend(off)
 				ylabel(`YRANGE', `YLAB_OPTS' ) 

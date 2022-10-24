@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  13 Apr 2022, 16:31:50
+ opened on:  24 Oct 2022, 16:03:18
 
 . 
 . version 13              // Still on version 13 :(
@@ -14,11 +14,11 @@
 
 . adopath ++ ./ado                // Add path to ados
   [1]              "./ado"
-  [2]  (BASE)      "C:\Program Files\Stata17\ado\base/"
-  [3]  (SITE)      "C:\Program Files\Stata17\ado\site/"
+  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
+  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
   [4]              "."
-  [5]  (PERSONAL)  "C:\Users\lsys\ado\personal/"
-  [6]  (PLUS)      "C:\Users\lsys\ado\plus/"
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
   [7]  (OLDPLACE)  "c:\ado/"
 
 . 
@@ -32,16 +32,16 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 13 Apr 2022 16:31:50
+Start time: 24 Oct 2022 16:03:18
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. // * MTurk results
+. // * MTurk results (Study 2)
 . // *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . import delimited `rootdir'/data/turk/mturk-recoded.csv
-(344 vars, 1,253 obs)
+(344 vars, 1253 obs)
 
 . do ./mturk/preamble.do
 
@@ -60,7 +60,7 @@ Start time: 13 Apr 2022 16:31:50
 . rename avg avg_str
 
 . destring avg_str, gen(avg) force
-avg_str: contains nonnumeric bytes; avg generated as double
+avg_str contains nonnumeric characters; avg generated as double
 (2 missing values generated)
 
 . 
@@ -89,7 +89,7 @@ avg_str: contains nonnumeric bytes; avg generated as double
 
 . 
 . replace deficit = 1 - deficit
-(1,171 real changes made)
+(1171 real changes made)
 
 . 
 . *------------------------------------------------------------------------------
@@ -141,13 +141,13 @@ avg_str: contains nonnumeric bytes; avg generated as double
 . *** Survey types
 . encode question_type, gen(survey)
 
-. fvset base 5 survey // permanently set RW as base
+. fvset base 4 survey // permanently set IPS (IDA) as base
 
 . 
 end of do-file
 
 . 
-. // **** Figure for raw partisan gaps by items, by survey type
+. **** Figure for raw partisan gaps by items, by survey type (Fig 1)
 . do ./mturk/fig-partisan-gap.do
 
 . grstyle init
@@ -161,16 +161,30 @@ end of do-file
   2.         foreach arm in $arms {
   3.                 qui: reg `item' ib1.pid if (pid_str!="Independent") & (question_type=="`arm'"), vce(hc3)
   4.                 est store `item'_`arm'          
-  5.         }
-  6. 
-.         // * For all arms together
-.         // qui: reg `item' ib1.pid if (pid_str!="Independent") 
-.         // est store `item'_all 
-. }
+  5.                 * Store estimates for average of conditions for annotations later
+.                 if "`item'"=="avg" {
+  6.                         local beta_`arm' = round(_b[3.pid], 0.01)
+  7.                         dis `beta_`arm''
+  8.                 }
+  9.         }
+ 10. }
+.38
+.35
+.21
+.22
+.1
 
 . 
+. /* In order that should appear
+> IDA = IPS
+> CUD = RW
+> FSR = FSR
+> IMC = 14k
+> CCD = 24k
+> */
 . 
-. coefplot (*_RW) || (*_IPS) || (*_FSR) || (*_14k) || (*_24k), ///
+. 
+. coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
 >         msymbol(s) ///
 >         keep(3.pid) ///
 >         asequation /// "set equation to model name or string" make the rows the models
@@ -247,20 +261,23 @@ end of do-file
 >                 avg_14k = "{bf:Average}" ///                                                            
 >                 avg_24k = "{bf:Average}" ///                                                            
 >                 avg_all = "{bf:Average}" ///                                                            
+>                 avg_IPS_annote = "{bf:Average}" ///                                                             
+>                 avg_24k_annote = "{bf:Average}" ///                                                             
 >                 )
 
 . 
+. 
 . * Add column titles     
-. addplot 1: , title("{bf:RW}", size(med)) norescaling
+. addplot 1: , title("{bf:IDA}", size(med)) norescaling
 (note:  named style med not found in class gsize, default attributes used)
 
-. addplot 2: , title("{bf:IPS}") norescaling
+. addplot 2: , title("{bf:CUD}") norescaling
 
 . addplot 3: , title("{bf:FSR}") norescaling
 
-. addplot 4: , title("{bf:14k}") norescaling
+. addplot 4: , title("{bf:IMC}") norescaling
 
-. addplot 5: , title("{bf:24k}") norescaling
+. addplot 5: , title("{bf:CCD}") norescaling
 
 . 
 . * graph margin
@@ -282,8 +299,61 @@ end of do-file
 . gr_edit .plotregion1.style.editstyle margin(zero) editcopy
 
 . 
+. * Add annotes
+. local y_heigh_coord = 9.748674339250291
+
+. local annote_style angle(default) size(medsmall) color(black) horizontal(left) vertical(middle) margin(zero) linegap(z
+> ero) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignme
+> nt(east) editcopy
+
+. 
+. gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_IPS'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].text.Arrpush `beta_IPS'
+
+. 
+. gr_edit .plotregion1.plotregion1[2].AddTextBox added_text editor `y_heigh_coord' `beta_RW'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_RW'
+
+. 
+. gr_edit .plotregion1.plotregion1[3].AddTextBox added_text editor `y_heigh_coord' `beta_FSR'
+
+. gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[3].added_text[1].text.Arrpush `beta_FSR'
+
+. 
+. gr_edit .plotregion1.plotregion1[4].AddTextBox added_text editor `y_heigh_coord' `beta_14k'
+
+. gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
+
+. 
+. gr_edit .plotregion1.plotregion1[5].AddTextBox added_text editor `y_heigh_coord' `beta_24k'
+
+. gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[5].added_text[1].text.Arrpush `beta_24k'
+
+. 
 . graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
-file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf saved as PDF format
+(file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf written in PDF format)
 
 . 
 . 
@@ -293,40 +363,9 @@ file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf saved as PDF format
 end of do-file
 
 . 
-. // *** Balance tests (24k vs RW), takes a while
-. do ./mturk/baltest-24k-rw.do
+. *** Balance tests (IPS/IDA as base) [will replace Fig SI 1.1]
+. do ./mturk/study2-balance-tests.do // store estimates only
 
-. preserve
-
-. 
-. drop if (question_type!="24k") & (question_type!="RW")
-(725 observations deleted)
-
-. gen tarm = (question_type=="24k") 
-
-. 
-. 
-. global bs_seed 0
-
-. global nboot 10000
-
-. 
-. cap program drop run_reg_corr
-
-. program define run_reg_corr
-  1.         args xvar
-  2. 
-.         qui eststo: reg tarm `xvar', vce(hc3) 
-  3.         global `xvar'_N = "(N=`e(N)')"
-  4.         
-.         rho_report tarm `xvar', seed($bs_seed) nboot($nboot)
-  5.         global `xvar'_rreport = "`r(rreport)'"
-  6. end
-
-. 
-. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. *** Run regressions and correlation
-. 
 . center age interest_1 vote_1 pid_strength_1, standardize inplace
 (modified variables: age interest_1 vote_1 pid_strength_1)
 
@@ -335,130 +374,35 @@ end of do-file
 . local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
 
 . 
-. eststo clear 
+. local conditions RW FSR 14k 24k
 
-. local i = 1
-
-. foreach xvar of varlist `listofxvar' {
-  2.         _dots `i++' 0
-  3.         run_reg_corr `xvar'
-  4. }
-.............
+. foreach condition in `conditions' {
+  2.         preserve
+  3.         * Retain only IPS (as base condition) and one of the other four (conditions)
+.         qui drop if (question_type!="`condition'") & (question_type!="IPS")
+  4.         gen tarm = (question_type=="`condition'")       
+  5. 
+.         * Prep filepath to save to
+.         local filepath "storespecs-baltest-`condition'-ips"
+  6.         cap erase `filepath'.dta
+  7. 
+.         * Do balance test for each xvar and save to filepath
+.         eststo clear 
+  8.         local i = 1
+  9.         foreach xvar of varlist `listofxvar' {  
+ 10.                 _dots `i++' 0
+ 11.                 qui reg tarm `xvar', vce(hc3) 
+ 12.                 qui storespecs `xvar', spec(`xvar') file(`filepath')
+ 13.         }
+ 14.         restore // to full data before dropping three conditions
+ 15. }
+....................................................
 . 
-. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. *** Plot
-. grstyle init
-
-. grstyle set plain, noextend
-
-. 
-. #delimit; 
-delimiter now ;
-. coefplot est*,
->         mcolor(navy) msize(small) 
->         ciopts(lcolor(gs7))
->         keep(`listofxvar')               
->         eqrename(est1="Female $female_N $female_rreport"
->                          est2="Age cohort $age_N $age_rreport"
->                          est3="Hispanic/Latinx $hisla_N   $hisla_rreport"
->                          // est4="No HS diploma `d_educ3_N' `d_educ3_rreport'"
->                          est4="HS diploma $d_educ2_N $d_educ2_rreport"
->                          est5="Some college $d_educ5_N $d_educ5_rreport"
->                          est6="Four-year college $d_educ1_N $d_educ1_rreport"
->                          est7="Post-graduate $d_educ4_N $d_educ4_rreport"
->                          est8="Asian $asian_N $asian_rreport"
->                          est9="Black $black_N $black_rreport"
->                          est10="White $white_N $white_rreport"
->                          // est11="Others `others_N' `others_rreport'"
->                          est11="Political interest $interest_1_N $interest_1_rreport"
->                          est12="Intention to vote $vote_1_N $vote_1_rreport"
->                          est13="Political leaning $pid_strength_1_N $pid_strength_1_rreport"
->                          )
->         headings(
->                 "HS diploma $d_educ2_N $d_educ2_rreport"="{bf:Education}"
->                 "Asian $asian_N $asian_rreport"="{bf:Race}"
->                 "Political interest $interest_1_N $interest_1_rreport"="{bf:Politics}", 
->                 labsize(vsmall) labgap(-3.5)
->                 )
->         asequation /// "set equation to model name or string" make the rows the models
->         swapnames /// "swap coefficient names and equation names"
->         xline(0, lcolor(gs10) lpattern(dash) lwidth(medium)) ///
->         ytick(none) /// remove horizontal grids 
->         ylabel(, labsize(vsmall))
->         xlabel(-.3(.1).3, labsize(vsmall))
->         // transform(* = min(max(@,-.24),.24)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound  
->         yscale(noline alt)
->         plotregion(margin(0 1 0 0) ) ///        
->         graphregion(margin(3 0 0 0)) ///        
->         title("{bf:Pearson Correlation}" "{bf:Coefficient [95% CI]}", 
->                         position(11) justification(center) size(small)
->                 )
->         legend(off)
-> ;
-
-. #delimit cr
-delimiter now cr
-. 
-. gr_edit .yaxis1.style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy // yaxis1 edits
-
-. 
-. gr_edit .move yaxis1 leftof 8 5 // yaxis1 grid reposition
-
-. 
-. gr_edit .yaxis1.edit_tick 1 1   `"{bf:{fontface Consolas:Female $female_N              $female_rreport}}"', tickset(ma
-> jor)
-
-. gr_edit .yaxis1.edit_tick 2 2   `"{bf:{fontface Consolas:Age cohort $age_N           $age_rreport}}"', tickset(major)
-
-. gr_edit .yaxis1.edit_tick 3 3   `"{bf:{fontface Consolas:Hispanic/Latinx $hisla_N      $hisla_rreport}}"', tickset(maj
-> or)
-
-. gr_edit .yaxis1.edit_tick 4 6   `"{bf:{fontface Consolas:HS diploma $d_educ2_N           $d_educ2_rreport}}"', tickset
-> (major)
-
-. gr_edit .yaxis1.edit_tick 5 7   `"{bf:{fontface Consolas:Some college $d_educ5_N        $d_educ5_rreport}}"', tickset(
-> major)
-
-. gr_edit .yaxis1.edit_tick 6 8   `"{bf:{fontface Consolas:Four-year college $d_educ1_N    $d_educ1_rreport}}"', tickset
-> (major)
-
-. gr_edit .yaxis1.edit_tick 7 9   `"{bf:{fontface Consolas:Post-graduate $d_educ4_N       $d_educ4_rreport}}"', tickset(
-> major)
-
-. gr_edit .yaxis1.edit_tick 8 12  `"{bf:{fontface Consolas:Asian $asian_N                $asian_rreport}}"', tickset(maj
-> or)
-
-. gr_edit .yaxis1.edit_tick 9 13  `"{bf:{fontface Consolas:Black $black_N               $black_rreport}}"', tickset(majo
-> r)
-
-. gr_edit .yaxis1.edit_tick 10 14 `"{bf:{fontface Consolas:White $white_N               $white_rreport}}"', tickset(majo
-> r)
-
-. // gr_edit .yaxis1.edit_tick 11 15 `"Others                   0.07 (-0.03 to 0.17)"', tickset(major)
-. gr_edit .yaxis1.edit_tick 11 17 `"{bf:{fontface Consolas:Political interest $interest_1_N  $interest_1_rreport}}"', ti
-> ckset(major)
-
-. gr_edit .yaxis1.edit_tick 12 18 `"{bf:{fontface Consolas:Intention to vote $vote_1_N   $vote_1_rreport}}"', tickset(ma
-> jor)
-
-. gr_edit .yaxis1.edit_tick 13 19 `"{bf:{fontface Consolas:Political leaning $pid_strength_1_N   $pid_strength_1_rreport
-> }}"', tickset(major)
-
-. 
-. gr_edit .title.DragBy 0 -31
-
-. 
-. graph export $figsavedir/baltest-24k-rw.pdf, replace    
-file D:/partisan-gaps/figs/baltest-24k-rw.pdf saved as PDF format
-
-. 
-. restore
-
 . 
 end of do-file
 
 . 
-. **** Reg results for effect of party & survey type on response
+. **** Reg results for effect of party & survey type on response (Tab 2 + Fig 2)
 . do ./mturk/reg-table.do
 
 . 
@@ -468,12 +412,12 @@ end of do-file
   3. }
 
 . reshape long item, i(id) j(item_type, string)
-(j = birth death deficit fraud illegal increase mmr religion science)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
 
-Data                               Wide   ->   Long
+Data                               wide   ->   long
 -----------------------------------------------------------------------------
-Number of observations            1,207   ->   10,863      
-Number of variables                 406   ->   399         
+Number of obs.                     1207   ->   10863
+Number of variables                 411   ->     404
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -481,7 +425,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3,708 observations deleted)
+(3708 observations deleted)
 
 . 
 . 
@@ -628,11 +572,17 @@ delimiter now ;
 >         noobs
 >         nomtitle
 >         coeflabel(1.rep "Republican=1"
->                       1.rep#1.survey "Republican=1 $\times$ 14k"                
->                       1.rep#2.survey "Republican=1 $\times$ 24k"
->                       1.rep#3.survey "Republican=1 $\times$ FSR"
->                       1.rep#4.survey "Republican=1 $\times$ IPS"
+>                           5.survey "CUD"
+>                           3.survey "FSR"
+>                           1.survey "IMC"
+>                           2.survey "CCD"
+>                       1.rep#5.survey "Republican=1 $\times$ CUD"
+>                       1.rep#3.survey "Republican=1 $\times$ FSR"                
+>                       1.rep#1.survey "Republican=1 $\times$ IMC"
+>                       1.rep#2.survey "Republican=1 $\times$ CCD"
+>                       // 1.rep#4.survey "Republican=1 $\times$ IPS"
 >                 )
+>         order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
 >         scalar(
 >                 "r2 R$^2$" 
 >                 "itemFE Survey item FE"
@@ -648,35 +598,35 @@ Dep. var. is 1(response is congenial)
 --------------------------------------------------------------------------------------------
                           (1)         (2)         (3)         (4)         (5)         (6)   
 --------------------------------------------------------------------------------------------
-Republican=1            0.256***                0.375***    0.258***                0.374***
-                      (0.016)                 (0.030)     (0.016)                 (0.029)   
+Republican=1            0.256***                0.351***    0.258***                0.353***
+                      (0.016)                 (0.035)     (0.016)                 (0.034)   
 
-14k                                -0.090***   -0.023                  -0.093***   -0.026   
-                                  (0.025)     (0.022)                 (0.025)     (0.021)   
-
-24k                                -0.165***   -0.064***               -0.166***   -0.066***
-                                  (0.022)     (0.018)                 (0.022)     (0.017)   
-
-FSR                                -0.074**    -0.000                  -0.075**    -0.004   
-                                  (0.025)     (0.022)                 (0.024)     (0.021)   
-
-IPS                                -0.010      -0.000                  -0.014      -0.005   
+CUD                                 0.010       0.000                   0.014       0.005   
                                   (0.028)     (0.022)                 (0.028)     (0.021)   
 
-Republican=1 $\t~14k                           -0.156***                           -0.157***
-                                              (0.044)                             (0.044)   
+FSR                                -0.064**     0.000                  -0.062*      0.001   
+                                  (0.024)     (0.019)                 (0.024)     (0.019)   
 
-Republican=1 $\t~24k                           -0.265***                           -0.266***
-                                              (0.042)                             (0.041)   
+IMC                                -0.080**    -0.023                  -0.079**    -0.021   
+                                  (0.025)     (0.019)                 (0.025)     (0.019)   
 
-Republican=1 $\tim~R                           -0.196***                           -0.186***
-                                              (0.042)                             (0.041)   
+CCD                                -0.155***   -0.064***               -0.153***   -0.061***
+                                  (0.022)     (0.015)                 (0.022)     (0.015)   
 
-Republican=1 $\tim~S                           -0.024                              -0.021   
+Republican=1 $\tim~D                            0.024                               0.021   
                                               (0.046)                             (0.045)   
 
-Constant                0.165***    0.314***    0.182***   -0.008       1.794+      0.483   
-                      (0.006)     (0.020)     (0.017)     (0.946)     (1.083)     (0.878)   
+Republican=1 $\tim~R                           -0.173***                           -0.165***
+                                              (0.046)                             (0.045)   
+
+Republican=1 $\tim~C                           -0.132**                            -0.136** 
+                                              (0.048)                             (0.048)   
+
+Republican=1 $\tim~D                           -0.241***                           -0.245***
+                                              (0.046)                             (0.045)   
+
+Constant                0.165***    0.304***    0.182***    0.144***    0.299***    0.162***
+                      (0.006)     (0.020)     (0.014)     (0.011)     (0.023)     (0.015)   
 --------------------------------------------------------------------------------------------
 R$^2$                   0.329       0.270       0.354       0.335       0.277       0.361   
 Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
@@ -703,11 +653,18 @@ Standard errors in parentheses
 >         noobs
 >         nomtitle
 >         coeflabel(1.rep "Republican=1"
->                       1.rep#1.survey "Republican=1 $\times$ 14k"                
->                       1.rep#2.survey "Republican=1 $\times$ 24k"
->                       1.rep#3.survey "Republican=1 $\times$ FSR"
->                       1.rep#4.survey "Republican=1 $\times$ IPS"
+>                           5.survey "CUD"
+>                           3.survey "FSR"
+>                           1.survey "IMC"
+>                           2.survey "CCD"
+>                       1.rep#5.survey "Republican=1 $\times$ CUD"
+>                       1.rep#3.survey "Republican=1 $\times$ FSR"                
+>                       1.rep#1.survey "Republican=1 $\times$ IMC"
+>                       1.rep#2.survey "Republican=1 $\times$ CCD"
+>                       // 1.rep#4.survey "Republican=1 $\times$ IPS"
 >                 )
+>         order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
+> 
 >         scalar(
 >                 "r2 R$^2$" 
 >                 "itemFE Survey item FE"
@@ -739,7 +696,7 @@ D:\partisan-gaps\scripts\Stata
 
 . **** Basic prep of data
 . import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
-(344 vars, 1,253 obs)
+(344 vars, 1253 obs)
 
 . do ./mturk/preamble.do
 
@@ -758,7 +715,7 @@ D:\partisan-gaps\scripts\Stata
 . rename avg avg_str
 
 . destring avg_str, gen(avg) force
-avg_str: contains nonnumeric bytes; avg generated as double
+avg_str contains nonnumeric characters; avg generated as double
 (2 missing values generated)
 
 . 
@@ -787,7 +744,7 @@ avg_str: contains nonnumeric bytes; avg generated as double
 
 . 
 . replace deficit = 1 - deficit
-(1,171 real changes made)
+(1171 real changes made)
 
 . 
 . *------------------------------------------------------------------------------
@@ -839,7 +796,7 @@ avg_str: contains nonnumeric bytes; avg generated as double
 . *** Survey types
 . encode question_type, gen(survey)
 
-. fvset base 5 survey // permanently set RW as base
+. fvset base 4 survey // permanently set IPS (IDA) as base
 
 . 
 end of do-file
@@ -851,12 +808,12 @@ end of do-file
   3. }
 
 . reshape long item, i(id) j(item_type, string)
-(j = birth death deficit fraud illegal increase mmr religion science)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
 
-Data                               Wide   ->   Long
+Data                               wide   ->   long
 -----------------------------------------------------------------------------
-Number of observations            1,207   ->   10,863      
-Number of variables                 356   ->   349         
+Number of obs.                     1207   ->   10863
+Number of variables                 356   ->     349
 j variable (9 values)                     ->   item_type
 xij variables:
     itembirth itemdeath ... itemscience   ->   item
@@ -864,7 +821,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3,708 observations deleted)
+(3708 observations deleted)
 
 . 
 . eststo: qui reghdfe item i.rep##i.survey $demo, absorb(item_type) vce(cluster id)
@@ -876,13 +833,13 @@ xij variables:
 . mat list coefmat
 
 coefmat[1,32]
-            0b.          1.          1.          2.          3.          4.         5b.     0b.rep#     0b.rep#
+            0b.          1.          1.          2.          3.         4b.          5.     0b.rep#     0b.rep#
            rep         rep      survey      survey      survey      survey      survey   1o.survey   2o.survey
-y1           0   .38351127  -.02260659  -.06382917   -.0037427  -.00360187           0           0           0
+y1           0   .36075449  -.01900472  -.06022729  -.00014082           0   .00360187           0           0
 
-        0b.rep#     0b.rep#     0b.rep#      1.rep#      1.rep#      1.rep#      1.rep#     1o.rep#            
-     3o.survey   4o.survey   5b.survey    1.survey    2.survey    3.survey    4.survey   5b.survey         age
-y1           0           0           0   -.1569754  -.26645049  -.18803882  -.02275678           0  -.00028675
+        0b.rep#     0b.rep#     0b.rep#      1.rep#      1.rep#      1.rep#     1o.rep#      1.rep#            
+     3o.survey   4b.survey   5o.survey    1.survey    2.survey    3.survey   4b.survey    5.survey         age
+y1           0           0           0  -.13421861  -.24369371  -.16528204           0   .02275678  -.00028675
 
             0b.          1.         1b.          2.          3.          4.          5.         1b.          2.
         female      female        educ        educ        educ        educ        educ       hisla       hisla
@@ -890,7 +847,7 @@ y1           0   .01730912           0    .0243345   .24794014   -.0294332   .02
 
                                                                
          asian       black       white      others       _cons
-y1  -.07846987  -.03329282  -.09986147  -.06673277   .82192409
+y1  -.07846987  -.03329282  -.09986147  -.06673277   .81832221
 
 . local baseline = coefmat[1, 2] /* 1.rep */
 
@@ -913,13 +870,13 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .82192409
 . drop if var=="3.survey"
 (1 observation deleted)
 
-. drop if var=="4.survey"
+. drop if var=="4b.survey"
 (1 observation deleted)
 
-. drop if var=="5b.survey"
+. drop if var=="5.survey"
 (1 observation deleted)
 
-. drop if var=="1o.rep#5b.survey"
+. drop if var=="1o.rep#4b.survey"
 (1 observation deleted)
 
 . drop if strpos(var, "female")
@@ -946,7 +903,6 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .82192409
 . drop if var=="others"
 (1 observation deleted)
 
-. 
 . * Gen coef for plotting (add estimates back to baseline)
 . gen est = coef
 
@@ -970,18 +926,41 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .82192409
 . 
 . 
 . * Create plot order var by treat dummies and label values with sample size
-. gen porder = _n
+. /* In order that should appear
+> IDA = IPS _n == 1
+> CUD = RW 1 _n==5
+> FSR = FSR 4 _n==3
+> IMC = 14k 2 _n==2
+> CCD = 24k 3 _n==3
+> */
+. 
+. gen porder = .
+(5 missing values generated)
 
-. replace porder = 0 if var=="_cons"
-(0 real changes made)
+. replace porder = 1 if _n==1
+(1 real change made)
+
+. replace porder = 4 if _n==2 
+(1 real change made)
+
+. replace porder = 5 if _n==3
+(1 real change made)
+
+. replace porder = 3 if _n==4
+(1 real change made)
+
+. replace porder = 2 if _n==5
+(1 real change made)
 
 . sort porder
 
 . 
-. label define xlab 1 "RW" 2 "14k" 3 "24k" 4 "FSR" 5 "IPS"
+. label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC" 5 "CCD"
 
 . label values porder xlab
 
+. 
+. 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
 . set scheme s2mono
@@ -992,13 +971,13 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .82192409
 
 . local BASELINE_XLIM = _N+.5
 
-. local CI_WIDTH medthick
+. local CI_WIDTH thick
 
 . local XLAB_SIZE large
 
-. local BAR_OPTS          color(purple) fcolor(none) lwidth(medthick)
+. local BAR_OPTS          color(gs10) fcolor(none) lwidth(medthick)
 
-. local BAR_OPTS_BASE color(gs5) fcolor(none) lwidth(medthick)
+. local BAR_OPTS_BASE color(black) fcolor(none) lwidth(medthick)
 
 . 
 . local graphsavedir ./figures
@@ -1016,7 +995,7 @@ delimiter now ;
 >                                 xlabel(,val labsize(`XLAB_SIZE') )
 >                         ) 
 >                         (rcap uci lci porder if porder!=1, 
->                                 color(black)
+>                                 color(gs7)
 >                                 lwidth(`CI_WIDTH')
 >                                 legend(off)
 >                                 ylabel(`YRANGE', `YLAB_OPTS' ) 
@@ -1035,7 +1014,7 @@ delimiter now ;
 .         #delimit cr     
 delimiter now cr
 . graph export $figsavedir/mturk-pgag-surveyarms.pdf, replace     
-file D:/partisan-gaps/figs/mturk-pgag-surveyarms.pdf saved as PDF format
+(file D:/partisan-gaps/figs/mturk-pgag-surveyarms.pdf written in PDF format)
 
 . 
 end of do-file
@@ -1047,13 +1026,13 @@ end of do-file
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
-(262 vars, 2,500 obs)
+(262 vars, 2500 obs)
 
 . do ./survey-exp/preamble.do
 
 . **** Basic prep of data
 . import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
-(262 vars, 2,500 obs)
+(262 vars, 2500 obs)
 
 . 
 . gen rep = (pid2=="Republican")
@@ -1284,9 +1263,9 @@ delimiter now ;
 >         label
 >         nobase  
 >         nomtitle
->         coeflabel(1.congenialcue "Congenial cue"
+>         coeflabel(1.congenialcue "Congenial"
 >                           1.rep "Republican"
->                       1.congenialcue#1.rep "Congenial cue x Republican"         
+>                       1.congenialcue#1.rep "Congenial x Republican"             
 >                 )
 >         scalar(
 >                 "demo Demographic controls"
@@ -1298,13 +1277,13 @@ delimiter now ;
 ------------------------------------------------------------------------------------------------------
                                     (1)         (2)         (3)         (4)         (5)         (6)   
 ------------------------------------------------------------------------------------------------------
-Congenial cue                     0.144***    0.111***    0.112***    0.178***    0.182***    0.190***
+Congenial                         0.144***    0.111***    0.112***    0.178***    0.182***    0.190***
                                 (0.019)     (0.025)     (0.026)     (0.021)     (0.030)     (0.029)   
 
 Republican                                    0.067**     0.071**                 0.232***    0.162***
                                             (0.025)     (0.027)                 (0.030)     (0.031)   
 
-Congenial cue x Republican                    0.069+      0.071+                 -0.009      -0.009   
+Congenial x Republican                        0.069+      0.071+                 -0.009      -0.009   
                                             (0.038)     (0.039)                 (0.040)     (0.039)   
 
 Constant                          0.199***    0.168***    3.170+      0.552***    0.443***    7.056***
@@ -1329,9 +1308,9 @@ Standard errors in parentheses
 >         nobase  
 >         noobs
 >         nomtitle
->         coeflabel(1.congenialcue "Congenial cue"
+>         coeflabel(1.congenialcue "Congenial"
 >                           1.rep "Republican"
->                       1.congenialcue#1.rep "Congenial cue $\times$ Republican"          
+>                       1.congenialcue#1.rep "Congenial $\times$ Republican"              
 >                       _cons "Constant"  
 >                 )
 >         scalar(
@@ -1409,7 +1388,7 @@ y1             0     .14400665     .19903846
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
-. label define xlab 0 `""Uncongenial" "cue""' 1 `""Congenial" "cue""'
+. label define xlab 0 Uncongenial 1 Congenial
 
 . label values porder xlab
 
@@ -1455,7 +1434,7 @@ delimiter now ;
 delimiter now cr
 . 
 . graph export $figsavedir/yougov-unemp-congenialcue.pdf, replace 
-file D:/partisan-gaps/figs/yougov-unemp-congenialcue.pdf saved as PDF format
+(file D:/partisan-gaps/figs/yougov-unemp-congenialcue.pdf written in PDF format)
 
 . restore
 
@@ -1536,8 +1515,8 @@ y1      .06947264      .16757741
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
-. label define xlab 0 `""Dem. w/" "uncongenial" "cue""' 1 `""Dem. w/" "congenial" "cue""' 2 `""Rep. w/" "uncongenial" "c
-> ue""' 3 `""Rep. w/" "congenial" "cue""' 
+. label define xlab 0 `""Dem. w/" "uncongenial" """' 1 `""Dem. w/" "congenial" """' 2 `""Rep. w/" "uncongenial" """' 3 `
+> ""Rep. w/" "congenial" """' 
 
 . label values porder xlab
 
@@ -1584,7 +1563,7 @@ delimiter now ;
 . #delimit cr     
 delimiter now cr
 . graph export $figsavedir/yougov-unemp-congenialcue-partisan.pdf, replace        
-file D:/partisan-gaps/figs/yougov-unemp-congenialcue-partisan.pdf saved as PDF format
+(file D:/partisan-gaps/figs/yougov-unemp-congenialcue-partisan.pdf written in PDF format)
 
 . 
 . restore
@@ -1649,7 +1628,7 @@ y1             0     .17834008     .55192308
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
-. label define xlab 0 `""Uncongenial" "cue""' 1 `""Congenial" "cue""'
+. label define xlab 0 `""Uncongenial" """' 1 `""Congenial" """'
 
 . label values porder xlab
 
@@ -1695,7 +1674,7 @@ delimiter now ;
 delimiter now cr
 . 
 . graph export $figsavedir/yougov-deficit-congenialcue.pdf, replace       
-file D:/partisan-gaps/figs/yougov-deficit-congenialcue.pdf saved as PDF format
+(file D:/partisan-gaps/figs/yougov-deficit-congenialcue.pdf written in PDF format)
 
 . restore
 
@@ -1775,8 +1754,8 @@ y1     -.00928925      .44262295
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
-. label define xlab 0 `""Dem. w/" "uncongenial" "cue""' 1 `""Dem. w/" "congenial" "cue""' 2 `""Rep. w/" "uncongenial" "c
-> ue""' 3 `""Rep. w/" "congenial" "cue""' 
+. label define xlab 0 `""Dem. " "uncongenial" """' 1 `""Dem. " "congenial" """' 2 `""Rep. " "uncongenial" """' 3 `""Rep.
+>  " "congenial" """' 
 
 . label values porder xlab
 
@@ -1823,7 +1802,7 @@ delimiter now ;
 . #delimit cr     
 delimiter now cr
 . graph export $figsavedir/yougov-deficit-congenialcue-partisan.pdf, replace      
-file D:/partisan-gaps/figs/yougov-deficit-congenialcue-partisan.pdf saved as PDF format
+(file D:/partisan-gaps/figs/yougov-deficit-congenialcue-partisan.pdf written in PDF format)
 
 . 
 . restore
@@ -1834,7 +1813,7 @@ end of do-file
 . 
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. * YouGov results
+. * Texas Lyceum results
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
@@ -2026,11 +2005,11 @@ delimiter now ;
 >         label
 >         nobase  
 >         nomtitle
->         coeflabel(1.unempcongenial "Congenial cue"
->                           1.unempuncongenial "Uncongenial cue"
+>         coeflabel(1.unempcongenial "Congenial"
+>                           1.unempuncongenial "Uncongenial"
 >                           1.rep "Republican"
->                       1.unempcongenial#1.rep "Congenial cue x Republican"       
->                       1.unempuncongenial#1.rep "Uncongenial cue x Republican"           
+>                       1.unempcongenial#1.rep "Congenial x Republican"   
+>                       1.unempuncongenial#1.rep "Uncongenial x Republican"               
 >                       )
 >         scalar(
 >                 "demo Demographic controls"
@@ -2042,19 +2021,19 @@ delimiter now ;
 ------------------------------------------------------------------
                                     (1)         (2)         (3)   
 ------------------------------------------------------------------
-Congenial cue                     0.084+      0.088       0.072   
+Congenial                         0.084+      0.088       0.072   
                                 (0.044)     (0.061)     (0.066)   
 
-Uncongenial cue                  -0.172***   -0.134**    -0.164** 
+Uncongenial                      -0.172***   -0.134**    -0.164** 
                                 (0.040)     (0.050)     (0.058)   
 
 Republican                                    0.273***    0.203** 
                                             (0.058)     (0.074)   
 
-Congenial cue x Republican                    0.009       0.030   
+Congenial x Republican                        0.009       0.030   
                                             (0.085)     (0.091)   
 
-Uncongenial cue x Republican                 -0.065      -0.042   
+Uncongenial x Republican                     -0.065      -0.042   
                                             (0.075)     (0.084)   
 
 Constant                          0.395***    0.236***    0.056   
@@ -2079,11 +2058,11 @@ Standard errors in parentheses
 >         nobase  
 >         noobs
 >         nomtitle
->         coeflabel(1.unempcongenial "Congenial cue"
->                           1.unempuncongenial "Uncongenial cue"
+>         coeflabel(1.unempcongenial "Congenial"
+>                           1.unempuncongenial "Uncongenial"
 >                           1.rep "Republican"
->                       1.unempcongenial#1.rep "Congenial cue x Republican"       
->                       1.unempuncongenial#1.rep "Uncongenial cue x Republican"           
+>                       1.unempcongenial#1.rep "Congenial x Republican"   
+>                       1.unempuncongenial#1.rep "Uncongenial x Republican"               
 >                       )
 >         scalar(
 >                 "r2 R$^2$" 
@@ -2193,10 +2172,10 @@ delimiter now ;
 >         label
 >         nobase  
 >         nomtitle
->         coeflabel(fedtaxcongenial "Congenial cue"
->                           fedtaxuncongenial "Uncongenial cue"
->                           fedtaxcongenialguess "Congenial cue w/ guess"
->                       fedtaxuncongenialguess "Uncongenial cue w/ guess" 
+>         coeflabel(fedtaxcongenial "Congenial"
+>                           fedtaxuncongenial "Uncongenial"
+>                           fedtaxcongenialguess "Congenial w/ guess"
+>                       fedtaxuncongenialguess "Uncongenial w/ guess"     
 >                       )
 >         scalar(
 >                 "demo Demographic controls"
@@ -2207,16 +2186,16 @@ delimiter now ;
 ------------------------------------------------------------------------------
                                     (1)         (2)         (3)         (4)   
 ------------------------------------------------------------------------------
-Congenial cue                     0.215***    0.171**    -0.077*     -0.081*  
+Congenial                         0.215***    0.171**    -0.077*     -0.081*  
                                 (0.051)     (0.056)     (0.036)     (0.038)   
 
-Uncongenial cue                  -0.298***   -0.228***   -0.063      -0.077   
+Uncongenial                      -0.298***   -0.228***   -0.063      -0.077   
                                 (0.042)     (0.048)     (0.042)     (0.050)   
 
-Congenial cue w/ guess            0.091+      0.042      -0.074*     -0.066+  
+Congenial w/ guess                0.091+      0.042      -0.074*     -0.066+  
                                 (0.052)     (0.057)     (0.036)     (0.038)   
 
-Uncongenial cue w/ guess         -0.290***   -0.234***   -0.038      -0.051   
+Uncongenial w/ guess             -0.290***   -0.234***   -0.038      -0.051   
                                 (0.040)     (0.047)     (0.041)     (0.043)   
 
 Constant                          0.381***   -0.223       0.187***    0.884***
@@ -2241,10 +2220,314 @@ Standard errors in parentheses
 >         nobase  
 >         noobs
 >         nomtitle
->         coeflabel(fedtaxcongenial "Congenial cue"
->                           fedtaxuncongenial "Uncongenial cue"
->                           fedtaxcongenialguess "Congenial w/ guessing cue"
->                       fedtaxuncongenialguess "Uncongenial w/ guessing cue"      
+>         coeflabel(fedtaxcongenial "Congenial"
+>                           fedtaxuncongenial "Uncongenial"
+>                           fedtaxcongenialguess "Congenial w/ guessing"
+>                       fedtaxuncongenialguess "Uncongenial w/ guessing"  
+>                       )
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "demotab Demographic controls"
+>                 "nobs Respondent-items"
+>                 ) 
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+>         ;
+(output written to D:/partisan-gaps/tabs/texas-fedtax-reg-table-fragment.tex)
+
+. #delimit cr     
+delimiter now cr
+. 
+end of do-file
+
+. do ./tx-lyceum/reg-table.do
+
+. eststo clear
+
+. eststo: qui reg unempup i.unempcongenial i.unempuncongenial, vce(hc3)
+(est1 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg unempup i.(unempcongenial unempuncongenial)##i.rep, vce(hc3)
+(est2 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg unempup i.(unempcongenial unempuncongenial)##i.rep $demoX, vce(hc3)
+(est3 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      752}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+. 
+. #delimit;
+delimiter now ;
+. esttab,
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(30)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.unempcongenial 1.unempuncongenial 1.rep 1.unempcongenial#1.rep 1.unempuncongenial#1.rep _cons)
+>         obslast
+>         label
+>         nobase  
+>         nomtitle
+>         coeflabel(1.unempcongenial "Congenial"
+>                           1.unempuncongenial "Uncongenial"
+>                           1.rep "Republican"
+>                       1.unempcongenial#1.rep "Congenial x Republican"   
+>                       1.unempuncongenial#1.rep "Uncongenial x Republican"               
+>                       )
+>         scalar(
+>                 "demo Demographic controls"
+>                 "r2 R-square" 
+>                 ) 
+>         // title("Dep. var. is 1(response is congenial)")
+> ;
+
+------------------------------------------------------------------
+                                    (1)         (2)         (3)   
+------------------------------------------------------------------
+Congenial                         0.084+      0.088       0.072   
+                                (0.044)     (0.061)     (0.066)   
+
+Uncongenial                      -0.172***   -0.134**    -0.164** 
+                                (0.040)     (0.050)     (0.058)   
+
+Republican                                    0.273***    0.203** 
+                                            (0.058)     (0.074)   
+
+Congenial x Republican                        0.009       0.030   
+                                            (0.085)     (0.091)   
+
+Uncongenial x Republican                     -0.065      -0.042   
+                                            (0.075)     (0.084)   
+
+Constant                          0.395***    0.236***    0.056   
+                                (0.030)     (0.041)     (0.170)   
+------------------------------------------------------------------
+Demographic controls                                        Yes   
+R-square                          0.048       0.118       0.170   
+Observations                        758         758         752   
+------------------------------------------------------------------
+Standard errors in parentheses
++ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
+
+.         esttab using $tabsavedir/texas-unemp-reg-table-fragment.tex, 
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.unempcongenial 1.unempuncongenial 1.rep 1.unempcongenial#1.rep 1.unempuncongenial#1.rep _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(1.unempcongenial "Congenial"
+>                           1.unempuncongenial "Uncongenial"
+>                           1.rep "Republican"
+>                       1.unempcongenial#1.rep "Congenial x Republican"   
+>                       1.unempuncongenial#1.rep "Uncongenial x Republican"               
+>                       )
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "demotab Demographic controls"
+>                 "nobs Respondent-items"
+>                 ) 
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+>         ;
+(output written to D:/partisan-gaps/tabs/texas-unemp-reg-table-fragment.tex)
+
+. #delimit cr     
+delimiter now cr
+. 
+. 
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Make the reg table for federal taxes
+. 
+. global congguess fedtaxcongenial fedtaxuncongenial fedtaxcongenialguess fedtaxuncongenialguess
+
+. 
+. eststo clear
+
+. eststo: qui reg fedtaxup $congguess, vce(hc3)
+(est1 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg fedtaxup $congguess $demoX, vce(hc3)
+(est2 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      752}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+. eststo: qui reg fedtaxdk $congguess, vce(hc3)
+(est3 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      758}"
+
+.         estadd local demotab "\multicolumn{1}{c}{.}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{.}"
+
+. eststo: qui reg fedtaxdk $congguess $demoX, vce(hc3)
+(est4 stored)
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      752}"
+
+.         estadd local demotab "\multicolumn{1}{c}{Yes}"
+
+added macro:
+            e(demotab) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local demo "Yes"
+
+added macro:
+               e(demo) : "Yes"
+
+. 
+. #delimit;
+delimiter now ;
+. esttab,
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(30)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep($congguess _cons)
+>         obslast
+>         label
+>         nobase  
+>         nomtitle
+>         coeflabel(fedtaxcongenial "Congenial"
+>                           fedtaxuncongenial "Uncongenial"
+>                           fedtaxcongenialguess "Congenial w/ guess"
+>                       fedtaxuncongenialguess "Uncongenial w/ guess"     
+>                       )
+>         scalar(
+>                 "demo Demographic controls"
+>                 "r2 R-square" 
+>                 ) 
+> ;
+
+------------------------------------------------------------------------------
+                                    (1)         (2)         (3)         (4)   
+------------------------------------------------------------------------------
+Congenial                         0.215***    0.171**    -0.077*     -0.081*  
+                                (0.051)     (0.056)     (0.036)     (0.038)   
+
+Uncongenial                      -0.298***   -0.228***   -0.063      -0.077   
+                                (0.042)     (0.048)     (0.042)     (0.050)   
+
+Congenial w/ guess                0.091+      0.042      -0.074*     -0.066+  
+                                (0.052)     (0.057)     (0.036)     (0.038)   
+
+Uncongenial w/ guess             -0.290***   -0.234***   -0.038      -0.051   
+                                (0.040)     (0.047)     (0.041)     (0.043)   
+
+Constant                          0.381***   -0.223       0.187***    0.884***
+                                (0.031)     (0.177)     (0.025)     (0.180)   
+------------------------------------------------------------------------------
+Demographic controls                            Yes                     Yes   
+R-square                          0.151       0.219       0.009       0.126   
+Observations                        758         752         758         752   
+------------------------------------------------------------------------------
+Standard errors in parentheses
++ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
+
+.         esttab using $tabsavedir/texas-fedtax-reg-table-fragment.tex, 
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep($congguess _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(fedtaxcongenial "Congenial"
+>                           fedtaxuncongenial "Uncongenial"
+>                           fedtaxcongenialguess "Congenial w/ guessing"
+>                       fedtaxuncongenialguess "Uncongenial w/ guessing"  
 >                       )
 >         scalar(
 >                 "r2 R$^2$" 
@@ -2448,7 +2731,7 @@ y1             0      .0837294             0    -.17190785     .39543726
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . * Graph settings
-. label define xlab 0 `""Neutral" "cue""' 1 `""Uncongenial" "cue""' 2 `""Congenial" "cue""' 
+. label define xlab 0 `""Neutral" """' 1 `""Uncongenial" """' 2 `""Congenial" """' 
 
 . label values porder xlab
 
@@ -2482,7 +2765,7 @@ delimiter now ;
 >                         lwidth(`CI_WIDTH')
 >                         legend(off)
 >                         ylabel(`YRANGE', `YLAB_OPTS' ) 
->                         yscale(r(0 .61))
+>                         yscale(r(0 .63))
 >                         xlabel(0 1 2,val labsize(`XLAB_SIZE') noticks)
 >                         xscale(noextend lcolor(none))
 >                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
@@ -2494,7 +2777,7 @@ delimiter now ;
 . #delimit cr     
 delimiter now cr
 . graph export $figsavedir/texas-unemp-congenialcue.pdf, replace  
-file D:/partisan-gaps/figs/texas-unemp-congenialcue.pdf saved as PDF format
+(file D:/partisan-gaps/figs/texas-unemp-congenialcue.pdf written in PDF format)
 
 . restore
 
@@ -2507,11 +2790,11 @@ end of do-file
 . tictoc toc
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 13 Apr 2022 16:31:49
-End time: 13 Apr 2022 16:39:41
-Elapsed seconds:       472
-Elapsed minutes:         8
-Elapsed hours:       .13
+Start time: 24 Oct 2022 16:03:17
+End time: 24 Oct 2022 16:03:39
+Elapsed seconds:        21
+Elapsed minutes:         0
+Elapsed hours:       .01
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
@@ -2519,5 +2802,5 @@ Elapsed hours:       .13
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  13 Apr 2022, 16:39:41
+ closed on:  24 Oct 2022, 16:03:39
 ------------------------------------------------------------------------------------------------------------------------

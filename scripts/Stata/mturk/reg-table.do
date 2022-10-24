@@ -46,11 +46,17 @@ esttab,
 	noobs
 	nomtitle
 	coeflabel(1.rep "Republican=1"
-		      1.rep#1.survey "Republican=1 $\times$ 14k"		
-		      1.rep#2.survey "Republican=1 $\times$ 24k"
-		      1.rep#3.survey "Republican=1 $\times$ FSR"
-		      1.rep#4.survey "Republican=1 $\times$ IPS"
+			  5.survey "CUD"
+			  3.survey "FSR"
+			  1.survey "IMC"
+			  2.survey "CCD"
+		      1.rep#5.survey "Republican=1 $\times$ CUD"
+		      1.rep#3.survey "Republican=1 $\times$ FSR"		
+		      1.rep#1.survey "Republican=1 $\times$ IMC"
+		      1.rep#2.survey "Republican=1 $\times$ CCD"
+		      // 1.rep#4.survey "Republican=1 $\times$ IPS"
 		)
+	order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
 	scalar(
 		"r2 R$^2$" 
 		"itemFE Survey item FE"
@@ -76,11 +82,18 @@ esttab using $tabsavedir/mturk-reg-table-fragment.tex,
 	noobs
 	nomtitle
 	coeflabel(1.rep "Republican=1"
-		      1.rep#1.survey "Republican=1 $\times$ 14k"		
-		      1.rep#2.survey "Republican=1 $\times$ 24k"
-		      1.rep#3.survey "Republican=1 $\times$ FSR"
-		      1.rep#4.survey "Republican=1 $\times$ IPS"
+			  5.survey "CUD"
+			  3.survey "FSR"
+			  1.survey "IMC"
+			  2.survey "CCD"
+		      1.rep#5.survey "Republican=1 $\times$ CUD"
+		      1.rep#3.survey "Republican=1 $\times$ FSR"		
+		      1.rep#1.survey "Republican=1 $\times$ IMC"
+		      1.rep#2.survey "Republican=1 $\times$ CCD"
+		      // 1.rep#4.survey "Republican=1 $\times$ IPS"
 		)
+	order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
+
 	scalar(
 		"r2 R$^2$" 
 		"itemFE Survey item FE"

@@ -25,11 +25,11 @@ esttab,
 	label
 	nobase 	
 	nomtitle
-	coeflabel(1.unempcongenial "Congenial cue"
-			  1.unempuncongenial "Uncongenial cue"
+	coeflabel(1.unempcongenial "Congenial"
+			  1.unempuncongenial "Uncongenial"
 			  1.rep "Republican"
-		      1.unempcongenial#1.rep "Congenial cue x Republican"	
-		      1.unempuncongenial#1.rep "Uncongenial cue x Republican"		
+		      1.unempcongenial#1.rep "Congenial x Republican"	
+		      1.unempuncongenial#1.rep "Uncongenial x Republican"		
 		      )
 	scalar(
 		"demo Demographic controls"
@@ -50,11 +50,11 @@ esttab using $tabsavedir/texas-unemp-reg-table-fragment.tex,
 	nobase 	
 	noobs
 	nomtitle
-	coeflabel(1.unempcongenial "Congenial cue"
-			  1.unempuncongenial "Uncongenial cue"
+	coeflabel(1.unempcongenial "Congenial"
+			  1.unempuncongenial "Uncongenial"
 			  1.rep "Republican"
-		      1.unempcongenial#1.rep "Congenial cue x Republican"	
-		      1.unempuncongenial#1.rep "Uncongenial cue x Republican"		
+		      1.unempcongenial#1.rep "Congenial x Republican"	
+		      1.unempuncongenial#1.rep "Uncongenial x Republican"		
 		      )
 	scalar(
 		"r2 R$^2$" 
@@ -106,10 +106,10 @@ esttab,
 	label
 	nobase 	
 	nomtitle
-	coeflabel(fedtaxcongenial "Congenial cue"
-			  fedtaxuncongenial "Uncongenial cue"
-			  fedtaxcongenialguess "Congenial cue w/ guess"
-		      fedtaxuncongenialguess "Uncongenial cue w/ guess"	
+	coeflabel(fedtaxcongenial "Congenial"
+			  fedtaxuncongenial "Uncongenial"
+			  fedtaxcongenialguess "Congenial w/ guess"
+		      fedtaxuncongenialguess "Uncongenial w/ guess"	
 		      )
 	scalar(
 		"demo Demographic controls"
@@ -130,10 +130,10 @@ esttab using $tabsavedir/texas-fedtax-reg-table-fragment.tex,
 	nobase 	
 	noobs
 	nomtitle
-	coeflabel(fedtaxcongenial "Congenial cue"
-			  fedtaxuncongenial "Uncongenial cue"
-			  fedtaxcongenialguess "Congenial w/ guessing cue"
-		      fedtaxuncongenialguess "Uncongenial w/ guessing cue"	
+	coeflabel(fedtaxcongenial "Congenial"
+			  fedtaxuncongenial "Uncongenial"
+			  fedtaxcongenialguess "Congenial w/ guessing"
+		      fedtaxuncongenialguess "Uncongenial w/ guessing"	
 		      )
 	scalar(
 		"r2 R$^2$" 
