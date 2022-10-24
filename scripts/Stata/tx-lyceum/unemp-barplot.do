@@ -31,7 +31,7 @@ sort porder
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Graph settings
-label define xlab 0 `""Neutral" "cue""' 1 `""Uncongenial" "cue""' 2 `""Congenial" "cue""' 
+label define xlab 0 `""Neutral" """' 1 `""Uncongenial" """' 2 `""Congenial" """' 
 label values porder xlab
 
 set scheme s2mono
@@ -55,7 +55,7 @@ twoway
 			lwidth(`CI_WIDTH')
 			legend(off)
 			ylabel(`YRANGE', `YLAB_OPTS' ) 
-			yscale(r(0 .61))
+			yscale(r(0 .63))
 			xlabel(0 1 2,val labsize(`XLAB_SIZE') noticks)
 			xscale(noextend lcolor(none))
 			graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 

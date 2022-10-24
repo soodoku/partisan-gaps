@@ -29,19 +29,19 @@ setup "`r(mymacro)'"
 tictoc tic
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// * MTurk results
+// * MTurk results (Study 2)
 // *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 import delimited `rootdir'/data/turk/mturk-recoded.csv
 do ./mturk/preamble.do
 
-// **** Figure for raw partisan gaps by items, by survey type
+**** Figure for raw partisan gaps by items, by survey type (Fig 1)
 do ./mturk/fig-partisan-gap.do
 
-// *** Balance tests (24k vs RW), takes a while
-do ./mturk/baltest-24k-rw.do
+*** Balance tests (IPS/IDA as base) [will replace Fig SI 1.1]
+do ./mturk/study2-balance-tests.do // store estimates only
 
-**** Reg results for effect of party & survey type on response
+**** Reg results for effect of party & survey type on response (Tab 2 + Fig 2)
 do ./mturk/reg-table.do
 do ./mturk/barplot.do
 
@@ -63,13 +63,14 @@ do ./survey-exp/deficit-barplots.do
 
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* YouGov results
+* Texas Lyceum results
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
 do ./tx-lyceum/preamble.do
 
 **** Reg table for effect of party & survey type on response
+do ./tx-lyceum/reg-table.do
 do ./tx-lyceum/reg-table.do
 
 **** Barplots for effect of party & survey type on response

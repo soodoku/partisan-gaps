@@ -43,9 +43,9 @@ esttab,
 	label
 	nobase 	
 	nomtitle
-	coeflabel(1.congenialcue "Congenial cue"
+	coeflabel(1.congenialcue "Congenial"
 			  1.rep "Republican"
-		      1.congenialcue#1.rep "Congenial cue x Republican"		
+		      1.congenialcue#1.rep "Congenial x Republican"		
 		)
 	scalar(
 		"demo Demographic controls"
@@ -66,9 +66,9 @@ esttab using $tabsavedir/yougov-reg-table-fragment.tex,
 	nobase 	
 	noobs
 	nomtitle
-	coeflabel(1.congenialcue "Congenial cue"
+	coeflabel(1.congenialcue "Congenial"
 			  1.rep "Republican"
-		      1.congenialcue#1.rep "Congenial cue $\times$ Republican"		
+		      1.congenialcue#1.rep "Congenial $\times$ Republican"		
 		      _cons "Constant"	
 		)
 	scalar(

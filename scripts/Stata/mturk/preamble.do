@@ -55,4 +55,4 @@ global races asian black white others
 *------------------------------------------------------------------------------
 *** Survey types
 encode question_type, gen(survey)
-fvset base 5 survey // permanently set RW as base
+fvset base 4 survey // permanently set IPS (IDA) as base

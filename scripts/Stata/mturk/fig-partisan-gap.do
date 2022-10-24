@@ -6,15 +6,24 @@ foreach item of varlist $items avg {
 	foreach arm in $arms {
 		qui: reg `item' ib1.pid if (pid_str!="Independent") & (question_type=="`arm'"), vce(hc3)
 		est store `item'_`arm'		
+		* Store estimates for average of conditions for annotations later
+		if "`item'"=="avg" {
+			local beta_`arm' = round(_b[3.pid], 0.01)
+			dis `beta_`arm''
+		}
 	}
-
-	// * For all arms together
-	// qui: reg `item' ib1.pid if (pid_str!="Independent") 
-	// est store `item'_all	
 }
 
+/* In order that should appear
+IDA = IPS
+CUD = RW
+FSR = FSR
+IMC = 14k
+CCD = 24k
+*/
 
-coefplot (*_RW) || (*_IPS) || (*_FSR) || (*_14k) || (*_24k), ///
+
+coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
 	msymbol(s) ///
 	keep(3.pid) ///
 	asequation /// "set equation to model name or string" make the rows the models
@@ -90,14 +99,17 @@ coefplot (*_RW) || (*_IPS) || (*_FSR) || (*_14k) || (*_24k), ///
 		avg_14k = "{bf:Average}" ///								
 		avg_24k = "{bf:Average}" ///								
 		avg_all = "{bf:Average}" ///								
+		avg_IPS_annote = "{bf:Average}" ///								
+		avg_24k_annote = "{bf:Average}" ///								
 		)
 
+
 * Add column titles	
-addplot 1: , title("{bf:RW}", size(med)) norescaling
-addplot 2: , title("{bf:IPS}") norescaling
+addplot 1: , title("{bf:IDA}", size(med)) norescaling
+addplot 2: , title("{bf:CUD}") norescaling
 addplot 3: , title("{bf:FSR}") norescaling
-addplot 4: , title("{bf:14k}") norescaling
-addplot 5: , title("{bf:24k}") norescaling
+addplot 4: , title("{bf:IMC}") norescaling
+addplot 5: , title("{bf:CCD}") norescaling
 
 * graph margin
 gr_edit .style.editstyle margin(left) editcopy 
@@ -111,6 +123,35 @@ gr_edit .plotregion1.move yaxis1[5] leftof 9 1
 * reset margins back to zero to flush with new col of labels
 gr_edit .style.editstyle margin(zero) editcopy 
 gr_edit .plotregion1.style.editstyle margin(zero) editcopy
+
+* Add annotes
+local y_heigh_coord = 9.748674339250291
+local annote_style angle(default) size(medsmall) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(east) editcopy
+
+gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_IPS'
+gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle `annote_style'
+gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle box_alignment(center) editcopy
+gr_edit .plotregion1.plotregion1[1].added_text[1].text.Arrpush `beta_IPS'
+
+gr_edit .plotregion1.plotregion1[2].AddTextBox added_text editor `y_heigh_coord' `beta_RW'
+gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle `annote_style'
+gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle box_alignment(center) editcopy
+gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_RW'
+
+gr_edit .plotregion1.plotregion1[3].AddTextBox added_text editor `y_heigh_coord' `beta_FSR'
+gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle `annote_style'
+gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle box_alignment(center) editcopy
+gr_edit .plotregion1.plotregion1[3].added_text[1].text.Arrpush `beta_FSR'
+
+gr_edit .plotregion1.plotregion1[4].AddTextBox added_text editor `y_heigh_coord' `beta_14k'
+gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle `annote_style'
+gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle box_alignment(center) editcopy
+gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
+
+gr_edit .plotregion1.plotregion1[5].AddTextBox added_text editor `y_heigh_coord' `beta_24k'
+gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle `annote_style'
+gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle box_alignment(center) editcopy
+gr_edit .plotregion1.plotregion1[5].added_text[1].text.Arrpush `beta_24k'
 
 graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace	
 
