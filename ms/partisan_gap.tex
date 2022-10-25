@@ -254,7 +254,10 @@ We test the effect of these five different conditions on the partisan gaps in po
 
 
 \subsubsection*{Study 1}
-We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. In the baseline IDA condition (first column), the Republicans are, on average, 35 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow horizontal bars), the differences attenuated substantially depending on the treatment arms. Removing more and more inflationary features from the questions decreases the partisan gap in political knowledge.
+We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. In the baseline IDA condition (first column), the Republicans are, on average, 35 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow horizontal bars), the differences attenuated substantially depending on the treatment arms. While IAD and CUD are statistically indistinguishable (\textbf{TODO TRUE?}) the partisan gap is on average substantially larger than in FSR and IMC. These two treatment arms are again statistically indistinguishable but both have on average a substantially larger partisan gap than the CCD. This means, that removing more and more inflationary features from the questions decreases the partisan gap in political knowledge.
+
+The attenuation is most pronounced when comparing the baseline IDA condition to the CCD condition (first vs. last columns). In the CCD condition, Republicans are, on average, only about 10 percentage points more likely to have party-congenial responses, a drop larger than 70 percent when compared to the baseline IDA. \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey conditions.
+
 
 % Table for the unstandardized partisan gap estimates from study 1
 % results are presented in the partisan-gap-by-item-arm.pdf figure
@@ -275,7 +278,6 @@ We start by summarizing the average partisan gap for each survey item and each t
 	\end{figure}
 \end{center}
 
-The attenuation is most pronounced when comparing the baseline IDA condition to the CCD condition (first vs. last columns). In the CCD condition, Republicans are, on average, only about 10 percentage points more likely to have party-congenial responses, a drop larger than 70 percent when compared to the baseline IDA. \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey conditions.
 
 We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is party-congenial, on the interaction of partisanship and the treatment arm:
 \begin{equation}\label{eq:partisangap-mturk}
@@ -283,21 +285,6 @@ y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Condition)_k + \delta_k (Rep_i \times
 \end{equation}
 for respondent $i$, survey item $j$, and condition $k$. $\beta$ is the difference in partisan knowledge gaps, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different conditions affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always IDA, so $\delta$ captures how the four conditions (CUD, FSR, IMC, CCD)---having the same questions with different questionnaire artifacts---mediates partisan knowledge gaps.
 We include the survey item fixed effects to allow each item to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
-
-\begin{figure}[t]
-	\centering
-	\caption{Partisan Gap by Condition: MTurk}
-	\includegraphics[width=.55\textwidth]{../figs/mturk-pgag-surveyarms.pdf}
-	\label{fig:partisangaps-mturk-reg}
-	\caption*{\footnotesize 
-		Difference between bars indicates the predicted partisan gap by the five conditions. 
-		Bars reconstructed from the interactions of the Republican indicator with the treatment arms as reported in column (3) of \cref{tab:partisangaps-mturk}.
-		The baseline arm is IDA.
-		See \cref{tab:conditions} for the description of the conditions.
-		Capped vertical bars are 95\% confidence intervals.
-	}
-\end{figure}
-
 
 \begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
@@ -325,11 +312,34 @@ Compared to the gap arising from partisanship (in column (1)), a survey artifact
 
 In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and conditions. Now the Republican variable captures the partisan gap in the IDA condition (corresponding to column (1) of \cref{fig:partisangaps-mturk}). The Republican and survey condition interactions reveal the extent to which partisan knowledge gaps change across the different survey conditions. 
 
+\begin{figure}[t]
+	\centering
+	\caption{Partisan Gap by Condition: MTurk}
+	\includegraphics[width=.55\textwidth]{../figs/mturk-pgag-surveyarms.pdf}
+	\label{fig:partisangaps-mturk-reg}
+	\caption*{\footnotesize
+		Difference between bars indicates the predicted partisan gap by the five conditions.
+		Bars reconstructed from the interactions of the Republican indicator with the treatment arms as reported in column (3) of \cref{tab:partisangaps-mturk}.
+		The baseline arm is IDA.
+		See \cref{tab:conditions} for the description of the conditions.
+		Capped vertical bars are 95\% confidence intervals.
+	}
+\end{figure}
+
+
+
+
 \cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by more 49\% ($p<0.001$).
 The largest reduction is 69\% ($p<0.001$), which comes from the CCD condition. This condition allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. In columns (4)--(6), including the self-reported characteristics of respondents does not change the conclusion. Overall, the MTurk sample of Study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
 
 
 \subsubsection*{Study 2}
+% TODO: Do we want to keep this? should we do an analysis that looks at the effect of all treatment arms? I think this needs to be removed or put into the second section of the MS. It does not fit here.
+
+In a second study we examine how congenial partisanship affects answers to survey questions in multiple choice and Likert scale response options. In this study we code answers by the respondents to survey questions as correct (when they select the correct response in the multiple choice arm or indicate full confidence with the correct response in the Likert arm). Congenial partisanship is coded for as 1 for instances where the individuals partisanship aligns with the content of the question and 0 otherwise. For example, the question about Donald Trump's executive order is coded as congenial for Republican survey participants but as uncongenial for Democrats.
+
+\cref{fig:mturk_hk} and \cref{tab:mturk_hk} indicate that questionnaire design features might also affect congeniality of responses. Moving from the standard multiple choice format to the confidence coding comes with a reduction in the congeniality estimate.
+
 % TODO: What to do with this stuff?
 \begin{center}
 	\begin{figure}[h]
@@ -352,7 +362,7 @@ The largest reduction is 69\% ($p<0.001$), which comes from the CCD condition. T
 \newpage
 
 \section*{The Effect of Partisan Cues on Partisan Gaps}\label{subsec:partisan-cues}
-The aim of the study is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. For the purpose of the study, we examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.  
+The aim of the studies 3 and 4 is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. We examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.
 
 For exploring the research question, we exploit two datasets---a national survey conducted by YouGov, and a telephone survey of a random sample of adults in Texas. The YouGov survey interviewed 2000 respondents between July 10th and 12th, 2012.  In Texas, a total of 1003 interviews were conducted between September 10th and 21st, 2012. 
 
@@ -387,7 +397,7 @@ Using the YouGov survey responses, we estimate
 \text{correct response}_{i} = \alpha + \beta (congenial \; cue)_i  +\varepsilon_{i},
 \end{equation}
 where the dependent variable is the indicator of whether the response to the question is correct.
-As discussed above in \cref{subsec:partisan-cues}, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly. Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response. The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
+As discussed above, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly. Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response. The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
 
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
