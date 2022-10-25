@@ -131,11 +131,12 @@ The idea of a well-functioning representative democracy rests on the assumption 
 In this paper, we extend the investigation into the role of survey design in explaining partisan differences.\footnote{We primarily focus on design features in non-academic surveys, which are substantially more prevalent than academic surveys.} We propose two theories of partisan knowledge gaps. The first argues that partisan gaps reflect actual differences in beliefs about the world. The second proposes that partisan gaps are, to a large part, artifacts of survey and questionnaire design. We report results from a new set of experiments that manipulate common features of frequently used survey items. The features we focus on plausibly encourage people to guess when they don't know or report attitudes instead of knowledge, and thereby encourage partisan inference causing inflated partisan gaps in knowledge. We also assess what difference items that not only assess knowledge but also confidence in that knowledge make on the prevelance and size of partisan gaps. After all, knowledge is a confidently held correct belief about something. Do the partisan gaps persist if only survey responses that participants are confident in are coded as correct?
 %more stringent way to code the answers---only coding responses that respondents are confident about as correct---makes to observed differences.
 
-% 52% = Table 2 RepXFSR
+% 38% = Table 2 RepXFSR vs RepXIDA
+% 49% = Table 2 RepXIMC vs RepXIDA
 % 72% = Table 4 column 1
 % 43% = Table 3
-% 71% = Table 2 colum 3
-Across two experiments and thirteen items, we find that about 52\% of the knowledge differences between partisans are due to survey measures that encourage respondents to guess when they don't know. Across two other experiments, we find that survey features that encourage partisan inferences inflate the observed differences by up to 72\%. Lastly, we find that a coding scheme that only codes answers that respondents are confident in reduces partisan gaps by 43\% to 72\%. Our findings support the second theory of partisan knowledge gap formation. Current designs of survey items can encourage participants to not report confidently held knowledge but use partisan cues to express attitudes and opinions about the world. In contrast to incentive-based experimental designs that use (monetary) rewards to encourage respondents to overcome their perceptual screen of partisanship when it comes to answering knowledge questions \citep[for example, see][]{bullocketal_2015, peterson2021partisan} our research design examines the effect that question design has on increasing the partisan gaps in knowledge. Our findings offer practical advice on how to, with no additional costs, decrease the gap through simple and senseable adjustments to the questionnaire design.
+% 69% = Table 2 colum 3 RepXCCD vs RepXIDA
+Across two experiments and thirteen items, we find that about 38\% to 49\% of the knowledge differences between partisans are due to survey measures that encourage respondents to guess when they don't know. Across two other experiments, we find that survey features that encourage partisan inferences inflate the observed differences by up to 72\%. Lastly, we find that a coding scheme that only codes answers that respondents are confident in reduces partisan gaps by 43\% to 69\%. Our findings support the second theory of partisan knowledge gap formation. Current designs of survey items can encourage participants to not report confidently held knowledge but use partisan cues to express attitudes and opinions about the world. In contrast to incentive-based experimental designs that use (monetary) rewards to encourage respondents to overcome their perceptual screen of partisanship when it comes to answering knowledge questions \citep[for example, see][]{bullocketal_2015, peterson2021partisan} our research design examines the effect that question design has on increasing the partisan gaps in knowledge. Our findings offer practical advice on how to, with no additional costs, decrease the gap through simple and sensible adjustments to the questionnaire design.
 
 \newpage
 
@@ -253,7 +254,7 @@ We test the effect of these five different conditions on the partisan gaps in po
 
 
 \subsubsection*{Study 1}
-We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. In the Condition 1 treatment arm (first column), the Republicans are, on average, 30 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow bars), the differences attenuated substantially depending on the treatment arms. Removing more and more inflationary features from the questions decreases the partisan gap in political knowledge.
+We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. In the baseline IDA condition (first column), the Republicans are, on average, 35 percentage points more likely than the Democrats to have party-congenial responses. The subsequent four columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow horizontal bars), the differences attenuated substantially depending on the treatment arms. Removing more and more inflationary features from the questions decreases the partisan gap in political knowledge.
 
 % Table for the unstandardized partisan gap estimates from study 1
 % results are presented in the partisan-gap-by-item-arm.pdf figure
@@ -262,38 +263,37 @@ We start by summarizing the average partisan gap for each survey item and each t
 \begin{center}
 	\begin{figure}[t]
 		\centering
-		\caption{Partisan Gap by Treatment Arm (MTurk)}
+		\caption{Partisan Gap by Condition (MTurk)}
 		\includegraphics[width=\textwidth]{../figs/partisan-gap-by-item-arm.pdf}
 		\label{fig:partisangaps-mturk}
 		\caption*{\footnotesize 
 			Each marker is the estimated difference in proportions for how congenial their responses are to their own party.
-			Columns indicate the five different conditions described in \nameref{sec:data}. Rows indicate the nine individual survey question items described in \cref{si:mturk} plus their average.
-			Each point is the estimated $\beta$ from estimating $1\{party\text{-}congenial\, response\}_i = \alpha + \beta Rep_i + \varepsilon_i$ for each of items and each of the five arms.			
+			Columns indicate the five different conditions described in \Cref{tab:conditions}. Rows indicate the nine individual survey question items described in \cref{si:mturk} plus their average.
+			Each point is the estimated $\beta$ from estimating $1\{party\text{-}congenial\, response\}_i = \alpha + \beta Rep_i + \varepsilon_i$ for each of items and each of the five conditions.			
 			Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
 		}
 	\end{figure}
 \end{center}
 
-The attenuation is most pronounced when comparing Condition 1 to Condition 5 (first vs. last columns). In the Condition 5 arm, Republicans are, on average, only about 10 percentage points more likely to have party-congenial responses, a drop larger than 50 percent. \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey arms.
+The attenuation is most pronounced when comparing the baseline IDA condition to the CCD condition (first vs. last columns). In the CCD condition, Republicans are, on average, only about 10 percentage points more likely to have party-congenial responses, a drop larger than 70 percent when compared to the baseline IDA. \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey conditions.
 
 We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is party-congenial, on the interaction of partisanship and the treatment arm:
 \begin{equation}\label{eq:partisangap-mturk}
-y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Arm)_k + \delta_k (Rep_i \times Arm_k) + (survey \; item)_j + \varepsilon_{ijk}
+y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Condition)_k + \delta_k (Rep_i \times Condition_k) + (survey \; item)_j + \varepsilon_{ijk}
 \end{equation}
-for respondent $i$, survey item $j$, and treatment arm $k$. $\beta$ is the difference in partisan knowledge gaps, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different treatment arms affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always RW, so $\delta$ captures
-% TODO here we need to change the baseline to IDA
-how the four treatment arms---having the same questions with different questionnaire artifacts ---mediates partisan knowledge gaps.
+for respondent $i$, survey item $j$, and condition $k$. $\beta$ is the difference in partisan knowledge gaps, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different conditions affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always IDA, so $\delta$ captures how the four conditions (CUD, FSR, IMC, CCD)---having the same questions with different questionnaire artifacts---mediates partisan knowledge gaps.
 We include the survey item fixed effects to allow each item to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
 
 \begin{figure}[t]
 	\centering
-	\caption{Partisan Gap by Treatment Arm: MTurk}
+	\caption{Partisan Gap by Condition: MTurk}
 	\includegraphics[width=.55\textwidth]{../figs/mturk-pgag-surveyarms.pdf}
 	\label{fig:partisangaps-mturk-reg}
 	\caption*{\footnotesize 
-		Difference between bars indicates the predicted partisan gap by the treatment arms. 
+		Difference between bars indicates the predicted partisan gap by the five conditions. 
 		Bars reconstructed from the interactions of the Republican indicator with the treatment arms as reported in column (3) of \cref{tab:partisangaps-mturk}.
-		The baseline arm is RW.
+		The baseline arm is IDA.
+		See \cref{tab:conditions} for the description of the conditions.
 		Capped vertical bars are 95\% confidence intervals.
 	}
 \end{figure}
@@ -311,20 +311,22 @@ We include the survey item fixed effects to allow each item to elicit some const
 			\bottomrule
 		\end{tabular}
 	\end{adjustbox}
-	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether the response to a survey item is congenial to party affiliation. Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether the response to a survey item is congenial to party affiliation.
+		See \cref{tab:conditions} for the description of the conditions.
+	Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 
 \cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the Republican variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
-Column (2) includes only the treatment arms, and three of them elicit differences in partisan gaps that are statistically different from the baseline RW arm. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artifacts.
+Column (2) includes only the treatment arms, and three of them elicit differences in partisan gaps that are statistically different from the baseline IDA condition. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artifacts that inflate partisan gaps.
 
-Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the 24k arm is 17 percentage points less likely to give a party-congenial response than the RW arm ($p<0.001$). This estimate is non-trivial.
-Compared to the gap arising from partisanship (in column (1)), a survey artifact in terms of differences in survey features (in column (2)) elicits a gap two-thirds as large.
+Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the CCD condition is 16 percentage points less likely to give a party-congenial response than the baseline IDA condition ($p<0.001$). This estimate is non-trivial.
+Compared to the gap arising from partisanship (in column (1)), a survey artifact in terms of differences in survey features (in column (2)) elicits a gap 0.61 times as large.
 
-In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and treatment arms. Now the Republican variable captures the partisan gap in the RW arm (corresponding to column (1) of \cref{fig:baltest-24k-rw}). The Republican and treatment arms interactions reveal the extent to which partisan knowledge gaps change across the different treatment arms. 
+In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and conditions. Now the Republican variable captures the partisan gap in the IDA condition (corresponding to column (1) of \cref{fig:partisangaps-mturk}). The Republican and survey condition interactions reveal the extent to which partisan knowledge gaps change across the different survey conditions. 
 
-\cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by more than half ($p<0.001$).
-The largest reduction is 71 percent ($p<0.001$), which comes from the CCD arm. This arm allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. In columns (4)--(6), including the self-reported characteristics of respondents does not change the conclusion. Overall, the MTurk sample of Study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
+\cref{fig:partisangaps-mturk-reg} shows the estimates in absolute terms. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated partisan knowledge gap by more 49\% ($p<0.001$).
+The largest reduction is 69\% ($p<0.001$), which comes from the CCD condition. This condition allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. In columns (4)--(6), including the self-reported characteristics of respondents does not change the conclusion. Overall, the MTurk sample of Study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
 
 
 \subsubsection*{Study 2}
