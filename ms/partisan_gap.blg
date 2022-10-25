@@ -3,49 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: partisan_gap.aux
 The style file: apsr.bst
 Database file #1: pgap.bib
-Warning--I didn't find a database entry for "redlawsk2002hot"
-Warning--I didn't find a database entry for "klar2014partisanship"
-Warning--I didn't find a database entry for "petersen2013motivated"
-Warning--I didn't find a database entry for "klar2016independent"
-You've used 43 entries,
+You've used 47 entries,
             2874 wiz_defined-function locations,
-            893 strings with 11386 characters,
-and the built_in function-call counts, 172027 in all, are:
-= -- 28112
-> -- 2021
+            908 strings with 11927 characters,
+and the built_in function-call counts, 188078 in all, are:
+= -- 30748
+> -- 2187
 < -- 0
-+ -- 13142
-- -- 720
-* -- 14627
-:= -- 34651
-add.period$ -- 173
-call.type$ -- 43
-change.case$ -- 559
-chr.to.int$ -- 43
-cite$ -- 43
-duplicate$ -- 653
-empty$ -- 1445
-format.name$ -- 767
-if$ -- 30904
++ -- 14366
+- -- 780
+* -- 15998
+:= -- 37867
+add.period$ -- 189
+call.type$ -- 47
+change.case$ -- 611
+chr.to.int$ -- 47
+cite$ -- 47
+duplicate$ -- 714
+empty$ -- 1585
+format.name$ -- 834
+if$ -- 33788
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 48
-newline$ -- 183
-num.names$ -- 491
-pop$ -- 169
+missing$ -- 53
+newline$ -- 200
+num.names$ -- 534
+pop$ -- 186
 preamble$ -- 1
-purify$ -- 645
+purify$ -- 705
 quote$ -- 0
-skip$ -- 557
+skip$ -- 606
 stack$ -- 0
-substring$ -- 39578
-swap$ -- 88
-text.length$ -- 602
+substring$ -- 43309
+swap$ -- 95
+text.length$ -- 658
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 158
+type$ -- 172
 warning$ -- 0
-while$ -- 1002
+while$ -- 1094
 width$ -- 0
-write$ -- 597
-(There were 4 warnings)
+write$ -- 652
