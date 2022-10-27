@@ -1,0 +1,18 @@
+
+* Study 2 framing
+
+** Order
+2. All confidence coding into one thing and add at the end as bridge between studies
+3. Study 2 to appendix
+4. Nuke it
+1. We replicated one of the condition
+
+
+1) conceptually it is about question design, sth where the partisan cues are part of it (is it introduced or not, neutral info, dk)
+
+2) how do we score the responses (e.g. CCD)
+
+** Todo
+
+- let's redo front, remove CCD. other conditions are about q design, CCD is about scoring
+- Lucas: take out CCD, redo tables and graphs, combine studies for new backend result, new table/graph for that as well
