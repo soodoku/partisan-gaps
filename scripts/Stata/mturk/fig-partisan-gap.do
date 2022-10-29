@@ -126,7 +126,7 @@ gr_edit .plotregion1.style.editstyle margin(zero) editcopy
 
 * Add annotes
 local y_heigh_coord = 9.748674339250291
-local annote_style angle(default) size(medsmall) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(east) editcopy
+local annote_style angle(default) size(small) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(east) editcopy
 
 gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_IPS'
 gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle `annote_style'
