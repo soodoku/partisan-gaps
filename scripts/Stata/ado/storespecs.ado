@@ -1,10 +1,15 @@
-version 13.1
+version 13.1 /* That's right... I'm still on Stata 13... */
 
 cap program drop storespecs
 
 program storespecs
 syntax varlist(min=1 numeric), [SPEC_name(string) BInary DEDUPlicate] file(string)
 	///////////////////////////////////////////////////////////////////////////////
+	// Description:
+	// ------------
+	//		Stores coefficients and other post-regression meta data (standard errors, 
+	//		confidence limits, t-statistics, p-values, and specification data.
+	//
 	// Syntax: 
 	// -------
 	// 		storespecs varlist, spec_name(groups) file(filename)
@@ -15,6 +20,7 @@ syntax varlist(min=1 numeric), [SPEC_name(string) BInary DEDUPlicate] file(strin
 	//		storespecs weight, spec_name(length) file(_file)
 	//		reg price weight length mpg
 	//		storespecs weight, spec_name(length mpg) file(_file)
+	//		use _file, clear
 	//
 	// BS example:
 	// -----------
@@ -57,7 +63,7 @@ syntax varlist(min=1 numeric), [SPEC_name(string) BInary DEDUPlicate] file(strin
 
 	cap use "`file'.dta", clear
 
-	if _rc!=0 { /* File not found, Init empty dataset */
+	if _rc!=0 {
 		clear
 		gen int spec_id=.
 		if `n_varlist'==1 {
@@ -66,16 +72,20 @@ syntax varlist(min=1 numeric), [SPEC_name(string) BInary DEDUPlicate] file(strin
 			gen double u95=.
 			gen double l95=.
 			gen double u90=.
-			gen double l90=.			
+			gen double l90=.		
+			gen double tstat=.
+			gen double pval=.	
 		}
-		else if `n_varlist'>1 { /* if more than 1 var, use var name as suffix */
+		else if `n_varlist'>1 { 
 			foreach var in `varlist' {
 				gen double beta_`var'=.
 				gen double se_`var'=.
 				gen double u95_`var'=.
 				gen double l95_`var'=.
 				gen double u90_`var'=.
-				gen double l90_`var'=.				
+				gen double l90_`var'=.	
+				gen double tstat_`var'=.
+				gen double pval_`var'=.			
 			}
 		}		
 	}
@@ -88,6 +98,8 @@ syntax varlist(min=1 numeric), [SPEC_name(string) BInary DEDUPlicate] file(strin
 		* retreive estimates
 		replace beta=_b[`estprefix'`var'] if spec_id==`n'
 		replace se=_se[`estprefix'`var']  if spec_id==`n'
+		replace tstat=beta/se  if spec_id==`n'
+		replace pval=2*ttail(e(df_r), abs(tstat))
 
 		* compute bounds
 		replace u95=beta+invt(e(df_r),0.975)*se if spec_id==`n'
@@ -100,12 +112,14 @@ syntax varlist(min=1 numeric), [SPEC_name(string) BInary DEDUPlicate] file(strin
 			* retreive estimates
 			replace beta_`var'=_b[`estprefix'`var'] if spec_id==`n'
 			replace se_`var'=_se[`estprefix'`var']  if spec_id==`n'
+			replace tstat_`var'=beta_`var'/se_`var'  if spec_id==`n'
+			replace pval_`var'=2*ttail(e(df_r), abs(tstat_`var'))
 
 			* compute bounds
 			replace u95_`var'=beta_`var'+invt(e(df_r),0.975)*se_`var' if spec_id==`n'
 			replace l95_`var'=beta_`var'-invt(e(df_r),0.975)*se_`var' if spec_id==`n'
 			replace u90_`var'=beta_`var'+invt(e(df_r),0.95)*se_`var'  if spec_id==`n'
-			replace l90_`var'=beta_`var'-invt(e(df_r),0.95)*se_`var'  if spec_id==`n'		
+			replace l90_`var'=beta_`var'-invt(e(df_r),0.95)*se_`var'  if spec_id==`n'	
 		}
 	}
 
