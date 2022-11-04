@@ -62,19 +62,18 @@
     "txt:CUD"
     "txt:FSR"
     "txt:IMC"
-    "txt:CCD"
     "fig:partisangaps-mturk"
     "eq:partisangap-mturk"
     "tab:partisangaps-mturk"
     "fig:partisangaps-mturk-reg"
-    "fig:mturk_hk"
     "subsec:partisan-cues"
     "fig:yougov-reg"
     "eq:pgap-yougov"
     "tab:partisangaps-yougov"
     "fig:partisangaps-texas-unemp"
     "tab:partisangaps-texas-unemp"
-    "tab:partisangaps-texas-fedtax")
+    "tab:partisangaps-texas-fedtax"
+    "fig:mturk_hk")
    (LaTeX-add-bibliographies
     "pgap"))
  :latex)
