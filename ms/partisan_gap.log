@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.16)  4 NOV 2022 14:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.16)  4 NOV 2022 15:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1175,12 +1175,15 @@ gment.tex)
 <../figs/mturk-hk-MC-LIKERT.pdf, id=366, 433.62pt x 289.08pt>
 File: ../figs/mturk-hk-MC-LIKERT.pdf Graphic file (type pdf)
 <use ../figs/mturk-hk-MC-LIKERT.pdf>
-Package pdftex.def Info: ../figs/mturk-hk-MC-LIKERT.pdf  used on input line 489
+Package pdftex.def Info: ../figs/mturk-hk-MC-LIKERT.pdf  used on input line 491
 .
 (pdftex.def)             Requested size: 258.36668pt x 172.25395pt.
- [22 <../figs/mturk-hk-MC-LIKERT.pdf>] (../tabs/mturk_hk_mc_likert.tex) [23] [2
-4]
-(./partisan_gap.bbl [25
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+(../tabs/mturk_hk_mc_likert.tex) [22] [23 <../figs/mturk-hk-MC-LIKERT.pdf>]
+[24] (./partisan_gap.bbl [25
 
 ] [26] [27] [28]) [29] (./sections/appendix.tex
 
@@ -1314,16 +1317,13 @@ Package pdftex.def Info: ../figs/hk_eo1.png  used on input line 563.
 (pdftex.def)             Requested size: 469.75502pt x 452.68713pt.
  [43 <../figs/hk_aca2.png>] [44 <../figs/hk_eo1.png>]) [45] (./partisan_gap.aux
 )
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `partisan_gap.out' has not changed.
 (rerunfilecheck)             Checksum: F5277D9173825422D711F5BD73EFB9A0;583.
  ) 
 Here is how much of TeX's memory you used:
  18264 strings out of 478287
  308606 string characters out of 5849289
- 639049 words of memory out of 5000000
+ 639066 words of memory out of 5000000
  35910 multiletter control sequences out of 15000+600000
  555631 words of font info for 178 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1352,7 +1352,7 @@ blic/mathdesign/mdbch/md-chr7t.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/mathdesign/mdbch/md-chr7y.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/mathdesign/mdbch/md-chr8t.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/mathdesign/mdbch/md-chri7m.pfb>
-Output written on partisan_gap.pdf (46 pages, 380970 bytes).
+Output written on partisan_gap.pdf (46 pages, 381279 bytes).
 PDF statistics:
  650 PDF objects out of 1000 (max. 8388607)
  543 compressed objects within 6 object streams
