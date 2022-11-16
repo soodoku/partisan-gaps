@@ -486,6 +486,34 @@ Next, we examine how congenial partisanship affects answers to survey questions 
 \input{../tabs/mturk_hk_mc_likert.tex}
 
 
+% partisan-gaps/scripts/Stata/mturk_hk/reg-table.do
+\begin{table}[t] \centering \small \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
+	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	\caption{Question Scoring and Knowledge Gaps: MTurk Study 2} 
+	\label{tab:partisangaps-mturk}
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+			\toprule
+			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+			&\multicolumn{4}{c}{Individual survey question}\\
+			\cmidrule(l){2-5}
+			&\multicolumn{1}{c}{Affordable Care Act}&\multicolumn{1}{c}{Affordable Care Act 2}&\multicolumn{1}{c}{Greenhouse gases}&\multicolumn{1}{c}{President Trump}&\multicolumn{1}{c}{All}\\
+			\input ../tabs/mturk-hk-reg-table-fragment.tex
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption*{\scriptsize Dependent variables indicate whether the respondent answered the question(s) correctly. 
+		See \cref{si:mturk2} for exact wording of the four questions.
+		Columns (1)--(4) estimates by the individual survey questions.
+		Column (5) includes all questions and adds the survey question fixed effects.
+		All models are linear probability models.
+		In the CCD (Confidence-coding design), a response is correct only if the correct answer is selected with a full confidence of 10.
+		The baseline are the multiple choice designs.
+		Standard errors are clustered at the respondent level.
+		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+\end{table}
+
+
 \section*{Discussion and Conclusion}
 
 Since at least the publication of \cite{bartels_2002}, the conventional wisdom has been that partisan gaps in beliefs about politically consequential facts are wide and pervasive. 
