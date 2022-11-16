@@ -234,6 +234,7 @@ The attenuation is most pronounced when comparing the baseline IDA condition to 
 % results are presented in the partisan-gap-by-item-arm.pdf figure
 %\input{../tabs/unstandardized-pg-mturk.tex}
 
+% partisan-gaps/scripts/Stata/mturk/fig-partisan-gap.do
 \begin{center}
 	\begin{figure}[t]
 		\centering
@@ -257,6 +258,7 @@ y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Condition)_k + \delta_k (Rep_i \times
 for respondent $i$, survey item $j$, and condition $k$. $\beta$ is the difference in partisan knowledge gaps, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different conditions affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always IDA, so $\delta$ captures how the four conditions (CUD, FSR, IMC, CCD)---having the same questions with different questionnaire artifacts---mediates partisan knowledge gaps.
 We include the survey item fixed effects to allow each item to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
 
+% partisan-gaps/scripts/Stata/mturk/reg-table.do
 \begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 	\caption{Partisan Knowledge Gaps: MTurk}
@@ -283,6 +285,7 @@ Compared to the gap arising from partisanship (in column (1)), a survey artifact
 
 In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and conditions. Now the Republican variable captures the partisan gap in the IDA condition (corresponding to column (1) of \cref{fig:partisangaps-mturk}). The Republican and survey condition interactions reveal the extent to which partisan knowledge gaps change across the different survey conditions. 
 
+% partisan-gaps/scripts/Stata/mturk/barplot.do
 \begin{figure}[t]
 	\centering
 	\caption{Partisan Gap by Condition: MTurk}
@@ -316,6 +319,9 @@ In the Texas survey, we added another condition to the above design – no parti
 
 
 \subsection*{Results: Partisan Knowledge Gaps with Partisan Cues (YouGov)}
+
+% partisan-gaps/scripts/Stata/survey-exp/unemp-barplots.do
+% partisan-gaps/scripts/Stata/survey-exp/deficit-barplots.do
 \begin{figure}[t]
 	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov Survey}	
 	\centering
@@ -343,6 +349,7 @@ Using the YouGov survey responses, we estimate
 where the dependent variable is the indicator of whether the response to the question is correct.
 As discussed above, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly. Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response. The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
 
+% partisan-gaps/scripts/Stata/survey-exp/reg-table.do
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
@@ -370,6 +377,7 @@ Panel (b) of \cref{fig:yougov-reg} shows that this systematic difference is not 
 Presumably, we observe this congenial cue effect because the question stem holds the other party responsible for the increase in unemployment and deficit, which are both undesirable.\footnote{\cref{fig:yougov-reg-by-partisanship} show that there is some heterogeneity in how the congenial cue affects Republicans as opposed to Democrats. However, the effect is not unique to either party since partisans of both types are more likely to get the correct response when randomly assigned the congenial cue.}
 
 \subsection*{Results: Partisan Knowledge Gaps with Partisan Cues (Texas Lyceum)}
+% partisan-gaps/scripts/Stata/tx-lyceum/unemp-barplot.do
 \begin{figure}[!t]
 	\centering
 	\caption{Partisan Gap by Treatment Arm: Texas Lyceum, Unemployment}
@@ -385,6 +393,7 @@ We further supplement our results with the Texas Lyceum survey, which includes a
 
 \cref{fig:partisangaps-texas-unemp} shows that our results above still hold when we include a neutral cue. Compared to individuals who received a neutral cue, individuals who receive an uncongenial cue are 17 percentage points less likely to get the correct answer that unemployment has gone up ($p<0.001$). Individuals who receive a congenial cue are 8 percentage points more likely to get the correct answer ($p<0.1$). These results are tabulated in \cref{tab:partisangaps-texas-unemp}.
 
+% partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 	\caption{Partisan Knowledge Gaps with Partisan Cues: Texas Lyceum, Unemployment}
@@ -408,7 +417,7 @@ We further supplement our results with the Texas Lyceum survey, which includes a
 		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
-
+% partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 	\caption{Partisan Knowledge Gaps with Partisan Cues: Texas Lyceum, Federal Taxes}
@@ -457,7 +466,7 @@ Next, we examine how congenial partisanship affects answers to survey questions 
 
 %In the survey for Study 2, we randomly assigned 1,059 respondents to either closed-ended or confidence coding questions of four items. The preamble, topics, and answer options of these questions were indentical to Study 1 and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received five options as answers, including a ``Don't Know'' option. In the confidence coding version of the survey respondents were asked to report the confidence with which they knew an item to be correct or incorrect. In this treatment the individuals were asked the same questions as in the multiple choice treatment and they had to report, on a ten point Likert scale, the confidence with which they considered each of the four statements that were answer options in the multiple choice questions to be correct.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
 
-
+% partisan-gaps/scripts/Stata/mturk_hk/mc_likert_coefplot.do
 \begin{center}
 	\begin{figure}[h]
 		\centering
