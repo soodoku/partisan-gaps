@@ -10,7 +10,6 @@ encode condition_str, gen(likert) label(conditionLabel)
 
 drop if independent ==1
 
-
 * Item-level effect of LIKERT/Scale/CCD on proportion of correct response
 global items aca aca2 gg dt 
 eststo clear
