@@ -14,7 +14,7 @@ drop if independent ==1
 global items aca aca2 gg dt 
 eststo clear
 foreach item in $items {
-	qui eststo: reg correct i.republican##i.likert if questions_str=="`item'", cluster(respondent) 
+	qui eststo: reg correct i.congenial##i.likert if questions_str=="`item'", cluster(respondent) 
 		estadd local itemFE "\multicolumn{1}{c}{No}"
 		estadd local items 1
 		estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
@@ -22,7 +22,7 @@ foreach item in $items {
 		estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 }
 * Average (over the four items) effect of LIKERT/Scale/CCD on proportion of correct response
-qui eststo: reghdfe correct i.republican##i.likert, cluster(respondent) absorb(questions)
+qui eststo: reghdfe correct i.congenial##i.likert, cluster(respondent) absorb(questions)
 	estadd local itemFE "\multicolumn{1}{c}{Yes}"
 	estadd local items 4
 	estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
@@ -36,16 +36,16 @@ esttab,
 	varwidth(30)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.republican 1.likert 1.republican#1.likert)
+	keep(1.congenial 1.likert 1.congenial#1.likert)
 	obslast
 	label
 	nobase 	
 	noobs
 	nomtitle	
 	coeflabel(
-		1.republican "Republican=1"
+		1.congenial "Congenial"
 		1.likert "CCD"
-		1.republican#1.likert "Republican=1 $\times$ CCD"
+		1.congenial#1.likert "Congenial $\times$ CCD"
 		)	
 	scalar(
 		"r2 R$^2$" 
@@ -63,16 +63,16 @@ esttab using $tabsavedir/mturk-hk-reg-table-fragment.tex,
 	varwidth(20)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.republican 1.likert 1.republican#1.likert)
+	keep(1.congenial 1.likert 1.congenial#1.likert)
 	obslast
 	label
 	nobase 	
 	noobs
 	nomtitle
 	coeflabel(
-		1.republican "Republican=1"
+		1.congenial "Congenial"
 		1.likert "CCD"
-		1.republican#1.likert "Republican=1 $\times$ CCD"
+		1.congenial#1.likert "Congenial $\times$ CCD"
 		)	
 	scalar(
 		"r2 R$^2$" 
