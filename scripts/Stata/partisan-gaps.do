@@ -29,8 +29,8 @@ setup "`r(mymacro)'"
 tictoc tic
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// * MTurk results (Study 2)
-// *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// * MTurk results (Study 1)
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 import delimited `rootdir'/data/turk/mturk-recoded.csv
 do ./mturk/preamble.do
@@ -47,7 +47,7 @@ do ./mturk/barplot.do
 
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* YouGov results
+* YouGov results (Study 2)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
@@ -63,7 +63,7 @@ do ./survey-exp/deficit-barplots.do
 
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* Texas Lyceum results
+* Texas Lyceum results (Study 3)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
@@ -76,6 +76,14 @@ do ./tx-lyceum/reg-table.do
 **** Barplots for effect of party & survey type on response
 do ./tx-lyceum/unemp-barplot.do
 
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// * MTurk results (Study 4)
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**** Figure 5
+do ./mturk_hk/mc_likert_coefplot.do
+
+**** Table 7: Confidence scoring and knowledge gaps
+do ./mturk_hk/reg_table.do
 
 
 tictoc toc

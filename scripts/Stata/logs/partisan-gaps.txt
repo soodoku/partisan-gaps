@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  24 Oct 2022, 16:03:18
+ opened on:  21 Nov 2022, 12:16:41
 
 . 
 . version 13              // Still on version 13 :(
@@ -32,13 +32,13 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 24 Oct 2022 16:03:18
+Start time: 21 Nov 2022 12:16:41
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. // * MTurk results (Study 2)
-. // *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. // * MTurk results (Study 1)
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . import delimited `rootdir'/data/turk/mturk-recoded.csv
 (344 vars, 1253 obs)
@@ -302,9 +302,9 @@ end of do-file
 . * Add annotes
 . local y_heigh_coord = 9.748674339250291
 
-. local annote_style angle(default) size(medsmall) color(black) horizontal(left) vertical(middle) margin(zero) linegap(z
-> ero) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignme
-> nt(east) editcopy
+. local annote_style angle(default) size(small) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero
+> ) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(
+> east) editcopy
 
 . 
 . gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_IPS'
@@ -1022,7 +1022,7 @@ end of do-file
 . 
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. * YouGov results
+. * YouGov results (Study 2)
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
@@ -1813,7 +1813,7 @@ end of do-file
 . 
 . 
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. * Texas Lyceum results
+. * Texas Lyceum results (Study 3)
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . **** Basic prep of data
 . use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
@@ -2785,14 +2785,367 @@ delimiter now cr
 end of do-file
 
 . 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. // * MTurk results (Study 4)
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. **** Figure 5
+. do ./mturk_hk/mc_likert_coefplot.do
+
+. /* 
+> Multiple choice sample: MTurks HK 
+> */
+. import delimited D:/partisan-gaps/data/mturk_hk/mturk_hk_MC.csv, clear
+(12 vars, 2228 obs)
+
+. 
+. rename congenial congenial_str
+
+. drop if congenial_str=="NA"
+(308 observations deleted)
+
+. encode congenial_str, gen(congenial)
+
+. 
+. rename questions questions_str
+
+. encode questions_str, gen(questions)
+
+. 
+. reg responses i.congenial i.questions, cluster(respondent)
+
+Linear regression                                      Number of obs =    1920
+                                                       F(  4,   479) =  161.89
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.2357
+                                                       Root MSE      =  .42698
+
+                           (Std. Err. adjusted for 480 clusters in respondent)
+------------------------------------------------------------------------------
+             |               Robust
+   responses |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+   congenial |
+          1  |   .0666495   .0214104     3.11   0.002     .0245797    .1087194
+             |
+   questions |
+aca_correct  |  -.0229167   .0229406    -1.00   0.318    -.0679933      .02216
+ dt_correct  |   .5530516   .0262464    21.07   0.000     .5014792    .6046239
+ gg_correct  |      .0125   .0272141     0.46   0.646    -.0409737    .0659737
+             |
+       _cons |   .2172328   .0224311     9.68   0.000     .1731572    .2613084
+------------------------------------------------------------------------------
+
+. eststo mc
+
+. 
+. 
+. /* 
+> Likert scale sample: MTurks HK 
+> */
+. import delimited D:/partisan-gaps/data\mturk_hk/mturk_hk_LIKERT.csv, clear
+(13 vars, 10040 obs)
+
+. 
+. rename congenial congenial_str
+
+. drop if congenial_str=="NA"
+(480 observations deleted)
+
+. encode congenial_str, gen(congenial)
+
+. 
+. rename questions questions_str
+
+. encode questions_str, gen(questions)
+
+. 
+. rename scale_mc_c_10 scale_mc_c_10_str
+
+. drop if scale_mc_c_10_str=="NA"
+(7872 observations deleted)
+
+. encode scale_mc_c_10_str, gen(scale_mc_c_10)
+
+. 
+. reg scale_mc_c_10 i.congenial i.questions, cluster(respondent)
+
+Linear regression                                      Number of obs =    1688
+                                                       F(  4,   421) =  127.39
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.2478
+                                                       Root MSE      =  .39008
+
+                           (Std. Err. adjusted for 422 clusters in respondent)
+------------------------------------------------------------------------------
+             |               Robust
+scale_mc_~10 |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+   congenial |
+          1  |   .0347608   .0159058     2.19   0.029     .0034962    .0660254
+             |
+   questions |
+ rg_s_aca_3  |    .063981   .0156252     4.09   0.000      .033268    .0946941
+  rg_s_dt_4  |   .5629675   .0254153    22.15   0.000     .5130108    .6129243
+  rg_s_gg_4  |   .3388626   .0254215    13.33   0.000     .2888936    .3888315
+             |
+       _cons |   1.019856   .0137881    73.97   0.000     .9927541    1.046958
+------------------------------------------------------------------------------
+
+. eststo scale
+
+. 
+. 
+. /* 
+> Plot the stored coefficients for congenial
+> */
+. local MSIZE huge
+
+. local MLWIDTH vvvthin
+
+. local MARKER_OPTS msize(`MSIZE') mlwidth(`MLWIDTH')
+
+. 
+. #delimit;
+delimiter now ;
+. coefplot 
+>         (mc, msymbol(O) `MARKER_OPTS') 
+>         (scale, msymbol(dh) `MARKER_OPTS'), 
+>         keep(2.congenial) 
+>         coeflabels(2.congenial = `""Congenial" "partisanship""', labsize(large))
+>         ciopts(lwidth(medthick)) 
+>         xlabel(0(.03).09, labsize(medlarge))
+>         scheme(lean2)
+>         plotregion(lcolor(black) lwidth(medthin) margin(0 0 0 0))       
+>         legend(
+>                 label(2 "Multiple Choice") 
+>                 label(4 "Likert Scale")
+>                 // title({bf:Condition})
+>                 size(large)
+>                 col(1) ring(0)
+>                 )
+> ;
+
+. #delimit cr
+delimiter now cr
+. graph export "$figsavedir/mturk-hk-MC-LIKERT.pdf", replace      
+(file D:/partisan-gaps/figs/mturk-hk-MC-LIKERT.pdf written in PDF format)
+
+. 
+end of do-file
+
+. 
+. **** Table 7: Confidence scoring and knowledge gaps
+. do ./mturk_hk/reg_table.do
+
+. import delimited D:\partisan-gaps\data\mturk_hk\mturk_hk_MC_LIKERT.csv, clear
+(13 vars, 3916 obs)
+
+. 
+. rename question questions_str
+
+. encode questions_str, gen(questions)
+
+. 
+. * Define likert == 1 if likert, 0 if multiple choice
+. rename condition condition_str
+
+. label define conditionLabel 0 "mc" 1 "scale"
+
+. encode condition_str, gen(likert) label(conditionLabel)
+
+. 
+. drop if independent ==1
+(404 observations deleted)
+
+. 
+. * Item-level effect of LIKERT/Scale/CCD on proportion of correct response
+. global items aca aca2 gg dt 
+
+. eststo clear
+
+. foreach item in $items {
+  2.         qui eststo: reg correct i.congenial##i.likert if questions_str=="`item'", cluster(respondent) 
+  3.                 estadd local itemFE "\multicolumn{1}{c}{No}"
+  4.                 estadd local items 1
+  5.                 estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
+  6.                 local nobs: display %9.0fc `e(N)'
+  7.                 estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+  8. }
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      878}"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      878}"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      878}"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      878}"
+
+. * Average (over the four items) effect of LIKERT/Scale/CCD on proportion of correct response
+. qui eststo: reghdfe correct i.congenial##i.likert, cluster(respondent) absorb(questions)
+
+.         estadd local itemFE "\multicolumn{1}{c}{Yes}"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local items 4
+
+added macro:
+              e(items) : "4"
+
+.         estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    3,512}"
+
+. 
+. #delimit;
+delimiter now ;
+. esttab,
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(30)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.congenial 1.likert 1.congenial#1.likert)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle        
+>         coeflabel(
+>                 1.congenial "Congenial"
+>                 1.likert "CCD"
+>                 1.congenial#1.likert "Congenial $\times$ CCD"
+>                 )       
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "itemFE Survey item FE"
+>                 "items Items"
+>                 "Nrespondents Respondents"
+>                 "nobs Respondent-items"
+>                 ) 
+>         title("Dep. var. is 1(response is correct)")    
+> ;
+
+Dep. var. is 1(response is correct)
+------------------------------------------------------------------------------------------
+                                    (1)         (2)         (3)         (4)         (5)   
+------------------------------------------------------------------------------------------
+Congenial                         0.098*      0.089*      0.103*      0.011       0.062** 
+                                (0.039)     (0.040)     (0.041)     (0.038)     (0.021)   
+
+CCD                               0.003      -0.145***   -0.026      -0.169***   -0.097***
+                                (0.042)     (0.036)     (0.043)     (0.039)     (0.022)   
+
+Congenial $\times$ CCD           -0.208***   -0.113*      0.234***   -0.092      -0.019   
+                                (0.051)     (0.046)     (0.060)     (0.063)     (0.027)   
+------------------------------------------------------------------------------------------
+R$^2$                             0.045       0.095       0.079       0.053       0.231   
+Survey item FE                 \multicolumn{1}{c}{No}    \multicolumn{1}{c}{No}    \multicolumn{1}{c}{No}    \multicolum
+> n{1}{c}{No}    \multicolumn{1}{c}{Yes}   
+Items                                 1           1           1           1           4   
+Respondents                    \multicolumn{1}{c}{878}    \multicolumn{1}{c}{878}    \multicolumn{1}{c}{878}    \multico
+> lumn{1}{c}{878}    \multicolumn{1}{c}{878}   
+Respondent-items               \multicolumn{1}{c}{      878}    \multicolumn{1}{c}{      878}    \multicolumn{1}{c}{    
+>   878}    \multicolumn{1}{c}{      878}    \multicolumn{1}{c}{    3,512}   
+------------------------------------------------------------------------------------------
+Standard errors in parentheses
++ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
+
+. esttab using $tabsavedir/mturk-hk-reg-table-fragment.tex, 
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.congenial 1.likert 1.congenial#1.likert)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(
+>                 1.congenial "Congenial"
+>                 1.likert "CCD"
+>                 1.congenial#1.likert "Congenial $\times$ CCD"
+>                 )       
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "itemFE Survey item FE"
+>                 "items Items"
+>                 "Nrespondents Respondents"
+>                 "nobs Respondent-items"
+>                 ) 
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+> ;
+(output written to D:/partisan-gaps/tabs/mturk-hk-reg-table-fragment.tex)
+
+. #delimit cr
+delimiter now cr
+. 
+. 
+. 
+. 
+end of do-file
+
 . 
 . 
 . tictoc toc
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 24 Oct 2022 16:03:17
-End time: 24 Oct 2022 16:03:39
-Elapsed seconds:        21
+Start time: 21 Nov 2022 12:16:40
+End time: 21 Nov 2022 12:17:04
+Elapsed seconds:        23
 Elapsed minutes:         0
 Elapsed hours:       .01
 ------------------------------------------------------------------------------------------------------------------------
@@ -2802,5 +3155,5 @@ Elapsed hours:       .01
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  24 Oct 2022, 16:03:39
+ closed on:  21 Nov 2022, 12:17:04
 ------------------------------------------------------------------------------------------------------------------------
