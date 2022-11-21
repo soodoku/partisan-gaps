@@ -145,6 +145,8 @@ Across two experiments and thirteen items, we find that about 38\% to 49\% of th
 \newpage
 
 \section*{Two Theories of Partisan Gaps}
+\label{sec:theory}
+\addcontentsline{toc}{section}{\nameref{sec:theory}}
 
 Research has repeatedly shown that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term in 1996 about whether the budget deficits increased, decreased, or remained the same, 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}.
 % TODO: Should we add a more recent example here as well?
@@ -199,7 +201,7 @@ To test the conditionality of partisan knowledge gaps in survey data we fielded 
 
 \section*{The Effect of Inflationary Survey Design on Partisan Gaps}
 \label{sec:inflationary_measures}
-
+\addcontentsline{toc}{section}{\nameref{sec:inflationary_measures}}
 The first study focuses on four survey design features that we suspect might inflate the partisan gap in political knowledge. These features are the absence of a ``Don't Know'' option, including partisan-related as well as neutral information in the question stem, and explicitly encouraging guesses.
 
 \subsection*{Data and Research Design}\label{sec:data}
@@ -215,10 +217,10 @@ In total this yields four multiple choice conditions that successively remove in
 \input{../tabs/treatment_labels.tex}
 
 \begin{description}
-  \item[Inflationary Design Approach] \label{txt:IDA} In the IDA, we replicate design features from highly partisan surveys that do not have the goal of collecting representative opinion data but push an agenda. In this design, `Don't Know' options are never presented and respondents can't indicate lack of knowledge. These questions also include social proof  about the incorrect answer, for instance, ``Some people believe Barack Obama was not born in the United States, but was born in another country'' on a question about where Mr. Obama was born, and some neutral information about the topic, like ``According to the Constitution, American presidents must be `natural born citizens''' on the birthplace question, that may encourage the ignorant to take a guess.  This condition does not score the confidence with which knowledge is held.
-  \item[Commonly Used Design] \label{txt:CUD} The CUD, reflects the real-world standards in (nonacademic) polling most closely. These questions are very similar to the IDA questions but usually do not include social proof. In our experiments, these questions do not feature a `Don't Know' option, include neutral information in the question stem, encourage guessing, and do not ask respondents to report how confidently they hold the knowledge.
-  \item[Fewer Substantive Responses] \label{txt:FSR} The FSR design likely reduces the number of substantive responses to survey questions by including a `Don't Know' option and thereby offering participants the option to reveal ignorance. In doing so, respondents are not forced to pick a substantive answer category when they don't have an opinion. Since research has repeatedly shown how prevelant the absence of political knowledge is we consider this an important feature for designing non-inflationary partisan knowledge surveys. These questions do not provide social poof but encourage guessing with a neutral question stem that might provide people information to base that guess on.
-  \item[Improved Multiple Choice] \label{txt:IMC} The IMC condition is the best version of multiple choice questions. It offers individuals a `Don't Know' option, does not include any social proof, does not encourage guessing, and does not provide neutral information. These changes to question formulation and design have been done while maintaining commensurability with other items. This approach minimizes inflationary features in questions with minimal changes to questionnaire and survey design.
+  \item[Inflationary Design Approach] \phantomsection\label{txt:IDA} In the IDA, we replicate design features from highly partisan surveys that do not have the goal of collecting representative opinion data but push an agenda. In this design, `Don't Know' options are never presented and respondents can't indicate lack of knowledge. These questions also include social proof  about the incorrect answer, for instance, ``Some people believe Barack Obama was not born in the United States, but was born in another country'' on a question about where Mr. Obama was born, and some neutral information about the topic, like ``According to the Constitution, American presidents must be `natural born citizens''' on the birthplace question, that may encourage the ignorant to take a guess.  This condition does not score the confidence with which knowledge is held.
+  \item[Commonly Used Design] \phantomsection\label{txt:CUD} The CUD, reflects the real-world standards in (nonacademic) polling most closely. These questions are very similar to the IDA questions but usually do not include social proof. In our experiments, these questions do not feature a `Don't Know' option, include neutral information in the question stem, encourage guessing, and do not ask respondents to report how confidently they hold the knowledge.
+  \item[Fewer Substantive Responses] \phantomsection\label{txt:FSR} The FSR design likely reduces the number of substantive responses to survey questions by including a `Don't Know' option and thereby offering participants the option to reveal ignorance. In doing so, respondents are not forced to pick a substantive answer category when they don't have an opinion. Since research has repeatedly shown how prevelant the absence of political knowledge is we consider this an important feature for designing non-inflationary partisan knowledge surveys. These questions do not provide social poof but encourage guessing with a neutral question stem that might provide people information to base that guess on.
+  \item[Improved Multiple Choice] \phantomsection\label{txt:IMC} The IMC condition is the best version of multiple choice questions. It offers individuals a `Don't Know' option, does not include any social proof, does not encourage guessing, and does not provide neutral information. These changes to question formulation and design have been done while maintaining commensurability with other items. This approach minimizes inflationary features in questions with minimal changes to questionnaire and survey design.
 \end{description}
 
 \subsection*{Coding rules across surveys and studies}
@@ -233,7 +235,8 @@ Partisanship is coded based on self-classification of respondents as Democrats o
 
 Knowledge items or partisan cues are coded as congenial if the correct answer or the cue given in the question are congenial with the partisanship of the respondent \citep[see][]{prior2015you}.
 
-\subsection*{Results}
+
+\subsection*{Results from Study 1 (MTurk)}
 We test the effect of these four different conditions on the partisan gaps in political knowledge and present results about gradually removing inflationary features from the questions.
 
 We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. In the baseline IDA condition (first column), the Republicans are, on average, 35 percentage points more likely than the Democrats to have party-congenial responses. The subsequent three columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow horizontal bars), the differences attenuated substantially depending on the treatment arms. While IAD and CUD are statistically indistinguishable the partisan gap is on average substantially larger than in FSR and IMC. These two treatment arms are again statistically indistinguishable. This means, that removing more and more inflationary features from the questions decreases the partisan gap in political knowledge.
@@ -320,7 +323,9 @@ The largest reduction is 69\% ($p<0.001$), which comes from the CCD condition. T
 
 \newpage
 
-\section*{The Effect of Partisan Cues on Partisan Gaps}\label{subsec:partisan-cues}
+\section*{The Effects of Partisan Cues on Partisan Gaps}
+\label{sec:partisan_cues}
+\addcontentsline{toc}{section}{\nameref{sec:partisan_cues}}
 The aim of the studies 2 and 3 is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. We examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.
 
 For exploring the research question, we exploit two datasets--- study 2 is a national survey conducted by YouGov, and study 3 is a telephone survey of a random sample of adults in Texas. The YouGov survey interviewed 2000 respondents between July 10th and 12th, 2012.  In Texas, a total of 1003 interviews were conducted between September 10th and 21st, 2012.
@@ -330,7 +335,7 @@ In the YouGov survey, respondents were randomly assigned to factual questions wi
 In the Texas survey, we added another condition to the above design – no partisan cue in the stem. So a third of the respondents were assigned to a question that simply read, ``since the 2010 midterm elections, has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?'' For the second question we changed our design to – no partisan cue, Democratic cue, and Democratic cue plus the following introduction “based on what you have heard”. The question read, ``since January 2009, have federal taxes increased, decreased, or remained the same or couldn’t you say?.'' The second version gave respondents a Democratic cue by changing the initial part of the sentence; the question now read, “Since Barack Obama took office\ldots''  The third version prepended a cue designed to encourage guessing to the second version; the version read, “Based on what you have heard, since Barack Obama took office, \ldots''
 
 
-\subsection*{Results: Partisan Knowledge Gaps with Partisan Cues (YouGov)}
+\subsection*{Results from Study 2 (YouGov)}
 
 % partisan-gaps/scripts/Stata/survey-exp/unemp-barplots.do
 % partisan-gaps/scripts/Stata/survey-exp/deficit-barplots.do
@@ -388,7 +393,7 @@ Panel (a) of \cref{fig:yougov-reg} shows that, by manipulating the partisan cue 
 Panel (b) of \cref{fig:yougov-reg} shows that this systematic difference is not unique to the unemployment question. We reestimate \cref{eq:pgap-yougov} where the dependent variable is getting the correct response that the budget deficit has gone up. When the individuals get a congenial cue, they are 18 percentage points more likely to get the correct response ($p<0.001$).
 Presumably, we observe this congenial cue effect because the question stem holds the other party responsible for the increase in unemployment and deficit, which are both undesirable.\footnote{\cref{fig:yougov-reg-by-partisanship} show that there is some heterogeneity in how the congenial cue affects Republicans as opposed to Democrats. However, the effect is not unique to either party since partisans of both types are more likely to get the correct response when randomly assigned the congenial cue.}
 
-\subsection*{Results: Partisan Knowledge Gaps with Partisan Cues (Texas Lyceum)}
+\subsection*{Results from Study 3 (Texas Lyceum)}
 % partisan-gaps/scripts/Stata/tx-lyceum/unemp-barplot.do
 \begin{figure}[!t]
 	\centering
@@ -464,7 +469,8 @@ Overall, we find again using the YouGov survey and Texas Lyceum survey that ques
 
 
 \section*{The Effects of Design and Cues on Partisan Gaps}
-
+\label{sec:confidence_coding}
+\addcontentsline{toc}{section}{\nameref{sec:confidence_coding}}
 
 In a last study we examine the consequences of scoring decisions in surveys. How do decisions in how we code knowledge affect the partisan gaps? In this study we depart from the classic multiple choice design prevalent in survey questions about political knowledge and introduce an assessment of the confidence in knowledge. In our Confidence Coding Design (CCD) we focuses on the confidence scoring of knowledge. Respondents rate a series of claims on a 0 to 10 scale going from `definitely false' to `definitely true.' In order to be able to compare the response patterns in the multiple choice questions to those for the confidence coding we only code the responses to the correct answer when respondents indicate with a 10 on the Likert scale that they are fully confident that this response option is correct. The question is inspired by other attempts to take account of confidence in distinguishing misinformation from incorrect responses stemming from processes like inference, unlucky guessing, and such  \citep[for instance,][]{pasek2015}. While we consider this confidence coding to be the gold standard when it comes to removing inflationary features from the survey design it is a larger deviation from common survey design features. In our surveys this question design does not encourage guessing and features no social proof.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
 
@@ -519,10 +525,11 @@ In order to be able to compare this design to the previous studies in this manus
 		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
-\newpage
 
+\clearpage
 \section*{Discussion and Conclusion}
-
+\label{sec:discussion}
+\addcontentsline{toc}{section}{\nameref{sec:discussion}}
 Since at least the publication of \cite{bartels_2002}, the conventional wisdom has been that partisan gaps in beliefs about politically consequential facts are wide and pervasive. 
 The conventional wisdom in academia has also become the received wisdom for the mass public --- nearly 80\% of Americans believe that Democrats and Republicans  disagree on facts \citep{pew2018disagree}.
 
