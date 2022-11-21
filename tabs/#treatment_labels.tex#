@@ -1,0 +1,17 @@
+\begin{table}[H]
+\centering
+\caption{Experimental Treatments}
+\label{tab:conditions}
+\begin{tabular}{cccccc}
+\hline
+           & \multicolumn{5}{c}{\textbf{Treatments}}              \\
+ Condition & Label & Don't & Social & Guessing   & Neutral      \\
+           &       & Know  & Proof  & Encouraged & Information  \\ \hline
+ 1         & \hyperref[txt:IDA]{IDA} & No    & Yes    & Yes        &  Yes \\
+ 2         & \hyperref[txt:CUD]{CUD} & No    & No     & Yes        &  Yes \\
+ 3         & \hyperref[txt:FSR]{FSR} & Yes   & No     & No         &  Yes \\
+ 4         & \hyperref[txt:IMC]{IMC} & Yes   & No     & No         &  No  \\
+% 5        & \hyperref[txt:CCD]{CCD} & No    & No     & No         &  No         & Yes        \\
+  \hline
+\end{tabular}
+\end{table}
