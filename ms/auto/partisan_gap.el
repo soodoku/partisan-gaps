@@ -56,6 +56,7 @@
     "citeapos"
     "sym")
    (LaTeX-add-labels
+    "sec:theory"
     "sec:inflationary_measures"
     "sec:data"
     "txt:IDA"
@@ -66,14 +67,16 @@
     "eq:partisangap-mturk"
     "tab:partisangaps-mturk"
     "fig:partisangaps-mturk-reg"
-    "subsec:partisan-cues"
+    "sec:partisan_cues"
     "fig:yougov-reg"
     "eq:pgap-yougov"
     "tab:partisangaps-yougov"
     "fig:partisangaps-texas-unemp"
     "tab:partisangaps-texas-unemp"
     "tab:partisangaps-texas-fedtax"
-    "fig:mturk_hk")
+    "sec:confidence_coding"
+    "fig:mturk_hk"
+    "sec:discussion")
    (LaTeX-add-bibliographies
     "pgap"))
  :latex)
