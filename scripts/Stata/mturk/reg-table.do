@@ -1,3 +1,5 @@
+* Drop CCD (confidence coding/24k)
+drop if survey == 2
 
 * Reshape from wide to long to stack participant-item observations
 foreach item of varlist $items {
@@ -45,18 +47,19 @@ esttab,
 	nobase 	
 	noobs
 	nomtitle
-	coeflabel(1.rep "Republican=1"
+	coeflabel(1.rep "Congenial"
 			  5.survey "CUD"
 			  3.survey "FSR"
 			  1.survey "IMC"
-			  2.survey "CCD"
-		      1.rep#5.survey "Republican=1 $\times$ CUD"
-		      1.rep#3.survey "Republican=1 $\times$ FSR"		
-		      1.rep#1.survey "Republican=1 $\times$ IMC"
-		      1.rep#2.survey "Republican=1 $\times$ CCD"
-		      // 1.rep#4.survey "Republican=1 $\times$ IPS"
+			  // 2.survey "CCD"
+		      1.rep#5.survey "Congenial $\times$ CUD"
+		      1.rep#3.survey "Congenial $\times$ FSR"		
+		      1.rep#1.survey "Congenial $\times$ IMC"
+		      // 1.rep#2.survey "Congenial $\times$ CCD"
+		      // 1.rep#4.survey "Congenial $\times$ IPS"
 		)
-	order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
+	// order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
+	order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
 	scalar(
 		"r2 R$^2$" 
 		"itemFE Survey item FE"
@@ -81,19 +84,18 @@ esttab using $tabsavedir/mturk-reg-table-fragment.tex,
 	nobase 	
 	noobs
 	nomtitle
-	coeflabel(1.rep "Republican=1"
+	coeflabel(1.rep "Congenial"
 			  5.survey "CUD"
 			  3.survey "FSR"
 			  1.survey "IMC"
-			  2.survey "CCD"
-		      1.rep#5.survey "Republican=1 $\times$ CUD"
-		      1.rep#3.survey "Republican=1 $\times$ FSR"		
-		      1.rep#1.survey "Republican=1 $\times$ IMC"
-		      1.rep#2.survey "Republican=1 $\times$ CCD"
-		      // 1.rep#4.survey "Republican=1 $\times$ IPS"
+			  // 2.survey "CCD"
+		      1.rep#5.survey "Congenial $\times$ CUD"
+		      1.rep#3.survey "Congenial $\times$ FSR"		
+		      1.rep#1.survey "Congenial $\times$ IMC"
+		      // 1.rep#2.survey "Congenial $\times$ CCD"
+		      // 1.rep#4.survey "Congenial $\times$ IPS"
 		)
-	order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
-
+	order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
 	scalar(
 		"r2 R$^2$" 
 		"itemFE Survey item FE"
