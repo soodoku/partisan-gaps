@@ -23,7 +23,8 @@ CCD = 24k
 */
 
 
-coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
+// coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
+coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k), /// removing 24k aka CCD
 	msymbol(s) ///
 	keep(3.pid) ///
 	asequation /// "set equation to model name or string" make the rows the models
@@ -43,64 +44,42 @@ coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
 		birth_IPS = "{bf:Obama birthplace}" ///
 		birth_FSR = "{bf:Obama birthplace}" ///
 		birth_14k = "{bf:Obama birthplace}" ///
-		birth_24k = "{bf:Obama birthplace}" ///
-		birth_all = "{bf:Obama birthplace}" ///
 		religion_RW = "{bf:Obama religion}" ///                                                                                                   " ///
 		religion_IPS = "{bf:Obama religion}" ///
 		religion_FSR = "{bf:Obama religion}" ///
 		religion_14k = "{bf:Obama religion}" ///
-		religion_24k = "{bf:Obama religion}" ///
-		religion_all = "{bf:Obama religion}" ///
 		illegal_RW = "{bf:ACA illegal}" ///
 		illegal_IPS = "{bf:ACA illegal}" ///
 		illegal_FSR = "{bf:ACA illegal}" ///
 		illegal_14k = "{bf:ACA illegal}" ///
-		illegal_24k = "{bf:ACA illegal}" ///
-		illegal_all = "{bf:ACA illegal}" ///
 		death_RW = "{bf:ACA death panels}" ///
 		death_IPS = "{bf:ACA death panels}" ///
 		death_FSR = "{bf:ACA death panels}" ///
 		death_14k = "{bf:ACA death panels}" ///
-		death_24k = "{bf:ACA death panels}" ///
-		death_all = "{bf:ACA death panels}" ///
 		increase_RW = "{bf:GW causes}" ///
 		increase_IPS = "{bf:GW causes}" ///
 		increase_FSR = "{bf:GW causes}" ///
 		increase_14k = "{bf:GW causes}" ///
-		increase_24k = "{bf:GW causes}" ///
-		increase_all = "{bf:GW causes}" ///
 		science_RW = "{bf:GW scientists agree}" ///
 		science_IPS = "{bf:GW scientists agree}" ///
 		science_FSR = "{bf:GW scientists agree}" ///
 		science_14k = "{bf:GW scientists agree}" ///
-		science_24k = "{bf:GW scientists agree}" ///
-		science_all = "{bf:GW scientists agree}" ///
 		fraud_RW = "{bf:Voter fraud}" ///
 		fraud_IPS = "{bf:Voter fraud}" ///
 		fraud_FSR = "{bf:Voter fraud}" ///
 		fraud_14k = "{bf:Voter fraud}" ///
-		fraud_24k = "{bf:Voter fraud}" ///
-		fraud_all = "{bf:Voter fraud}" ///
 		mmr_RW = "{bf:MMR vaccine}" ///
 		mmr_IPS = "{bf:MMR vaccine}" ///
 		mmr_FSR = "{bf:MMR vaccine}" ///
 		mmr_14k = "{bf:MMR vaccine}" ///
-		mmr_24k = "{bf:MMR vaccine}" ///
-		mmr_all = "{bf:MMR vaccine}" ///
 		deficit_RW = "{bf:Budget deficit}" ///
 		deficit_IPS = "{bf:Budget deficit}" ///
 		deficit_FSR = "{bf:Budget deficit}" ///
 		deficit_14k = "{bf:Budget deficit}" ///
-		deficit_24k = "{bf:Budget deficit}" ///
-		deficit_all = "{bf:Budget deficit}" ///		
 		avg_RW = "{bf:Average}" ///								
 		avg_IPS = "{bf:Average}" ///								
 		avg_FSR = "{bf:Average}" ///								
 		avg_14k = "{bf:Average}" ///								
-		avg_24k = "{bf:Average}" ///								
-		avg_all = "{bf:Average}" ///								
-		avg_IPS_annote = "{bf:Average}" ///								
-		avg_24k_annote = "{bf:Average}" ///								
 		)
 
 
@@ -109,16 +88,15 @@ addplot 1: , title("{bf:IDA}", size(med)) norescaling
 addplot 2: , title("{bf:CUD}") norescaling
 addplot 3: , title("{bf:FSR}") norescaling
 addplot 4: , title("{bf:IMC}") norescaling
-addplot 5: , title("{bf:CCD}") norescaling
 
 * graph margin
 gr_edit .style.editstyle margin(left) editcopy 
 * plot margin
 gr_edit .plotregion1.style.editstyle margin(left) editcopy
 * Remove ylabel ticks
-gr_edit .plotregion1.yaxis1[5].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
+gr_edit .plotregion1.yaxis1[4].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
 * Shift labels to left
-gr_edit .plotregion1.move yaxis1[5] leftof 9 1
+gr_edit .plotregion1.move yaxis1[4] leftof 9 1
 
 * reset margins back to zero to flush with new col of labels
 gr_edit .style.editstyle margin(zero) editcopy 
@@ -147,11 +125,6 @@ gr_edit .plotregion1.plotregion1[4].AddTextBox added_text editor `y_heigh_coord'
 gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle `annote_style'
 gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle box_alignment(center) editcopy
 gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
-
-gr_edit .plotregion1.plotregion1[5].AddTextBox added_text editor `y_heigh_coord' `beta_24k'
-gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle `annote_style'
-gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle box_alignment(center) editcopy
-gr_edit .plotregion1.plotregion1[5].added_text[1].text.Arrpush `beta_24k'
 
 graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace	
 
