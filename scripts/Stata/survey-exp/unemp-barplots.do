@@ -29,7 +29,7 @@ label values porder xlab
 
 set scheme s2mono
 local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
-local YRANGE 0.(0.1).4
+local YRANGE 0.(0.2).8
 local BASELINE_XLIM = _N+.5
 local CI_WIDTH medthick
 local XLAB_SIZE large
@@ -47,7 +47,7 @@ twoway
 			lwidth(`CI_WIDTH')
 			legend(off)
 			ylabel(`YRANGE', `YLAB_OPTS' ) 
-			yscale(r(0 .41))
+			yscale(r(0 .82))
 			xlabel(0 1,val labsize(`XLAB_SIZE') noticks)
 			xscale(noextend lcolor(none))
 			graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
