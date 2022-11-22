@@ -271,12 +271,12 @@ In the IDA and CUD condition (first two columns) the partisan gap is larger than
 \end{center}
 
 
-We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is party-congenial, on the interaction of partisanship and the treatment arm:
+We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is correct, on the interaction of the survey conditions and the congenial dummy:
 \begin{equation}\label{eq:partisangap-mturk}
-y_{ijk} = \alpha + \beta (Rep)_i + \gamma (Condition)_k + \delta_k (Rep_i \times Condition_k) + (survey \; item)_j + \varepsilon_{ijk}
+\text{Correct}_{ijk} = \alpha + \beta \text{Congenial}_i + \gamma \text{Condition}_k + \delta_k (\text{Congenial}_i \times \text{Condition}_k) + \text{question}_j + \varepsilon_{ijk}
 \end{equation}
-for respondent $i$, survey item $j$, and condition $k$. $\beta$ is the difference in partisan knowledge gaps, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that Republicans are more likely than Democrats to have a party-congenial response. We focus on the $\delta$'s, which capture how the different conditions affect observed partisan knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always IDA, so $\delta$ captures how the three conditions (CUD, FSR, IMC)---having the same questions with different questionnaire artifacts---mediates partisan knowledge gaps.
-We include the survey item fixed effects to allow each item to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
+for respondent $i$, survey item $j$, and condition $k$. $\beta$ captures the difference in proportion of correct responses when the answer is congenial to party, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that respondents are more likely to choose the correct answer when it is congenial to their party. We focus on the $\delta_k$'s, which capture how the different conditions affect observed knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always IDA, so the $\delta_k$'s capture how the three conditions (CUD, FSR, IMC)---having the same questions with different questionnaire artifacts---mediates partisan knowledge gaps.
+We include the nine survey questions fixed effects to allow each question to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
 
 % partisan-gaps/scripts/Stata/mturk/reg-table.do
 \begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
@@ -297,13 +297,12 @@ We include the survey item fixed effects to allow each item to elicit some const
 \end{table}
 
 
-\cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the Republican variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
-Column (2) includes only the treatment arms, and three of them elicit differences in partisan gaps that are statistically different from the baseline IDA condition. While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artifacts that inflate partisan gaps.
+\cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the congenial variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
+Column (2) includes only the survey conditions, and two of them (FSR, IMC) elicit differences in partisan gaps that are statistically different from the baseline IDA condition. This is consistent with our observation in \cref{fig:partisangaps-mturk} While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artifacts that inflate partisan gaps.
+Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the IMC condition is 8 percentage points less likely to give the correct response than the baseline IDA condition ($p<0.05$).
+%Compared to the gap arising from congeniality (in column (1)), a survey artifact in terms of differences in survey features (in column (2)) elicits a gap 0.31 times as large.
 
-Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the IMC condition is 8 percentage points less likely to give a party-congenial response than the baseline IDA condition ($p<0.05$). This estimate is non-trivial.
-Compared to the gap arising from partisanship (in column (1)), a survey artifact in terms of differences in survey features (in column (2)) elicits a gap 0.31 times as large.
-
-In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of partisanship and conditions. Now the Republican variable captures the partisan gap in the IDA condition (corresponding to column (1) of \cref{fig:partisangaps-mturk}). The Republican and survey condition interactions reveal the extent to which partisan knowledge gaps change across the different survey conditions. 
+In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of congenial and the four conditions (baseline is IDA). Now the congenial variable captures the knowledge gap in the IDA condition (corresponding to column (1) of \cref{fig:partisangaps-mturk}). The congenial and survey condition interactions reveal the extent to which partisan knowledge gaps change across the different survey conditions. 
 
 % partisan-gaps/scripts/Stata/mturk/barplot.do
 \begin{figure}[t]
@@ -507,7 +506,7 @@ In order to be able to compare this design to the previous studies in this manus
 \begin{table}[t] \centering \small \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 	\caption{Confidence Scoring and Knowledge Gaps: MTurk Study 2} 
-	\label{tab:partisangaps-mturk}
+	%\label{tab:xx}
 	\begin{adjustbox}{max width=\textwidth}
 		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
 			\toprule
