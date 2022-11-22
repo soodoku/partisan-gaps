@@ -12,6 +12,8 @@ foreach item of varlist $items {
 reshape long item, i(id) j(item_type, string)
 
 drop if pid_str=="Independent"
+* Drop CCD (confidence coding/24k)
+drop if survey == 2
 
 eststo: qui reghdfe item i.rep##i.survey $demo, absorb(item_type) vce(cluster id)
 
@@ -61,12 +63,12 @@ CCD = 24k 3 _n==3
 gen porder = .
 replace porder = 1 if _n==1
 replace porder = 4 if _n==2 
-replace porder = 5 if _n==3
-replace porder = 3 if _n==4
-replace porder = 2 if _n==5
+replace porder = 3 if _n==3
+replace porder = 2 if _n==4
+// replace porder = 2 if _n==5
 sort porder
 
-label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC" 5 "CCD"
+label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC"
 label values porder xlab
 
 
@@ -76,10 +78,10 @@ set scheme s2mono
 local YLAB_OPTS angle(horizontal) labsize(large) nogrid
 local YRANGE 0.1(0.1).4
 local BASELINE_XLIM = _N+.5
-local CI_WIDTH thick
+local CI_WIDTH medium
 local XLAB_SIZE large
-local BAR_OPTS 		color(gs10) fcolor(none) lwidth(medthick)
-local BAR_OPTS_BASE color(black) fcolor(none) lwidth(medthick)
+local BAR_OPTS 		color(gs10) fcolor(none) lwidth(medthick) 
+local BAR_OPTS_BASE color(gs10) fcolor(none) lwidth(medthick)
 
 local graphsavedir ./figures
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,13 +91,13 @@ local graphsavedir ./figures
 			(bar coef porder if porder==1, `BAR_OPTS_BASE') 
 			(bar coef porder if porder==2, `BAR_OPTS') 
 			(bar coef porder if porder==3, `BAR_OPTS') 
-			(bar coef porder if porder==4, `BAR_OPTS') 
-			(bar coef porder if porder==5, `BAR_OPTS'
+			(bar coef porder if porder==4, `BAR_OPTS' 
+			// (bar coef porder if porder==5, `BAR_OPTS'
 				xlabel(,val labsize(`XLAB_SIZE') )
 			) 
 			(rcap uci lci porder if porder!=1, 
-				color(gs7)
-				lwidth(`CI_WIDTH')
+				color(gs5)
+				lwidth(`CI_WIDTH') 
 				legend(off)
 				ylabel(`YRANGE', `YLAB_OPTS' ) 
 				xlabel(, notick)
@@ -105,7 +107,7 @@ local graphsavedir ./figures
 				plotregion(margin(12 12 0 0))
 			)		
 			(scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
-				xlabel(1 2 3 4 5)
+				xlabel(1 2 3 4)
 				recast(line) color(black) lpattern(dash)
 			)
 		;
