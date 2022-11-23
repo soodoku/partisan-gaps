@@ -30,3 +30,5 @@ Choices:
 3. be lazy
    - nuke gg
    - a bit sketchy
+
+Conclusion: we run with 2
