@@ -16,3 +16,17 @@
 
 - let's redo front, remove CCD. other conditions are about q design, CCD is about scoring
 - Lucas: take out CCD, redo tables and graphs, combine studies for new backend result, new table/graph for that as well
+
+
+* Added notes
+
+Choices:
+
+1. Skip Study 2
+2. Include Study 2
+   - clarify that we have different effect size expectations here as this a very diff. kind of q. + these are tricky questions
+   - apply relative scoring rule (4 and conditions)
+   - no meta analysis, don't average out effects, won't do precision weighting of study 1 and study 2
+3. be lazy
+   - nuke gg
+   - a bit sketchy
