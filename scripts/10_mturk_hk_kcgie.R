@@ -73,6 +73,7 @@ mturk_hk_closed_correct <-
                               ifelse(gg == "", NA, 0)),
          dt_correct = if_else(dt == "Temporarily ban immigrants from several majority-Muslim countries", 1,
                              ifelse(dt == "", NA, 0))) |> 
+        # democrat_leaners = ifelse(democrat_leaners == 1, "Democrat", "Republican"))  
   pivot_longer(cols = c(aca_correct, aca2_correct, gg_correct, dt_correct),
                names_to = "questions",
                values_to = "responses") |> 
@@ -81,6 +82,7 @@ mturk_hk_closed_correct <-
          response_probe = ifelse(questions %in% c("aca2_correct", "dt_correct"), responses, NA)) |> 
   dplyr::select(-c(rgc_o_aca:dt)) |> 
   drop_na(responses)
+
 
 ## Generating a data set with the probes 
 mturk_hk_probes <-
@@ -171,3 +173,139 @@ write_csv(mturk_hk_probes, "data/mturk_hk/mturk_hk_PROBES.csv")
 write_csv(mturk_hk_scale, "data/mturk_hk/mturk_hk_LIKERT.csv")
 
 # fin
+
+
+## graphs for data checks
+# 
+# library(scales)
+# 
+# mturk_hk_closed_correct |> 
+#   dplyr::select(democrat_leaners, aca) |> 
+#   drop_na() |> 
+#   ggplot(aes(x=reorder(aca, aca, function(x) length(x)), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) + 
+#   scale_y_continuous(labels=percent) + 
+#   scale_x_discrete(labels = wrap_format(10)) +
+#   labs(title = "Study 2: Affordable Care Act", x = "Response Options", y = "Count") + 
+#   theme_bw() + theme(legend.position = "none") +
+#   scale_fill_manual(values=c("blue", "red", "gray"))
+# 
+# mturk_hk_closed_correct |> 
+#   dplyr::select(democrat_leaners, aca2) |> 
+#   drop_na() |> 
+#   ggplot(aes(x=reorder(aca2, aca2, function(x) length(x)), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) + 
+#   scale_y_continuous(labels=percent) + 
+#   scale_x_discrete(labels = wrap_format(10)) +
+#   labs(title = "Study 2: Affordable Care Act 2", x = "Response Options", y = "Count") + 
+#   theme_bw() + theme(legend.position = "none") +
+#   scale_fill_manual(values=c("blue", "red", "gray"))
+# 
+# 
+# mturk_hk_closed_correct |> 
+#   dplyr::select(democrat_leaners, dt) |> 
+#   drop_na() |> 
+#   ggplot(aes(x=reorder(dt, dt, function(x) length(x)), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) + 
+#   scale_y_continuous(labels=percent) + 
+#   scale_x_discrete(labels = wrap_format(10)) +
+#   labs(title = "Study 2: Trump's Executive Order", x = "Response Options", y = "Count") + 
+#   theme_bw() + theme(legend.position = "none") +
+#   scale_fill_manual(values=c("blue", "red", "gray"))
+# 
+# mturk_hk_closed_correct |> 
+#   dplyr::select(democrat_leaners, gg) |> 
+#   drop_na() |> 
+#   ggplot(aes(x=reorder(gg, gg, function(x) length(x)), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) + 
+#   scale_y_continuous(labels=percent) + 
+#   scale_x_discrete(labels = wrap_format(10)) +
+#   labs(title = "Study 2: Greenhouse Gases", x = "Response Options", y = "Count") + 
+#   theme_bw() + theme(legend.position = "none") +
+#   scale_fill_manual(values=c("blue", "red", "gray"))
+# 
+# table(mturk_hk_closed_correct$gg_correct,mturk_hk_closed_correct$democrat_leaners)
+
+
+# mturk_hk_scale |> 
+#   dplyr::select(democrat_leaners, questions, responses) |> 
+#   filter(str_detect(questions, "aca_")) |> 
+#   drop_na() |> 
+#   arrange(questions, responses)|> 
+#   ggplot(aes(x = as.factor(responses), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) +
+#   scale_y_continuous(labels=percent) + 
+#   labs(title = "Study 2: Affordable Care Act", y = "Count", x = "Response Options",
+#        subtitle = "Correct answer is option 3") + 
+#   facet_wrap(~questions) +
+#   theme_bw() + 
+#   theme(legend.position = "none") +
+#   scale_fill_manual(values=c("red", "blue", "gray"))
+# 
+# 
+# mturk_hk_scale |> 
+#   dplyr::select(respondent,democrat_leaners, questions, responses) |> 
+#   filter(str_detect(questions, "aca_")) |> 
+#   drop_na() |> 
+#   arrange(questions, responses) |>
+#   mutate(correct = ifelse(questions == "rg_s_aca_3" & responses == 10, 1, NA)) |> 
+#   group_by(respondent) |> 
+#   fill(correct, .direction = "updown") |> 
+#   filter(correct == 1) |> 
+#   ggplot(aes(x = as.factor(responses), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) +
+#   scale_y_continuous(labels=percent) + 
+#   labs(title = "Study 2: Affordable Care Act", y = "Count", x = "Response Options",
+#        subtitle = "Correct answer is option 3") + 
+#   facet_wrap(~questions) +
+#   theme_bw() + 
+#   theme(legend.position = "none") +
+#   scale_fill_manual(values=c("red", "blue", "gray"))
+# 
+# 
+# mturk_hk_scale |> 
+#   dplyr::select(democrat_leaners, questions, responses) |> 
+#   filter(str_detect(questions, "aca2_")) |> 
+#   drop_na() |> 
+#   arrange(questions, responses)|> 
+#   ggplot(aes(x = as.factor(responses), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) +
+#   scale_y_continuous(labels=percent) + 
+#   labs(title = "Study 2: Affordable Care Act 2", y = "Count", x = "Response Options",
+#        subtitle = "Correct answer is option 3") + 
+#   facet_wrap(~questions) +
+#   theme_bw() + 
+#   theme(legend.position = "none") +
+#   scale_fill_manual(values=c("red", "blue", "gray"))
+# 
+# 
+# 
+# mturk_hk_scale |> 
+#   dplyr::select(democrat_leaners, questions, responses) |> 
+#   filter(str_detect(questions, "gg_")) |> 
+#   drop_na() |> 
+#   arrange(questions, responses)|> 
+#   ggplot(aes(x = as.factor(responses), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) +
+#   scale_y_continuous(labels=percent) + 
+#   labs(title = "Study 2: Greenhouse Gases", y = "Count", x = "Response Options",
+#        subtitle = "Correct answer is option 4") + 
+#   facet_wrap(~questions) +
+#   theme_bw() + 
+#   theme(legend.position = "none") +
+#   scale_fill_manual(values=c("red", "blue", "gray"))
+# 
+# mturk_hk_scale |> 
+#   dplyr::select(democrat_leaners, questions, responses) |> 
+#   filter(str_detect(questions, "dt_")) |> 
+#   drop_na() |> 
+#   arrange(questions, responses)|> 
+#   ggplot(aes(x = as.factor(responses), fill = as.factor(democrat_leaners))) +
+#   geom_bar(aes(y = (..count..)/sum(..count..))) +
+#   scale_y_continuous(labels=percent) + 
+#   labs(title = "Study 2: Donald Trump Executive Order", y = "Count", x = "Response Options",
+#        subtitle = "Correct answer is option 4") + 
+#   facet_wrap(~questions) +
+#   theme_bw() + 
+#   theme(legend.position = "none") +
+#   scale_fill_manual(values=c("red", "blue", "gray"))
