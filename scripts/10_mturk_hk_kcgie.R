@@ -5,8 +5,8 @@
 #setwd("partisan-gaps")  # folder
 
 ## Daniel's path
-#setwd(githubdir)
-#setwd("partisan-gaps")  # folder
+setwd(githubdir)
+setwd("partisan-gaps")  # folder
 
 # Load the packages
 library("tidyverse")
@@ -163,6 +163,47 @@ mturk_hk_scale <-
   mutate(congenial = ifelse(questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", "rg_s_gg2_2", "rg_s_gg2_4") & democrat_leaners == 1, 1,
                             ifelse(questions %in% c("rg_s_dt_4") & democrat_leaners == 0, 1, 0))) |> 
   drop_na(scale_correct_10)
+
+
+mturk_hk_relscale <-
+  mturk_hk |> 
+  dplyr::select(respondent, democrat, republican, independent, 
+                democrat_noleaners, democrat_leaners,
+                contains("_s_"), -contains("gg2")) |> 
+  pivot_longer(cols = contains("_s_"),
+               names_to = "questions",
+               values_to = "responses") |>
+  mutate(questions = str_remove(questions, "rg_s_"),
+         correct = ifelse(questions %in% c("aca_3", "aca2_3","gg_4", "dt_4"), "correct", NA_character_)) |> 
+  separate(questions, into = c("q_item", "r_num"), sep = "_", remove = FALSE) |> 
+  mutate(r_num = as.numeric(r_num)) |> 
+  group_by(respondent, q_item) |> 
+  mutate(max = ifelse(responses == max(responses), responses, NA),
+         unique = ifelse(max == sum(max, na.rm = TRUE), 1, NA),
+         c_threshold_10 = ifelse(max == 10, 1, NA),
+         c_threshold_7 = ifelse(max > 6, 1, NA),
+         nc_threshold_5 = ifelse(responses >= 7 & is.na(max), 1, NA),
+         nc_threshold_3 = ifelse(responses >= 3 & is.na(max), 1, NA)) |> 
+  fill(nc_threshold_5, .direction = "updown") |> 
+  fill(nc_threshold_3, .direction = "updown") |> 
+  mutate(rescaled_c_7 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_7) & is.na(nc_threshold_5), 1, 0),
+         rescaled_c_10 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
+         rescaled_c_7 = ifelse(!is.na(responses) & is.na(rescaled_c_7), 0, ifelse(is.na(responses), NA, rescaled_c_7)),
+         rescaled_c_10 = ifelse(!is.na(responses) & is.na(rescaled_c_10), 0, ifelse(is.na(responses), NA, rescaled_c_10)))
+         
+table(mturk_hk_relscale$rescaled_c_7)
+table(mturk_hk_relscale$rescaled_c_10)
+
+## TODO CONTINUE HERE
+# > table(mturk_hk_relscale$rescaled_c_7)
+# 
+# 0    1 
+# 7773  259 
+# > table(mturk_hk_relscale$rescaled_c_10)
+# 
+# 0    1 
+# 7904  128 
+
 
 ## Remove original file which is not required anymore
 rm(mturk_hk)
