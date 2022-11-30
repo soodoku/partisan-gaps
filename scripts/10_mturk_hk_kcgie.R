@@ -5,8 +5,8 @@
 #setwd("partisan-gaps")  # folder
 
 ## Daniel's path
-setwd(githubdir)
-setwd("partisan-gaps")  # folder
+#setwd(githubdir)
+#setwd("partisan-gaps")  # folder
 
 # Load the packages
 library("tidyverse")
@@ -165,7 +165,7 @@ mturk_hk_scale <-
   drop_na(scale_correct_10)
 
 
-mturk_hk_relscale <-
+mturk_hk_relscore <-
   mturk_hk |> 
   dplyr::select(respondent, democrat, republican, independent, 
                 democrat_noleaners, democrat_leaners,
@@ -182,7 +182,7 @@ mturk_hk_relscale <-
          unique = ifelse(max == sum(max, na.rm = TRUE), 1, NA),
          c_threshold_10 = ifelse(max == 10, 1, NA),
          c_threshold_7 = ifelse(max > 6, 1, NA),
-         nc_threshold_5 = ifelse(responses >= 7 & is.na(max), 1, NA),
+         nc_threshold_5 = ifelse(responses >= 5 & is.na(max), 1, NA),
          nc_threshold_3 = ifelse(responses >= 3 & is.na(max), 1, NA)) |> 
   fill(nc_threshold_5, .direction = "updown") |> 
   fill(nc_threshold_3, .direction = "updown") |> 
@@ -190,20 +190,11 @@ mturk_hk_relscale <-
          rescaled_c_10 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
          rescaled_c_7 = ifelse(!is.na(responses) & is.na(rescaled_c_7), 0, ifelse(is.na(responses), NA, rescaled_c_7)),
          rescaled_c_10 = ifelse(!is.na(responses) & is.na(rescaled_c_10), 0, ifelse(is.na(responses), NA, rescaled_c_10)))
-         
-table(mturk_hk_relscale$rescaled_c_7)
+
+table(mturk_hk_relscale$rescaled_c_7)         
+table(mturk_hk_relscale$rescaled_c_7[mturk_hk_relscale$correct == "correct"])
 table(mturk_hk_relscale$rescaled_c_10)
-
-## TODO CONTINUE HERE
-# > table(mturk_hk_relscale$rescaled_c_7)
-# 
-# 0    1 
-# 7773  259 
-# > table(mturk_hk_relscale$rescaled_c_10)
-# 
-# 0    1 
-# 7904  128 
-
+table(mturk_hk_relscale$rescaled_c_10[mturk_hk_relscale$correct == "correct"])
 
 ## Remove original file which is not required anymore
 rm(mturk_hk)
@@ -212,6 +203,7 @@ rm(mturk_hk)
 write_csv(mturk_hk_closed_correct, "data/mturk_hk/mturk_hk_MC.csv")
 write_csv(mturk_hk_probes, "data/mturk_hk/mturk_hk_PROBES.csv")
 write_csv(mturk_hk_scale, "data/mturk_hk/mturk_hk_LIKERT.csv")
+write_csv(mturk_hk_relscore, "data/mturk_hk/mturk_hk_relative_scoring.csv")
 
 # fin
 
