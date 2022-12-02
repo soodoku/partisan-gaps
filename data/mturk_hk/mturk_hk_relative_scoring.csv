@@ -1,4 +1,4 @@
-respondent,democrat,republican,independent,democrat_noleaners,democrat_leaners,questions,q_item,r_num,responses,correct,max,unique,c_threshold_10,c_threshold_7,nc_threshold_5,nc_threshold_3,rescaled_c_7,rescaled_c_10,rescaled_c_7_nounique,rescaled_c_10_nounique,rescaled_c_7_nomin,rescaled_c_10_nomin
+respondent,democrat,republican,independent,democrat_noleaners,democrat_leaners,questions,q_item,r_num,responses,correct,max,unique,c_threshold_10,c_threshold_7,nc_threshold_5,nc_threshold_3,relscore_c_7,relscore_c_10,relscore_c_7_nounique,relscore_c_10_nounique,relscore_c_7_nomin,relscore_c_10_nomin
 1,0,1,0,0,0,aca_1,aca,1,6,NA,NA,NA,NA,NA,1,1,0,0,0,0,0,0
 1,0,1,0,0,0,aca_2,aca,2,7,NA,NA,NA,NA,NA,1,1,0,0,0,0,0,0
 1,0,1,0,0,0,aca_3,aca,3,8,correct,8,1,NA,1,1,1,0,0,0,0,1,0

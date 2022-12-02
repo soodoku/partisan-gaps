@@ -186,35 +186,35 @@ mturk_hk_relscore <-
          nc_threshold_3 = ifelse(responses >= 3 & is.na(max), 1, NA)) |> 
   fill(nc_threshold_5, .direction = "updown") |> 
   fill(nc_threshold_3, .direction = "updown") |> 
-  mutate(rescaled_c_7 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_7) & is.na(nc_threshold_5), 1, 0),
-         rescaled_c_10 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
-         rescaled_c_7_nounique = ifelse(correct == "correct" & !is.na(max) & !is.na(c_threshold_7) & is.na(nc_threshold_5), 1, 0),
-         rescaled_c_10_nounique = ifelse(correct == "correct" & !is.na(max)& !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
-         rescaled_c_7_nomin = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_7), 1, 0),
-         rescaled_c_10_nomin = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10), 1, 0),
-         rescaled_c_7 = ifelse(!is.na(responses) & is.na(rescaled_c_7), 0, ifelse(is.na(responses), NA, rescaled_c_7)),
-         rescaled_c_10 = ifelse(!is.na(responses) & is.na(rescaled_c_10), 0, ifelse(is.na(responses), NA, rescaled_c_10)),
-         rescaled_c_7_nounique = ifelse(!is.na(responses) & is.na(rescaled_c_7_nounique), 0, ifelse(is.na(responses), NA, rescaled_c_7_nounique)),
-         rescaled_c_10_nounique = ifelse(!is.na(responses) & is.na(rescaled_c_10_nounique), 0, ifelse(is.na(responses), NA, rescaled_c_10_nounique)),
-         rescaled_c_7_nomin = ifelse(!is.na(responses) & is.na(rescaled_c_7_nomin), 0, ifelse(is.na(responses), NA, rescaled_c_7_nomin)),
-         rescaled_c_10_nomin = ifelse(!is.na(responses) & is.na(rescaled_c_10_nomin), 0, ifelse(is.na(responses), NA, rescaled_c_10_nomin)))
+  mutate(relscore_c_7 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_7) & is.na(nc_threshold_5), 1, 0),
+         relscore_c_10 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
+         relscore_c_7_nounique = ifelse(correct == "correct" & !is.na(max) & !is.na(c_threshold_7) & is.na(nc_threshold_5), 1, 0),
+         relscore_c_10_nounique = ifelse(correct == "correct" & !is.na(max)& !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
+         relscore_c_7_nomin = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_7), 1, 0),
+         relscore_c_10_nomin = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10), 1, 0),
+         relscore_c_7 = ifelse(!is.na(responses) & is.na(relscore_c_7), 0, ifelse(is.na(responses), NA, relscore_c_7)),
+         relscore_c_10 = ifelse(!is.na(responses) & is.na(relscore_c_10), 0, ifelse(is.na(responses), NA, relscore_c_10)),
+         relscore_c_7_nounique = ifelse(!is.na(responses) & is.na(relscore_c_7_nounique), 0, ifelse(is.na(responses), NA, relscore_c_7_nounique)),
+         relscore_c_10_nounique = ifelse(!is.na(responses) & is.na(relscore_c_10_nounique), 0, ifelse(is.na(responses), NA, relscore_c_10_nounique)),
+         relscore_c_7_nomin = ifelse(!is.na(responses) & is.na(relscore_c_7_nomin), 0, ifelse(is.na(responses), NA, relscore_c_7_nomin)),
+         relscore_c_10_nomin = ifelse(!is.na(responses) & is.na(relscore_c_10_nomin), 0, ifelse(is.na(responses), NA, relscore_c_10_nomin)))
 
 # Checking output
-# table(mturk_hk_relscore$rescaled_c_7)         
-# table(mturk_hk_relscore$rescaled_c_7[mturk_hk_relscore$correct == "correct"])
-# table(mturk_hk_relscore$rescaled_c_10)
-# table(mturk_hk_relscore$rescaled_c_10[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_7)         
+# table(mturk_hk_relscore$relscore_c_7[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_10)
+# table(mturk_hk_relscore$relscore_c_10[mturk_hk_relscore$correct == "correct"])
 # 
-# table(mturk_hk_relscore$rescaled_c_7_nounique)         
-# table(mturk_hk_relscore$rescaled_c_7_nounique[mturk_hk_relscore$correct == "correct"])
-# table(mturk_hk_relscore$rescaled_c_10_nomin)
-# table(mturk_hk_relscore$rescaled_c_10_nomin[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_7_nounique)         
+# table(mturk_hk_relscore$relscore_c_7_nounique[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_10_nomin)
+# table(mturk_hk_relscore$relscore_c_10_nomin[mturk_hk_relscore$correct == "correct"])
 # 
 # 
-# table(mturk_hk_relscore$rescaled_c_7_nomin)         
-# table(mturk_hk_relscore$rescaled_c_7_nomin[mturk_hk_relscore$correct == "correct"])
-# table(mturk_hk_relscore$rescaled_c_10_nomin)
-# table(mturk_hk_relscore$rescaled_c_10_nomin[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_7_nomin)         
+# table(mturk_hk_relscore$relscore_c_7_nomin[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_10_nomin)
+# table(mturk_hk_relscore$relscore_c_10_nomin[mturk_hk_relscore$correct == "correct"])
 
 ## Remove original file which is not required anymore
 rm(mturk_hk)
