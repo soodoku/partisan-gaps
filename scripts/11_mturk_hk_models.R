@@ -1,8 +1,8 @@
 # Set Working dir 
 
 ## Gaurav's path
-setwd(basedir) 
-setwd("partisan-gaps")  # folder
+#setwd(basedir) 
+#setwd("partisan-gaps")  # folder
 
 ## Daniel's path
 setwd(githubdir)
@@ -16,9 +16,84 @@ library("DeclareDesign")
 ## Sourcing the data cleaning file 
 source("scripts/10_mturk_hk_kcgie.R")
 
+## Generate a combined data set with closed ended responses and likert scale for Scoring analysis 
+df_analysis <-
+  bind_rows(
+  mturk_hk_closed_correct |> 
+    dplyr::select(respondent, questions, congenial, responses) |> 
+    mutate(survey = "Closed",
+           response_type = "closed",
+           questions = str_remove(questions, "_correct")) |> 
+    rename(q_item = questions),
+  mturk_hk_relscore |> 
+    ungroup() |> 
+    filter(correct == "correct") |> 
+    dplyr::select(respondent, congenial, q_item,starts_with("relscore")) |> 
+    pivot_longer(cols = starts_with("relscore"),
+                 names_to = "response_type",
+                 values_to = "responses") |> 
+  mutate(survey = "RL"))
+
+
 
 ##########
 ## Models for the document:
+
+
+lm_mc10rel_c_aca  <- lm_robust(responses ~ congenial*survey, 
+                           data = subset(df_analysis, response_type %in% c("closed", "relscore_c_10") & q_item == "aca"), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
+lm_mc10rel_c_aca2  <- lm_robust(responses ~ congenial*survey, 
+                               data = subset(df_analysis, response_type %in% c("closed", "relscore_c_10") & q_item == "aca2"), 
+                               clusters = respondent, 
+                               se_type = "stata")
+
+lm_mc10rel_c_gg  <- lm_robust(responses ~ congenial*survey, 
+                               data = subset(df_analysis, response_type %in% c("closed", "relscore_c_10") & q_item == "gg"), 
+                               clusters = respondent, 
+                               se_type = "stata")
+
+lm_mc10rel_c_dt  <- lm_robust(responses ~ congenial*survey, 
+                               data = subset(df_analysis, response_type %in% c("closed", "relscore_c_10") & q_item == "dt"), 
+                               clusters = respondent, 
+                               se_type = "stata")
+
+lm_mc10rel_c  <- lm_robust(responses ~ congenial*survey + q_item, 
+                           data = subset(df_analysis, response_type %in% c("closed", "relscore_c_10")), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
+lm_mc7rel_c  <- lm_robust(responses ~ congenial*survey + q_item, 
+                           data = subset(df_analysis, response_type %in% c("closed", "relscore_c_7")), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
+
+
+lm_mc10relnu_c  <- lm_robust(responses ~ congenial*survey + q_item, 
+                           data = subset(df_analysis, response_type %in% c("closed", "relscore_c_10_nounique")), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
+
+lm_mc10relnm_c  <- lm_robust(responses ~ congenial*survey + q_item, 
+                           data = subset(df_analysis, response_type %in% c("closed", "relscore_c_10_nomin")), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
+
+screenreg(list(lm_mc10rel_c, lm_mc7rel_c,lm_mc10relnu_c,lm_mc10relnm_c),
+          omit.coef = "q_item",
+          custom.coef.names = c("Intercept", "Congenial", "Relative Scoring (RL)",  "Congenial*RL" ),
+          custom.model.names =  c("Relative Scoring 10",  "RS >6","RS not unique", "RS no min" ))
+
+screenreg(list(lm_mc10rel_c_aca,lm_mc10rel_c_aca2,lm_mc10rel_c_gg,lm_mc10rel_c_dt,lm_mc10rel_c),
+          omit.coef = "q_item",
+          custom.coef.names = c("Intercept", "Congenial", "Relative Scoring (RL)",  "Congenial*RL" ),
+          custom.model.names =  c("ACA", "ACA2", "GG", "DT","All"))
+
 
 ## First table in the document
 ## TODO: this either needs to be added to Figure 1 or made its own version of the figure
@@ -33,10 +108,31 @@ lm_mc10_c  <- lm_robust(scale_mc_c_10 ~ congenial + questions,
                         clusters = respondent, 
                         se_type = "stata")
 
+lm_mc10rel_c  <- lm_robust(relscore_c_10 ~ congenial + questions, 
+                        data = subset(mturk_hk_relscore, correct == "correct" ), 
+                        clusters = respondent, 
+                        se_type = "stata")
+
+
+lm_mc7rel_c  <- lm_robust(relscore_c_7 ~ congenial + questions, 
+                           data = subset(mturk_hk_relscore, correct == "correct" ), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
+lm_mc10relnu_c  <- lm_robust(relscore_c_10_nounique ~ congenial + questions, 
+                           data = subset(mturk_hk_relscore, correct == "correct" ), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
+lm_mc10relnm_c  <- lm_robust(relscore_c_10_nomin ~ congenial + questions, 
+                           data = subset(mturk_hk_relscore, correct == "correct" ), 
+                           clusters = respondent, 
+                           se_type = "stata")
+
 # Presenting the difference between multiple choice and likert scale:
-screenreg(list(lm_closed_c, lm_mc10_c),
+screenreg(list(lm_closed_c, lm_mc10_c, lm_mc10rel_c, lm_mc7rel_c,lm_mc10relnu_c,lm_mc10relnm_c),
           omit.coef = "questions",
-          custom.model.names =  c("Multiple Choice", "Confidence Coding"))
+          custom.model.names =  c("Multiple Choice", "Confidence Coding", "Relative Scoring 10",  "RS >6","RS not unique", "RS no min" ))
 
 # Exporting the difference between multiple choice and likert scale:
 texreg(list(lm_closed_c, lm_mc10_c),
