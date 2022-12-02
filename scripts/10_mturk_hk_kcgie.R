@@ -199,6 +199,19 @@ mturk_hk_relscore <-
          relscore_c_7_nomin = ifelse(!is.na(responses) & is.na(relscore_c_7_nomin), 0, ifelse(is.na(responses), NA, relscore_c_7_nomin)),
          relscore_c_10_nomin = ifelse(!is.na(responses) & is.na(relscore_c_10_nomin), 0, ifelse(is.na(responses), NA, relscore_c_10_nomin)))
 
+## Remove original file which is not required anymore
+rm(mturk_hk)
+
+## Export files for Stata analysis
+write_csv(mturk_hk_closed_correct, "data/mturk_hk/mturk_hk_MC.csv")
+write_csv(mturk_hk_probes, "data/mturk_hk/mturk_hk_PROBES.csv")
+write_csv(mturk_hk_scale, "data/mturk_hk/mturk_hk_LIKERT.csv")
+write_csv(mturk_hk_relscore, "data/mturk_hk/mturk_hk_relative_scoring.csv")
+
+# fin
+
+
+
 # Checking output
 # table(mturk_hk_relscore$relscore_c_7)         
 # table(mturk_hk_relscore$relscore_c_7[mturk_hk_relscore$correct == "correct"])
@@ -215,18 +228,6 @@ mturk_hk_relscore <-
 # table(mturk_hk_relscore$relscore_c_7_nomin[mturk_hk_relscore$correct == "correct"])
 # table(mturk_hk_relscore$relscore_c_10_nomin)
 # table(mturk_hk_relscore$relscore_c_10_nomin[mturk_hk_relscore$correct == "correct"])
-
-## Remove original file which is not required anymore
-rm(mturk_hk)
-
-## Export files for Stata analysis
-write_csv(mturk_hk_closed_correct, "data/mturk_hk/mturk_hk_MC.csv")
-write_csv(mturk_hk_probes, "data/mturk_hk/mturk_hk_PROBES.csv")
-write_csv(mturk_hk_scale, "data/mturk_hk/mturk_hk_LIKERT.csv")
-write_csv(mturk_hk_relscore, "data/mturk_hk/mturk_hk_relative_scoring.csv")
-
-# fin
-
 
 ## graphs for data checks
 # 
