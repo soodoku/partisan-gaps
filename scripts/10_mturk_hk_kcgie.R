@@ -197,7 +197,9 @@ mturk_hk_relscore <-
          relscore_c_7_nounique = ifelse(!is.na(responses) & is.na(relscore_c_7_nounique), 0, ifelse(is.na(responses), NA, relscore_c_7_nounique)),
          relscore_c_10_nounique = ifelse(!is.na(responses) & is.na(relscore_c_10_nounique), 0, ifelse(is.na(responses), NA, relscore_c_10_nounique)),
          relscore_c_7_nomin = ifelse(!is.na(responses) & is.na(relscore_c_7_nomin), 0, ifelse(is.na(responses), NA, relscore_c_7_nomin)),
-         relscore_c_10_nomin = ifelse(!is.na(responses) & is.na(relscore_c_10_nomin), 0, ifelse(is.na(responses), NA, relscore_c_10_nomin)))
+         relscore_c_10_nomin = ifelse(!is.na(responses) & is.na(relscore_c_10_nomin), 0, ifelse(is.na(responses), NA, relscore_c_10_nomin))) |> 
+  mutate(congenial = ifelse(questions %in% c("aca_3", "aca2_3", "gg_4", "gg2_2", "gg2_4") & democrat_leaners == 1, 1,
+                            ifelse(questions %in% c("dt_4") & democrat_leaners == 0, 1, 0)))
 
 ## Remove original file which is not required anymore
 rm(mturk_hk)
