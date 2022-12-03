@@ -153,13 +153,13 @@ mturk_hk_scale <-
          scale_mc_c_10 = ifelse(questions == "rg_s_dt_4"   & responses == 10, 1, scale_mc_c_10),
          scale_mc_c_10 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
                                                   "rg_s_dt_4"), NA, scale_mc_c_10),
-         scale_mc_c_7 = ifelse(responses <= 7, 0, NA),
-         scale_mc_c_7 = ifelse(questions == "rg_s_aca_3"  & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(questions == "rg_s_aca2_3" & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(questions == "rg_s_gg_4"   & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(questions == "rg_s_dt_4"   & responses > 7, 1, scale_mc_c_7),
-         scale_mc_c_7 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
-                                                 "rg_s_dt_4"), NA, scale_mc_c_7)) |> 
+         scale_mc_c_8 = ifelse(responses <= 7, 0, NA),
+         scale_mc_c_8 = ifelse(questions == "rg_s_aca_3"  & responses > 7, 1, scale_mc_c_8),
+         scale_mc_c_8 = ifelse(questions == "rg_s_aca2_3" & responses > 7, 1, scale_mc_c_8),
+         scale_mc_c_8 = ifelse(questions == "rg_s_gg_4"   & responses > 7, 1, scale_mc_c_8),
+         scale_mc_c_8 = ifelse(questions == "rg_s_dt_4"   & responses > 7, 1, scale_mc_c_8),
+         scale_mc_c_8 = ifelse(!questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", 
+                                                 "rg_s_dt_4"), NA, scale_mc_c_8)) |> 
   mutate(congenial = ifelse(questions %in% c("rg_s_aca_3", "rg_s_aca2_3", "rg_s_gg_4", "rg_s_gg2_2", "rg_s_gg2_4") & democrat_leaners == 1, 1,
                             ifelse(questions %in% c("rg_s_dt_4") & democrat_leaners == 0, 1, 0))) |> 
   drop_na(scale_correct_10)
@@ -181,22 +181,28 @@ mturk_hk_relscore <-
   mutate(max = ifelse(responses == max(responses), responses, NA),
          unique = ifelse(max == sum(max, na.rm = TRUE), 1, NA),
          c_threshold_10 = ifelse(max == 10, 1, NA),
-         c_threshold_7 = ifelse(max > 6, 1, NA),
+         c_threshold_8 = ifelse(max > 7, 1, NA),
          nc_threshold_5 = ifelse(responses >= 5 & is.na(max), 1, NA),
-         nc_threshold_3 = ifelse(responses >= 3 & is.na(max), 1, NA)) |> 
+         nc_threshold_4 = ifelse(responses >= 4 & is.na(max), 1, NA),
+         nc_threshold_3 = ifelse(responses >= 3 & is.na(max), 1, NA),
+         nc_threshold_2 = ifelse(responses >= 2 & is.na(max), 1, NA),
+         nc_threshold_0 = ifelse(responses >= 1 & is.na(max), 1, NA)) |> 
   fill(nc_threshold_5, .direction = "updown") |> 
+  fill(nc_threshold_4, .direction = "updown") |> 
   fill(nc_threshold_3, .direction = "updown") |> 
-  mutate(relscore_c_7 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_7) & is.na(nc_threshold_5), 1, 0),
-         relscore_c_10 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
-         relscore_c_7_nounique = ifelse(correct == "correct" & !is.na(max) & !is.na(c_threshold_7) & is.na(nc_threshold_5), 1, 0),
-         relscore_c_10_nounique = ifelse(correct == "correct" & !is.na(max)& !is.na(c_threshold_10) & is.na(nc_threshold_5), 1, 0),
-         relscore_c_7_nomin = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_7), 1, 0),
+  fill(nc_threshold_2, .direction = "updown") |> 
+  fill(nc_threshold_0, .direction = "updown") |> 
+  mutate(relscore_c_8 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_8) & is.na(nc_threshold_2), 1, 0),
+         relscore_c_10 = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10) & is.na(nc_threshold_0), 1, 0),
+         relscore_c_8_nounique = ifelse(correct == "correct" & !is.na(max) & !is.na(c_threshold_8) & is.na(nc_threshold_2), 1, 0),
+         relscore_c_10_nounique = ifelse(correct == "correct" & !is.na(max)& !is.na(c_threshold_10) & is.na(nc_threshold_0), 1, 0),
+         relscore_c_8_nomin = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_8), 1, 0),
          relscore_c_10_nomin = ifelse(correct == "correct" & !is.na(max) & unique == 1 & !is.na(c_threshold_10), 1, 0),
-         relscore_c_7 = ifelse(!is.na(responses) & is.na(relscore_c_7), 0, ifelse(is.na(responses), NA, relscore_c_7)),
+         relscore_c_8 = ifelse(!is.na(responses) & is.na(relscore_c_8), 0, ifelse(is.na(responses), NA, relscore_c_8)),
          relscore_c_10 = ifelse(!is.na(responses) & is.na(relscore_c_10), 0, ifelse(is.na(responses), NA, relscore_c_10)),
-         relscore_c_7_nounique = ifelse(!is.na(responses) & is.na(relscore_c_7_nounique), 0, ifelse(is.na(responses), NA, relscore_c_7_nounique)),
+         relscore_c_8_nounique = ifelse(!is.na(responses) & is.na(relscore_c_8_nounique), 0, ifelse(is.na(responses), NA, relscore_c_8_nounique)),
          relscore_c_10_nounique = ifelse(!is.na(responses) & is.na(relscore_c_10_nounique), 0, ifelse(is.na(responses), NA, relscore_c_10_nounique)),
-         relscore_c_7_nomin = ifelse(!is.na(responses) & is.na(relscore_c_7_nomin), 0, ifelse(is.na(responses), NA, relscore_c_7_nomin)),
+         relscore_c_8_nomin = ifelse(!is.na(responses) & is.na(relscore_c_8_nomin), 0, ifelse(is.na(responses), NA, relscore_c_8_nomin)),
          relscore_c_10_nomin = ifelse(!is.na(responses) & is.na(relscore_c_10_nomin), 0, ifelse(is.na(responses), NA, relscore_c_10_nomin))) |> 
   mutate(congenial = ifelse(questions %in% c("aca_3", "aca2_3", "gg_4", "gg2_2", "gg2_4") & democrat_leaners == 1, 1,
                             ifelse(questions %in% c("dt_4") & democrat_leaners == 0, 1, 0)))
@@ -215,19 +221,19 @@ write_csv(mturk_hk_relscore, "data/mturk_hk/mturk_hk_relative_scoring.csv")
 
 
 # Checking output
-# table(mturk_hk_relscore$relscore_c_7)         
-# table(mturk_hk_relscore$relscore_c_7[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_8)         
+# table(mturk_hk_relscore$relscore_c_8[mturk_hk_relscore$correct == "correct"])
 # table(mturk_hk_relscore$relscore_c_10)
 # table(mturk_hk_relscore$relscore_c_10[mturk_hk_relscore$correct == "correct"])
 # 
-# table(mturk_hk_relscore$relscore_c_7_nounique)         
-# table(mturk_hk_relscore$relscore_c_7_nounique[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_8_nounique)         
+# table(mturk_hk_relscore$relscore_c_8_nounique[mturk_hk_relscore$correct == "correct"])
 # table(mturk_hk_relscore$relscore_c_10_nomin)
 # table(mturk_hk_relscore$relscore_c_10_nomin[mturk_hk_relscore$correct == "correct"])
 # 
 # 
-# table(mturk_hk_relscore$relscore_c_7_nomin)         
-# table(mturk_hk_relscore$relscore_c_7_nomin[mturk_hk_relscore$correct == "correct"])
+# table(mturk_hk_relscore$relscore_c_8_nomin)         
+# table(mturk_hk_relscore$relscore_c_8_nomin[mturk_hk_relscore$correct == "correct"])
 # table(mturk_hk_relscore$relscore_c_10_nomin)
 # table(mturk_hk_relscore$relscore_c_10_nomin[mturk_hk_relscore$correct == "correct"])
 

@@ -66,7 +66,7 @@ lm_mc10rel_c  <- lm_robust(responses ~ congenial*survey + q_item,
                            se_type = "stata")
 
 lm_mc7rel_c  <- lm_robust(responses ~ congenial*survey + q_item, 
-                           data = subset(df_analysis, response_type %in% c("closed", "relscore_c_7")), 
+                           data = subset(df_analysis, response_type %in% c("closed", "relscore_c_8")), 
                            clusters = respondent, 
                            se_type = "stata")
 
@@ -94,6 +94,8 @@ screenreg(list(lm_mc10rel_c_aca,lm_mc10rel_c_aca2,lm_mc10rel_c_gg,lm_mc10rel_c_d
           custom.coef.names = c("Intercept", "Congenial", "Relative Scoring (RL)",  "Congenial*RL" ),
           custom.model.names =  c("ACA", "ACA2", "GG", "DT","All"))
 
+table(mturk_hk_relscore$relscore_c_10[mturk_hk_relscore$correct == "correct"])
+table(mturk_hk_relscore$relscore_c_8[mturk_hk_relscore$correct == "correct"])
 
 ## First table in the document
 ## TODO: this either needs to be added to Figure 1 or made its own version of the figure
