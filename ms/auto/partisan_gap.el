@@ -58,7 +58,7 @@
    (LaTeX-add-labels
     "sec:theory"
     "sec:inflationary_measures"
-    "sec:data"
+    "sec:data1"
     "txt:IDA"
     "txt:CUD"
     "txt:FSR"
@@ -68,6 +68,7 @@
     "tab:partisangaps-mturk"
     "fig:partisangaps-mturk-reg"
     "sec:partisan_cues"
+    "sec:data2"
     "fig:yougov-reg"
     "eq:pgap-yougov"
     "tab:partisangaps-yougov"
@@ -75,6 +76,7 @@
     "tab:partisangaps-texas-unemp"
     "tab:partisangaps-texas-fedtax"
     "sec:confidence_coding"
+    "sec:data3"
     "fig:mturk_hk"
     "sec:discussion")
    (LaTeX-add-bibliographies
