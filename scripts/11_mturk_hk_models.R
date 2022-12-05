@@ -91,11 +91,16 @@ screenreg(list(lm_mc10rel_c, lm_mc7rel_c,lm_mc10relnu_c,lm_mc10relnm_c),
 
 screenreg(list(lm_mc10rel_c_aca,lm_mc10rel_c_aca2,lm_mc10rel_c_gg,lm_mc10rel_c_dt,lm_mc10rel_c),
           omit.coef = "q_item",
+          custom.gof.rows = list("Survey item FE" = c("No", "No", "No", "No", "Yes")),
           custom.coef.names = c("Intercept", "Congenial", "Relative Scoring (RL)",  "Congenial*RL" ),
-          custom.model.names =  c("ACA", "ACA2", "GG", "DT","All"))
+          custom.model.names =  c("Affordable Care Act", "Affordable Care Act 2", "Greenhouse Gases", "Donald Trump","All"))
 
-table(mturk_hk_relscore$relscore_c_10[mturk_hk_relscore$correct == "correct"])
-table(mturk_hk_relscore$relscore_c_8[mturk_hk_relscore$correct == "correct"])
+texreg(list(lm_mc10rel_c_aca,lm_mc10rel_c_aca2,lm_mc10rel_c_gg,lm_mc10rel_c_dt,lm_mc10rel_c),
+       omit.coef = "q_item",
+       custom.gof.rows = list("Survey item FE" = c("No", "No", "No", "No", "Yes")),
+       custom.coef.names = c("Intercept", "Congenial", "Relative Scoring (RL)",  "Congenial*RL" ),
+       custom.model.names =  c("Affordable Care Act", "Affordable Care Act 2", "Greenhouse Gases", "Donald Trump","All"))
+
 
 ## First table in the document
 ## TODO: this either needs to be added to Figure 1 or made its own version of the figure
