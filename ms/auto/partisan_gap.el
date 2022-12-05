@@ -9,6 +9,7 @@
     "latex2e"
     "../tabs/treatment_labels"
     "."
+    "../tabs/study4_prelim_table"
     "../tabs/mturk_hk_mc_likert"
     "./sections/appendix"
     "article"
