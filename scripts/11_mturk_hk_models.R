@@ -32,7 +32,8 @@ df_analysis <-
     pivot_longer(cols = starts_with("relscore"),
                  names_to = "response_type",
                  values_to = "responses") |> 
-  mutate(survey = "RL"))
+  mutate(survey = "RL")) |> 
+  mutate(congenial = as.factor(congenial))
 
 
 
@@ -101,6 +102,10 @@ texreg(list(lm_mc10rel_c_aca,lm_mc10rel_c_aca2,lm_mc10rel_c_gg,lm_mc10rel_c_dt,l
        custom.coef.names = c("Intercept", "Congenial", "Relative Scoring (RL)",  "Congenial*RL" ),
        custom.model.names =  c("Affordable Care Act", "Affordable Care Act 2", "Greenhouse Gases", "Donald Trump","All"))
 
+
+library(sjPlot)
+
+plot_model(lm_mc10rel_c, type = "int") + theme_minimal()
 
 ## First table in the document
 ## TODO: this either needs to be added to Figure 1 or made its own version of the figure
