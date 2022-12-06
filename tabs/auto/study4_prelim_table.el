@@ -2,6 +2,6 @@
  "study4_prelim_table"
  (lambda ()
    (LaTeX-add-labels
-    "table:coefficients4"))
+    "table:study4_results"))
  :latex)
 

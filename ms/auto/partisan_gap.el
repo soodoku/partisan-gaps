@@ -78,6 +78,7 @@
     "tab:partisangaps-texas-fedtax"
     "sec:confidence_coding"
     "sec:data3"
+    "eq:partisangap-mturk2"
     "fig:mturk_hk"
     "sec:discussion")
    (LaTeX-add-bibliographies

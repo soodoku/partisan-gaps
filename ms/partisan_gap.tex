@@ -370,7 +370,7 @@ We start with the YouGov survey to provide experimental evidence that cues in su
 
 Using the YouGov survey responses, we estimate
 \begin{equation}\label{eq:pgap-yougov}
-\text{correct response}_{i} = \alpha + \beta (congenial \; cue)_i  +\varepsilon_{i},
+\text{Correct}_{i} = \alpha + \beta (Congenial \; Cue)_i  +\varepsilon_{i},
 \end{equation}
 where the dependent variable is the indicator of whether the response to the question is correct.
 As discussed above, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly. Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response. The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
@@ -505,7 +505,19 @@ This means that we only code an answer to a question as correct if the responden
 
 \subsection*{Results from Study 4 (MTurk 2)}
 
-\textbf{PRESENTATION AND DISCUSSION OF THE RESULTS IS TODO}
+Using the data from study 4 we formalize the above observation as before. We regress the dependent variable, an indicator of whether the response is correct, on the interaction of the survey conditions (Multiple Choice and Relative Scoring) and the congenial dummy:
+
+\begin{equation}\label{eq:partisangap-mturk2}
+  \text{Correct}_{ijk} = \alpha + \beta \text{Congenial}_i + \gamma \text{Condition}_k + \delta_k (\text{Congenial}_i \times \text{Condition}_k) + \varepsilon_{ijk}
+\end{equation}
+
+
+for respondents \(i\), survey item \(j\), and condition \(k\). As in \cref{eq:partisangap-mturk} \(\beta\) captures the difference in proportion of correct responses when the answer to the question is congenial to the respondents party affiliation. A positive estimate indicates that respondents are more likely to choose the correct response when it is congenial to their party affiliation. \(\delta\) captures the difference in how the two scoring treatments, multiple choice and confidence coding, affect the knowledge gaps across partisans.
+
+In the pooled equation, which includes all questions we also include question fixed effects, \(\text{question}_j\).
+
+The results from \cref{table:study4_results} show that
+
 
 
 
