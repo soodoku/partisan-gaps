@@ -79,11 +79,13 @@ do ./tx-lyceum/unemp-barplot.do
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // * MTurk results (Study 4)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Figure 5
-do ./mturk_hk/mc_likert_coefplot.do
-
-**** Table 7: Confidence scoring and knowledge gaps
+**** Table x
 do ./mturk_hk/reg_table.do
+
+**** Figure x
+do ./mturk_hk/barplots.do
+
+
 
 
 tictoc toc

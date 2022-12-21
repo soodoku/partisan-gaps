@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  21 Nov 2022, 12:16:41
+ opened on:  21 Dec 2022, 17:26:41
 
 . 
 . version 13              // Still on version 13 :(
@@ -32,7 +32,7 @@ sssssss
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 21 Nov 2022 12:16:41
+Start time: 21 Dec 2022 17:26:41
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
@@ -45,8 +45,6 @@ Start time: 21 Nov 2022 12:16:41
 
 . do ./mturk/preamble.do
 
-. global items    birth religion illegal death increase science fraud mmr deficit
-
 . global arms             RW IPS FSR 14k 24k
 
 . global demo     age i.female i.educ i.hisla $races
@@ -57,15 +55,10 @@ Start time: 21 Nov 2022 12:16:41
 . label var id "Participant ID"
 
 . 
-. rename avg avg_str
-
-. destring avg_str, gen(avg) force
-avg_str contains nonnumeric characters; avg generated as double
-(2 missing values generated)
-
-. 
 . *------------------------------------------------------------------------------
 . *** Response for the 9 items
+. global items    birth religion illegal death increase science fraud mmr deficit
+
 . label define itemResponseLabel 1 "Correct" 0 "Incorrect"
 
 . 
@@ -74,8 +67,12 @@ avg_str contains nonnumeric characters; avg generated as double
   3.         gen `_`var'' = `var'
   4.         drop `var'
   5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
-  6.         label variable `var' "=1 if response is congenial to party for `var' item"
-  7.         label values `var' itemResponseLabel
+  6.         label variable `var' "=1 if response is wrong and congenial to R for `var' item"
+  7.         * If we define it as correct and congenial to D, and then use D as the "congenial dummy". it's going
+.         * to be the same. (Independents dropped)
+.         // replace `var' = 1 - `var'
+.         // label variable `var' "=1 if response is correct and congenial for D for `var' item"
+.         label values `var' itemResponseLabel
   8. }
 (24 missing values generated)
 (35 missing values generated)
@@ -87,9 +84,19 @@ avg_str contains nonnumeric characters; avg generated as double
 (31 missing values generated)
 (82 missing values generated)
 
-. 
-. replace deficit = 1 - deficit
+. * deficif seems to have been coded differently compared to previous 8 items
+. * https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
+. replace deficit = 1 - deficit 
 (1171 real changes made)
+
+. 
+. rename avg avg_str
+
+. destring avg_str, gen(avg) force
+avg_str contains nonnumeric characters; avg generated as double
+(2 missing values generated)
+
+. label variable avg "Avg of the 9 survey questions"
 
 . 
 . *------------------------------------------------------------------------------
@@ -110,6 +117,7 @@ avg_str contains nonnumeric characters; avg generated as double
 . 
 . gen rep = (pid_str=="Republican") if !missing(pid_str)
 
+. 
 . 
 . *------------------------------------------------------------------------------
 . *** Demo
@@ -184,7 +192,8 @@ end of do-file
 > */
 . 
 . 
-. coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
+. // coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
+. coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k), /// removing 24k aka CCD
 >         msymbol(s) ///
 >         keep(3.pid) ///
 >         asequation /// "set equation to model name or string" make the rows the models
@@ -204,65 +213,43 @@ end of do-file
 >                 birth_IPS = "{bf:Obama birthplace}" ///
 >                 birth_FSR = "{bf:Obama birthplace}" ///
 >                 birth_14k = "{bf:Obama birthplace}" ///
->                 birth_24k = "{bf:Obama birthplace}" ///
->                 birth_all = "{bf:Obama birthplace}" ///
 >                 religion_RW = "{bf:Obama religion}" ///                                                               
 >                                     " ///
 >                 religion_IPS = "{bf:Obama religion}" ///
 >                 religion_FSR = "{bf:Obama religion}" ///
 >                 religion_14k = "{bf:Obama religion}" ///
->                 religion_24k = "{bf:Obama religion}" ///
->                 religion_all = "{bf:Obama religion}" ///
 >                 illegal_RW = "{bf:ACA illegal}" ///
 >                 illegal_IPS = "{bf:ACA illegal}" ///
 >                 illegal_FSR = "{bf:ACA illegal}" ///
 >                 illegal_14k = "{bf:ACA illegal}" ///
->                 illegal_24k = "{bf:ACA illegal}" ///
->                 illegal_all = "{bf:ACA illegal}" ///
 >                 death_RW = "{bf:ACA death panels}" ///
 >                 death_IPS = "{bf:ACA death panels}" ///
 >                 death_FSR = "{bf:ACA death panels}" ///
 >                 death_14k = "{bf:ACA death panels}" ///
->                 death_24k = "{bf:ACA death panels}" ///
->                 death_all = "{bf:ACA death panels}" ///
 >                 increase_RW = "{bf:GW causes}" ///
 >                 increase_IPS = "{bf:GW causes}" ///
 >                 increase_FSR = "{bf:GW causes}" ///
 >                 increase_14k = "{bf:GW causes}" ///
->                 increase_24k = "{bf:GW causes}" ///
->                 increase_all = "{bf:GW causes}" ///
 >                 science_RW = "{bf:GW scientists agree}" ///
 >                 science_IPS = "{bf:GW scientists agree}" ///
 >                 science_FSR = "{bf:GW scientists agree}" ///
 >                 science_14k = "{bf:GW scientists agree}" ///
->                 science_24k = "{bf:GW scientists agree}" ///
->                 science_all = "{bf:GW scientists agree}" ///
 >                 fraud_RW = "{bf:Voter fraud}" ///
 >                 fraud_IPS = "{bf:Voter fraud}" ///
 >                 fraud_FSR = "{bf:Voter fraud}" ///
 >                 fraud_14k = "{bf:Voter fraud}" ///
->                 fraud_24k = "{bf:Voter fraud}" ///
->                 fraud_all = "{bf:Voter fraud}" ///
 >                 mmr_RW = "{bf:MMR vaccine}" ///
 >                 mmr_IPS = "{bf:MMR vaccine}" ///
 >                 mmr_FSR = "{bf:MMR vaccine}" ///
 >                 mmr_14k = "{bf:MMR vaccine}" ///
->                 mmr_24k = "{bf:MMR vaccine}" ///
->                 mmr_all = "{bf:MMR vaccine}" ///
 >                 deficit_RW = "{bf:Budget deficit}" ///
 >                 deficit_IPS = "{bf:Budget deficit}" ///
 >                 deficit_FSR = "{bf:Budget deficit}" ///
 >                 deficit_14k = "{bf:Budget deficit}" ///
->                 deficit_24k = "{bf:Budget deficit}" ///
->                 deficit_all = "{bf:Budget deficit}" ///         
 >                 avg_RW = "{bf:Average}" ///                                                             
 >                 avg_IPS = "{bf:Average}" ///                                                            
 >                 avg_FSR = "{bf:Average}" ///                                                            
 >                 avg_14k = "{bf:Average}" ///                                                            
->                 avg_24k = "{bf:Average}" ///                                                            
->                 avg_all = "{bf:Average}" ///                                                            
->                 avg_IPS_annote = "{bf:Average}" ///                                                             
->                 avg_24k_annote = "{bf:Average}" ///                                                             
 >                 )
 
 . 
@@ -277,8 +264,6 @@ end of do-file
 
 . addplot 4: , title("{bf:IMC}") norescaling
 
-. addplot 5: , title("{bf:CCD}") norescaling
-
 . 
 . * graph margin
 . gr_edit .style.editstyle margin(left) editcopy 
@@ -287,10 +272,10 @@ end of do-file
 . gr_edit .plotregion1.style.editstyle margin(left) editcopy
 
 . * Remove ylabel ticks
-. gr_edit .plotregion1.yaxis1[5].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
+. gr_edit .plotregion1.yaxis1[4].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
 
 . * Shift labels to left
-. gr_edit .plotregion1.move yaxis1[5] leftof 9 1
+. gr_edit .plotregion1.move yaxis1[4] leftof 9 1
 
 . 
 . * reset margins back to zero to flush with new col of labels
@@ -341,15 +326,6 @@ end of do-file
 . gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle box_alignment(center) editcopy
 
 . gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
-
-. 
-. gr_edit .plotregion1.plotregion1[5].AddTextBox added_text editor `y_heigh_coord' `beta_24k'
-
-. gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle `annote_style'
-
-. gr_edit .plotregion1.plotregion1[5].added_text[1].style.editstyle box_alignment(center) editcopy
-
-. gr_edit .plotregion1.plotregion1[5].added_text[1].text.Arrpush `beta_24k'
 
 . 
 . graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
@@ -405,6 +381,10 @@ end of do-file
 . **** Reg results for effect of party & survey type on response (Tab 2 + Fig 2)
 . do ./mturk/reg-table.do
 
+. * Drop CCD (confidence coding/24k)
+. drop if survey == 2
+(254 observations deleted)
+
 . 
 . * Reshape from wide to long to stack participant-item observations
 . foreach item of varlist $items {
@@ -416,7 +396,7 @@ end of do-file
 
 Data                               wide   ->   long
 -----------------------------------------------------------------------------
-Number of obs.                     1207   ->   10863
+Number of obs.                      953   ->    8577
 Number of variables                 411   ->     404
 j variable (9 values)                     ->   item_type
 xij variables:
@@ -425,7 +405,7 @@ xij variables:
 
 . 
 . drop if pid_str=="Independent"
-(3708 observations deleted)
+(2925 observations deleted)
 
 . 
 . 
@@ -464,13 +444,13 @@ added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "794"
+       e(Nrespondents) : "628"
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{Yes}"
 
 added macro:
-               e(nobs) : "    6,893"
+               e(nobs) : "    5,652"
 
 added macro:
                e(demo) : "\multicolumn{1}{c}{.}"
@@ -480,13 +460,13 @@ added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "794"
+       e(Nrespondents) : "628"
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{Yes}"
 
 added macro:
-               e(nobs) : "    6,893"
+               e(nobs) : "    5,652"
 
 added macro:
                e(demo) : "\multicolumn{1}{c}{.}"
@@ -496,13 +476,13 @@ added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "794"
+       e(Nrespondents) : "628"
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{Yes}"
 
 added macro:
-               e(nobs) : "    6,893"
+               e(nobs) : "    5,652"
 
 added macro:
                e(demo) : "\multicolumn{1}{c}{.}"
@@ -512,13 +492,13 @@ added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "793"
+       e(Nrespondents) : "627"
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{Yes}"
 
 added macro:
-               e(nobs) : "    6,884"
+               e(nobs) : "    5,643"
 
 added macro:
                e(demo) : "\multicolumn{1}{c}{Yes}"
@@ -528,13 +508,13 @@ added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "793"
+       e(Nrespondents) : "627"
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{Yes}"
 
 added macro:
-               e(nobs) : "    6,884"
+               e(nobs) : "    5,643"
 
 added macro:
                e(demo) : "\multicolumn{1}{c}{Yes}"
@@ -544,13 +524,13 @@ added macro:
               e(items) : "9"
 
 added macro:
-       e(Nrespondents) : "793"
+       e(Nrespondents) : "627"
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{Yes}"
 
 added macro:
-               e(nobs) : "    6,884"
+               e(nobs) : "    5,643"
 
 added macro:
                e(demo) : "\multicolumn{1}{c}{Yes}"
@@ -571,18 +551,20 @@ delimiter now ;
 >         nobase  
 >         noobs
 >         nomtitle
->         coeflabel(1.rep "Republican=1"
+>         coeflabel(1.rep "Congenial"
 >                           5.survey "CUD"
 >                           3.survey "FSR"
 >                           1.survey "IMC"
->                           2.survey "CCD"
->                       1.rep#5.survey "Republican=1 $\times$ CUD"
->                       1.rep#3.survey "Republican=1 $\times$ FSR"                
->                       1.rep#1.survey "Republican=1 $\times$ IMC"
->                       1.rep#2.survey "Republican=1 $\times$ CCD"
->                       // 1.rep#4.survey "Republican=1 $\times$ IPS"
+>                           // 2.survey "CCD"
+>                       1.rep#5.survey "Congenial $\times$ CUD"
+>                       1.rep#3.survey "Congenial $\times$ FSR"           
+>                       1.rep#1.survey "Congenial $\times$ IMC"
+>                       // 1.rep#2.survey "Congenial $\times$ CCD"
+>                       // 1.rep#4.survey "Congenial $\times$ IPS"
 >                 )
->         order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
+>         // order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey
+> )
+>         order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
 >         scalar(
 >                 "r2 R$^2$" 
 >                 "itemFE Survey item FE"
@@ -598,44 +580,38 @@ Dep. var. is 1(response is congenial)
 --------------------------------------------------------------------------------------------
                           (1)         (2)         (3)         (4)         (5)         (6)   
 --------------------------------------------------------------------------------------------
-Republican=1            0.256***                0.351***    0.258***                0.353***
-                      (0.016)                 (0.035)     (0.016)                 (0.034)   
+Congenial               0.281***                0.351***    0.284***                0.353***
+                      (0.017)                 (0.035)     (0.017)                 (0.034)   
 
-CUD                                 0.010       0.000                   0.014       0.005   
+CUD                                 0.010       0.000                   0.011       0.002   
                                   (0.028)     (0.022)                 (0.028)     (0.021)   
 
-FSR                                -0.064**     0.000                  -0.062*      0.001   
+FSR                                -0.064**     0.000                  -0.063**    -0.001   
                                   (0.024)     (0.019)                 (0.024)     (0.019)   
 
 IMC                                -0.080**    -0.023                  -0.079**    -0.021   
                                   (0.025)     (0.019)                 (0.025)     (0.019)   
 
-CCD                                -0.155***   -0.064***               -0.153***   -0.061***
-                                  (0.022)     (0.015)                 (0.022)     (0.015)   
-
-Republican=1 $\tim~D                            0.024                               0.021   
+Congenial $\times$~D                            0.024                               0.024   
                                               (0.046)                             (0.045)   
 
-Republican=1 $\tim~R                           -0.173***                           -0.165***
+Congenial $\times$~R                           -0.173***                           -0.163***
                                               (0.046)                             (0.045)   
 
-Republican=1 $\tim~C                           -0.132**                            -0.136** 
+Congenial $\times$~C                           -0.132**                            -0.136** 
                                               (0.048)                             (0.048)   
 
-Republican=1 $\tim~D                           -0.241***                           -0.245***
-                                              (0.046)                             (0.045)   
-
-Constant                0.165***    0.304***    0.182***    0.144***    0.299***    0.162***
-                      (0.006)     (0.020)     (0.014)     (0.011)     (0.023)     (0.015)   
+Constant                0.179***    0.306***    0.184***    0.156***    0.303***    0.164***
+                      (0.007)     (0.020)     (0.014)     (0.013)     (0.024)     (0.016)   
 --------------------------------------------------------------------------------------------
-R$^2$                   0.329       0.270       0.354       0.335       0.277       0.361   
+R$^2$                   0.315       0.234       0.328       0.324       0.243       0.337   
 Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
 > {Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
 Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{Yes} 
 >    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
 Items                       9           9           9           9           9           9   
-Respondents               794         794         794         793         793         793   
-Respondent-items         6,893        6,893        6,893        6,884        6,884        6,884   
+Respondents               628         628         628         627         627         627   
+Respondent-items         5,652        5,652        5,652        5,643        5,643        5,643   
 --------------------------------------------------------------------------------------------
 Standard errors in parentheses
 + p<0.1, * p<0.05, ** p<0.01, *** p<0.001
@@ -652,19 +628,18 @@ Standard errors in parentheses
 >         nobase  
 >         noobs
 >         nomtitle
->         coeflabel(1.rep "Republican=1"
+>         coeflabel(1.rep "Congenial"
 >                           5.survey "CUD"
 >                           3.survey "FSR"
 >                           1.survey "IMC"
->                           2.survey "CCD"
->                       1.rep#5.survey "Republican=1 $\times$ CUD"
->                       1.rep#3.survey "Republican=1 $\times$ FSR"                
->                       1.rep#1.survey "Republican=1 $\times$ IMC"
->                       1.rep#2.survey "Republican=1 $\times$ CCD"
->                       // 1.rep#4.survey "Republican=1 $\times$ IPS"
+>                           // 2.survey "CCD"
+>                       1.rep#5.survey "Congenial $\times$ CUD"
+>                       1.rep#3.survey "Congenial $\times$ FSR"           
+>                       1.rep#1.survey "Congenial $\times$ IMC"
+>                       // 1.rep#2.survey "Congenial $\times$ CCD"
+>                       // 1.rep#4.survey "Congenial $\times$ IPS"
 >                 )
->         order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey)
-> 
+>         order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
 >         scalar(
 >                 "r2 R$^2$" 
 >                 "itemFE Survey item FE"
@@ -700,8 +675,6 @@ D:\partisan-gaps\scripts\Stata
 
 . do ./mturk/preamble.do
 
-. global items    birth religion illegal death increase science fraud mmr deficit
-
 . global arms             RW IPS FSR 14k 24k
 
 . global demo     age i.female i.educ i.hisla $races
@@ -712,15 +685,10 @@ D:\partisan-gaps\scripts\Stata
 . label var id "Participant ID"
 
 . 
-. rename avg avg_str
-
-. destring avg_str, gen(avg) force
-avg_str contains nonnumeric characters; avg generated as double
-(2 missing values generated)
-
-. 
 . *------------------------------------------------------------------------------
 . *** Response for the 9 items
+. global items    birth religion illegal death increase science fraud mmr deficit
+
 . label define itemResponseLabel 1 "Correct" 0 "Incorrect"
 
 . 
@@ -729,8 +697,12 @@ avg_str contains nonnumeric characters; avg generated as double
   3.         gen `_`var'' = `var'
   4.         drop `var'
   5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
-  6.         label variable `var' "=1 if response is congenial to party for `var' item"
-  7.         label values `var' itemResponseLabel
+  6.         label variable `var' "=1 if response is wrong and congenial to R for `var' item"
+  7.         * If we define it as correct and congenial to D, and then use D as the "congenial dummy". it's going
+.         * to be the same. (Independents dropped)
+.         // replace `var' = 1 - `var'
+.         // label variable `var' "=1 if response is correct and congenial for D for `var' item"
+.         label values `var' itemResponseLabel
   8. }
 (24 missing values generated)
 (35 missing values generated)
@@ -742,9 +714,19 @@ avg_str contains nonnumeric characters; avg generated as double
 (31 missing values generated)
 (82 missing values generated)
 
-. 
-. replace deficit = 1 - deficit
+. * deficif seems to have been coded differently compared to previous 8 items
+. * https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
+. replace deficit = 1 - deficit 
 (1171 real changes made)
+
+. 
+. rename avg avg_str
+
+. destring avg_str, gen(avg) force
+avg_str contains nonnumeric characters; avg generated as double
+(2 missing values generated)
+
+. label variable avg "Avg of the 9 survey questions"
 
 . 
 . *------------------------------------------------------------------------------
@@ -765,6 +747,7 @@ avg_str contains nonnumeric characters; avg generated as double
 . 
 . gen rep = (pid_str=="Republican") if !missing(pid_str)
 
+. 
 . 
 . *------------------------------------------------------------------------------
 . *** Demo
@@ -823,6 +806,10 @@ xij variables:
 . drop if pid_str=="Independent"
 (3708 observations deleted)
 
+. * Drop CCD (confidence coding/24k)
+. drop if survey == 2
+(1503 observations deleted)
+
 . 
 . eststo: qui reghdfe item i.rep##i.survey $demo, absorb(item_type) vce(cluster id)
 (est7 stored)
@@ -832,22 +819,22 @@ xij variables:
 
 . mat list coefmat
 
-coefmat[1,32]
-            0b.          1.          1.          2.          3.         4b.          5.     0b.rep#     0b.rep#
-           rep         rep      survey      survey      survey      survey      survey   1o.survey   2o.survey
-y1           0   .36075449  -.01900472  -.06022729  -.00014082           0   .00360187           0           0
+coefmat[1,29]
+            0b.          1.          1.          3.         4b.          5.     0b.rep#     0b.rep#     0b.rep#
+           rep         rep      survey      survey      survey      survey   1o.survey   3o.survey   4b.survey
+y1           0   .36250244  -.01842748  -.00143353           0   .00018715           0           0           0
 
-        0b.rep#     0b.rep#     0b.rep#      1.rep#      1.rep#      1.rep#     1o.rep#      1.rep#            
-     3o.survey   4b.survey   5o.survey    1.survey    2.survey    3.survey   4b.survey    5.survey         age
-y1           0           0           0  -.13421861  -.24369371  -.16528204           0   .02275678  -.00028675
+        0b.rep#      1.rep#      1.rep#     1o.rep#      1.rep#                     0b.          1.         1b.
+     5o.survey    1.survey    3.survey   4b.survey    5.survey         age      female      female        educ
+y1           0  -.13464867  -.16386998           0    .0249549  -.00020876           0   .01569866           0
 
-            0b.          1.         1b.          2.          3.          4.          5.         1b.          2.
-        female      female        educ        educ        educ        educ        educ       hisla       hisla
-y1           0   .01730912           0    .0243345   .24794014   -.0294332   .02978312           0   .00281798
+             2.          3.          4.          5.         1b.          2.                                    
+          educ        educ        educ        educ       hisla       hisla       asian       black       white
+y1   .02533311   .41662524   -.0274593   .03659491           0  -.00109593  -.06090855  -.02826621   -.0997682
 
-                                                               
-         asian       black       white      others       _cons
-y1  -.07846987  -.03329282  -.09986147  -.06673277   .81832221
+                           
+        others       _cons
+y1  -.05118928   .66260155
 
 . local baseline = coefmat[1, 2] /* 1.rep */
 
@@ -859,13 +846,13 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .81832221
 (1 observation deleted)
 
 . drop if strpos(var, "0b.rep")
-(6 observations deleted)
+(5 observations deleted)
 
 . drop if var=="1.survey"
 (1 observation deleted)
 
 . drop if var=="2.survey"
-(1 observation deleted)
+(0 observations deleted)
 
 . drop if var=="3.survey"
 (1 observation deleted)
@@ -909,7 +896,7 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .81832221
 . label var est "Original reg estimate (before adding back to baseline)"
 
 . replace coef = `baseline' + coef if var!="1.rep"
-(4 real changes made)
+(3 real changes made)
 
 . 
 . * Construct CI
@@ -935,7 +922,7 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .81832221
 > */
 . 
 . gen porder = .
-(5 missing values generated)
+(4 missing values generated)
 
 . replace porder = 1 if _n==1
 (1 real change made)
@@ -943,19 +930,17 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .81832221
 . replace porder = 4 if _n==2 
 (1 real change made)
 
-. replace porder = 5 if _n==3
+. replace porder = 3 if _n==3
 (1 real change made)
 
-. replace porder = 3 if _n==4
+. replace porder = 2 if _n==4
 (1 real change made)
 
-. replace porder = 2 if _n==5
-(1 real change made)
-
+. // replace porder = 2 if _n==5
 . sort porder
 
 . 
-. label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC" 5 "CCD"
+. label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC"
 
 . label values porder xlab
 
@@ -971,13 +956,13 @@ y1  -.07846987  -.03329282  -.09986147  -.06673277   .81832221
 
 . local BASELINE_XLIM = _N+.5
 
-. local CI_WIDTH thick
+. local CI_WIDTH medium
 
 . local XLAB_SIZE large
 
-. local BAR_OPTS          color(gs10) fcolor(none) lwidth(medthick)
+. local BAR_OPTS          color(gs10) fcolor(none) lwidth(medthick) 
 
-. local BAR_OPTS_BASE color(black) fcolor(none) lwidth(medthick)
+. local BAR_OPTS_BASE color(gs10) fcolor(none) lwidth(medthick)
 
 . 
 . local graphsavedir ./figures
@@ -990,13 +975,13 @@ delimiter now ;
 >                         (bar coef porder if porder==1, `BAR_OPTS_BASE') 
 >                         (bar coef porder if porder==2, `BAR_OPTS') 
 >                         (bar coef porder if porder==3, `BAR_OPTS') 
->                         (bar coef porder if porder==4, `BAR_OPTS') 
->                         (bar coef porder if porder==5, `BAR_OPTS'
+>                         (bar coef porder if porder==4, `BAR_OPTS' 
+>                         // (bar coef porder if porder==5, `BAR_OPTS'
 >                                 xlabel(,val labsize(`XLAB_SIZE') )
 >                         ) 
 >                         (rcap uci lci porder if porder!=1, 
->                                 color(gs7)
->                                 lwidth(`CI_WIDTH')
+>                                 color(gs5)
+>                                 lwidth(`CI_WIDTH') 
 >                                 legend(off)
 >                                 ylabel(`YRANGE', `YLAB_OPTS' ) 
 >                                 xlabel(, notick)
@@ -1006,7 +991,7 @@ delimiter now ;
 >                                 plotregion(margin(12 12 0 0))
 >                         )               
 >                         (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
->                                 xlabel(1 2 3 4 5)
+>                                 xlabel(1 2 3 4)
 >                                 recast(line) color(black) lpattern(dash)
 >                         )
 >                 ;
@@ -1397,7 +1382,7 @@ y1             0     .14400665     .19903846
 
 . local YLAB_OPTS angle(horizontal) labsize(large) nogrid 
 
-. local YRANGE 0.(0.1).4
+. local YRANGE 0.(0.2).8
 
 . local BASELINE_XLIM = _N+.5
 
@@ -1421,7 +1406,7 @@ delimiter now ;
 >                         lwidth(`CI_WIDTH')
 >                         legend(off)
 >                         ylabel(`YRANGE', `YLAB_OPTS' ) 
->                         yscale(r(0 .41))
+>                         yscale(r(0 .82))
 >                         xlabel(0 1,val labsize(`XLAB_SIZE') noticks)
 >                         xscale(noextend lcolor(none))
 >                         graphregion(color(white) lc(white) lw(medium) margin(0 0 3 0)) 
@@ -2788,189 +2773,50 @@ end of do-file
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . // * MTurk results (Study 4)
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. **** Figure 5
-. do ./mturk_hk/mc_likert_coefplot.do
-
-. /* 
-> Multiple choice sample: MTurks HK 
-> */
-. import delimited D:/partisan-gaps/data/mturk_hk/mturk_hk_MC.csv, clear
-(12 vars, 2228 obs)
-
-. 
-. rename congenial congenial_str
-
-. drop if congenial_str=="NA"
-(308 observations deleted)
-
-. encode congenial_str, gen(congenial)
-
-. 
-. rename questions questions_str
-
-. encode questions_str, gen(questions)
-
-. 
-. reg responses i.congenial i.questions, cluster(respondent)
-
-Linear regression                                      Number of obs =    1920
-                                                       F(  4,   479) =  161.89
-                                                       Prob > F      =  0.0000
-                                                       R-squared     =  0.2357
-                                                       Root MSE      =  .42698
-
-                           (Std. Err. adjusted for 480 clusters in respondent)
-------------------------------------------------------------------------------
-             |               Robust
-   responses |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-   congenial |
-          1  |   .0666495   .0214104     3.11   0.002     .0245797    .1087194
-             |
-   questions |
-aca_correct  |  -.0229167   .0229406    -1.00   0.318    -.0679933      .02216
- dt_correct  |   .5530516   .0262464    21.07   0.000     .5014792    .6046239
- gg_correct  |      .0125   .0272141     0.46   0.646    -.0409737    .0659737
-             |
-       _cons |   .2172328   .0224311     9.68   0.000     .1731572    .2613084
-------------------------------------------------------------------------------
-
-. eststo mc
-
-. 
-. 
-. /* 
-> Likert scale sample: MTurks HK 
-> */
-. import delimited D:/partisan-gaps/data\mturk_hk/mturk_hk_LIKERT.csv, clear
-(13 vars, 10040 obs)
-
-. 
-. rename congenial congenial_str
-
-. drop if congenial_str=="NA"
-(480 observations deleted)
-
-. encode congenial_str, gen(congenial)
-
-. 
-. rename questions questions_str
-
-. encode questions_str, gen(questions)
-
-. 
-. rename scale_mc_c_10 scale_mc_c_10_str
-
-. drop if scale_mc_c_10_str=="NA"
-(7872 observations deleted)
-
-. encode scale_mc_c_10_str, gen(scale_mc_c_10)
-
-. 
-. reg scale_mc_c_10 i.congenial i.questions, cluster(respondent)
-
-Linear regression                                      Number of obs =    1688
-                                                       F(  4,   421) =  127.39
-                                                       Prob > F      =  0.0000
-                                                       R-squared     =  0.2478
-                                                       Root MSE      =  .39008
-
-                           (Std. Err. adjusted for 422 clusters in respondent)
-------------------------------------------------------------------------------
-             |               Robust
-scale_mc_~10 |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-   congenial |
-          1  |   .0347608   .0159058     2.19   0.029     .0034962    .0660254
-             |
-   questions |
- rg_s_aca_3  |    .063981   .0156252     4.09   0.000      .033268    .0946941
-  rg_s_dt_4  |   .5629675   .0254153    22.15   0.000     .5130108    .6129243
-  rg_s_gg_4  |   .3388626   .0254215    13.33   0.000     .2888936    .3888315
-             |
-       _cons |   1.019856   .0137881    73.97   0.000     .9927541    1.046958
-------------------------------------------------------------------------------
-
-. eststo scale
-
-. 
-. 
-. /* 
-> Plot the stored coefficients for congenial
-> */
-. local MSIZE huge
-
-. local MLWIDTH vvvthin
-
-. local MARKER_OPTS msize(`MSIZE') mlwidth(`MLWIDTH')
-
-. 
-. #delimit;
-delimiter now ;
-. coefplot 
->         (mc, msymbol(O) `MARKER_OPTS') 
->         (scale, msymbol(dh) `MARKER_OPTS'), 
->         keep(2.congenial) 
->         coeflabels(2.congenial = `""Congenial" "partisanship""', labsize(large))
->         ciopts(lwidth(medthick)) 
->         xlabel(0(.03).09, labsize(medlarge))
->         scheme(lean2)
->         plotregion(lcolor(black) lwidth(medthin) margin(0 0 0 0))       
->         legend(
->                 label(2 "Multiple Choice") 
->                 label(4 "Likert Scale")
->                 // title({bf:Condition})
->                 size(large)
->                 col(1) ring(0)
->                 )
-> ;
-
-. #delimit cr
-delimiter now cr
-. graph export "$figsavedir/mturk-hk-MC-LIKERT.pdf", replace      
-(file D:/partisan-gaps/figs/mturk-hk-MC-LIKERT.pdf written in PDF format)
-
-. 
-end of do-file
-
-. 
-. **** Table 7: Confidence scoring and knowledge gaps
+. **** Table x
 . do ./mturk_hk/reg_table.do
 
-. import delimited D:\partisan-gaps\data\mturk_hk\mturk_hk_MC_LIKERT.csv, clear
-(13 vars, 3916 obs)
+. import delimited ../../data/mturk_hk/mturk_hk_relative_scoring_MC.csv, clear
+(7 vars, 27644 obs)
 
 . 
-. rename question questions_str
+. rename responses responses_str
 
-. encode questions_str, gen(questions)
+. gen responses = (responses_str=="1")
 
-. 
-. * Define likert == 1 if likert, 0 if multiple choice
-. rename condition condition_str
-
-. label define conditionLabel 0 "mc" 1 "scale"
-
-. encode condition_str, gen(likert) label(conditionLabel)
+. replace responses = . if responses_str=="NA"
+(13368 real changes made, 13368 to missing)
 
 . 
-. drop if independent ==1
-(404 observations deleted)
+. rename congenial congenial_str
+
+. gen congenial = (congenial_str=="1")
+
+. replace congenial = . if congenial_str=="NA"
+(4076 real changes made, 4076 to missing)
 
 . 
-. * Item-level effect of LIKERT/Scale/CCD on proportion of correct response
-. global items aca aca2 gg dt 
+. rename survey survey_str
+
+. encode survey_str, gen(survey)
+
+. 
+. local q_items aca aca2 gg dt
+
+. local close_relscore (response_type=="closed" | response_type=="relscore_c_10")
 
 . eststo clear
 
-. foreach item in $items {
-  2.         qui eststo: reg correct i.congenial##i.likert if questions_str=="`item'", cluster(respondent) 
+. foreach q_item in `q_items' {
+  2.         eststo: qui reg responses i.congenial##i.survey if q_item == "`q_item'" & `close_relscore', cluster(respond
+> ent) 
   3.                 estadd local itemFE "\multicolumn{1}{c}{No}"
   4.                 estadd local items 1
   5.                 estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
   6.                 local nobs: display %9.0fc `e(N)'
   7.                 estadd local nobs "\multicolumn{1}{c}{`nobs'}"
   8. }
+(est1 stored)
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{No}"
@@ -2979,22 +2825,11 @@ added macro:
               e(items) : "1"
 
 added macro:
-       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+       e(Nrespondents) : "\multicolumn{1}{c}{902}"
 
 added macro:
-               e(nobs) : "\multicolumn{1}{c}{      878}"
-
-added macro:
-             e(itemFE) : "\multicolumn{1}{c}{No}"
-
-added macro:
-              e(items) : "1"
-
-added macro:
-       e(Nrespondents) : "\multicolumn{1}{c}{878}"
-
-added macro:
-               e(nobs) : "\multicolumn{1}{c}{      878}"
+               e(nobs) : "\multicolumn{1}{c}{      902}"
+(est2 stored)
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{No}"
@@ -3003,10 +2838,11 @@ added macro:
               e(items) : "1"
 
 added macro:
-       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+       e(Nrespondents) : "\multicolumn{1}{c}{902}"
 
 added macro:
-               e(nobs) : "\multicolumn{1}{c}{      878}"
+               e(nobs) : "\multicolumn{1}{c}{      902}"
+(est3 stored)
 
 added macro:
              e(itemFE) : "\multicolumn{1}{c}{No}"
@@ -3015,13 +2851,26 @@ added macro:
               e(items) : "1"
 
 added macro:
-       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+       e(Nrespondents) : "\multicolumn{1}{c}{902}"
 
 added macro:
-               e(nobs) : "\multicolumn{1}{c}{      878}"
+               e(nobs) : "\multicolumn{1}{c}{      902}"
+(est4 stored)
 
-. * Average (over the four items) effect of LIKERT/Scale/CCD on proportion of correct response
-. qui eststo: reghdfe correct i.congenial##i.likert, cluster(respondent) absorb(questions)
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{902}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      902}"
+
+. eststo: qui reghdfe responses congenial##survey if `close_relscore', absorb(q_item) cluster(respondent) 
+(est5 stored)
 
 .         estadd local itemFE "\multicolumn{1}{c}{Yes}"
 
@@ -3036,14 +2885,14 @@ added macro:
 .         estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
 
 added macro:
-       e(Nrespondents) : "\multicolumn{1}{c}{878}"
+       e(Nrespondents) : "\multicolumn{1}{c}{902}"
 
 .         local nobs: display %9.0fc `e(N)'
 
 .         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 
 added macro:
-               e(nobs) : "\multicolumn{1}{c}{    3,512}"
+               e(nobs) : "\multicolumn{1}{c}{    3,608}"
 
 . 
 . #delimit;
@@ -3054,16 +2903,17 @@ delimiter now ;
 >         varwidth(30)
 >         modelwidth(8)   
 >         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
->         keep(1.congenial 1.likert 1.congenial#1.likert)
+>         keep(_cons 1.congenial 2.survey 1.congenial#2.survey)
 >         obslast
 >         label
 >         nobase  
 >         noobs
 >         nomtitle        
 >         coeflabel(
+>                 _cons "Constant"
 >                 1.congenial "Congenial"
->                 1.likert "CCD"
->                 1.congenial#1.likert "Congenial $\times$ CCD"
+>                 2.survey "Relative Scoring (RS)"
+>                 1.congenial#2.survey "Congenial $\times$ RS"
 >                 )       
 >         scalar(
 >                 "r2 R$^2$" 
@@ -3079,23 +2929,26 @@ Dep. var. is 1(response is correct)
 ------------------------------------------------------------------------------------------
                                     (1)         (2)         (3)         (4)         (5)   
 ------------------------------------------------------------------------------------------
-Congenial                         0.098*      0.089*      0.103*      0.011       0.062** 
-                                (0.039)     (0.040)     (0.041)     (0.038)     (0.021)   
+Congenial                         0.091*      0.084*      0.087*      0.005       0.025   
+                                (0.038)     (0.040)     (0.041)     (0.038)     (0.023)   
 
-CCD                               0.003      -0.145***   -0.026      -0.169***   -0.097***
-                                (0.042)     (0.036)     (0.043)     (0.039)     (0.022)   
+Relative Scoring (RS)            -0.179***   -0.201***   -0.206***   -0.737***   -0.377***
+                                (0.028)     (0.030)     (0.032)     (0.028)     (0.018)   
 
-Congenial $\times$ CCD           -0.208***   -0.113*      0.234***   -0.092      -0.019   
-                                (0.051)     (0.046)     (0.060)     (0.063)     (0.027)   
+Congenial $\times$ RS            -0.071+     -0.070+     -0.098*      0.031       0.024   
+                                (0.039)     (0.041)     (0.041)     (0.046)     (0.026)   
+
+Constant                          0.179***    0.207***    0.217***    0.794***    0.376***
+                                (0.028)     (0.030)     (0.030)     (0.024)     (0.017)   
 ------------------------------------------------------------------------------------------
-R$^2$                             0.045       0.095       0.079       0.053       0.231   
+R$^2$                             0.119       0.128       0.149       0.528       0.305   
 Survey item FE                 \multicolumn{1}{c}{No}    \multicolumn{1}{c}{No}    \multicolumn{1}{c}{No}    \multicolum
 > n{1}{c}{No}    \multicolumn{1}{c}{Yes}   
 Items                                 1           1           1           1           4   
-Respondents                    \multicolumn{1}{c}{878}    \multicolumn{1}{c}{878}    \multicolumn{1}{c}{878}    \multico
-> lumn{1}{c}{878}    \multicolumn{1}{c}{878}   
-Respondent-items               \multicolumn{1}{c}{      878}    \multicolumn{1}{c}{      878}    \multicolumn{1}{c}{    
->   878}    \multicolumn{1}{c}{      878}    \multicolumn{1}{c}{    3,512}   
+Respondents                    \multicolumn{1}{c}{902}    \multicolumn{1}{c}{902}    \multicolumn{1}{c}{902}    \multico
+> lumn{1}{c}{902}    \multicolumn{1}{c}{902}   
+Respondent-items               \multicolumn{1}{c}{      902}    \multicolumn{1}{c}{      902}    \multicolumn{1}{c}{    
+>   902}    \multicolumn{1}{c}{      902}    \multicolumn{1}{c}{    3,608}   
 ------------------------------------------------------------------------------------------
 Standard errors in parentheses
 + p<0.1, * p<0.05, ** p<0.01, *** p<0.001
@@ -3106,16 +2959,17 @@ Standard errors in parentheses
 >         varwidth(20)
 >         modelwidth(8)   
 >         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
->         keep(1.congenial 1.likert 1.congenial#1.likert)
+>         keep(_cons 1.congenial 2.survey 1.congenial#2.survey)
 >         obslast
 >         label
 >         nobase  
 >         noobs
->         nomtitle
+>         nomtitle        
 >         coeflabel(
+>                 _cons "Constant"
 >                 1.congenial "Congenial"
->                 1.likert "CCD"
->                 1.congenial#1.likert "Congenial $\times$ CCD"
+>                 2.survey "Relative Scoring (RS)"
+>                 1.congenial#2.survey "Congenial $\times$ RS"
 >                 )       
 >         scalar(
 >                 "r2 R$^2$" 
@@ -3130,22 +2984,314 @@ Standard errors in parentheses
 > ;
 (output written to D:/partisan-gaps/tabs/mturk-hk-reg-table-fragment.tex)
 
-. #delimit cr
+. 
+end of do-file
+
+. 
+. **** Figure x
+. do ./mturk_hk/barplots.do
+
+. **** Basic prep of data
+. import delimited ../../data/mturk_hk/mturk_hk_relative_scoring_MC.csv, clear
+(7 vars, 27644 obs)
+
+. 
+. rename responses responses_str
+
+. gen responses = (responses_str=="1")
+
+. replace responses = . if responses_str=="NA"
+(13368 real changes made, 13368 to missing)
+
+. 
+. rename congenial congenial_str
+
+. gen congenial = (congenial_str=="1")
+
+. replace congenial = . if congenial_str=="NA"
+(4076 real changes made, 4076 to missing)
+
+. 
+. rename survey survey_str
+
+. encode survey_str, gen(survey)
+
+. 
+. local q_items aca aca2 gg dt
+
+. local close_relscore (response_type=="closed" | response_type=="relscore_c_10")
+
+. 
+. 
+. graph drop _all
+
+. foreach q_item in `q_items' {
+  2.         qui reg responses i.congenial##i.survey if q_item == "`q_item'" & `close_relscore', cluster(respondent) 
+  3. 
+.         mat coefmat = e(b)
+  4.         mat list coefmat
+  5.         local baseline = coefmat[1, 2] /* 1.congenial */
+  6. 
+.         preserve
+  7.         regsave
+  8.         drop if var=="_cons"
+  9.         drop if var=="2.survey"
+ 10.         drop if strpos(var, "0b")  // Drop base variables
+ 11.         drop if strpos(var, "1b.survey") // Drop base variables
+ 12. 
+.         * Gen coef for plotting (add estimates back to baseline)
+.         gen est = coef
+ 13.         label var est "Original reg estimate (before adding back to baseline)"
+ 14.         replace coef = `baseline' + coef if var!="1.congenial"
+ 15. 
+.         * Construct CI
+.         gen uci = coef + 1.96 * stderr
+ 16.         gen lci = coef - 1.96 * stderr
+ 17.         replace uci = 0 if var=="_cons"
+ 18.         replace lci = 0 if var=="_cons"
+ 19. 
+.         gen porder = _n
+ 20.         label define xlab 1 "MC" 2 "RL"
+ 21.         label values porder xlab
+ 22. 
+.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         * Graph settings
+.         set scheme s2mono
+ 23.         local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+ 24.         local YRANGE 0(0.05).2
+ 25.         local BASELINE_XLIM = _N+.5
+ 26.         local CI_WIDTH medthick
+ 27.         local XLAB_SIZE large
+ 28.         local BAR_OPTS           color(gs7) fcolor(none) lwidth(thick)
+ 29.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         #delimit;
+delimiter now ;
+.                 twoway  
+>                                 (bar coef porder if porder==1, `BAR_OPTS') 
+>                                 (bar coef porder if porder==2, `BAR_OPTS'
+>                                         xlabel(,val labsize(`XLAB_SIZE') )
+>                                 ) 
+>                                 (rcap uci lci porder if porder!=1, 
+>                                         color(gs5)
+>                                         lwidth(`CI_WIDTH') 
+>                                         legend(off)
+>                                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                         xlabel(, notick)
+>                                         yscale(r(0 .21))
+>                                         xscale(noextend lcolor(none))
+>                                         graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                         bgcolor(white)
+>                                         plotregion(margin(30 30 0 0))
+>                                 )               
+>                                 (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                         xlabel(1 2)
+>                                         recast(line) color(black) lpattern(dash)
+>                                         name(`q_item')
+>                                 )
+>                         ;
+ 30.                 #delimit cr     
 delimiter now cr
+.         restore
+ 31.         graph export $figsavedir/relative_score_`q_item'.pdf, replace   
+ 32. 
+. }
+
+coefmat[1,9]
+               0b.             1.            1b.             2.  0b.congenial#  0b.congenial#  1o.congenial#
+        congenial      congenial         survey         survey      1b.survey      2o.survey      1b.survey
+y1              0      .09092244              0     -.17934783              0              0              0
+
+      1.congenial#               
+         2.survey          _cons
+y1     -.07076115      .17934783
+(1 observation deleted)
+(1 observation deleted)
+(3 observations deleted)
+(2 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/relative_score_aca.pdf written in PDF format)
+
+coefmat[1,9]
+               0b.             1.            1b.             2.  0b.congenial#  0b.congenial#  1o.congenial#
+        congenial      congenial         survey         survey      1b.survey      2o.survey      1b.survey
+y1              0       .0840188              0     -.20077461              0              0              0
+
+      1.congenial#               
+         2.survey          _cons
+y1     -.06960464      .20652174
+(1 observation deleted)
+(1 observation deleted)
+(3 observations deleted)
+(2 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/relative_score_aca2.pdf written in PDF format)
+
+coefmat[1,9]
+               0b.             1.            1b.             2.  0b.congenial#  0b.congenial#  1o.congenial#
+        congenial      congenial         survey         survey      1b.survey      2o.survey      1b.survey
+y1              0      .08666275              0     -.20589705              0              0              0
+
+      1.congenial#               
+         2.survey          _cons
+y1       -.098157       .2173913
+(1 observation deleted)
+(1 observation deleted)
+(3 observations deleted)
+(2 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/relative_score_gg.pdf written in PDF format)
+
+coefmat[1,9]
+               0b.             1.            1b.             2.  0b.congenial#  0b.congenial#  1o.congenial#
+        congenial      congenial         survey         survey      1b.survey      2o.survey      1b.survey
+y1              0      .00499412              0     -.73746731              0              0              0
+
+      1.congenial#               
+         2.survey          _cons
+y1      .03050829      .79391892
+(1 observation deleted)
+(1 observation deleted)
+(3 observations deleted)
+(2 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/relative_score_dt.pdf written in PDF format)
+
+. * Barplot for all
+. qui reghdfe responses congenial##survey if `close_relscore', absorb(q_item) cluster(respondent) 
+
 . 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,9]
+               0b.             1.            1b.             2.  0b.congenial#  0b.congenial#  1o.congenial#
+        congenial      congenial         survey         survey      1b.survey      2o.survey      1b.survey
+y1              0      .02530881              0     -.37721317              0              0              0
+
+      1.congenial#               
+         2.survey          _cons
+y1      .02381178      .37597341
+
+. local baseline = coefmat[1, 2] /* 1.rep */
+
 . 
+. preserve
+
+. regsave
+
+. drop if var=="_cons"
+(1 observation deleted)
+
+. drop if var=="2.survey"
+(1 observation deleted)
+
+. drop if strpos(var, "0b")  // Drop base variables
+(3 observations deleted)
+
+. drop if strpos(var, "1b.survey") // Drop base variables
+(2 observations deleted)
+
 . 
+. * Gen coef for plotting (add estimates back to baseline)
+. gen est = coef
+
+. label var est "Original reg estimate (before adding back to baseline)"
+
+. replace coef = `baseline' + coef if var!="1.congenial"
+(1 real change made)
+
+. 
+. * Construct CI
+. gen uci = coef + 1.96 * stderr
+
+. gen lci = coef - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(0 real changes made)
+
+. replace lci = 0 if var=="_cons"
+(0 real changes made)
+
+. 
+. gen porder = _n
+
+. label define xlab 1 "MC" 2 "RS"
+
+. label values porder xlab
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+
+. local YRANGE 0(0.05).2
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medthick
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS           color(gs7) fcolor(none) lwidth(thick)
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. #delimit;
+delimiter now ;
+.         twoway  
+>                         (bar coef porder if porder==1, `BAR_OPTS') 
+>                         (bar coef porder if porder==2, `BAR_OPTS'
+>                                 xlabel(,val labsize(`XLAB_SIZE') )
+>                         ) 
+>                         (rcap uci lci porder if porder!=1, 
+>                                 color(gs5)
+>                                 lwidth(`CI_WIDTH') 
+>                                 legend(off)
+>                                 ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                 xlabel(, notick)
+>                                 yscale(r(0 .21))
+>                                 xscale(noextend lcolor(none))
+>                                 graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                 bgcolor(white)
+>                                 plotregion(margin(30 30 0 0))
+>                         )               
+>                         (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                 xlabel(1 2)
+>                                 recast(line) color(black) lpattern(dash)
+>                                 name(all)
+>                         )
+>                 ;
+
+.         #delimit cr             
+delimiter now cr
+. restore 
+
+. graph export $figsavedir/relative_score.pdf, replace    
+(file D:/partisan-gaps/figs/relative_score.pdf written in PDF format)
+
 . 
 end of do-file
 
 . 
 . 
+. 
+. 
 . tictoc toc
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 21 Nov 2022 12:16:40
-End time: 21 Nov 2022 12:17:04
-Elapsed seconds:        23
+Start time: 21 Dec 2022 17:26:41
+End time: 21 Dec 2022 17:27:03
+Elapsed seconds:        22
 Elapsed minutes:         0
 Elapsed hours:       .01
 ------------------------------------------------------------------------------------------------------------------------
@@ -3155,5 +3301,5 @@ Elapsed hours:       .01
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  21 Nov 2022, 12:17:04
+ closed on:  21 Dec 2022, 17:27:03
 ------------------------------------------------------------------------------------------------------------------------
