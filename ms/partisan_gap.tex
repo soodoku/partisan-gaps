@@ -8,12 +8,12 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage[linkcolor=blue,
-			colorlinks=true,
-			urlcolor=blue,
-			pdfstartview={XYZ null null 1.00},
-			pdfpagemode=UseNone,
-			citecolor={bluish},
-			pdftitle={partisan gap}]{hyperref}
+colorlinks=true,
+urlcolor=blue,
+pdfstartview={XYZ null null 1.00},
+pdfpagemode=UseNone,
+citecolor={bluish},
+pdftitle={partisan gap}]{hyperref}
 
 \usepackage[resetlabels,labeled]{multibib}
 \newcites{SI}{SI References}
@@ -94,8 +94,8 @@
 \title{A Measurement Gap? Effect of the Survey Instrument on the Partisan Knowledge Gap}
 
 \author{Lucas Shen\thanks{Research Fellow at Asia Competitiveness Institute, Lee Kuan Yew School of Public Policy, at the National University of Singapore, \href{lucas@lucasshen.com}{lucas@lucasshen.com}},
-  Gaurav Sood\thanks{Independent researcher, \href{gsood07@gmail.com}{gsood07@gmail.com}}, and
-  Daniel Weitzel\thanks{Assistant Professor, Colorado State University, \href{mailto:daniel.weitzel@colostate.edu}{daniel.weitzel@colostate.edu}}}
+	Gaurav Sood\thanks{Independent researcher, \href{gsood07@gmail.com}{gsood07@gmail.com}}, and
+	Daniel Weitzel\thanks{Assistant Professor, Colorado State University, \href{mailto:daniel.weitzel@colostate.edu}{daniel.weitzel@colostate.edu}}}
 
 
 \date{\today \thanks{Working paper, most recent version available at: \href{https://github.com/soodoku/partisan-gaps}{https://github.com/soodoku/partisan-gaps}}}
@@ -109,490 +109,523 @@ setwd(githubdir)
 \end{comment}
 
 \begin{document}
-\maketitle
-\thispagestyle{empty}
-
-\begin{abstract}
-
-\noindent Conventional wisdom suggests large, persistent gaps between partisans' stores of political knowledge, fanning concerns about democratic accountability. We reconsider the frequency and size of these ``partisan knowledge gaps,'' in a series of experiments. Manipulating frequently used survey items we demonstrate that survey design can inflate the partisan gap by up to 71\%. Our findings suggest that knowledge gaps---when they do exist---stem more from motivated responding than genuine differences in factual knowledge.
-
-\end{abstract}
-
-\vspace{.2in}
-
-%{\bf Keywords:} Knowledge; Partisan Gap; Motivated Skepticism
-
-\newpage
-
-\doublespacing
-
-The idea of a well-functioning representative democracy rests on the assumption of a more or less informed citizenry holding its representatives and political parties accountable for the successes and failures in office \citep{schattschneider-1960}. Empirical examinations of this assumptions initially focused on the prevalence (or absence) of political knowledge \citep{dellicarpini} and then moved to the effect of the ``perceptual screen'' \citep[p. 133]{campbell1980american} of partisanship on the type of things people know \citep{bartels_2002}. These partisan divisions raise concerns about the functioning of the above mentioned process of democratic accountability \citep{hochschild2015isn}. In particular, research showing large differences in what partisans believe to be true about politically consequential things has cast a shadow on the prospect of democracy \citep{campbell1980american, jerit2012partisan}. If partisanship is in fact the pervasive force that perpetuates and reinforces how partisans see and understand the political world \citep[p. 138]{bartels_2002} serious normative implications about the functioning of democracy arise. A new line of research, however, suggests that a large fraction of the observed partisan difference in beliefs is an artifact of the survey response process \citep{bullocketal_2015,huber_yair_2018, prior2015you}. For instance, \cite{bullocketal_2015} find that nearly half the partisan gap in political knowledge is not a result of differences in beliefs but a result of expressive responding or partisan inference.
-
-In this paper, we extend the investigation into the role of survey design in explaining partisan differences.\footnote{We primarily focus on design features in non-academic surveys, which are substantially more prevalent than academic surveys.} We propose two theories of partisan knowledge gaps. The first argues that partisan gaps reflect actual differences in beliefs about the world. The second proposes that partisan gaps are, to a large part, artifacts of survey and questionnaire design. We report results from a new set of experiments that manipulate common features of frequently used survey items. The features we focus on plausibly encourage people to guess when they don't know or report attitudes instead of knowledge, and thereby encourage partisan inference causing inflated partisan gaps in knowledge. We also assess what difference items that not only assess knowledge but also confidence in that knowledge make on the prevelance and size of partisan gaps. After all, knowledge is a confidently held correct belief about something. Are partisan gaps then maybe a product of how we score answers to knowledge questions? Meaning, do the partisan gaps persist if only survey responses that participants are \emph{confident} in are coded as correct?
-%more stringent way to code the answers---only coding responses that respondents are confident about as correct---makes to observed differences.
-
-% 38% = Table 2 RepXFSR vs RepXIDA
-% 49% = Table 2 RepXIMC vs RepXIDA
-% 72% = Table 4 column 1
-% 43% = Table 3
-% 69% = Table 2 colum 3 RepXCCD vs RepXIDA
-
-% TODO Here we need to adjust discussion after empirical section has been redone
-% How many surveys do we present
-% How many items do these surveys have
-Across two experiments and thirteen items, we find that about 38\% to 49\% of the knowledge differences between partisans are due to survey measures that encourage respondents to guess when they don't know. Across two other experiments, we find that survey features that encourage partisan inferences inflate the observed differences by up to 71\%. Lastly, we find that a coding scheme that only codes answers that respondents are confident in reduces partisan gaps by 43\% to 69\%. Our findings support the second theory of partisan knowledge gap formation. Current designs of survey items can encourage participants to not report confidently held knowledge but use partisan cues to express attitudes and opinions about the world. In contrast to incentive-based experimental designs that use (monetary) rewards to encourage respondents to overcome their perceptual screen of partisanship when it comes to answering knowledge questions \citep[for example, see][]{bullocketal_2015, peterson2021partisan} our research design examines the effect that question design has on increasing the partisan gaps in knowledge. Our findings offer practical advice on how to, with no additional costs, decrease the gap through simple and sensible adjustments to the questionnaire design.
-
-\newpage
-
-\section*{Two Theories of Partisan Gaps}
-\label{sec:theory}
-\addcontentsline{toc}{section}{\nameref{sec:theory}}
-
-Research has repeatedly shown that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term in 1996 about whether the budget deficits increased, decreased, or remained the same, 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}.
-% TODO: Should we add a more recent example here as well?
-
-%slothuus2021political
-
-There are two broad explanations for these gaps: The first is that partisan gaps on partisan consequential knowledge and misinformation items are a result of the fact that partisans know different things. The second theory is that partisans gaps are an artifact of the survey design. In the following, we will elaborate on both of these theories and formulate empirical implications for each.
-
-
-% THIS IS THE SAME AS ABOVE
-%\subsection*{Partisan Gaps in Knowledge}
-%Research shows that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term about whether the budget deficits increased, decreased, or remained the same during the last four years, while 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}.
-
-%There are two broad explanations for these gaps. The first is that partisan gaps on partisan consequential knowledge and misinformation items are a result of partisans knowing different things. The second theory is that partisan gaps are an artifact of the survey interview process.
-
-\subsection*{Partisan Differences in Beliefs}
-Partisan gaps in survey measures of political knowledge and misinformation may reflect \emph{actual differences} in what partisans believe to be true. These differences in beliefs may, in turn, stem from selective exposure to information or motivated reasoning. Selective exposure to information---partisans being exposed to more congenial than uncongenial information--can affect what facts people know about the world \citep{redlawsk2002hot,stroud_2010}. Even without partisans favoring congenial information, it could be that because of the kinds of people that partisans are, certain information is more readily available \citep[e.g.][]{Zaller1992}. % TODO CITES
-As an example, African Americans, who overwhelmingly identify as Democrats, may be more exposed to negative consequences of economic downturns and may hence have different beliefs about economic conditions than Caucasians, a majority of whom identify as Republicans. Similarly, selective exposure may stem from different 'tastes' in politics.
-% \bgcd \textbf{(TODO CITE)}\ech
-For instance, partisans of different stripes may be interested in different policies, politicians, etc. Taken thus, the partisan gap might be similar to other types of knowledge gaps across groups---see research on gaps in gender \citep{dolan2011women, barabas2014question} and race \citep{abrajano2015reexamining}. Conventionally, however, partisan gaps are thought to stem from information avoidance---people find information that is dissonant to their worldview to be painful and work to avoid it  \citep[e.g.,][]{abelson1959modes,festinger1962theory}.
-
-Whatever the cause, the effect of selective exposure is undoubtedly made worse by ``motivated skepticism'' \citep{taber2006, stroud2008media}. People are more skeptical of uncongenial than congenial information \citep{Zaller1992}. This can have various consequences on how individuals engage with congenial and uncongenial information they might encounter. It is possible that citizens are more likely to follow up and do the due diligence to disprove uncongenial information. They may also simply be more likely to distrust and ignore uncongenial information. And lastly, even when people are receiving congenial and uncongenial informationa at the same rate, they may be less likely to actually remember uncongenial information \citep[see, for example][]{bayes2020and,hill2017learning,flynn2017nature, taber2006}. Recently,  \citet{peterson2021partisan} have, for example, shown that political polarization increases the readiness of individuals to accept information that corroborates ideological or partiasan beliefs and vice versa disregard or challenge facts that run counter to them.
-
-To summarize, it is possible that due to selective exposure or motivated skepticism the observed partisan gaps in political knowledge in survey research reflect actually existing differences in beliefs about what is true about the world.
-
-\subsection*{Artifacts of Survey Design}
-Partisan gaps on partisan consequential knowledge and misinformation items in surveys may alternatively be an \emph{artifact of questionnaire design}.
-
-In aggregate, the answers to survey questions about factual beliefs reflect a mixture of knowledge, inferences, cheating, expressive responding, and guesses by the respondents. Inferences, cheating, and guessing cause structured error in our estimates, by inflating our estimates of how many people believe something to be true. These three ways of answering survey questions also affect our estimates of partisan gaps in beliefs.
-
-Primarily, inferences or guesses with a partisan tint and expressive responding--responding to questions about beliefs to indicate partisan positions--inflate the estimates. On partisan consequential items---items where the right answer has implications about how good the party looks---inferences with a partisan tint are likely common. For instance, when partisans don't know the answer to a question, they can fall back on affect and attachments as a guide to infer the answer \citep{malka2022expressive}. As an example, when asked about what happened to the federal deficit during the Obama administration, Republicans, thinking Democrats cause bad things, may infer that deficits increased under Obama. Alternately, partisans may rely on stereotypical inference. Republicans may think of Democrats as generally indifferent to deficits, and hence may infer, without actually knowing, that it increased under Mr. Obama \citep[e.g.][]{rahn1993role, goggin2020goes}. In a highly polarized political environment minimal information can be enough to switch individuals from answering a knowledge question to using affect or expressive motivations to answer a questions \citep{klar2014partisanship, merkley2018party}.
-
-The extent to which survey responses are contaminated by responses other than strongly held beliefs is conditional on survey features. Surveys can encourage respondents to respond 'expressively' by highlighting partisan motivations over accuracy motivations \citep{Zaller1992, petersen2013motivated, klar2014partisanship}. This explanation has attracted considerable research. Some of it shows that up to half of the partisan gaps are a result of expressive responding \citep[][though see \citeauthor{berinsky_2017} \citeyear{berinsky_2017}]{bullocketal_2015,huber_yair_2018, prior2015you}.
-
-\subsection*{Empirical Implications of the Theories}
-
-If partisan gaps are a result of actual knowledge disparities between Republicans and Democrats, minor differences in question wording and response options stem should principally have little effect on the gap we observe. This gap then ought to be the product of actual partisan-based variation in knowledge and not an artifact of survey design. On the other hand, if the gaps are sensitive to question and response attributes, it suggests that some of the partisan gaps may not be founded in actual differences in beliefs but artificial products of the way information is presented and questions are asked. In particular, we contend that political surveys, primarily commercial ones, regularly include features that inflate partisan gaps to produce sensational results.
-
-Surveys regularly exclude don't know \citep{luskin2011don}, include guessing encouraging features such as providing background information and social proof in the stem that likely makes people think that they know something about the topic
-% \textbf{(TODO CITE)}
-or give them extra information that they can use to guess the answer.
-% \textbf{(TODO CITE)}.
-Often enough, surveys also include partisan cues.
-% \textbf{(TODO CITE)}.
-And the scoring rules used by analysts don't disambiguate between respondents who are confident about their answers and those who aren't.
-% \textbf{(TODO CITE)}.
-We suggest that removing these inflationary features diminishes the partisan gaps in political knowledge.
-
-% TODO The text below needs to be adjusted to the number of surveys we are presenting and the way we are presenting them
-To test the conditionality of partisan knowledge gaps in survey data we fielded four surveys that test the effect different aspects of survey and question design can have on (partisan) response patterns. In studies 1 and 4, we use Amazon Mechanical Turk (MTurk) to ask participants a variety of knowledge questions in different designs. These items aim at examining how survey instructions, question wording, response options, and response design in the survey affect partisans to respond to questions in specific ways. In studies 2 and 3, we use YouGov and a telephone survey to examine the role of question wording on response behavior in more detail by focusing on the effect that partisan-related auxilliary information can have on response patterns. We will first turn to the impact of inflationary survey design on knowledge gaps (study 1) before examining partisan-related cues (studies 2 and 3). The empirical analysis concludes with an examination of the effect that response scoring has on the partisan gap. How does incorporating confidence in the correctness of a response affect the partisan gap (study 4)?
-
-
-\section*{The Effect of Inflationary Survey Design on Partisan Gaps}
-\label{sec:inflationary_measures}
-\addcontentsline{toc}{section}{\nameref{sec:inflationary_measures}}
-The first study focuses on four survey design features that we suspect might inflate the partisan gap in political knowledge. These features are the absence of a ``Don't Know'' option, including partisan-related as well as neutral information in the question stem, and explicitly encouraging guesses.
-
-\subsection*{Research Design and Data}\label{sec:data1}
-
-For this study we fielded two surveys on Amazon's Mechanical Turk \citep{BerinskyHuberLenz2012} in the second quarter of 2017. In the first survey, we randomly assigned 1,253 respondents to one of five conditions with varying experimental treatments testing the effect of inflationary components of survey questions.
-
-In each condition in the two surveys respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk}.} Respondents assigned to the first two conditions (inflationary and commonly used design) saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they, as research has shown is frequently the case, in fact don’t know the correct answer to a question.\footnote{Again, see \cref{si:mturk} for the specific wording.}
-
-In the second survey, we randomly assigned 1,059 respondents to these conditions. The preamble, topics, and answer options of these questions were indentical to the first survey and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received three options as answers. In two of the four conditions respondents also had a ``Don't Know'' option available to them.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
-
-In total this yields four multiple choice conditions that successively remove inflationary survey design features, as shown in \Cref{tab:conditions}. Items can include a `Don't Know' option, offer social proof of the incorrect answer (such as ``some people belief that Barack Obama was not born in the U.S.''), have neutral information that encourages people to guess, and explicitly encourage guessing. Each condition is explained in detail below:
-
-\input{../tabs/treatment_labels.tex}
-
-\begin{description}
-  \item[Inflationary Design Approach] \phantomsection\label{txt:IDA} In the IDA, we replicate design features from highly partisan surveys that do not have the goal of collecting representative opinion data but push an agenda. In this design, `Don't Know' options are never presented and respondents can't indicate lack of knowledge. These questions also include social proof  about the incorrect answer, for instance, ``Some people believe Barack Obama was not born in the United States, but was born in another country'' on a question about where Mr. Obama was born, and some neutral information about the topic, like ``According to the Constitution, American presidents must be `natural born citizens''' on the birthplace question, that may encourage the ignorant to take a guess.  This condition does not score the confidence with which knowledge is held.
-  \item[Commonly Used Design] \phantomsection\label{txt:CUD} The CUD, reflects the real-world standards in (nonacademic) polling most closely. These questions are very similar to the IDA questions but usually do not include social proof. In our experiments, these questions do not feature a `Don't Know' option, include neutral information in the question stem, encourage guessing, and do not ask respondents to report how confidently they hold the knowledge.
-  \item[Fewer Substantive Responses] \phantomsection\label{txt:FSR} The FSR design likely reduces the number of substantive responses to survey questions by including a `Don't Know' option and thereby offering participants the option to reveal ignorance. In doing so, respondents are not forced to pick a substantive answer category when they don't have an opinion. Since research has repeatedly shown how prevelant the absence of political knowledge is we consider this an important feature for designing non-inflationary partisan knowledge surveys. These questions do not provide social poof but encourage guessing with a neutral question stem that might provide people information to base that guess on.
-  \item[Improved Multiple Choice] \phantomsection\label{txt:IMC} The IMC condition is the best version of multiple choice questions. It offers individuals a `Don't Know' option, does not include any social proof, does not encourage guessing, and does not provide neutral information. These changes to question formulation and design have been done while maintaining commensurability with other items. This approach minimizes inflationary features in questions with minimal changes to questionnaire and survey design.
-\end{description}
-
-\subsection*{Coding rules across surveys and studies}
-
-% TODO are there other general coding rules we need to explain? does it make sense to have that here?
-
-We employ the following coding rules for the dependent and independent variables across our studies. Multiple choice answers are coded as correct when the respondents selected the correct answer from the five response options they were offered.
-
-
-
-Partisanship is coded based on self-classification of respondents as Democrats or Republicans. Individuals that classify themselves as Independents with political leanings to one or another party are coded as supporters of that party. True independents are excluded from the partisan gap analysis \citep{Bullock2011, klar2016independent}.
-
-Knowledge items or partisan cues are coded as congenial if the correct answer or the cue given in the question are congenial with the partisanship of the respondent \citep[see][]{prior2015you}.
-
-
-\subsection*{Results from Study 1 (MTurk)}
-We test the effect of these four different conditions on the partisan gaps in political knowledge and present results about gradually removing inflationary features from the questions.
-
-We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. 
-In the baseline IDA condition (first column), when the correct response is congenial to the party of respondents, they are 35 percentage points more likely to choose the correct response.
-The subsequent three columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow horizontal bars), the differences attenuated substantially depending on the treatment arms. The IDA and CUD conditions have similar estimates.
-However, the estimates from the FSR and IMC conditions are approximately 14 percentage points lower compared to the IDA condition.
-
-This means, that removing inflationary features from the questions decreases the partisan gap in political knowledge.
-In the IDA and CUD condition (first two columns) the partisan gap is larger than 35 percentage points. In the FSR and IMC conditions (last two columns), the gaps are approximately 20 percentage points. At a maximum the design-based attentuation of the partisan gap in this experiment constitutes a drop of 40\% ($100 \times \frac{.35-.21}{.35}$). \Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey conditions.
-
-
-% Table for the unstandardized partisan gap estimates from study 1
-% results are presented in the partisan-gap-by-item-arm.pdf figure
-%\input{../tabs/unstandardized-pg-mturk.tex}
-
-% partisan-gaps/scripts/Stata/mturk/fig-partisan-gap.do
-\begin{center}
+	\maketitle
+	\thispagestyle{empty}
+	
+	\begin{abstract}
+		
+		\noindent Research suggests that partisan gaps in political knowledge are wide and widespread. Using a series of experiments, we investigate whether partisan gaps are a result of differences in beliefs or an artifact of the survey instrument. Manipulating inflationary features of frequently used survey items, we demonstrate that survey design can inflate the partisan gap by up to 71\%. Our findings suggest that knowledge gaps---when they do exist---stem more from motivated responding than differences in political knowledge.
+	\end{abstract}
+	
+	\vspace{.2in}
+	
+	%{\bf Keywords:} Knowledge; Partisan Gap; Motivated Skepticism
+	
+	\newpage
+	
+	\doublespacing
+	
+	According to one prominent perspective, a well-functioning democracy rests on a well informed citizenry \citep{schattschneider-1960}. Wide and  widespread partisan gaps pose a serious challenge in citizen's ability to hold representatives accountable \citep{hochschild2015isn}. And hence the alarm over research suggesting as much \citep{bartels_2002, campbell1980american, jerit2012partisan}. However, a new line of research, suggests that a large fraction of the observed partisan difference in beliefs is an artifact of the survey response process \citep{bullocketal_2015,huber_yair_2018, prior2015you}. For instance, \cite{bullocketal_2015} find that nearly half the partisan gap in political knowledge is not a result of differences in beliefs but a result of expressive responding or partisan inference.
+	
+	In this paper, we extend the investigation into the role of survey design in explaining partisan differences. We use a series of survey experiments to arbitrate between two theories of partisan knowledge gaps. The first theory argues that partisan gaps reflect actual differences in beliefs about the world. The second contends that partisan gaps are an artifact of the survey and questionnaire design. We report results from a new set of experiments that manipulate common features of frequently used survey items. The features we focus on plausibly encourage people to guess when they don't know or report attitudes instead of knowledge, and thereby encourage partisan inference causing inflated partisan gaps in knowledge. We also assess what difference items that not only assess knowledge but also confidence in that knowledge make on the prevalence and size of partisan gaps. After all, knowledge is a confidently held correct belief about something. Are partisan gaps then maybe a product of how we score answers to knowledge questions? Meaning, do the partisan gaps persist if only survey responses that participants are \emph{confident} in are coded as correct?
+	%more stringent way to code the answers---only coding responses that respondents are confident about as correct---makes to observed differences.
+	
+	% 38% = Table 2 RepXFSR vs RepXIDA
+	% 49% = Table 2 RepXIMC vs RepXIDA
+	% 72% = Table 4 column 1
+	% 43% = Table 3
+	% 69% = Table 2 colum 3 RepXCCD vs RepXIDA
+	
+	% TODO Here we need to adjust discussion after empirical section has been redone
+	% How many surveys do we present
+	% How many items do these surveys have
+	Across two experiments and thirteen items, we find that about 38\% to 49\% of the knowledge differences between partisans are due to survey measures that encourage respondents to guess when they don't know. Across two other experiments, we find that survey features that encourage partisan inferences inflate the observed differences by up to 71\%. Lastly, we find that a coding scheme that only codes answers that respondents are confident in reduces partisan gaps by 43\% to 69\%. Our findings support the second theory of partisan knowledge gap formation. Current designs of survey items can encourage participants to not report confidently held knowledge but use partisan cues to express attitudes and opinions about the world. In contrast to incentive-based experimental designs that use (monetary) rewards to encourage respondents to overcome their perceptual screen of partisanship when it comes to answering knowledge questions \citep[for example, see][]{bullocketal_2015, peterson2021partisan} our research design examines the effect that question design has on increasing the partisan gaps in knowledge. Our findings offer practical advice on how to, with no additional costs, decrease the gap through simple and sensible adjustments to the questionnaire design.
+	
+	\section*{Two Theories of Partisan Gaps}
+	\label{sec:theory}
+	\addcontentsline{toc}{section}{\nameref{sec:theory}}
+	
+	Research has repeatedly shown that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term in 1996 about whether the budget deficits increased, decreased, or remained the same, 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}.
+	% TODO: Should we add a more recent example here as well?
+	
+	%slothuus2021political
+	
+	There are two broad explanations for these gaps: The first is that partisan gaps on partisan consequential knowledge and misinformation items are a result of the fact that partisans know different things. The second theory is that partisans gaps are an artifact of the survey design. In the following, we will elaborate on both of these theories and formulate empirical implications for each.
+	
+	
+	% THIS IS THE SAME AS ABOVE
+	%\subsection*{Partisan Gaps in Knowledge}
+	%Research shows that partisan gaps in political knowledge are wide and widespread \citep{bartels_2002, jerit2012partisan, lodgetaber_2013}. For instance, when Americans were quizzed at the end of Bill Clinton's first term about whether the budget deficits increased, decreased, or remained the same during the last four years, while 39\% of Democrats correctly identified that the budget deficit had decreased, only 25\% of Republicans did the same \citep[280]{achen2016democracy}.
+	
+	%There are two broad explanations for these gaps. The first is that partisan gaps on partisan consequential knowledge and misinformation items are a result of partisans knowing different things. The second theory is that partisan gaps are an artifact of the survey interview process.
+	
+	\subsection*{Partisan Differences in Beliefs}
+	Partisan gaps in survey measures of political knowledge and misinformation may reflect \emph{actual differences} in what partisans believe to be true. Differences in beliefs may, in turn, stem from selective exposure to information or motivated reasoning. Selective exposure to information---partisans being exposed to more congenial than uncongenial information--can affect what facts people know about the world \citep{redlawsk2002hot,stroud_2010}. Partisans do not have to prefer congenial information for them to be selectively exposed. For example, African Americans, who overwhelmingly identify as Democrats, may be more exposed to negative consequences of economic downturns and may hence have different beliefs about economic conditions than Caucasians, a majority of whom identify as Republicans. By the same token, selective exposure may stem from different 'tastes' in politics. For instance, partisans of different stripes may be interested in different policies, politicians, etc. Taken thus, the partisan gap might be similar to other types of knowledge gaps across groups---see research on gaps in gender \citep{dolan2011women, barabas2014question} and race \citep{abrajano2015reexamining}. Conventionally, however, partisan gaps are thought to stem from information avoidance---people find information that is dissonant to their worldview to be painful and work to avoid it  \citep[e.g.,][]{abelson1959modes,festinger1962theory}.
+	
+	Whatever the cause, the effect of selective exposure is undoubtedly made worse by ``motivated skepticism'' \citep{taber2006, stroud2008media}. People are more skeptical of uncongenial than congenial information \citep{Zaller1992}. As a result, partisans are thought to be more likely to follow up and do the due diligence to disprove uncongenial information. They may also simply be more likely to distrust and ignore uncongenial information. And lastly, even when people receive congenial and uncongenial information at the same rate, they may be less likely to remember uncongenial information \citep[see, for example][]{bayes2020and,hill2017learning,flynn2017nature, taber2006}. Recently,  \citet{peterson2021partisan} show that political polarization increases the readiness of individuals to accept information that corroborates ideological or partisan beliefs and vice versa disregard or challenge facts that run counter to them.
+	
+	To summarize, it is possible that due to selective exposure or motivated skepticism, the observed partisan gaps in political knowledge in survey research reflect actual differences in beliefs about factual items.
+	
+	\subsection*{Artifact of Survey Design}
+	Partisan gaps on partisan consequential knowledge and misinformation items in surveys may alternatively be an \emph{artifact of questionnaire design}.
+	
+	Answers to survey questions about factual beliefs reflect a mixture of knowledge, inferences, cheating, expressive responding, and guesses by the respondents. Inferences, cheating, and guessing cause structured error in our estimates, by inflating our estimates of how many people believe something to be true. These three ways of answering survey questions also affect our estimates of partisan gaps in beliefs.
+	
+	Primarily, inferences or guesses with a partisan tint and expressive responding--responding to questions about beliefs to indicate partisan positions--inflate the estimates. On partisan consequential items---items where the right answer has implications about how good the party looks---inferences with a partisan tint are likely common. For instance, when partisans don't know the answer to a question, they can fall back on affect as a guide to infer the answer \citep{malka2022expressive}. For example, when asked about what happened to the federal deficit during the Obama administration, Republicans, thinking Democrats cause bad things, may infer that deficits increased under Obama. Alternately, partisans may rely on stereotypical inference. Republicans may think of Democrats as generally indifferent to deficits, and hence may infer, without actually knowing, that deficits increased under Mr. Obama \citep[e.g.][]{rahn1993role, goggin2020goes}. In a highly polarized political environment minimal information can be enough to switch individuals from answering a knowledge question to using affect or expressive motivations to answer a question \citep{klar2014partisanship, merkley2018party}.
+	
+	The extent to which survey responses are contaminated by responses other than strongly held beliefs is conditional on survey features. Surveys can encourage respondents to respond 'expressively' by highlighting partisan motivations over accuracy motivations \citep{Zaller1992, petersen2013motivated, klar2014partisanship}. This explanation has attracted considerable research. Some of it shows that up to half of the partisan gaps are a result of expressive responding \citep[][though see \citeauthor{berinsky_2017} \citeyear{berinsky_2017}]{bullocketal_2015,huber_yair_2018, prior2015you}.
+	
+	\subsection*{Empirical Implications of the Theories}
+	
+	If partisan gaps are a result of actual knowledge disparities between Republicans and Democrats, minor differences in question wording and response options stem should principally have little effect on the gap we observe. This gap then ought to be the product of actual partisan-based variation in knowledge and not an artifact of survey design. On the other hand, if the gaps are sensitive to question and response attributes, it suggests that some of the partisan gaps may not be founded in actual differences in beliefs but artificial products of the way information is presented and questions are asked. In particular, we contend that political surveys, primarily commercial ones, regularly include features that inflate partisan gaps to produce sensational results.
+	
+	Surveys regularly exclude don't know \citep{luskin2011don}, include guessing encouraging features such as providing background information and social proof in the stem that likely makes people think that they know something about the topic
+	% \textbf{(TODO CITE)}
+	or give them extra information that they can use to guess the answer.
+	% \textbf{(TODO CITE)}.
+	Often enough, surveys also include partisan cues.
+	% \textbf{(TODO CITE)}.
+	And the scoring rules used by analysts don't disambiguate between respondents who are confident about their answers and those who aren't.
+	% \textbf{(TODO CITE)}.
+	We suggest that removing these inflationary features diminishes the partisan gaps in political knowledge.
+	
+	% TODO The text below needs to be adjusted to the number of surveys we are presenting and the way we are presenting them
+	To test the conditionality of partisan knowledge gaps in survey data we fielded four surveys that test the effect different aspects of survey and question design can have on (partisan) response patterns. In studies 1 and 4, we use Amazon Mechanical Turk (MTurk) to ask participants a variety of knowledge questions in different designs. These items aim at examining how survey instructions, question wording, response options, and response design in the survey affect partisans to respond to questions in specific ways. In studies 2 and 3, we use YouGov and a telephone survey to examine the role of question wording on response behavior in more detail by focusing on the effect that partisan-related auxiliary information can have on response patterns. We will first turn to the impact of inflationary survey design on knowledge gaps (study 1) before examining partisan-related cues (studies 2 and 3). The empirical analysis concludes with an examination of the effect that response scoring has on the partisan gap. How does incorporating confidence in the correctness of a response affect the partisan gap (study 4)?
+	
+	
+	\section*{The Effect of Inflationary Features on Partisan Gaps}
+	\label{sec:inflationary_measures}
+	\addcontentsline{toc}{section}{\nameref{sec:inflationary_measures}}
+	The first study focuses on four survey design features that we suspect might inflate the partisan gap in political knowledge. These features are the absence of a ``Don't Know'' option, including partisan-related as well as neutral information in the question stem, and explicitly encouraging guesses.
+	
+	\subsection*{Research Design and Data}\label{sec:data1}
+	
+	For this study we fielded two surveys on Amazon's Mechanical Turk \citep{BerinskyHuberLenz2012} in the second quarter of 2017. In the first survey, we randomly assigned 1,253 respondents to one of five conditions with varying experimental treatments testing the effect of inflationary components of survey questions.
+	
+	In each condition in the two surveys respondents answered 9 misinformation items, ranging from citizenship and religion of Obama to whether global warming is happening or not.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk}.} Respondents assigned to the first two conditions (inflationary and commonly used design) saw a simple preface: ``Now here are some questions about what you may know about politics and public affairs,'' while in all the other conditions, they were reassured that it is ok to not know answers to these questions and to commit to not looking up answers or asking anyone and to mark don't know when they, as research has shown is frequently the case, in fact don’t know the correct answer to a question.\footnote{Again, see \cref{si:mturk} for the specific wording.}
+	
+	In the second survey, we randomly assigned 1,059 respondents to these conditions. The preamble, topics, and answer options of these questions were identical to the first survey and included questions about the Affordable Care Act (2), the effect of greenhouse gases (1), and the consequences of then-president Trump's executive order on immigration(1). In the multiple choice version of the survey the participants received three options as answers. In two of the four conditions respondents also had a ``Don't Know'' option available to them.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.}
+	
+	In total this yields four multiple choice conditions that successively remove inflationary survey design features, as shown in \Cref{tab:conditions}. Items can include a `Don't Know' option, offer social proof of the incorrect answer (such as ``some people belief that Barack Obama was not born in the U.S.''), have neutral information that encourages people to guess, and explicitly encourage guessing. Each condition is explained in detail below:
+	
+	\input{../tabs/treatment_labels.tex}
+	
+	\begin{description}
+		\item[Inflationary Design Approach (IDA)] \phantomsection\label{txt:IDA} In the IDA, we replicate design features from highly partisan surveys that do not have the goal of collecting representative opinion data but push an agenda. In this design, `Don't Know' options are never presented and respondents can't indicate lack of knowledge. These questions also include social proof  about the incorrect answer, for instance, ``Some people believe Barack Obama was not born in the United States, but was born in another country'' on a question about where Mr. Obama was born, and some neutral information about the topic, like ``According to the Constitution, American presidents must be `natural born citizens''' on the birthplace question, that may encourage the ignorant to take a guess.  This condition does not score the confidence with which knowledge is held.
+		\item[Commonly Used Design (CUD)] \phantomsection\label{txt:CUD} The CUD, reflects the real-world standards in (nonacademic) polling most closely. These questions are very similar to the IDA questions but usually do not include social proof. In our experiments, these questions do not feature a `Don't Know' option, include neutral information in the question stem, encourage guessing, and do not ask respondents to report how confidently they hold the knowledge.
+		\item[Fewer Substantive Responses (FSR)] \phantomsection\label{txt:FSR} The FSR design likely reduces the number of substantive responses to survey questions by including a `Don't Know' option and thereby offering participants the option to reveal ignorance. In doing so, respondents are not forced to pick a substantive answer category when they don't have an opinion. Since research has repeatedly shown how prevalent the absence of political knowledge is we consider this an important feature for designing non-inflationary partisan knowledge surveys. These questions do not provide social poof but encourage guessing with a neutral question stem that might provide people information to base that guess on.
+		\item[Improved Multiple Choice (IMC)] \phantomsection\label{txt:IMC} The IMC condition is the best version of multiple choice questions. It offers individuals a `Don't Know' option, does not include any social proof, does not encourage guessing, and does not provide neutral information. These changes to question formulation and design have been done while maintaining commensurability with other items. This approach minimizes inflationary features in questions with minimal changes to questionnaire and survey design.
+	\end{description}
+	
+	\subsection*{Coding Rules}
+	
+	% TODO are there other general coding rules we need to explain? does it make sense to have that here?
+	
+	We employ the following coding rules for the dependent and independent variables across our studies. Multiple choice answers are coded as correct when the respondents selected the correct answer from the five response options they were offered.
+	
+	
+	
+	Partisanship is coded based on self-classification of respondents as Democrats or Republicans. Individuals that classify themselves as Independents with political leanings to one or another party are coded as supporters of that party. True independents are excluded from the partisan gap analysis \citep{Bullock2011, klar2016independent}.
+	
+	Knowledge items or partisan cues are coded as congenial if the correct answer or the cue given in the question are congenial with the partisanship of the respondent \citep[see][]{prior2015you}.
+	
+	
+	\subsection*{Results from Study 1 (MTurk)}
+	We test the effect of these four different conditions on the partisan gaps in political knowledge and present results about gradually removing inflationary features from the questions.
+	
+	We start by summarizing the average partisan gap for each survey item and each treatment arm from the MTurk sample of Study 1 in \Cref{fig:partisangaps-mturk}. Each marker represents how much more congenial the responses of the Republicans are to the Democrats. 
+	
+	In the baseline IDA condition (first column), when the correct response is congenial to the party of respondents, they are 35 percentage points more likely to choose the correct response.
+	The subsequent three columns in \cref{fig:partisangaps-mturk} show that, while the estimated differences in party-congenial responses are precise (the narrow horizontal bars), the differences attenuated substantially depending on the treatment arms. The IDA and CUD conditions have similar estimates.
+	
+	However, the estimates from the FSR and IMC conditions are approximately 14 percentage points lower compared to the IDA condition.
+	
+	This means, that removing inflationary features from the questions decreases the partisan gap in political knowledge.
+	In the IDA and CUD condition (first two columns) the partisan gap is larger than 35 percentage points. In the FSR and IMC conditions (last two columns), the gaps are approximately 20 percentage points. At a maximum the design-based attenuation of the partisan gap in this experiment constitutes a drop of 40\% ($100 \times \frac{.35-.21}{.35}$). 
+	
+	\Cref{fig:partisangaps-mturk} therefore gives us the first indication that partisan gaps arise, at least in part, from questionnaire artifacts present in the different survey conditions.
+	
+	
+	% Table for the unstandardized partisan gap estimates from study 1
+	% results are presented in the partisan-gap-by-item-arm.pdf figure
+	%\input{../tabs/unstandardized-pg-mturk.tex}
+	
+	% partisan-gaps/scripts/Stata/mturk/fig-partisan-gap.do
+	\begin{center}
+		\begin{figure}[t]
+			\centering
+			\caption{Partisan Gap by Condition (MTurk)}
+			\includegraphics[width=\textwidth]{../figs/partisan-gap-by-item-arm.pdf}
+			\label{fig:partisangaps-mturk}
+			\caption*{\footnotesize 
+				Each marker is the estimated difference in proportions for the proportion of correct responses when the correct response is congenial to party.
+				Columns indicate the four different conditions described in \Cref{tab:conditions}. Rows indicate the nine individual survey question items described in \cref{si:mturk} plus their average.
+				%Each point is the estimated $\beta$ from estimating $1\{party\text{-}congenial\, response\}_i = \alpha + \beta Rep_i + \varepsilon_i$ for each of items and each of the five conditions.			
+				% Same results with different semantics in labels
+				Each point is the estimated $\beta$ from estimating $1\{\text{Correct response}\}_i = \alpha + \beta \text{congenial}_i + \varepsilon_i$ for each of items and each of the four conditions.	Congenial is the dummy for when the correct response is congenial to party.
+				Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
+			}
+		\end{figure}
+	\end{center}
+	
+	
+	We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is correct, on the interaction of the survey conditions and the congenial dummy:
+	\begin{equation}\label{eq:partisangap-mturk}
+	\text{Correct}_{ijk} = \alpha + \beta \text{Congenial}_i + \gamma \text{Condition}_k + \delta_k (\text{Congenial}_i \times \text{Condition}_k) + \text{question}_j + \varepsilon_{ijk}
+	\end{equation}
+	for respondent $i$, survey item $j$, and condition $k$. $\beta$ captures the difference in proportion of correct responses when the answer is congenial to party, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that respondents are more likely to choose the correct answer when it is congenial to their party. We focus on the $\delta_k$'s, which capture how the different conditions affect observed knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always IDA, so the $\delta_k$'s capture how the three conditions (CUD, FSR, IMC)---having the same questions with different questionnaire artifacts---mediates partisan knowledge gaps.
+	We include the nine survey questions fixed effects to allow each question to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
+	
+	% partisan-gaps/scripts/Stata/mturk/reg-table.do
+	\begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
+		\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+		\caption{Partisan Knowledge Gaps: MTurk}
+		\label{tab:partisangaps-mturk}
+		\begin{adjustbox}{max width=\textwidth}
+			\begin{tabular}{l*{6}{D{.}{.}{-1}}}
+				\toprule
+				% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+				\input ../tabs/mturk-reg-table-fragment.tex
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}
+		\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether the response is correct.
+			See \cref{tab:conditions} for the description of the IDA, CUD, FSR, IMC conditions.
+			Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\end{table}
+	
+	
+	\cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the congenial variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
+	Column (2) includes only the survey conditions, and two of them (FSR, IMC) elicit differences in partisan gaps that are statistically different from the baseline IDA condition. This is consistent with our observation in \cref{fig:partisangaps-mturk} While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artifacts that inflate partisan gaps.
+	
+	Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the IMC condition is 8 percentage points less likely to give the correct response than the baseline IDA condition ($p<0.05$).
+	%Compared to the gap arising from congeniality (in column (1)), a survey artifact in terms of differences in survey features (in column (2)) elicits a gap 0.31 times as large.
+	
+	In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of congenial and the four conditions (baseline is IDA). Now the congenial variable captures the knowledge gap in the IDA condition (corresponding to column (1) of \cref{fig:partisangaps-mturk}). The congenial and survey condition interactions reveal the extent to which partisan knowledge gaps change across the different survey conditions. 
+	
+	% partisan-gaps/scripts/Stata/mturk/barplot.do
 	\begin{figure}[t]
 		\centering
-		\caption{Partisan Gap by Condition (MTurk)}
-		\includegraphics[width=\textwidth]{../figs/partisan-gap-by-item-arm.pdf}
-		\label{fig:partisangaps-mturk}
-		\caption*{\footnotesize 
-			Each marker is the estimated difference in proportions for the proportion of correct responses when the correct response is congenial to party.
-			Columns indicate the four different conditions described in \Cref{tab:conditions}. Rows indicate the nine individual survey question items described in \cref{si:mturk} plus their average.
-			%Each point is the estimated $\beta$ from estimating $1\{party\text{-}congenial\, response\}_i = \alpha + \beta Rep_i + \varepsilon_i$ for each of items and each of the five conditions.			
-			% Same results with different semantics in labels
-			Each point is the estimated $\beta$ from estimating $1\{\text{Correct response}\}_i = \alpha + \beta \text{congenial}_i + \varepsilon_i$ for each of items and each of the four conditions.	Congenial is the dummy for when the correct response is congenial to party.
-			Horizontal bars are 95\% confidence intervals constructed from robust standard errors.
+		\caption{Partisan Gap by Condition: MTurk}
+		\includegraphics[width=.55\textwidth]{../figs/mturk-pgag-surveyarms.pdf}
+		\label{fig:partisangaps-mturk-reg}
+		\caption*{\footnotesize
+			Difference between bars indicates the predicted partisan gap by the five conditions.
+			Bars reconstructed from the interactions of the Republican indicator with the treatment arms as reported in column (3) of \cref{tab:partisangaps-mturk}.
+			The baseline arm is IDA.
+			See \cref{tab:conditions} for the description of the conditions.
+			Capped vertical bars are 95\% confidence intervals.
 		}
 	\end{figure}
-\end{center}
-
-
-We formalize the above observation as follows. We regress the dependent variable, an indicator of whether the response is correct, on the interaction of the survey conditions and the congenial dummy:
-\begin{equation}\label{eq:partisangap-mturk}
-\text{Correct}_{ijk} = \alpha + \beta \text{Congenial}_i + \gamma \text{Condition}_k + \delta_k (\text{Congenial}_i \times \text{Condition}_k) + \text{question}_j + \varepsilon_{ijk}
-\end{equation}
-for respondent $i$, survey item $j$, and condition $k$. $\beta$ captures the difference in proportion of correct responses when the answer is congenial to party, corresponding to the markers in \cref{fig:partisangaps-mturk}. A positive estimate suggests that respondents are more likely to choose the correct answer when it is congenial to their party. We focus on the $\delta_k$'s, which capture how the different conditions affect observed knowledge gaps (difference between columns in \cref{fig:partisangaps-mturk}). The baseline treatment arm is always IDA, so the $\delta_k$'s capture how the three conditions (CUD, FSR, IMC)---having the same questions with different questionnaire artifacts---mediates partisan knowledge gaps.
-We include the nine survey questions fixed effects to allow each question to elicit some constant amount of partisan gap, if any, from the respondents. Standard errors are clustered at the respondent level.
-
-% partisan-gaps/scripts/Stata/mturk/reg-table.do
-\begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Partisan Knowledge Gaps: MTurk}
-	\label{tab:partisangaps-mturk}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{l*{6}{D{.}{.}{-1}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			\input ../tabs/mturk-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize All models are linear probability models where the dependent variable indicates whether the response to a survey item is congenial to party affiliation.
-		See \cref{tab:conditions} for the description of the conditions.
-	Demographic controls include age cohort, gender, education level (college degree, high school, no high school, post-graduate, and some college), and race (Hispanic, Asian, Black, White, Others). All models include the nine survey item fixed effects. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
-\end{table}
-
-
-\cref{tab:partisangaps-mturk} reports the results from estimating \cref{eq:partisangap-mturk}. Column (1) includes just the congenial variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
-Column (2) includes only the survey conditions, and two of them (FSR, IMC) elicit differences in partisan gaps that are statistically different from the baseline IDA condition. This is consistent with our observation in \cref{fig:partisangaps-mturk} While the treatment arm estimates are not as large as the Republican variable in column (1), it is still substantial evidence of how variable the estimated knowledge gap can be in the presence of questionnaire artifacts that inflate partisan gaps.
-Moreover, it is variable in a way that is independent of partisanship. Without accounting for partisanship, for instance, the average respondent assigned to the IMC condition is 8 percentage points less likely to give the correct response than the baseline IDA condition ($p<0.05$).
-%Compared to the gap arising from congeniality (in column (1)), a survey artifact in terms of differences in survey features (in column (2)) elicits a gap 0.31 times as large.
-
-In column (3) of \cref{tab:partisangaps-mturk}, we include the interaction of congenial and the four conditions (baseline is IDA). Now the congenial variable captures the knowledge gap in the IDA condition (corresponding to column (1) of \cref{fig:partisangaps-mturk}). The congenial and survey condition interactions reveal the extent to which partisan knowledge gaps change across the different survey conditions. 
-
-% partisan-gaps/scripts/Stata/mturk/barplot.do
-\begin{figure}[t]
-	\centering
-	\caption{Partisan Gap by Condition: MTurk}
-	\includegraphics[width=.55\textwidth]{../figs/mturk-pgag-surveyarms.pdf}
-	\label{fig:partisangaps-mturk-reg}
-	\caption*{\footnotesize
-		Difference between bars indicates the predicted partisan gap by the five conditions.
-		Bars reconstructed from the interactions of the Republican indicator with the treatment arms as reported in column (3) of \cref{tab:partisangaps-mturk}.
-		The baseline arm is IDA.
-		See \cref{tab:conditions} for the description of the conditions.
-		Capped vertical bars are 95\% confidence intervals.
-	}
-\end{figure}
-
-
-
-
-\cref{fig:partisangaps-mturk-reg} shows, in absolute terms, the estimates of how the different survey conditions attenuate the effect that has congeniality has on getting the correct response. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated knowledge gap by more than 49\% ($p<0.001$).
-For the IMC interaction term, adding a `Don't Know' without social proof and without encouragement to guess reduces the estimated knowledge gap by more than 37\% ($p<0.01$).
-%The largest reduction is 69\% ($p<0.001$), which comes from the CCD condition.
-%This condition allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. 
-In columns (4)--(6) of \cref{tab:partisangaps-mturk}, we show that including the self-reported characteristics of respondents does not change the conclusion.\footnote{See \crefrange{fig:baltest-ida-cud}{fig:baltest-ida-imc} for tests of balance between the four survey conditions.} Overall, the MTurk sample of Study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
-
-\newpage
-
-\section*{The Effects of Partisan Cues on Partisan Gaps}
-\label{sec:partisan_cues}
-\addcontentsline{toc}{section}{\nameref{sec:partisan_cues}}
-The aim of the studies 2 and 3 is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. We examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.
-
-\subsection*{Research Design and Data}\label{sec:data2}
-
-For exploring the research question, we exploit two datasets--- study 2 is a national survey conducted by YouGov, and study 3 is a telephone survey of a random sample of adults in Texas. The YouGov survey interviewed 2000 respondents between July 10th and 12th, 2012.  In Texas, a total of 1003 interviews were conducted between September 10th and 21st, 2012.
-
-In the YouGov survey, respondents were randomly assigned to factual questions with either a Republican or Democratic cue in the stem. In a question about whether ``since 2010 midterm elections, the unemployment rate [had] gone up, down, or remained the same, or couldn't you say?'', we inserted either the phrase “when Republicans regained control of the U.S. Congress'' or ``when Democrats retained control of the Senate” right after the first phrase. We employed a similar manipulation for the question on budget deficit, asking how the budget deficit had fared “since the 2010 midterm elections, when Republicans regained control of the U.S. Congress (or ``when Democrats retained control of the Senate''), has the budget deficit gone up, gone down, remained the same, or couldn't you say?''
-
-In the Texas survey, we added another condition to the above design – no partisan cue in the stem. So a third of the respondents were assigned to a question that simply read, ``since the 2010 midterm elections, has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?'' For the second question we changed our design to – no partisan cue, Democratic cue, and Democratic cue plus the following introduction “based on what you have heard”. The question read, ``since January 2009, have federal taxes increased, decreased, or remained the same or couldn’t you say?.'' The second version gave respondents a Democratic cue by changing the initial part of the sentence; the question now read, “Since Barack Obama took office\ldots''  The third version prepended a cue designed to encourage guessing to the second version; the version read, “Based on what you have heard, since Barack Obama took office, \ldots''
-
-
-\subsection*{Results from Study 2 (YouGov)}
-
-% partisan-gaps/scripts/Stata/survey-exp/unemp-barplots.do
-% partisan-gaps/scripts/Stata/survey-exp/deficit-barplots.do
-\begin{figure}[t]
-	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov Survey}	
-	\centering
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-unemp-congenialcue.pdf}
-		\caption{Unemployment}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-deficit-congenialcue.pdf}
-		\caption{Budget deficit}
-	\end{subfigure}	
-	\caption*{\footnotesize Bars indicate the predicted percent of responses saying that unemployment or the budget deficit have gone up (correct responses) as reported in \cref{tab:partisangaps-yougov} (columns (1) and (4)).  
-		Capped vertical bars indicate 95\% confidence intervals.
-	}
-	\label{fig:yougov-reg}
-\end{figure}
-
-We start with the YouGov survey to provide experimental evidence that cues in survey questions can affect responses to questions about policy-relevant and objectively verifiable facts. This survey includes questions about changes in unemployment and the budget deficit since the 2010 midterm elections, with manipulated partisan cues in the stem. 
-
-Using the YouGov survey responses, we estimate
-\begin{equation}\label{eq:pgap-yougov}
-\text{Correct}_{i} = \alpha + \beta (Congenial \; Cue)_i  +\varepsilon_{i},
-\end{equation}
-where the dependent variable is the indicator of whether the response to the question is correct.
-As discussed above, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly. Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response. The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
-
-% partisan-gaps/scripts/Stata/survey-exp/reg-table.do
-\begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
-	\label{tab:partisangaps-yougov}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{3}{c}{Unemployment has gone up}&\multicolumn{3}{c}{Deficit has gone up}\\
-			\cmidrule(lr){2-4}\cmidrule(l){5-7} 
-			\input ../tabs/yougov-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables indicate whether the individual responded that unemployment or the budget deficit had gone up since the 2010 midterm elections (which are the correct responses).
-		Congenial cue indicates whether the question stem includes the cue towards getting the correct response. For Democrats, this is when the question stem includes the cue ``when Republicans gained control of the US Congress.''
-		For Republicans, this is when the question stem includes the cue ``when Democrats retained control of the Senate.''
-		Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
-		All models are linear probability models. 
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
-\end{table}
-Panel (a) of \cref{fig:yougov-reg} shows that, by manipulating the partisan cue that respondents receive, the probability of getting the correct response for the unemployment question differs by 14 percentage points ($p < 0.001$, reported in \cref{tab:partisangaps-yougov}).
-
-Panel (b) of \cref{fig:yougov-reg} shows that this systematic difference is not unique to the unemployment question. We reestimate \cref{eq:pgap-yougov} where the dependent variable is getting the correct response that the budget deficit has gone up. When the individuals get a congenial cue, they are 18 percentage points more likely to get the correct response ($p<0.001$).
-Presumably, we observe this congenial cue effect because the question stem holds the other party responsible for the increase in unemployment and deficit, which are both undesirable.\footnote{\cref{fig:yougov-reg-by-partisanship} show that there is some heterogeneity in how the congenial cue affects Republicans as opposed to Democrats. However, the effect is not unique to either party since partisans of both types are more likely to get the correct response when randomly assigned the congenial cue.}
-
-\subsection*{Results from Study 3 (Texas Lyceum)}
-% partisan-gaps/scripts/Stata/tx-lyceum/unemp-barplot.do
-\begin{figure}[!t]
-	\centering
-	\caption{Partisan Gap by Treatment Arm: Texas Lyceum, Unemployment}
-	\includegraphics[width=.55\textwidth]{../figs/texas-unemp-congenialcue.pdf}
-	\label{fig:partisangaps-texas-unemp}
-	\caption*{\footnotesize 
-		Bars indicate the predicted percent of responses saying that unemployment has gone up (correct response) as reported in column (1) of \cref{tab:partisangaps-texas-unemp}.  
-		Capped vertical bars indicate 95\% confidence intervals.
-	}
-\end{figure}
-
-We further supplement our results with the Texas Lyceum survey, which includes a third cue: a neutral cue. For the question about unemployment in this survey, in addition to congenial and uncongenial cues, individuals can also be randomly assigned a neutral cue where the additional question stem assigning blame to a party is absent, giving us a total of three groups: (i) no cue, (ii) congenial cue, and (iii) uncongenial cue.
-
-\cref{fig:partisangaps-texas-unemp} shows that our results above still hold when we include a neutral cue. Compared to individuals who received a neutral cue, individuals who receive an uncongenial cue are 17 percentage points less likely to get the correct answer that unemployment has gone up ($p<0.001$). Individuals who receive a congenial cue are 8 percentage points more likely to get the correct answer ($p<0.1$). These results are tabulated in \cref{tab:partisangaps-texas-unemp}.
-
-% partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
-\begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Partisan Knowledge Gaps with Partisan Cues: Texas Lyceum, Unemployment}
-	\label{tab:partisangaps-texas-unemp}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{3}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{3}{c}{Unemployment has gone up}\\
-			\cmidrule(l){2-4}
-			\input ../tabs/texas-unemp-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize Dependent variable indicates whether the individual responded that unemployment has gone up since the 2010 midterm elections (which is the correct response).
-		Congenial cue indicates whether the question stem includes the cue towards getting the correct response. 
-		For Democrats, this is when the question stem includes the cue ``when Republicans regained control of the US Congress.''
-		For Republicans, this is when the question stem includes the cue ``when the Democrats retained control of the Senate.''
-		Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
-		All models are linear probability models. 
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
-\end{table}
-
-% partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
-\begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Partisan Knowledge Gaps with Partisan Cues: Texas Lyceum, Federal Taxes}
-	\label{tab:partisangaps-texas-fedtax}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{4}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{2}{c}{Responded ``Gone up''}&\multicolumn{2}{c}{Responded ``Don't Know''}\\
-			\cmidrule(lr){2-3}\cmidrule(l){4-5} 
-			\input ../tabs/texas-fedtax-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables indicate whether the individual responded that federal taxes had gone up since the 2010 midterm elections (which are the correct responses) or ``don't know''.
-		Congenial cue indicates whether the question stem includes the cue towards getting the correct response. 
-		Only Republicans can get a congenial cue for these questions.
-		This happens when Republicans receive the question stem that includes the cue ``since Barack Obama took office.''
-		Separately, individuals can also be assigned a cue that encourages guessing. This happens when the question stem includes ``Based on what you have heard, since Barack Obama took office...''
-		Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
-		All models are linear probability models. 
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
-\end{table}
-
-
-Finally, we examine the federal taxes question in the Texas Lyceum survey, where individuals are asked whether federal taxes have increased, decreased, or remained the same. For this question, individuals are randomly assigned (i) the Democratic cue ``Since Barack Obama took office'', (ii) the Democratic cue with an additional cue that encourages guessing ``Based on what you have heard, since Barack Obama took office...'', and (iii) a neutral stem.
-
-Based on the estimates in \cref{tab:partisangaps-texas-fedtax}, we observe that randomly receiving a congenial cue still leads to a higher correct response rate of 21.5 percentage points relative to receiving a neutral cue ($p<0.001$). On the other hand, an uncongenial cue leads to a lower correct response of 29.8 percentage points ($p<0.001$).
-We also estimate how the cue that encourages guessing affects the ``Don't Know'' response rate. Presumably, a cue that encourages guessing would lead to a lower response rate for Don't Know. We find that the guessing cues do not have a very different effect from cues that do not. 
-
-Overall, we find again using the YouGov survey and Texas Lyceum survey that questionnaire artifacts, via the addition of partisan cues in the same questions, affects the measured gaps in political knowledge. 
-
-
-
-\section*{The Effects of Scoring Responses on Partisan Gaps}
-\label{sec:confidence_coding}
-\addcontentsline{toc}{section}{\nameref{sec:confidence_coding}}
-
-In a last study we examine the consequences of scoring decisions in surveys. How do decisions in \emph{how we score knowledge} affect the partisan gaps? Does the classic multiple choice design affect the partisan gaps we find? We depart from this design prevalent in survey questions about political knowledge and introduce an assessment that includes an evaluation of respondents confidence in knowledge.
-
-
-\subsection*{Research Design and Data}\label{sec:data3}
-
-Usually respondents see a survey question and can select a single response out of a set of \emph{n} given options. Knowledge is then coded as selecting the one correct response to the question out of the \emph{n} options \citep[see, for example,][]{plescia2021enemy}. Question design like this does not differentiate between confidently held beliefs, vague hunches, lucky guesses, or expressive responses that are guided by partisan or ideological attachments. In our Confidence Coding Design (CCD) the respondents rate a series of claims on a 0 to 10 Likert scale going from `definitely false' to `definitely true.' We hence focuses on the confidence scoring of knowledge. Survey participants are asked to indicate how certain they are that a given statement is factually true. Asking respondents not only whether they think a statement is true but also how confident they are that the statement is true reduces the likelihood that we conflate confidently held knowledge with any of the other response types that might lead to a correct answer in the multiple choice coding scheme.
-
-In order to be able to compare this question design to the previous studies in this manuscript we examine the effect of the CCD approach on the partisan gaps with the same knowledge questions presented in the first study at the beginning of the manuscript. Using the same questions and answers allows us to directly compare the responses to the multiple choice questions in Study 1 to the Likert scale responses in Study 4. Our question design is inspired by other attempts to take account of confidence in distinguishing misinformation from incorrect responses stemming from processes like inference, unlucky guessing, and such  \citep[for instance,][]{pasek2015}. While we consider this confidence coding to be the gold standard when it comes to removing inflationary features from the survey design it is a larger deviation from common survey design features. In our surveys this question design does not encourage guessing and features no social proof.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.} As before, congenial partisanship is coded for as 1 for instances where the individuals partisanship aligns with the content of the question and 0 otherwise. For example, the question about Donald Trump's executive order is coded as congenial for Republican survey participants but as uncongenial for Democrats.
-
-In our final analysis, we examine how congenial partisanship affects answers to survey questions in multiple choice and the Likert scale response options of the CCD approach. As before, correct responses in the multiple choice treatment are responses that select the correct option out of the \emph{n} answer options presented in the question. In the CCD treatment the scoring of questions is more complicated. Survey participants see the same question as in the multiple choice treatment but have to rank the correctness of all of the \emph{n} answer option from the multiple choice treatment. We code a response to a question as correct if four conditions are met
-
-\begin{enumerate}
-  \item The correct answer must have a confidence of 10.
-  \item The correct answer must be the maximum response.
-  \item The correct answer must also be unique.
-  \item The confidence in the incorrect answers cannot be above a threshold \(\theta\).
-\end{enumerate}
-
-This means that we only code an answer to a question as correct if the respondent indicates that they are fully confident that the correct answer is correct and that they do not indicate that any of the incorrect options might also be correct.\footnote{We set the threshold \(\theta\) to be at 0 in the analysis that follows but also present a robustness check in the \bgcd \textbf{TODO appendix XYZ} \ech where correct responses are coded if the confidence for the correct answers is larger than 7 and the confidence in incorrect responses is less than 3. Conditions 2 always applies in the original coding but must be specified for the robustness checks.}.
-
-\subsection*{Results from Study 4 (MTurk 2)}
-
-Using the data from study 4 we formalize the above observation as before. We regress the dependent variable, an indicator of whether the response is correct, on the interaction of the survey conditions (Multiple Choice and Relative Scoring) and the congenial dummy:
-
-\begin{equation}\label{eq:partisangap-mturk2}
-  \text{Correct}_{ijk} = \alpha + \beta \text{Congenial}_i + \gamma \text{Scoring}_k + \delta_k (\text{Congenial}_i \times \text{Scoring}_k) + \varepsilon_{ijk}
-\end{equation}
-
-
-for respondents \(i\), survey item \(j\), and scoring condition \(k\). As in \cref{eq:partisangap-mturk} \(\beta\) captures the difference in proportion of correct responses when the answer to the question is congenial to the respondents party affiliation in the multiple choice treatment. A positive estimate indicates that respondents are more likely to choose the correct response when it is congenial to their party affiliation in the multiple choice treatment. \(\gamma\) captures the effect of the relative scoring in the Confidence Coding Design scheme for uncongenial questions. A positive coefficient indicates that relative scoring is associated with more correct responses,a negative one with less. \(\delta\) captures the difference in how the two scoring treatments, multiple choice and confidence coding, affect the knowledge gaps across partisans for congenial questions. In the pooled equation, which includes all questions we also include four question fixed effects, \(\text{question}_j\).
-
- \cref{table:study4_results} reports the results from \cref{eq:partisangap-mturk2}. Columns 1 through 4 report the question specific estimates. Column 5 pools all questions and adds question fixed effects to the model. In this specification the intercept term reports the proportion correct for uncongenial questions that were scored with the multiple choice rules. For \(\beta\), we can see across all but one column (column 4, Donald Trump) that congenial questions in the multiple choice scoring are associated with a higher proportion of correct responses. In the MC scoring treatment partisans are more likely to get questions correct that are closer to their partisanship. For the first three models focusing on the Affordable Care Act and Greenhouse Gas questions the effects are statistically significant. This is not the case for model 4 and the pooled model. \(\gamma\) shows us that this is not the case for congenial questions that are scored with the relative scoring rule of the CCD approach. In this treatment all but the Greenhouse Gas question see the partisan gap in knowledge disappear.
-
-
- \bgcd  \textbf{Figure XYZ visualizes these effects as we have already seen in \cref{fig:partisangaps-mturk-reg} - \cref{fig:partisangaps-texas-unemp}} \ech
-
-
-
-\input{../tabs/study4_prelim_table.tex}
-
-
-% \cref{fig:mturk_hk} and \cref{tab:mturk_hk} indicate that questionnaire design features might also affect congeniality of responses. Moving from the standard multiple choice format to the confidence coding comes with a reduction in the congeniality estimate.
-
-% partisan-gaps/scripts/Stata/mturk_hk/mc_likert_coefplot.do
-\begin{center}
-	\begin{figure}[h]
+	
+	
+	
+	
+	\cref{fig:partisangaps-mturk-reg} shows, in absolute terms, the estimates of how the different survey conditions attenuate the effect that has congeniality has on getting the correct response. For the FSR interaction term, just adding a `Don't Know' response option reduces the estimated knowledge gap by more than 49\% ($p<0.001$).
+	For the IMC interaction term, adding a `Don't Know' without social proof and without encouragement to guess reduces the estimated knowledge gap by more than 37\% ($p<0.01$).
+	%The largest reduction is 69\% ($p<0.001$), which comes from the CCD condition.
+	%This condition allows respondents to rate their responses on a 0 to 10 scale from `definitely false' to `definitely true' instead of a false and true option, where only a response with confidence of 10 is considered. 
+	In columns (4)--(6) of \cref{tab:partisangaps-mturk}, we show that including the self-reported characteristics of respondents does not change the conclusion.\footnote{See \crefrange{fig:baltest-RW-ips}{fig:baltest-24k-ips} for tests of balance between the four survey conditions.} Overall, the MTurk sample of Study 1 reveals that measured partisan knowledge gaps are highly sensitive to different questionnaire artifacts in the same questions.
+	
+	\newpage
+	
+	\section*{The Effects of Partisan Cues on Partisan Gaps}
+	\label{sec:partisan_cues}
+	\addcontentsline{toc}{section}{\nameref{sec:partisan_cues}}
+	The aim of the studies 2 and 3 is to present experimental evidence about effect of partisan cues in the question stem on responses by partisans. We examine closed-ended items asking about policy-relevant facts or objective performance, particularly those items stirring affective consistency, stereotyping, or both.  In the first case, items whose correct response option one side or the other would like to disbelieve, or at least one of whose incorrect response options one side or the other would like to believe, or both; in the second case items whose correct response option defies stereotype, or at least one of whose incorrect response options conforms to stereotype, or both.
+	
+	\subsection*{Research Design and Data}\label{sec:data2}
+	
+	For exploring the research question, we exploit two datasets--- study 2 is a national survey conducted by YouGov, and study 3 is a telephone survey of a random sample of adults in Texas. The YouGov survey interviewed 2000 respondents between July 10th and 12th, 2012.  In Texas, a total of 1003 interviews were conducted between September 10th and 21st, 2012.
+	
+	In the YouGov survey, respondents were randomly assigned to factual questions with either a Republican or Democratic cue in the stem. In a question about whether ``since 2010 midterm elections, the unemployment rate [had] gone up, down, or remained the same, or couldn't you say?'', we inserted either the phrase “when Republicans regained control of the U.S. Congress'' or ``when Democrats retained control of the Senate” right after the first phrase. We employed a similar manipulation for the question on budget deficit, asking how the budget deficit had fared “since the 2010 midterm elections, when Republicans regained control of the U.S. Congress (or ``when Democrats retained control of the Senate''), has the budget deficit gone up, gone down, remained the same, or couldn't you say?''
+	
+	In the Texas survey, we added another condition to the above design – no partisan cue in the stem. So a third of the respondents were assigned to a question that simply read, ``since the 2010 midterm elections, has the unemployment rate gone up, gone down, or remained the same?  Or couldn’t you say?'' For the second question we changed our design to – no partisan cue, Democratic cue, and Democratic cue plus the following introduction “based on what you have heard”. The question read, ``since January 2009, have federal taxes increased, decreased, or remained the same or couldn’t you say?.'' The second version gave respondents a Democratic cue by changing the initial part of the sentence; the question now read, “Since Barack Obama took office\ldots''  The third version prepended a cue designed to encourage guessing to the second version; the version read, “Based on what you have heard, since Barack Obama took office, \ldots''
+	
+	
+	\subsection*{Results from Study 2 (YouGov)}
+	
+	% partisan-gaps/scripts/Stata/survey-exp/unemp-barplots.do
+	% partisan-gaps/scripts/Stata/survey-exp/deficit-barplots.do
+	\begin{figure}[t]
+		\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov Survey}	
 		\centering
-		\caption{Partisan Gaps in Knowledge in different question designs}
-		\includegraphics[width=.55\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
-		\label{fig:mturk_hk}
-		\caption*{\scriptsize
-			Figure shows the estimated partisan gaps in knowledge from the MTurk sample for Study 2 for two different survey conditions.
-			The multiple choice condition provides five closed-ended options, including the correct answer and a ``Don't Know''.
-			The Likert scale condition only considers the selection of the correct answer with a full confidence of 10 (see \cref{si:mturk2}).
-			Estimates correspond to those reported in \cref{tab:mturk_hk}.
-			Horizontal bars are 95\% confidence intervals.
+		\begin{subfigure}{.495\textwidth}\centering
+			\includegraphics[width=\textwidth]{../figs/yougov-unemp-congenialcue.pdf}
+			\caption{Unemployment}
+		\end{subfigure}
+		\hfil
+		\begin{subfigure}{.495\textwidth}\centering
+			\includegraphics[width=\textwidth]{../figs/yougov-deficit-congenialcue.pdf}
+			\caption{Budget deficit}
+		\end{subfigure}	
+		\caption*{\footnotesize Bars indicate the predicted percent of responses saying that unemployment or the budget deficit have gone up (correct responses) as reported in \cref{tab:partisangaps-yougov} (columns (1) and (4)).  
+			Capped vertical bars indicate 95\% confidence intervals.
+		}
+		\label{fig:yougov-reg}
+	\end{figure}
+	
+	We start with the YouGov survey to provide experimental evidence that cues in survey questions can affect responses to questions about policy-relevant and objectively verifiable facts. This survey includes questions about changes in unemployment and the budget deficit since the 2010 midterm elections, with manipulated partisan cues in the stem. 
+	
+	Using the YouGov survey responses, we estimate
+	\begin{equation}\label{eq:pgap-yougov}
+	\text{Correct}_{i} = \alpha + \beta (Congenial \; Cue)_i  +\varepsilon_{i},
+	\end{equation}
+	where the dependent variable is the indicator of whether the response to the question is correct.
+	As discussed above, we model the correct response rate as dependent on whether the cue presented to individuals is congenial to responding correctly. Specifically, the congenial cue indicator is coded as one when a Democrat receives a question stem with the cue ``when Republicans gained control of the US congress.'' This cue manipulates Democrats into blaming the Republicans by suggesting that unemployment has gone up, which is the correct response. The reverse happens for Republicans. The congenial cue for Republicans is coded as one when they receive the cue ``When Democrats retained control of the Senate.''
+	
+	% partisan-gaps/scripts/Stata/survey-exp/reg-table.do
+	\begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
+		\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+		\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
+		\label{tab:partisangaps-yougov}
+		\begin{adjustbox}{max width=\textwidth}
+			\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+				\toprule
+				% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+				&\multicolumn{3}{c}{Unemployment has gone up}&\multicolumn{3}{c}{Deficit has gone up}\\
+				\cmidrule(lr){2-4}\cmidrule(l){5-7} 
+				\input ../tabs/yougov-reg-table-fragment.tex
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}
+		\caption*{\footnotesize Dependent variables indicate whether the individual responded that unemployment or the budget deficit had gone up since the 2010 midterm elections (which are the correct responses).
+			Congenial cue indicates whether the question stem includes the cue towards getting the correct response. For Democrats, this is when the question stem includes the cue ``when Republicans gained control of the US Congress.''
+			For Republicans, this is when the question stem includes the cue ``when Democrats retained control of the Senate.''
+			Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
+			All models are linear probability models. 
+			Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\end{table}
+	Panel (a) of \cref{fig:yougov-reg} shows that, by manipulating the partisan cue that respondents receive, the probability of getting the correct response for the unemployment question differs by 14 percentage points ($p < 0.001$, reported in \cref{tab:partisangaps-yougov}).
+	
+	Panel (b) of \cref{fig:yougov-reg} shows that this systematic difference is not unique to the unemployment question. We reestimate \cref{eq:pgap-yougov} where the dependent variable is getting the correct response that the budget deficit has gone up. When the individuals get a congenial cue, they are 18 percentage points more likely to get the correct response ($p<0.001$).
+	Presumably, we observe this congenial cue effect because the question stem holds the other party responsible for the increase in unemployment and deficit, which are both undesirable.\footnote{\cref{fig:yougov-reg-by-partisanship} show that there is some heterogeneity in how the congenial cue affects Republicans as opposed to Democrats. However, the effect is not unique to either party since partisans of both types are more likely to get the correct response when randomly assigned the congenial cue.}
+	
+	\subsection*{Results from Study 3 (Texas Lyceum)}
+	% partisan-gaps/scripts/Stata/tx-lyceum/unemp-barplot.do
+	\begin{figure}[!t]
+		\centering
+		\caption{Partisan Gap by Treatment Arm: Texas Lyceum, Unemployment}
+		\includegraphics[width=.55\textwidth]{../figs/texas-unemp-congenialcue.pdf}
+		\label{fig:partisangaps-texas-unemp}
+		\caption*{\footnotesize 
+			Bars indicate the predicted percent of responses saying that unemployment has gone up (correct response) as reported in column (1) of \cref{tab:partisangaps-texas-unemp}.  
+			Capped vertical bars indicate 95\% confidence intervals.
 		}
 	\end{figure}
-\end{center}
-
-\input{../tabs/mturk_hk_mc_likert.tex}
-
-
-% partisan-gaps/scripts/Stata/mturk_hk/reg-table.do
-\begin{table}[t] \centering \small \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Confidence Scoring and Knowledge Gaps: MTurk Study 2} 
-	%\label{tab:xx}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{4}{c}{Individual survey question}\\
-			\cmidrule(l){2-5}
-			&\multicolumn{1}{c}{Affordable Care Act}&\multicolumn{1}{c}{Affordable Care Act 2}&\multicolumn{1}{c}{Greenhouse gases}&\multicolumn{1}{c}{President Trump}&\multicolumn{1}{c}{All}\\
-			\input ../tabs/mturk-hk-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\scriptsize Dependent variables indicate whether the respondent answered the question(s) correctly. 
-		See \cref{si:mturk2} for exact wording of the four questions.
-		Columns (1)--(4) estimates by the individual survey questions.
-		Column (5) includes all questions and adds the survey question fixed effects.
-		All models are linear probability models.
-		In the CCD (Confidence-coding design), a response is correct only if the correct answer is selected with a full confidence of 10.
-		The baseline are the multiple choice designs.
-		Standard errors are clustered at the respondent level.
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
-\end{table}
-
-
-\clearpage
-\section*{Discussion and Conclusion}
-\label{sec:discussion}
-\addcontentsline{toc}{section}{\nameref{sec:discussion}}
-Since at least the publication of \cite{bartels_2002}, the conventional wisdom has been that partisan gaps in beliefs about politically consequential facts are wide and pervasive. 
-The conventional wisdom in academia has also become the received wisdom for the mass public --- nearly 80\% of Americans believe that Democrats and Republicans  disagree on facts \citep{pew2018disagree}.
-
-In line with other research on this topic \citep[][though see \citeauthor{berinsky_2017} \citeyear{berinsky_2017} and \citeauthor{peterson_iyengar_forth} \citeyear{peterson_iyengar_forth}]{bullocketal_2015, prior2015you, schaffner_luks}, our results suggests that a big chunk of partisan gap is not founded in differences in beliefs. We find that conventional aspects of survey items like not asking don't know, inserting a partisan cue, and treating inconfident answers as knowledge inflate the patisan gaps that we see on surveys.
-
-The fact that partisan gaps are smaller may seem at odds with some political behavior research but a careful reading of recent research suggests that small partisan gaps are to be expected. For instance, at odds with the theory of selective exposure, which posits vast imbalances in consumption of partisan news, recent studies show that most people consume very little political news \citep{Prior2007,flaxmanetal_2016}, and the news that they do consume is relatively balanced \citep{flaxmanetal_2016,garzetal_2018,gentzkowshapiro_2011,guess_2020}. Other evidence points to the fact that Democrats and Republicans update in light of events in a similar fashion \citep{gerber_annual_review,kernell_2019}.
-
-The results however paint a mixed picture about democratic competence. Small gaps are partly a consequence of the fact that the average respondent doesn't have any confidently held beliefs about the issue at hand. It is mostly ignorance masquerading as partisan gaps. The upside is that partisan gaps are small and the downside is that people know even less than we assume.
-
-\clearpage
-\bibliographystyle{apsr}
-\bibliography{pgap}
-
-\clearpage
-
-\input{./sections/appendix.tex}
-
-
+	
+	We further supplement our results with the Texas Lyceum survey, which includes a third cue: a neutral cue. For the question about unemployment in this survey, in addition to congenial and uncongenial cues, individuals can also be randomly assigned a neutral cue where the additional question stem assigning blame to a party is absent, giving us a total of three groups: (i) no cue, (ii) congenial cue, and (iii) uncongenial cue.
+	
+	\cref{fig:partisangaps-texas-unemp} shows that our results above still hold when we include a neutral cue. Compared to individuals who received a neutral cue, individuals who receive an uncongenial cue are 17 percentage points less likely to get the correct answer that unemployment has gone up ($p<0.001$). Individuals who receive a congenial cue are 8 percentage points more likely to get the correct answer ($p<0.1$). These results are tabulated in \cref{tab:partisangaps-texas-unemp}.
+	
+	% partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
+	\begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
+		\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+		\caption{Partisan Knowledge Gaps with Partisan Cues: Texas Lyceum, Unemployment}
+		\label{tab:partisangaps-texas-unemp}
+		\begin{adjustbox}{max width=\textwidth}
+			\begin{tabular}{@{\hspace{0\tabcolsep}}l*{3}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+				\toprule
+				% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+				&\multicolumn{3}{c}{Unemployment has gone up}\\
+				\cmidrule(l){2-4}
+				\input ../tabs/texas-unemp-reg-table-fragment.tex
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}
+		\caption*{\footnotesize Dependent variable indicates whether the individual responded that unemployment has gone up since the 2010 midterm elections (which is the correct response).
+			Congenial cue indicates whether the question stem includes the cue towards getting the correct response. 
+			For Democrats, this is when the question stem includes the cue ``when Republicans regained control of the US Congress.''
+			For Republicans, this is when the question stem includes the cue ``when the Democrats retained control of the Senate.''
+			Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
+			All models are linear probability models. 
+			Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\end{table}
+	
+	% partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
+	\begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
+		\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+		\caption{Partisan Knowledge Gaps with Partisan Cues: Texas Lyceum, Federal Taxes}
+		\label{tab:partisangaps-texas-fedtax}
+		\begin{adjustbox}{max width=\textwidth}
+			\begin{tabular}{@{\hspace{0\tabcolsep}}l*{4}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+				\toprule
+				% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+				&\multicolumn{2}{c}{Responded ``Gone up''}&\multicolumn{2}{c}{Responded ``Don't Know''}\\
+				\cmidrule(lr){2-3}\cmidrule(l){4-5} 
+				\input ../tabs/texas-fedtax-reg-table-fragment.tex
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}
+		\caption*{\footnotesize Dependent variables indicate whether the individual responded that federal taxes had gone up since the 2010 midterm elections (which are the correct responses) or ``don't know''.
+			Congenial cue indicates whether the question stem includes the cue towards getting the correct response. 
+			Only Republicans can get a congenial cue for these questions.
+			This happens when Republicans receive the question stem that includes the cue ``since Barack Obama took office.''
+			Separately, individuals can also be assigned a cue that encourages guessing. This happens when the question stem includes ``Based on what you have heard, since Barack Obama took office...''
+			Demographic controls include age cohort, gender, education level, marital status, number of children, children school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
+			All models are linear probability models. 
+			Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\end{table}
+	
+	
+	Finally, we examine the federal taxes question in the Texas Lyceum survey, where individuals are asked whether federal taxes have increased, decreased, or remained the same. For this question, individuals are randomly assigned (i) the Democratic cue ``Since Barack Obama took office'', (ii) the Democratic cue with an additional cue that encourages guessing ``Based on what you have heard, since Barack Obama took office...'', and (iii) a neutral stem.
+	
+	Based on the estimates in \cref{tab:partisangaps-texas-fedtax}, we observe that randomly receiving a congenial cue still leads to a higher correct response rate of 21.5 percentage points relative to receiving a neutral cue ($p<0.001$). On the other hand, an uncongenial cue leads to a lower correct response of 29.8 percentage points ($p<0.001$).
+	We also estimate how the cue that encourages guessing affects the ``Don't Know'' response rate. Presumably, a cue that encourages guessing would lead to a lower response rate for Don't Know. We find that the guessing cues do not have a very different effect from cues that do not. 
+	
+	Overall, we find again using the YouGov survey and Texas Lyceum survey that questionnaire artifacts, via the addition of partisan cues in the same questions, affects the measured gaps in political knowledge. 
+	
+	
+	
+	\section*{The Effects of Scoring Responses on Partisan Gaps}
+	\label{sec:confidence_coding}
+	\addcontentsline{toc}{section}{\nameref{sec:confidence_coding}}
+	
+	In a last study we examine the consequences of scoring decisions in surveys. How do decisions in \emph{how we score knowledge} affect the partisan gaps? Does the classic multiple choice design affect the partisan gaps we find? We depart from this design prevalent in survey questions about political knowledge and introduce an assessment that includes an evaluation of respondents confidence in knowledge.
+	
+	
+	\subsection*{Research Design and Data}\label{sec:data3}
+	
+	Usually respondents see a survey question and can select a single response out of a set of \emph{n} given options. Knowledge is then coded as selecting the one correct response to the question out of the \emph{n} options \citep[see, for example,][]{plescia2021enemy}. Question design like this does not differentiate between confidently held beliefs, vague hunches, lucky guesses, or expressive responses that are guided by partisan or ideological attachments. In our Confidence Coding Design (CCD) the respondents rate a series of claims on a 0 to 10 Likert scale going from `definitely false' to `definitely true.' We hence focuses on the confidence scoring of knowledge. Survey participants are asked to indicate how certain they are that a given statement is factually true. Asking respondents not only whether they think a statement is true but also how confident they are that the statement is true reduces the likelihood that we conflate confidently held knowledge with any of the other response types that might lead to a correct answer in the multiple choice coding scheme.
+	
+	In order to be able to compare this question design to the previous studies in this manuscript we examine the effect of the CCD approach on the partisan gaps with the same knowledge questions presented in the first study at the beginning of the manuscript. Using the same questions and answers allows us to directly compare the responses to the multiple choice questions in Study 1 to the Likert scale responses in Study 4. Our question design is inspired by other attempts to take account of confidence in distinguishing misinformation from incorrect responses stemming from processes like inference, unlucky guessing, and such  \citep[for instance,][]{pasek2015}. While we consider this confidence coding to be the gold standard when it comes to removing inflationary features from the survey design it is a larger deviation from common survey design features. In our surveys this question design does not encourage guessing and features no social proof.\footnote{The exact question wording for each of the items is presented in \cref{si:mturk2}.} As before, congenial partisanship is coded for as 1 for instances where the individuals partisanship aligns with the content of the question and 0 otherwise. For example, the question about Donald Trump's executive order is coded as congenial for Republican survey participants but as uncongenial for Democrats.
+	
+	In our final analysis, we examine how congenial partisanship affects answers to survey questions in multiple choice and the Likert scale response options of the CCD approach. As before, correct responses in the multiple choice treatment are responses that select the correct option out of the \emph{n} answer options presented in the question. In the CCD treatment the scoring of questions is more complicated. Survey participants see the same question as in the multiple choice treatment but have to rank the correctness of all of the \emph{n} answer option from the multiple choice treatment. We code a response to a question as correct if four conditions are met
+	
+	\begin{enumerate}
+		\item The correct answer must have a confidence of 10.
+		\item The correct answer must be the maximum response.
+		\item The correct answer must also be unique.
+		\item The confidence in the incorrect answers cannot be above a threshold \(\theta\).
+	\end{enumerate}
+	
+	This means that we only code an answer to a question as correct if the respondent indicates that they are fully confident that the correct answer is correct and that they do not indicate that any of the incorrect options might also be correct.\footnote{We set the threshold \(\theta\) to be at 0 in the analysis that follows but also present a robustness check in the \bgcd \textbf{TODO appendix XYZ} \ech where correct responses are coded if the confidence for the correct answers is larger than 7 and the confidence in incorrect responses is less than 3. Conditions 2 always applies in the original coding but must be specified for the robustness checks.}.
+	
+	\subsection*{Results from Study 4 (MTurk 2)}
+	
+	Using the data from study 4 we formalize the above observation as before. We regress the dependent variable, an indicator of whether the response is correct, on the interaction of the survey conditions (Multiple Choice and Relative Scoring) and the congenial dummy:
+	
+	\begin{equation}\label{eq:partisangap-mturk2}
+	\text{Correct}_{ijk} = \alpha + \beta \text{Congenial}_i + \gamma \text{Scoring}_k + \delta_k (\text{Congenial}_i \times \text{Scoring}_k) + \varepsilon_{ijk}
+	\end{equation}
+	
+	
+	for respondents \(i\), survey item \(j\), and scoring condition \(k\). As in \cref{eq:partisangap-mturk} \(\beta\) captures the difference in proportion of correct responses when the answer to the question is congenial to the respondents party affiliation in the multiple choice treatment. A positive estimate indicates that respondents are more likely to choose the correct response when it is congenial to their party affiliation in the multiple choice treatment. \(\gamma\) captures the effect of the relative scoring in the Confidence Coding Design scheme for uncongenial questions. A positive coefficient indicates that relative scoring is associated with more correct responses,a negative one with less. \(\delta\) captures the difference in how the two scoring treatments, multiple choice and confidence coding, affect the knowledge gaps across partisans for congenial questions. In the pooled equation, which includes all questions we also include four question fixed effects, \(\text{question}_j\).
+	
+	\cref{table:study4_results} reports the results from \cref{eq:partisangap-mturk2}. Columns 1 through 4 report the question specific estimates. Column 5 pools all questions and adds question fixed effects to the model. In this specification the intercept term reports the proportion correct for uncongenial questions that were scored with the multiple choice rules. For \(\beta\), we can see across all but one column (column 4, Donald Trump) that congenial questions in the multiple choice scoring are associated with a higher proportion of correct responses. In the MC scoring treatment partisans are more likely to get questions correct that are closer to their partisanship. For the first three models focusing on the Affordable Care Act and Greenhouse Gas questions the effects are statistically significant. This is not the case for model 4 and the pooled model. \(\gamma\) shows us that this is not the case for congenial questions that are scored with the relative scoring rule of the CCD approach. In this treatment all but the Greenhouse Gas question see the partisan gap in knowledge disappear.
+	
+	
+	\bgcd  \textbf{\cref{fig:mturk_relative_score} visualizes these effects as we have already seen in \cref{fig:partisangaps-mturk-reg} - \cref{fig:partisangaps-texas-unemp}} \ech
+	
+	\begin{figure}[ht]
+		\caption{Confidence Scoring and Knowledge Gaps: MTurk Study 2}	
+		\centering
+		\begin{subfigure}{.495\textwidth}\centering
+			\includegraphics[width=\textwidth]{../figs/relative_score_aca.pdf}
+			\caption{Affordable Care Act}
+		\end{subfigure}
+		\hfil
+		\begin{subfigure}{.495\textwidth}\centering
+			\includegraphics[width=\textwidth]{../figs/relative_score_aca2.pdf}
+			\caption{Affordable Care Act 2}
+		\end{subfigure}	
+		\vfil
+		\begin{subfigure}{.495\textwidth}\centering
+			\includegraphics[width=\textwidth]{../figs/relative_score_gg.pdf}
+			\caption{Greenhouse Gases}
+		\end{subfigure}
+		\hfil
+		\begin{subfigure}{.495\textwidth}\centering
+			\includegraphics[width=\textwidth]{../figs/relative_score_dt.pdf}
+			\caption{Donald Trump}
+		\end{subfigure}	        
+		\caption*{\footnotesize
+			Bars indicate the predicted percent of correct responses as reported in \cref{table:study4_results}.  
+			MC bar indicates the predicted effect of multiple choice with congenial responses on getting the correct response.
+			RL bar indicates the effect of relative scoring with congenial responses on getting the correct response relative to the multiple choice (MC) scheme.
+			Capped vertical bars indicate 95\% confidence intervals.
+		}
+		\label{fig:mturk_relative_score}
+	\end{figure}
+	
+	% Commenting out for now
+	%\input{../tabs/study4_prelim_table.tex}
+	
+	
+	% \cref{fig:mturk_hk} and \cref{tab:mturk_hk} indicate that questionnaire design features might also affect congeniality of responses. Moving from the standard multiple choice format to the confidence coding comes with a reduction in the congeniality estimate.
+	
+	% Commenting out for now
+	\iffalse
+	% partisan-gaps/scripts/Stata/mturk_hk/mc_likert_coefplot.do
+	\begin{center}
+		\begin{figure}[ht]
+			\centering
+			\caption{Partisan Gaps in Knowledge in different question designs}
+			\includegraphics[width=.55\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
+			\label{fig:mturk_hk}
+			\caption*{\scriptsize
+				Figure shows the estimated partisan gaps in knowledge from the MTurk sample for Study 2 for two different survey conditions.
+				The multiple choice condition provides five closed-ended options, including the correct answer and a ``Don't Know''.
+				The Likert scale condition only considers the selection of the correct answer with a full confidence of 10 (see \cref{si:mturk2}).
+				Estimates correspond to those reported in \cref{tab:mturk_hk}.
+				Horizontal bars are 95\% confidence intervals.
+			}
+		\end{figure}
+	\end{center}
+	\fi
+	
+	% Commenting out for now
+	%\input{../tabs/mturk_hk_mc_likert.tex}
+	
+	
+	% partisan-gaps/scripts/Stata/mturk_hk/reg-table.do
+	\begin{table}[t] \centering \small \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
+		\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+		\caption{Confidence Scoring and Knowledge Gaps: MTurk Study 2} 
+		\label{table:study4_results}
+		\begin{adjustbox}{max width=\textwidth}
+			\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+				\toprule
+				% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+				&\multicolumn{4}{c}{Individual survey question}\\
+				\cmidrule(l){2-5}
+				&\multicolumn{1}{c}{Affordable Care Act}&\multicolumn{1}{c}{Affordable Care Act 2}&\multicolumn{1}{c}{Greenhouse gases}&\multicolumn{1}{c}{President Trump}&\multicolumn{1}{c}{All}\\
+				\input ../tabs/mturk-hk-reg-table-fragment.tex
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}
+		\caption*{\scriptsize Dependent variables indicate whether the respondent answered the question(s) correctly. 
+			See \cref{si:mturk2} for exact wording of the four questions.
+			Columns (1)--(4) estimates by the individual survey questions.
+			Column (5) includes all questions and adds the survey question fixed effects.
+			All models are linear probability models.
+			In the relative scoring scheme, a response is correct only if the correct answer is selected with full confidence of 10 (see \nameref{sec:data3} in the \nameref{sec:confidence_coding} section).
+			The baseline are the multiple choice designs.
+			Standard errors are clustered at the respondent level.
+			Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+	\end{table}
+	
+	
+	\clearpage
+	\section*{Discussion and Conclusion}
+	\label{sec:discussion}
+	\addcontentsline{toc}{section}{\nameref{sec:discussion}}
+	Since at least the publication of \cite{bartels_2002}, the conventional wisdom has been that partisan gaps in beliefs about politically consequential facts are wide and pervasive. 
+	The conventional wisdom in academia has also become the received wisdom for the mass public --- nearly 80\% of Americans believe that Democrats and Republicans  disagree on facts \citep{pew2018disagree}.
+	
+	In line with other research on this topic \citep[][though see \citeauthor{berinsky_2017} \citeyear{berinsky_2017} and \citeauthor{peterson_iyengar_forth} \citeyear{peterson_iyengar_forth}]{bullocketal_2015, prior2015you, schaffner_luks}, our results suggests that a big chunk of partisan gap is not founded in differences in beliefs. We find that conventional aspects of survey items like not asking don't know, inserting a partisan cue, and treating inconfident answers as knowledge inflate the patisan gaps that we see on surveys.
+	
+	The fact that partisan gaps are smaller may seem at odds with some political behavior research but a careful reading of recent research suggests that small partisan gaps are to be expected. For instance, at odds with the theory of selective exposure, which posits vast imbalances in consumption of partisan news, recent studies show that most people consume very little political news \citep{Prior2007,flaxmanetal_2016}, and the news that they do consume is relatively balanced \citep{flaxmanetal_2016,garzetal_2018,gentzkowshapiro_2011,guess_2020}. Other evidence points to the fact that Democrats and Republicans update in light of events in a similar fashion \citep{gerber_annual_review,kernell_2019}.
+	
+	The results however paint a mixed picture about democratic competence. Small gaps are partly a consequence of the fact that the average respondent doesn't have any confidently held beliefs about the issue at hand. It is mostly ignorance masquerading as partisan gaps. The upside is that partisan gaps are small and the downside is that people know even less than we assume.
+	
+	\clearpage
+	\bibliographystyle{apsr}
+	\bibliography{pgap}
+	
+	\clearpage
+	
+	\input{./sections/appendix.tex}
+	
+	
 \end{document}
