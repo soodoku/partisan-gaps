@@ -1,0 +1,3 @@
+[submodule "overleaf-partisan-gap"]
+	path = overleaf-partisan-gap
+	url = https://github.com/LSYS/overleaf-partisan-gap.git
