@@ -45,6 +45,11 @@ do ./mturk/study2-balance-tests.do // store estimates only
 do ./mturk/reg-table.do
 do ./mturk/barplot.do
 
+**** Reg results for comparing 24k/CCD (Confidence scoring) with the four other 
+****  multiple choice conditions (IPS/IDA, RW/CUD, FSR/FSR, 14K/IMC)
+do ./mturk/confidence-scoring-reg-tables.do
+do ./mturk/confidence-scoring-barplots.do
+
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * YouGov results (Study 2)
@@ -79,10 +84,10 @@ do ./tx-lyceum/unemp-barplot.do
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // * MTurk results (Study 4)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Table x
+**** Table
 do ./mturk_hk/reg_table.do
 
-**** Figure x
+**** Figure
 do ./mturk_hk/barplots.do
 
 

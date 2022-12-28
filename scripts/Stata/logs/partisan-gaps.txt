@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- opened on:  21 Dec 2022, 17:26:41
+ opened on:  28 Dec 2022, 11:09:43
 
 . 
 . version 13              // Still on version 13 :(
@@ -22,24 +22,13 @@
   [7]  (OLDPLACE)  "c:\ado/"
 
 . 
-. *** Setup dependencies
-. txt2macro stata-requirements.txt
-
-. setup "`r(mymacro)'"
-Installing ssc packages, please wait...
-sssssss
-. * -----------------------------------------------------------------------------
 . tictoc tic
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 21 Dec 2022 17:26:41
+Start time: 28 Dec 2022 11:09:43
 ------------------------------------------------------------------------------------------------------------------------
 
 . 
-. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. // * MTurk results (Study 1)
-. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. **** Basic prep of data
 . import delimited `rootdir'/data/turk/mturk-recoded.csv
 (344 vars, 1253 obs)
 
@@ -155,635 +144,7 @@ avg_str contains nonnumeric characters; avg generated as double
 end of do-file
 
 . 
-. **** Figure for raw partisan gaps by items, by survey type (Fig 1)
-. do ./mturk/fig-partisan-gap.do
-
-. grstyle init
-
-. grstyle set plain, 
-
 . 
-. eststo clear
-
-. foreach item of varlist $items avg {
-  2.         foreach arm in $arms {
-  3.                 qui: reg `item' ib1.pid if (pid_str!="Independent") & (question_type=="`arm'"), vce(hc3)
-  4.                 est store `item'_`arm'          
-  5.                 * Store estimates for average of conditions for annotations later
-.                 if "`item'"=="avg" {
-  6.                         local beta_`arm' = round(_b[3.pid], 0.01)
-  7.                         dis `beta_`arm''
-  8.                 }
-  9.         }
- 10. }
-.38
-.35
-.21
-.22
-.1
-
-. 
-. /* In order that should appear
-> IDA = IPS
-> CUD = RW
-> FSR = FSR
-> IMC = 14k
-> CCD = 24k
-> */
-. 
-. 
-. // coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
-. coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k), /// removing 24k aka CCD
->         msymbol(s) ///
->         keep(3.pid) ///
->         asequation /// "set equation to model name or string" make the rows the models
->         swapnames /// "swap coefficient names and equation names"
->         subtitle("") /// Remove subtitles for now
->         byopts(row(1)) /// Force results to be in one row (1xn)
->         xline(0, lcolor(gs10) lpattern(dash) lwidth(medium)) ///
->         xlabel(-.3(.3).6) ///
->         xscale(range(-.2 .53)) ///
->         plotregion(margin(zero) ) ///   
->         plotregion(lcolor(black) margin(zero) lwidth(medthin)) /// draw box around columns
->         graphregion(margin(zero)) ///
->         ytick(none) /// remove horizontal grids
->         yscale(noline alt)  /// swap labels to RHS
->         eqrename( ///
->                 birth_RW = "{bf:Obama birthplace}" ///
->                 birth_IPS = "{bf:Obama birthplace}" ///
->                 birth_FSR = "{bf:Obama birthplace}" ///
->                 birth_14k = "{bf:Obama birthplace}" ///
->                 religion_RW = "{bf:Obama religion}" ///                                                               
->                                     " ///
->                 religion_IPS = "{bf:Obama religion}" ///
->                 religion_FSR = "{bf:Obama religion}" ///
->                 religion_14k = "{bf:Obama religion}" ///
->                 illegal_RW = "{bf:ACA illegal}" ///
->                 illegal_IPS = "{bf:ACA illegal}" ///
->                 illegal_FSR = "{bf:ACA illegal}" ///
->                 illegal_14k = "{bf:ACA illegal}" ///
->                 death_RW = "{bf:ACA death panels}" ///
->                 death_IPS = "{bf:ACA death panels}" ///
->                 death_FSR = "{bf:ACA death panels}" ///
->                 death_14k = "{bf:ACA death panels}" ///
->                 increase_RW = "{bf:GW causes}" ///
->                 increase_IPS = "{bf:GW causes}" ///
->                 increase_FSR = "{bf:GW causes}" ///
->                 increase_14k = "{bf:GW causes}" ///
->                 science_RW = "{bf:GW scientists agree}" ///
->                 science_IPS = "{bf:GW scientists agree}" ///
->                 science_FSR = "{bf:GW scientists agree}" ///
->                 science_14k = "{bf:GW scientists agree}" ///
->                 fraud_RW = "{bf:Voter fraud}" ///
->                 fraud_IPS = "{bf:Voter fraud}" ///
->                 fraud_FSR = "{bf:Voter fraud}" ///
->                 fraud_14k = "{bf:Voter fraud}" ///
->                 mmr_RW = "{bf:MMR vaccine}" ///
->                 mmr_IPS = "{bf:MMR vaccine}" ///
->                 mmr_FSR = "{bf:MMR vaccine}" ///
->                 mmr_14k = "{bf:MMR vaccine}" ///
->                 deficit_RW = "{bf:Budget deficit}" ///
->                 deficit_IPS = "{bf:Budget deficit}" ///
->                 deficit_FSR = "{bf:Budget deficit}" ///
->                 deficit_14k = "{bf:Budget deficit}" ///
->                 avg_RW = "{bf:Average}" ///                                                             
->                 avg_IPS = "{bf:Average}" ///                                                            
->                 avg_FSR = "{bf:Average}" ///                                                            
->                 avg_14k = "{bf:Average}" ///                                                            
->                 )
-
-. 
-. 
-. * Add column titles     
-. addplot 1: , title("{bf:IDA}", size(med)) norescaling
-(note:  named style med not found in class gsize, default attributes used)
-
-. addplot 2: , title("{bf:CUD}") norescaling
-
-. addplot 3: , title("{bf:FSR}") norescaling
-
-. addplot 4: , title("{bf:IMC}") norescaling
-
-. 
-. * graph margin
-. gr_edit .style.editstyle margin(left) editcopy 
-
-. * plot margin
-. gr_edit .plotregion1.style.editstyle margin(left) editcopy
-
-. * Remove ylabel ticks
-. gr_edit .plotregion1.yaxis1[4].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
-
-. * Shift labels to left
-. gr_edit .plotregion1.move yaxis1[4] leftof 9 1
-
-. 
-. * reset margins back to zero to flush with new col of labels
-. gr_edit .style.editstyle margin(zero) editcopy 
-
-. gr_edit .plotregion1.style.editstyle margin(zero) editcopy
-
-. 
-. * Add annotes
-. local y_heigh_coord = 9.748674339250291
-
-. local annote_style angle(default) size(small) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero
-> ) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(
-> east) editcopy
-
-. 
-. gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_IPS'
-
-. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle `annote_style'
-
-. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle box_alignment(center) editcopy
-
-. gr_edit .plotregion1.plotregion1[1].added_text[1].text.Arrpush `beta_IPS'
-
-. 
-. gr_edit .plotregion1.plotregion1[2].AddTextBox added_text editor `y_heigh_coord' `beta_RW'
-
-. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle `annote_style'
-
-. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle box_alignment(center) editcopy
-
-. gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_RW'
-
-. 
-. gr_edit .plotregion1.plotregion1[3].AddTextBox added_text editor `y_heigh_coord' `beta_FSR'
-
-. gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle `annote_style'
-
-. gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle box_alignment(center) editcopy
-
-. gr_edit .plotregion1.plotregion1[3].added_text[1].text.Arrpush `beta_FSR'
-
-. 
-. gr_edit .plotregion1.plotregion1[4].AddTextBox added_text editor `y_heigh_coord' `beta_14k'
-
-. gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle `annote_style'
-
-. gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle box_alignment(center) editcopy
-
-. gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
-
-. 
-. graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
-(file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf written in PDF format)
-
-. 
-. 
-. * sort(, descending) /// sort by coeff size (by first column) 
-> *       transform(* = min(max(@,-.25),.5)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound
-
-end of do-file
-
-. 
-. *** Balance tests (IPS/IDA as base) [will replace Fig SI 1.1]
-. do ./mturk/study2-balance-tests.do // store estimates only
-
-. center age interest_1 vote_1 pid_strength_1, standardize inplace
-(modified variables: age interest_1 vote_1 pid_strength_1)
-
-. qui tabulate educ, gen(d_educ)
-
-. local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
-
-. 
-. local conditions RW FSR 14k 24k
-
-. foreach condition in `conditions' {
-  2.         preserve
-  3.         * Retain only IPS (as base condition) and one of the other four (conditions)
-.         qui drop if (question_type!="`condition'") & (question_type!="IPS")
-  4.         gen tarm = (question_type=="`condition'")       
-  5. 
-.         * Prep filepath to save to
-.         local filepath "storespecs-baltest-`condition'-ips"
-  6.         cap erase `filepath'.dta
-  7. 
-.         * Do balance test for each xvar and save to filepath
-.         eststo clear 
-  8.         local i = 1
-  9.         foreach xvar of varlist `listofxvar' {  
- 10.                 _dots `i++' 0
- 11.                 qui reg tarm `xvar', vce(hc3) 
- 12.                 qui storespecs `xvar', spec(`xvar') file(`filepath')
- 13.         }
- 14.         restore // to full data before dropping three conditions
- 15. }
-....................................................
-. 
-. 
-end of do-file
-
-. 
-. **** Reg results for effect of party & survey type on response (Tab 2 + Fig 2)
-. do ./mturk/reg-table.do
-
-. * Drop CCD (confidence coding/24k)
-. drop if survey == 2
-(254 observations deleted)
-
-. 
-. * Reshape from wide to long to stack participant-item observations
-. foreach item of varlist $items {
-  2.         rename `item' item`item'
-  3. }
-
-. reshape long item, i(id) j(item_type, string)
-(note: j = birth death deficit fraud illegal increase mmr religion science)
-
-Data                               wide   ->   long
------------------------------------------------------------------------------
-Number of obs.                      953   ->    8577
-Number of variables                 411   ->     404
-j variable (9 values)                     ->   item_type
-xij variables:
-    itembirth itemdeath ... itemscience   ->   item
------------------------------------------------------------------------------
-
-. 
-. drop if pid_str=="Independent"
-(2925 observations deleted)
-
-. 
-. 
-. local spec1 i.rep
-
-. local spec2 i.survey
-
-. local spec3 i.rep##i.survey
-
-. local spec4 `spec1' $demo
-
-. local spec5 `spec2' $demo
-
-. local spec6 `spec3' $demo
-
-. 
-. eststo clear
-
-. forvalues i = 1/6 {
-  2. eststo: qui reghdfe item `spec`i'', absorb(item_type) vce(cluster id)
-  3.         estadd local items 9
-  4.         estadd local Nrespondents = e(N_clust1)
-  5.         local nobs: display %9.0fc `e(N)'
-  6.         estadd local itemFE "\multicolumn{1}{c}{Yes}"
-  7.         estadd local nobs "`nobs'"
-  8.         if `i' > 3 {
-  9.                 estadd local demo "\multicolumn{1}{c}{Yes}"
- 10.         }
- 11.         else {
- 12.                 estadd local demo "\multicolumn{1}{c}{.}"       
- 13.         }
- 14. }
-(est1 stored)
-
-added macro:
-              e(items) : "9"
-
-added macro:
-       e(Nrespondents) : "628"
-
-added macro:
-             e(itemFE) : "\multicolumn{1}{c}{Yes}"
-
-added macro:
-               e(nobs) : "    5,652"
-
-added macro:
-               e(demo) : "\multicolumn{1}{c}{.}"
-(est2 stored)
-
-added macro:
-              e(items) : "9"
-
-added macro:
-       e(Nrespondents) : "628"
-
-added macro:
-             e(itemFE) : "\multicolumn{1}{c}{Yes}"
-
-added macro:
-               e(nobs) : "    5,652"
-
-added macro:
-               e(demo) : "\multicolumn{1}{c}{.}"
-(est3 stored)
-
-added macro:
-              e(items) : "9"
-
-added macro:
-       e(Nrespondents) : "628"
-
-added macro:
-             e(itemFE) : "\multicolumn{1}{c}{Yes}"
-
-added macro:
-               e(nobs) : "    5,652"
-
-added macro:
-               e(demo) : "\multicolumn{1}{c}{.}"
-(est4 stored)
-
-added macro:
-              e(items) : "9"
-
-added macro:
-       e(Nrespondents) : "627"
-
-added macro:
-             e(itemFE) : "\multicolumn{1}{c}{Yes}"
-
-added macro:
-               e(nobs) : "    5,643"
-
-added macro:
-               e(demo) : "\multicolumn{1}{c}{Yes}"
-(est5 stored)
-
-added macro:
-              e(items) : "9"
-
-added macro:
-       e(Nrespondents) : "627"
-
-added macro:
-             e(itemFE) : "\multicolumn{1}{c}{Yes}"
-
-added macro:
-               e(nobs) : "    5,643"
-
-added macro:
-               e(demo) : "\multicolumn{1}{c}{Yes}"
-(est6 stored)
-
-added macro:
-              e(items) : "9"
-
-added macro:
-       e(Nrespondents) : "627"
-
-added macro:
-             e(itemFE) : "\multicolumn{1}{c}{Yes}"
-
-added macro:
-               e(nobs) : "    5,643"
-
-added macro:
-               e(demo) : "\multicolumn{1}{c}{Yes}"
-
-. 
-. 
-. #delimit;
-delimiter now ;
-. esttab,
->         b(%9.3fc)
->         se(%9.3fc)
->         varwidth(20)
->         modelwidth(8)   
->         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
->         keep(1.rep *.survey _cons)
->         obslast
->         label
->         nobase  
->         noobs
->         nomtitle
->         coeflabel(1.rep "Congenial"
->                           5.survey "CUD"
->                           3.survey "FSR"
->                           1.survey "IMC"
->                           // 2.survey "CCD"
->                       1.rep#5.survey "Congenial $\times$ CUD"
->                       1.rep#3.survey "Congenial $\times$ FSR"           
->                       1.rep#1.survey "Congenial $\times$ IMC"
->                       // 1.rep#2.survey "Congenial $\times$ CCD"
->                       // 1.rep#4.survey "Congenial $\times$ IPS"
->                 )
->         // order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey
-> )
->         order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
->         scalar(
->                 "r2 R$^2$" 
->                 "itemFE Survey item FE"
->                 "demo Demographic controls"
->                 "items Items"
->                 "Nrespondents Respondents"
->                 "nobs Respondent-items"
->                 ) 
->         title("Dep. var. is 1(response is congenial)")
-> ;
-
-Dep. var. is 1(response is congenial)
---------------------------------------------------------------------------------------------
-                          (1)         (2)         (3)         (4)         (5)         (6)   
---------------------------------------------------------------------------------------------
-Congenial               0.281***                0.351***    0.284***                0.353***
-                      (0.017)                 (0.035)     (0.017)                 (0.034)   
-
-CUD                                 0.010       0.000                   0.011       0.002   
-                                  (0.028)     (0.022)                 (0.028)     (0.021)   
-
-FSR                                -0.064**     0.000                  -0.063**    -0.001   
-                                  (0.024)     (0.019)                 (0.024)     (0.019)   
-
-IMC                                -0.080**    -0.023                  -0.079**    -0.021   
-                                  (0.025)     (0.019)                 (0.025)     (0.019)   
-
-Congenial $\times$~D                            0.024                               0.024   
-                                              (0.046)                             (0.045)   
-
-Congenial $\times$~R                           -0.173***                           -0.163***
-                                              (0.046)                             (0.045)   
-
-Congenial $\times$~C                           -0.132**                            -0.136** 
-                                              (0.048)                             (0.048)   
-
-Constant                0.179***    0.306***    0.184***    0.156***    0.303***    0.164***
-                      (0.007)     (0.020)     (0.014)     (0.013)     (0.024)     (0.016)   
---------------------------------------------------------------------------------------------
-R$^2$                   0.315       0.234       0.328       0.324       0.243       0.337   
-Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
-> {Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
-Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{Yes} 
->    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
-Items                       9           9           9           9           9           9   
-Respondents               628         628         628         627         627         627   
-Respondent-items         5,652        5,652        5,652        5,643        5,643        5,643   
---------------------------------------------------------------------------------------------
-Standard errors in parentheses
-+ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
-
-.         esttab using $tabsavedir/mturk-reg-table-fragment.tex, 
->         b(%9.3fc)
->         se(%9.3fc)
->         varwidth(20)
->         modelwidth(8)   
->         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
->         keep(1.rep *.survey _cons)
->         obslast
->         label
->         nobase  
->         noobs
->         nomtitle
->         coeflabel(1.rep "Congenial"
->                           5.survey "CUD"
->                           3.survey "FSR"
->                           1.survey "IMC"
->                           // 2.survey "CCD"
->                       1.rep#5.survey "Congenial $\times$ CUD"
->                       1.rep#3.survey "Congenial $\times$ FSR"           
->                       1.rep#1.survey "Congenial $\times$ IMC"
->                       // 1.rep#2.survey "Congenial $\times$ CCD"
->                       // 1.rep#4.survey "Congenial $\times$ IPS"
->                 )
->         order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
->         scalar(
->                 "r2 R$^2$" 
->                 "itemFE Survey item FE"
->                 "demo Demographic controls"
->                 "items Items"
->                 "Nrespondents Respondents"
->                 "nobs Respondent-items"
->                 ) 
->         alignment(D{.}{.}{-1})
->         substitute(\_ _)
->         fragment booktabs replace        
->         ;
-(output written to D:/partisan-gaps/tabs/mturk-reg-table-fragment.tex)
-
-. #delimit cr     
-delimiter now cr
-. 
-end of do-file
-
-. do ./mturk/barplot.do
-
-. local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-
-. cd `rootdir'
-D:\partisan-gaps
-
-. cd scripts/Stata
-D:\partisan-gaps\scripts\Stata
-
-. **** Basic prep of data
-. import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
-(344 vars, 1253 obs)
-
-. do ./mturk/preamble.do
-
-. global arms             RW IPS FSR 14k 24k
-
-. global demo     age i.female i.educ i.hisla $races
-
-. 
-. rename v1 id
-
-. label var id "Participant ID"
-
-. 
-. *------------------------------------------------------------------------------
-. *** Response for the 9 items
-. global items    birth religion illegal death increase science fraud mmr deficit
-
-. label define itemResponseLabel 1 "Correct" 0 "Incorrect"
-
-. 
-. foreach var of varlist $items {
-  2.         tempvar _`var'
-  3.         gen `_`var'' = `var'
-  4.         drop `var'
-  5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
-  6.         label variable `var' "=1 if response is wrong and congenial to R for `var' item"
-  7.         * If we define it as correct and congenial to D, and then use D as the "congenial dummy". it's going
-.         * to be the same. (Independents dropped)
-.         // replace `var' = 1 - `var'
-.         // label variable `var' "=1 if response is correct and congenial for D for `var' item"
-.         label values `var' itemResponseLabel
-  8. }
-(24 missing values generated)
-(35 missing values generated)
-(113 missing values generated)
-(115 missing values generated)
-(18 missing values generated)
-(12 missing values generated)
-(18 missing values generated)
-(31 missing values generated)
-(82 missing values generated)
-
-. * deficif seems to have been coded differently compared to previous 8 items
-. * https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
-. replace deficit = 1 - deficit 
-(1171 real changes made)
-
-. 
-. rename avg avg_str
-
-. destring avg_str, gen(avg) force
-avg_str contains nonnumeric characters; avg generated as double
-(2 missing values generated)
-
-. label variable avg "Avg of the 9 survey questions"
-
-. 
-. *------------------------------------------------------------------------------
-. *** pid
-. rename pid pid_str
-
-. drop if pid_str =="Something else"
-(46 observations deleted)
-
-. 
-. label define pidLabel 1 "Democrat" 2 "Independent" 3 "Republican"
-
-. encode pid_str, gen(pid) label(pidLabel)
-
-. 
-. fvset base 2 pid // permanently set Independent as base
-
-. 
-. gen rep = (pid_str=="Republican") if !missing(pid_str)
-
-. 
-. 
-. *------------------------------------------------------------------------------
-. *** Demo
-. rename gender gender_str
-
-. label define genderLabel 0 "Male" 1 "Female"
-
-. encode gender_str, gen(female) label(genderLabel)
-
-. 
-. foreach demo in educ hisla race {
-  2.         rename `demo' `demo'_str
-  3.         encode `demo'_str, gen(`demo')
-  4. }
-
-. 
-. gen asian = strmatch(race_str, "Asian*")
-
-. gen black = strmatch(race_str, "Black*")
-
-. gen white = strmatch(race_str, "White*")
-
-. gen others = strmatch(race_str, "Other*")
-
-. global races asian black white others
-
-. 
-. *------------------------------------------------------------------------------
-. *** Survey types
-. encode question_type, gen(survey)
-
-. fvset base 4 survey // permanently set IPS (IDA) as base
-
-. 
-end of do-file
-
 . 
 . * Reshape from wide to long to stack participant-item observations
 . foreach item of varlist $items {
@@ -806,200 +167,968 @@ xij variables:
 . drop if pid_str=="Independent"
 (3708 observations deleted)
 
-. * Drop CCD (confidence coding/24k)
-. drop if survey == 2
-(1503 observations deleted)
-
 . 
-. eststo: qui reghdfe item i.rep##i.survey $demo, absorb(item_type) vce(cluster id)
-(est7 stored)
-
-. 
-. mat coefmat = e(b)
-
-. mat list coefmat
-
-coefmat[1,29]
-            0b.          1.          1.          3.         4b.          5.     0b.rep#     0b.rep#     0b.rep#
-           rep         rep      survey      survey      survey      survey   1o.survey   3o.survey   4b.survey
-y1           0   .36250244  -.01842748  -.00143353           0   .00018715           0           0           0
-
-        0b.rep#      1.rep#      1.rep#     1o.rep#      1.rep#                     0b.          1.         1b.
-     5o.survey    1.survey    3.survey   4b.survey    5.survey         age      female      female        educ
-y1           0  -.13464867  -.16386998           0    .0249549  -.00020876           0   .01569866           0
-
-             2.          3.          4.          5.         1b.          2.                                    
-          educ        educ        educ        educ       hisla       hisla       asian       black       white
-y1   .02533311   .41662524   -.0274593   .03659491           0  -.00109593  -.06090855  -.02826621   -.0997682
-
-                           
-        others       _cons
-y1  -.05118928   .66260155
-
-. local baseline = coefmat[1, 2] /* 1.rep */
-
-. 
-. // preserve
-. regsave
-
-. drop if var=="_cons"
-(1 observation deleted)
-
-. drop if strpos(var, "0b.rep")
-(5 observations deleted)
-
-. drop if var=="1.survey"
-(1 observation deleted)
-
-. drop if var=="2.survey"
-(0 observations deleted)
-
-. drop if var=="3.survey"
-(1 observation deleted)
-
-. drop if var=="4b.survey"
-(1 observation deleted)
-
-. drop if var=="5.survey"
-(1 observation deleted)
-
-. drop if var=="1o.rep#4b.survey"
-(1 observation deleted)
-
-. drop if strpos(var, "female")
-(2 observations deleted)
-
-. drop if strpos(var, "educ")
-(5 observations deleted)
-
-. drop if strpos(var, "hisla")
-(2 observations deleted)
-
-. drop if var=="age"
-(1 observation deleted)
-
-. drop if var=="asian"
-(1 observation deleted)
-
-. drop if var=="black"
-(1 observation deleted)
-
-. drop if var=="white"
-(1 observation deleted)
-
-. drop if var=="others"
-(1 observation deleted)
-
-. * Gen coef for plotting (add estimates back to baseline)
-. gen est = coef
-
-. label var est "Original reg estimate (before adding back to baseline)"
-
-. replace coef = `baseline' + coef if var!="1.rep"
-(3 real changes made)
-
-. 
-. * Construct CI
-. gen uci = coef + 1.96 * stderr
-
-. gen lci = coef - 1.96 * stderr
-
-. replace uci = 0 if var=="_cons"
-(0 real changes made)
-
-. replace lci = 0 if var=="_cons"
-(0 real changes made)
+. gen ccd = (survey==2)  /* 2.survey = 24k */
 
 . 
 . 
-. * Create plot order var by treat dummies and label values with sample size
-. /* In order that should appear
-> IDA = IPS _n == 1
-> CUD = RW 1 _n==5
-> FSR = FSR 4 _n==3
-> IMC = 14k 2 _n==2
-> CCD = 24k 3 _n==3
-> */
-. 
-. gen porder = .
-(4 missing values generated)
-
-. replace porder = 1 if _n==1
-(1 real change made)
-
-. replace porder = 4 if _n==2 
-(1 real change made)
-
-. replace porder = 3 if _n==3
-(1 real change made)
-
-. replace porder = 2 if _n==4
-(1 real change made)
-
-. // replace porder = 2 if _n==5
-. sort porder
-
-. 
-. label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC"
-
-. label values porder xlab
-
-. 
-. 
-. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. * Graph settings
-. set scheme s2mono
-
-. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
-
-. local YRANGE 0.1(0.1).4
-
-. local BASELINE_XLIM = _N+.5
-
-. local CI_WIDTH medium
-
-. local XLAB_SIZE large
-
-. local BAR_OPTS          color(gs10) fcolor(none) lwidth(medthick) 
-
-. local BAR_OPTS_BASE color(gs10) fcolor(none) lwidth(medthick)
-
-. 
-. local graphsavedir ./figures
-
-. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. 
-. #delimit;
+. /*==============================================
+> * Confidence coding vs all four other conditions
+> ==============================================*/ 
+. foreach item_type in $items {
+  2.         qui reg item i.rep##i.ccd if item_type=="`item_type'", vce(cluster id)
+  3. 
+.         mat coefmat = e(b)
+  4.         mat list coefmat
+  5.         local baseline = coefmat[1, 2] /* 1.congenial */
+  6. 
+.         preserve
+  7.         regsave
+  8.         drop if var=="_cons"
+  9.         drop if var=="1.ccd"
+ 10.         drop if strpos(var, "0b")  // Drop base variables
+ 11. 
+.         * Gen coef for plotting (add estimates back to baseline)
+.         gen est = coef
+ 12.         label var est "Original reg estimate (before adding back to baseline)"
+ 13.         replace coef = `baseline' + coef if var!="1.rep"
+ 14. 
+.         * Construct CI
+.         gen uci = coef + 1.96 * stderr
+ 15.         gen lci = coef - 1.96 * stderr
+ 16.         replace uci = 0 if var=="_cons"
+ 17.         replace lci = 0 if var=="_cons"
+ 18. 
+.         gen porder = _n
+ 19.         label define xlab 1 "MC" 2 "CS"
+ 20.         label values porder xlab
+ 21.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         * Graph settings
+.         set scheme s2mono
+ 22.         local YLAB_OPTS angle(horizontal) labsize(vlarge) nogrid
+ 23.         local YRANGE 0(0.1).5
+ 24.         local BASELINE_XLIM = _N+.5
+ 25.         local CI_WIDTH thick
+ 26.         local XLAB_SIZE vlarge
+ 27.         local BAR_OPTS           color(gs7) fcolor(none) lwidth(vthick)
+ 28.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         #delimit;
 delimiter now ;
-.         twoway  
->                         (bar coef porder if porder==1, `BAR_OPTS_BASE') 
->                         (bar coef porder if porder==2, `BAR_OPTS') 
->                         (bar coef porder if porder==3, `BAR_OPTS') 
->                         (bar coef porder if porder==4, `BAR_OPTS' 
->                         // (bar coef porder if porder==5, `BAR_OPTS'
->                                 xlabel(,val labsize(`XLAB_SIZE') )
->                         ) 
->                         (rcap uci lci porder if porder!=1, 
->                                 color(gs5)
->                                 lwidth(`CI_WIDTH') 
->                                 legend(off)
->                                 ylabel(`YRANGE', `YLAB_OPTS' ) 
->                                 xlabel(, notick)
->                                 xscale(noextend lcolor(none))
->                                 graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
->                                 bgcolor(white)
->                                 plotregion(margin(12 12 0 0))
->                         )               
->                         (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
->                                 xlabel(1 2 3 4)
->                                 recast(line) color(black) lpattern(dash)
->                         )
->                 ;
-
-.         #delimit cr     
+.                 twoway  
+>                                 (bar coef porder if porder==1, `BAR_OPTS') 
+>                                 (bar coef porder if porder==2, `BAR_OPTS'
+>                                         xlabel(,val labsize(`XLAB_SIZE') )
+>                                 ) 
+>                                 (rcap uci lci porder if porder!=1, 
+>                                         color(gs5)
+>                                         msize(huge)  // size of rcap
+>                                         lwidth(`CI_WIDTH') 
+>                                         legend(off)
+>                                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                         xlabel(, notick)
+>                                         yscale(r(-.05 .53))
+>                                         xscale(noextend lcolor(none))
+>                                         graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                         bgcolor(white)
+>                                         plotregion(margin(30 30 0 0))
+>                                 )               
+>                                 (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                         xlabel(1 2)
+>                                         recast(line) color(black) lpattern(dash)
+>                                         name(`item_type')
+>                                 )
+>                         ;
+ 29.                 #delimit cr             
 delimiter now cr
-. graph export $figsavedir/mturk-pgag-surveyarms.pdf, replace     
-(file D:/partisan-gaps/figs/mturk-pgag-surveyarms.pdf written in PDF format)
+.                 graph export $figsavedir/confidence_score_`item_type'_study1.pdf, replace       
+ 30.         restore
+ 31. }
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .24600837           0  -.00968295           0           0           0  -.07187044   .03554502
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_birth_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .36672342           0  -.09065612           0           0           0  -.19588285   .10900474
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_religion_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0    .3631344           0  -.16113744           0           0           0  -.21607558   .16113744
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_illegal_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .22178254           0  -.01068019           0           0           0  -.21520977   .13744076
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_death_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .49484655           0  -.07913072           0           0           0   -.2469833   .08767773
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_increase_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .23225049           0  -.04240459           0           0           0  -.23634406   .06872038
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_science_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .38908572           0  -.09461747           0           0           0  -.24702223   .13033175
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_fraud_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .09881287           0  -.06156624           0           0           0  -.08452715   .07109005
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_mmr_study1.pdf written in PDF format)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .11664289           0    .0443128           0           0           0  -.04356597    .8056872
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_deficit_study1.pdf written in PDF format)
+
+. 
+. /*================================
+> * Confidence coding vs IPS/IDA = 4
+> ================================*/ 
+. graph drop _all
+
+. foreach item_type in $items {
+  2.         preserve
+  3.         drop if (survey!=2) & (survey!=4)
+  4. 
+.         qui reg item i.rep##i.ccd if item_type=="`item_type'", vce(cluster id)
+  5. 
+.         mat coefmat = e(b)
+  6.         mat list coefmat
+  7.         local baseline = coefmat[1, 2] /* 1.congenial */
+  8. 
+.         regsave
+  9.         drop if var=="_cons"
+ 10.         drop if var=="1.ccd"
+ 11.         drop if strpos(var, "0b")  // Drop base variables
+ 12. 
+.         * Gen coef for plotting (add estimates back to baseline)
+.         gen est = coef
+ 13.         label var est "Original reg estimate (before adding back to baseline)"
+ 14.         replace coef = `baseline' + coef if var!="1.rep"
+ 15. 
+.         * Construct CI
+.         gen uci = coef + 1.96 * stderr
+ 16.         gen lci = coef - 1.96 * stderr
+ 17.         replace uci = 0 if var=="_cons"
+ 18.         replace lci = 0 if var=="_cons"
+ 19. 
+.         gen porder = _n
+ 20.         label define xlab 1 "MC" 2 "CS"
+ 21.         label values porder xlab
+ 22.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         * Graph settings
+.         set scheme s2mono
+ 23.         local YLAB_OPTS angle(horizontal) labsize(vlarge) nogrid
+ 24.         local YRANGE 0(0.1).5
+ 25.         local BASELINE_XLIM = _N+.5
+ 26.         local CI_WIDTH thick
+ 27.         local XLAB_SIZE vlarge
+ 28.         local BAR_OPTS           color(gs7) fcolor(none) lwidth(vthick)
+ 29.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         #delimit;
+delimiter now ;
+.                 twoway  
+>                                 (bar coef porder if porder==1, `BAR_OPTS') 
+>                                 (bar coef porder if porder==2, `BAR_OPTS'
+>                                         xlabel(,val labsize(`XLAB_SIZE') )
+>                                 ) 
+>                                 (rcap uci lci porder if porder!=1, 
+>                                         color(gs5)
+>                                         msize(huge)  // size of rcap
+>                                         lwidth(`CI_WIDTH') 
+>                                         legend(off)
+>                                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                         xlabel(, notick)
+>                                         yscale(r(-.05 .53))
+>                                         xscale(noextend lcolor(none))
+>                                         graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                         bgcolor(white)
+>                                         plotregion(margin(30 30 0 0))
+>                                 )               
+>                                 (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                         xlabel(1 2)
+>                                         recast(line) color(black) lpattern(dash)
+>                                         name(`item_type')
+>                                 )
+>                         ;
+ 30.                 #delimit cr             
+delimiter now cr
+.                 graph export $figsavedir/confidence_score_ccd_ida_ips_`item_type'_study1.pdf, replace   
+ 31.         restore
+ 32. }
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .32808511           0  -.00605282           0           0           0  -.15394718   .03191489
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_birth_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .41489362           0  -.06675776           0           0           0  -.24405305   .08510638
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_religion_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .48978723           0  -.17021277           0           0           0  -.34272841   .17021277
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_illegal_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .27106383           0  -.02217561           0           0           0  -.26449106   .14893617
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_death_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .55617021           0  -.05528278           0           0           0  -.30830696   .06382979
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_increase_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .22425532           0  -.06942889           0           0           0  -.22834889   .09574468
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_science_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .68297872           0  -.08130699           0           0           0  -.54091523   .11702128
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_fraud_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .14680851           0  -.04366768           0           0           0   -.1325228   .05319149
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_mmr_study1.pdf written in PDF format)
+(4356 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .04638298           0  -.04361702           0           0           0   .02669394   .89361702
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_ida_ips_deficit_study1.pdf written in PDF format)
+
+. 
+. 
+. 
+. /*===============================
+> * Confidence coding vs RW/CUD = 5
+> ================================*/ 
+. graph drop _all
+
+. foreach item_type in $items {
+  2.         preserve
+  3.         drop if (survey!=2) & (survey!=5)
+  4.         
+.         qui reg item i.rep##i.ccd if item_type=="`item_type'", vce(cluster id)
+  5. 
+.         mat coefmat = e(b)
+  6.         mat list coefmat
+  7.         local baseline = coefmat[1, 2] /* 1.congenial */
+  8. 
+.         regsave
+  9.         drop if var=="_cons"
+ 10.         drop if var=="1.ccd"
+ 11.         drop if strpos(var, "0b")  // Drop base variables
+ 12. 
+.         * Gen coef for plotting (add estimates back to baseline)
+.         gen est = coef
+ 13.         label var est "Original reg estimate (before adding back to baseline)"
+ 14.         replace coef = `baseline' + coef if var!="1.rep"
+ 15. 
+.         * Construct CI
+.         gen uci = coef + 1.96 * stderr
+ 16.         gen lci = coef - 1.96 * stderr
+ 17.         replace uci = 0 if var=="_cons"
+ 18.         replace lci = 0 if var=="_cons"
+ 19. 
+.         gen porder = _n
+ 20.         label define xlab 1 "MC" 2 "CS"
+ 21.         label values porder xlab
+ 22.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         * Graph settings
+.         set scheme s2mono
+ 23.         local YLAB_OPTS angle(horizontal) labsize(vlarge) nogrid
+ 24.         local YRANGE 0(0.1).5
+ 25.         local BASELINE_XLIM = _N+.5
+ 26.         local CI_WIDTH thick
+ 27.         local XLAB_SIZE vlarge
+ 28.         local BAR_OPTS           color(gs7) fcolor(none) lwidth(vthick)
+ 29.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         #delimit;
+delimiter now ;
+.                 twoway  
+>                                 (bar coef porder if porder==1, `BAR_OPTS') 
+>                                 (bar coef porder if porder==2, `BAR_OPTS'
+>                                         xlabel(,val labsize(`XLAB_SIZE') )
+>                                 ) 
+>                                 (rcap uci lci porder if porder!=1, 
+>                                         color(gs5)
+>                                         msize(huge)  // size of rcap
+>                                         lwidth(`CI_WIDTH') 
+>                                         legend(off)
+>                                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                         xlabel(, notick)
+>                                         yscale(r(-.05 .53))
+>                                         xscale(noextend lcolor(none))
+>                                         graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                         bgcolor(white)
+>                                         plotregion(margin(30 30 0 0))
+>                                 )               
+>                                 (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                         xlabel(1 2)
+>                                         recast(line) color(black) lpattern(dash)
+>                                         name(`item_type')
+>                                 )
+>                         ;
+ 30.                 #delimit cr             
+delimiter now cr
+.                 graph export $figsavedir/confidence_score_ccd_cud_rw_`item_type'_study1.pdf, replace    
+ 31.         restore
+ 32. }
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .44262611           0   .01565799           0           0           0  -.26848818   .01020408
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_birth_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .58586831           0  -.09389627           0           0           0  -.41502774    .1122449
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_religion_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .46495957           0  -.21428571           0           0           0  -.31790075   .21428571
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_illegal_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .20793223           0   -.1181374           0           0           0  -.20135946   .24489796
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_death_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .56854062           0  -.08328973           0           0           0  -.32067738   .09183673
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_increase_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0    .3090104           0  -.00429646           0           0           0  -.31310396   .03061224
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_science_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .49711205           0  -.12755102           0           0           0  -.35504856   .16326531
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_fraud_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .04736234           0  -.11292517           0           0           0  -.03307663   .12244898
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_mmr_study1.pdf written in PDF format)
+(4293 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .25105891           0   .17653061           0           0           0  -.17798199   .67346939
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_cud_rw_deficit_study1.pdf written in PDF format)
+
+. 
+. /*================================
+> * Confidence coding vs FSR/FSR = 3
+> =================================*/ 
+. graph drop _all
+
+. foreach item_type in $items {
+  2.         preserve
+  3.         drop if (survey!=2) & (survey!=3)
+  4.         
+.         qui reg item i.rep##i.ccd if item_type=="`item_type'", vce(cluster id)
+  5. 
+.         mat coefmat = e(b)
+  6.         mat list coefmat
+  7.         local baseline = coefmat[1, 2] /* 1.congenial */
+  8. 
+.         regsave
+  9.         drop if var=="_cons"
+ 10.         drop if var=="1.ccd"
+ 11.         drop if strpos(var, "0b")  // Drop base variables
+ 12. 
+.         * Gen coef for plotting (add estimates back to baseline)
+.         gen est = coef
+ 13.         label var est "Original reg estimate (before adding back to baseline)"
+ 14.         replace coef = `baseline' + coef if var!="1.rep"
+ 15. 
+.         * Construct CI
+.         gen uci = coef + 1.96 * stderr
+ 16.         gen lci = coef - 1.96 * stderr
+ 17.         replace uci = 0 if var=="_cons"
+ 18.         replace lci = 0 if var=="_cons"
+ 19. 
+.         gen porder = _n
+ 20.         label define xlab 1 "MC" 2 "CS"
+ 21.         label values porder xlab
+ 22.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         * Graph settings
+.         set scheme s2mono
+ 23.         local YLAB_OPTS angle(horizontal) labsize(vlarge) nogrid
+ 24.         local YRANGE 0(0.1).5
+ 25.         local BASELINE_XLIM = _N+.5
+ 26.         local CI_WIDTH thick
+ 27.         local XLAB_SIZE vlarge
+ 28.         local BAR_OPTS           color(gs7) fcolor(none) lwidth(vthick)
+ 29.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         #delimit;
+delimiter now ;
+.                 twoway  
+>                                 (bar coef porder if porder==1, `BAR_OPTS') 
+>                                 (bar coef porder if porder==2, `BAR_OPTS'
+>                                         xlabel(,val labsize(`XLAB_SIZE') )
+>                                 ) 
+>                                 (rcap uci lci porder if porder!=1, 
+>                                         color(gs5)
+>                                         msize(huge)  // size of rcap
+>                                         lwidth(`CI_WIDTH') 
+>                                         legend(off)
+>                                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                         xlabel(, notick)
+>                                         yscale(r(-.05 .53))
+>                                         xscale(noextend lcolor(none))
+>                                         graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                         bgcolor(white)
+>                                         plotregion(margin(30 30 0 0))
+>                                 )               
+>                                 (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                         xlabel(1 2)
+>                                         recast(line) color(black) lpattern(dash)
+>                                         name(`item_type')
+>                                 )
+>                         ;
+ 30.                 #delimit cr             
+delimiter now cr
+.                 graph export $figsavedir/confidence_score_ccd_fsr_fsr_`item_type'_study1.pdf, replace   
+ 31.         restore
+ 32. }
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .12681598           0  -.00803624           0           0           0   .04732195   .03389831
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_birth_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .29116223           0  -.08334629           0           0           0  -.12032166   .10169492
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_religion_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0    .2375908           0  -.10169492           0           0           0  -.09053198   .10169492
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_illegal_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .16525424           0    .0420148           0           0           0  -.15868147   .08474576
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_death_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .35502421           0  -.11857164           0           0           0  -.10716097   .12711864
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_increase_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .17282082           0  -.03300624           0           0           0  -.17691439   .05932203
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_science_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .21307506           0  -.10835351           0           0           0  -.07101157    .1440678
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_fraud_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .10139225           0  -.04979822           0           0           0  -.08710654   .05932203
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_mmr_study1.pdf written in PDF format)
+(4086 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   -.0562954           0  -.09915254           0           0           0   .12937232   .94915254
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_fsr_fsr_deficit_study1.pdf written in PDF format)
+
+. 
+. /*================================
+> * Confidence coding vs 14k/IMC = 1
+> =================================*/ 
+. graph drop _all
+
+. foreach item_type in $items {
+  2.         preserve
+  3.         drop if (survey!=2) & (survey!=1)
+  4.         
+.         qui reg item i.rep##i.ccd if item_type=="`item_type'", vce(cluster id)
+  5. 
+.         mat coefmat = e(b)
+  6.         mat list coefmat
+  7.         local baseline = coefmat[1, 2] /* 1.congenial */
+  8. 
+.         regsave
+  9.         drop if var=="_cons"
+ 10.         drop if var=="1.ccd"
+ 11.         drop if strpos(var, "0b")  // Drop base variables
+ 12. 
+.         * Gen coef for plotting (add estimates back to baseline)
+.         gen est = coef
+ 13.         label var est "Original reg estimate (before adding back to baseline)"
+ 14.         replace coef = `baseline' + coef if var!="1.rep"
+ 15. 
+.         * Construct CI
+.         gen uci = coef + 1.96 * stderr
+ 16.         gen lci = coef - 1.96 * stderr
+ 17.         replace uci = 0 if var=="_cons"
+ 18.         replace lci = 0 if var=="_cons"
+ 19. 
+.         gen porder = _n
+ 20.         label define xlab 1 "MC" 2 "CS"
+ 21.         label values porder xlab
+ 22.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         * Graph settings
+.         set scheme s2mono
+ 23.         local YLAB_OPTS angle(horizontal) labsize(vlarge) nogrid
+ 24.         local YRANGE 0(0.1).5
+ 25.         local BASELINE_XLIM = _N+.5
+ 26.         local CI_WIDTH thick
+ 27.         local XLAB_SIZE vlarge
+ 28.         local BAR_OPTS           color(gs7) fcolor(none) lwidth(vthick)
+ 29.         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.         #delimit;
+delimiter now ;
+.                 twoway  
+>                                 (bar coef porder if porder==1, `BAR_OPTS') 
+>                                 (bar coef porder if porder==2, `BAR_OPTS'
+>                                         xlabel(,val labsize(`XLAB_SIZE') )
+>                                 ) 
+>                                 (rcap uci lci porder if porder!=1, 
+>                                         color(gs5)
+>                                         msize(huge)  // size of rcap
+>                                         lwidth(`CI_WIDTH') 
+>                                         legend(off)
+>                                         ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                         xlabel(, notick)
+>                                         yscale(r(-.05 .53))
+>                                         xscale(noextend lcolor(none))
+>                                         graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                         bgcolor(white)
+>                                         plotregion(margin(30 30 0 0))
+>                                 )               
+>                                 (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                         xlabel(1 2)
+>                                         recast(line) color(black) lpattern(dash)
+>                                         name(`item_type')
+>                                 )
+>                         ;
+ 30.                 #delimit cr             
+delimiter now cr
+.                 graph export $figsavedir/confidence_score_ccd_imc_14k_`item_type'_study1.pdf, replace   
+ 31.         restore
+ 32. }
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .08643617           0  -.03663793           0           0           0   .08770176       .0625
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_birth_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .16394377           0  -.11557995           0           0           0    .0068968   .13392857
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_religion_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .25588906           0  -.16964286           0           0           0  -.10883023   .16964286
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_illegal_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .22986322           0   .03747485           0           0           0  -.22329045   .08928571
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_death_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .51196809           0  -.05395299           0           0           0  -.26410484       .0625
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_increase_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .22986322           0  -.06296992           0           0           0  -.23395679   .08928571
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_science_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .15710486           0      -.0625           0           0           0  -.01504137   .09821429
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_fraud_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .09536474           0  -.04404762           0           0           0  -.08107903   .05357143
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_mmr_study1.pdf written in PDF format)
+(4221 observations deleted)
+
+coefmat[1,9]
+            0b.          1.         0b.          1.     0b.rep#     0b.rep#     1o.rep#      1.rep#            
+           rep         rep         ccd         ccd      0b.ccd      1o.ccd      0b.ccd       1.ccd       _cons
+y1           0   .23974164           0   .15357143           0           0           0  -.16666472   .69642857
+(1 observation deleted)
+(1 observation deleted)
+(5 observations deleted)
+(1 real change made)
+(0 real changes made)
+(0 real changes made)
+(file D:/partisan-gaps/figs/confidence_score_ccd_imc_14k_deficit_study1.pdf written in PDF format)
 
 . 
 end of do-file
@@ -2773,7 +2902,7 @@ end of do-file
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 . // * MTurk results (Study 4)
 . *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-. **** Table x
+. **** Table
 . do ./mturk_hk/reg_table.do
 
 . import delimited ../../data/mturk_hk/mturk_hk_relative_scoring_MC.csv, clear
@@ -2988,7 +3117,7 @@ Standard errors in parentheses
 end of do-file
 
 . 
-. **** Figure x
+. **** Figure
 . do ./mturk_hk/barplots.do
 
 . **** Basic prep of data
@@ -3289,10 +3418,10 @@ end of do-file
 . tictoc toc
 ------------------------------------------------------------------------------------------------------------------------
 ----------- Time log -----------
-Start time: 21 Dec 2022 17:26:41
-End time: 21 Dec 2022 17:27:03
-Elapsed seconds:        22
-Elapsed minutes:         0
+Start time: 28 Dec 2022 11:09:43
+End time: 28 Dec 2022 11:10:14
+Elapsed seconds:        31
+Elapsed minutes:         1
 Elapsed hours:       .01
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -3301,5 +3430,5 @@ Elapsed hours:       .01
       name:  <unnamed>
        log:  D:\partisan-gaps\scripts\Stata\logs/partisan-gaps.txt
   log type:  text
- closed on:  21 Dec 2022, 17:27:03
+ closed on:  28 Dec 2022, 11:10:14
 ------------------------------------------------------------------------------------------------------------------------
