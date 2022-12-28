@@ -18,6 +18,8 @@ See the outputs of the scripts [here](tabs/).
 
 ### Authors
 
-Lucas Shen and Gaurav Sood
+Daniel Weitzel<br>
+Gaurav Sood<br>
+Lucas Shen
 
 
