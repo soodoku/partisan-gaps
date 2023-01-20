@@ -3,16 +3,12 @@ eststo: qui reg unempup i.unempcongenial i.unempuncongenial, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{.}"
-eststo: qui reg unempup i.(unempcongenial unempuncongenial)##i.rep, vce(hc3)
-	local nobs: display %9.0fc `e(N)'
-	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
-	estadd local demotab "\multicolumn{1}{c}{.}"
-eststo: qui reg unempup i.(unempcongenial unempuncongenial)##i.rep $demoX, vce(hc3)
+
+eststo: qui reg unempup i.unempcongenial i.unempuncongenial $demoX, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{Yes}"
 	estadd local demo "Yes"
-
 #delimit;
 esttab,
 	b(%9.3fc)
@@ -20,7 +16,7 @@ esttab,
 	varwidth(30)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.unempcongenial 1.unempuncongenial 1.rep 1.unempcongenial#1.rep 1.unempuncongenial#1.rep _cons)
+	keep(1.unempcongenial 1.unempuncongenial _cons)
 	obslast
 	label
 	nobase 	
@@ -35,7 +31,6 @@ esttab,
 		"demo Demographic controls"
 		"r2 R-square" 
 		) 
-	// title("Dep. var. is 1(response is congenial)")
 ;	
 
 esttab using $tabsavedir/texas-unemp-reg-table-fragment.tex, 
@@ -44,7 +39,7 @@ esttab using $tabsavedir/texas-unemp-reg-table-fragment.tex,
 	varwidth(20)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.unempcongenial 1.unempuncongenial 1.rep 1.unempcongenial#1.rep 1.unempuncongenial#1.rep _cons)
+	keep(1.unempcongenial 1.unempuncongenial _cons)
 	obslast
 	label
 	nobase 	
@@ -59,14 +54,13 @@ esttab using $tabsavedir/texas-unemp-reg-table-fragment.tex,
 	scalar(
 		"r2 R$^2$" 
 		"demotab Demographic controls"
-		"nobs Respondent-items"
+		"nobs Respondents"
 		) 
 	alignment(D{.}{.}{-1})
 	substitute(\_ _)
 	fragment booktabs replace        
 	;
 #delimit cr	
-
 
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,7 +132,7 @@ esttab using $tabsavedir/texas-fedtax-reg-table-fragment.tex,
 	scalar(
 		"r2 R$^2$" 
 		"demotab Demographic controls"
-		"nobs Respondent-items"
+		"nobs Respondents"
 		) 
 	alignment(D{.}{.}{-1})
 	substitute(\_ _)
