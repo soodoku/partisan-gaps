@@ -4,28 +4,18 @@ eststo: qui reg unempup i.congenialcue, vce(hc3)
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{.}"
 
-eststo: qui reg unempup i.congenialcue##i.rep, vce(hc3)
-	local nobs: display %9.0fc `e(N)'
-	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
-	estadd local demotab "\multicolumn{1}{c}{.}"
-
-eststo: qui reg unempup i.congenialcue##i.rep $demoX, vce(hc3)
+eststo: qui reg unempup i.congenialcue $demoX, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{Yes}"
-	estadd local demo "Yes"
+
 
 eststo: qui reg deficitup i.congenialcue, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{.}"
 
-eststo: qui reg deficitup i.congenialcue##i.rep, vce(hc3)
-	local nobs: display %9.0fc `e(N)'
-	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
-	estadd local demotab "\multicolumn{1}{c}{.}"
-
-eststo: qui reg deficitup i.congenialcue##i.rep $demoX, vce(hc3)
+eststo: qui reg deficitup i.congenialcue $demoX, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{Yes}"
@@ -38,7 +28,7 @@ esttab,
 	varwidth(30)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.congenialcue 1.rep 1.congenialcue#1.rep _cons)
+	keep(1.congenialcue _cons)
 	obslast
 	label
 	nobase 	
@@ -60,7 +50,7 @@ esttab using $tabsavedir/yougov-reg-table-fragment.tex,
 	varwidth(20)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.congenialcue 1.rep 1.congenialcue#1.rep _cons)
+	keep(1.congenialcue _cons)
 	obslast
 	label
 	nobase 	
@@ -74,7 +64,7 @@ esttab using $tabsavedir/yougov-reg-table-fragment.tex,
 	scalar(
 		"r2 R$^2$" 
 		"demotab Demographic controls"
-		"nobs Respondent-items"
+		"nobs Respondents"
 		) 
 	alignment(D{.}{.}{-1})
 	substitute(\_ _)
