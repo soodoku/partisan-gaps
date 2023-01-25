@@ -10,7 +10,7 @@ foreach condition in `conditions' {
 	gen tarm = (question_type=="`condition'") 	
 
 	* Prep filepath to save to
-	local filepath "storespecs-baltest-`condition'-ips"
+	local filepath "../../data/turk/storespecs-baltest-`condition'-ips"
 	cap erase `filepath'.dta
 
 	* Do balance test for each xvar and save to filepath
