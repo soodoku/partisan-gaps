@@ -73,8 +73,10 @@ To `make` the Stata output, `cd` to `scripts/Stata/` and type `make all`. The pa
 
 Python, via Jupyter notebooks, is used only to produce the balance of covariates tests for Study 1 (MTurk sample 1) and to inspect data. These are in `scripts/py/`. The `makefile` in the path runs both notebooks and output the balance tests figures with `make all` (relies on the [`runpynb`](https://github.com/lsys/runpynb) and the [`forestplot`](https://github.com/lsys/forestplot) utilities). Making the Python output should take only a minute or so.
 
+Total time to `make` all output should take only a few minutes.
+
 ### Software requirements
-Most of the code uses [R](https://www.r-project.org/) and [Stata](https://www.stata.com/). Stata code was tested using Stata 13 and Stata 17. Python code is used sparingly from Jupyter notebooks. These can be run from the command line using the `runpynb` utility (without initiating Jupyter notebooks JupyterLab). Manuscript is compiled in `LaTeX` and from `makefiles` using `latexmk`. Some recipes are provided for convenience in the `makefiles` using [GNU Make](https://www.gnu.org/software/make/). Makefiles come with quick help by typing `make` or `make help`. Total time to `make` all output should take only a few minutes.
+Most of the code uses [R](https://www.r-project.org/) and [Stata](https://www.stata.com/). Stata code was tested using Stata 13 and Stata 17. Python code is used sparingly from Jupyter notebooks. These can be run from the command line using the `runpynb` utility (without initiating Jupyter notebooks JupyterLab). Manuscript is compiled in `LaTeX` and from `makefiles` using `latexmk`. Some recipes are provided for convenience in the `makefiles` using [GNU Make](https://www.gnu.org/software/make/). Makefiles come with quick help by typing `make` or `make help`. 
 
 
 ### Authors
