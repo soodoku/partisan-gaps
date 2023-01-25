@@ -14,7 +14,7 @@ cd `rootdir'
 cd scripts/Stata
 
 cap log close
-log using logs/partisan-gaps.txt, replace text
+log using partisan-gaps-log.txt, replace text
 
 version 13              // Still on version 13 :(
 
@@ -29,25 +29,33 @@ setup "`r(mymacro)'"
 tictoc tic
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// * MTurk results (Study 1)
+* MTurk results (Study 1)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
 import delimited `rootdir'/data/turk/mturk-recoded.csv
 do ./mturk/preamble.do
 
-**** Figure for raw partisan gaps by items, by survey type (Fig 1)
+**** Figure for raw partisan gaps by items, by survey type
+* Figure 1
 do ./mturk/fig-partisan-gap.do
+do ./mturk/fig-partisan-gap-ips-24k.do
+* Figure 5
+do ./mturk/fig-partisan-gap-mc-24k.do
 
-*** Balance tests (IPS/IDA as base) [will replace Fig SI 1.1]
-do ./mturk/study2-balance-tests.do // store estimates only
+*** Balance tests (IPS/IDA as base) 
+do ./mturk/balance-tests.do // store estimates only
 
 **** Reg results for effect of party & survey type on response (Tab 2 + Fig 2)
+* Table 2
 do ./mturk/reg-table.do
+* Figure 2
 do ./mturk/barplot.do
 
 **** Reg results for comparing 24k/CCD (Confidence scoring) with the four other 
 ****  multiple choice conditions (IPS/IDA, RW/CUD, FSR/FSR, 14K/IMC)
+* Tables in SI 1.1
 do ./mturk/confidence-scoring-reg-tables.do
+* Figures in SI 1.1
 do ./mturk/confidence-scoring-barplots.do
 
 
@@ -60,14 +68,17 @@ do ./survey-exp/preamble.do
 drop if ind==1
 
 **** Reg table for effect of party & survey type on response
+* Table 3
 do ./survey-exp/reg-table.do
 
 **** Barplots for effect of party & survey type on response
+* Figure 3a
 do ./survey-exp/unemp-barplots.do
+* Figure 3b
 do ./survey-exp/deficit-barplots.do
 
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * Texas Lyceum results (Study 3)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **** Basic prep of data
@@ -75,22 +86,23 @@ use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
 do ./tx-lyceum/preamble.do
 
 **** Reg table for effect of party & survey type on response
-do ./tx-lyceum/reg-table.do
+* Table 4 & Table 5
 do ./tx-lyceum/reg-table.do
 
 **** Barplots for effect of party & survey type on response
+* Figure 4
 do ./tx-lyceum/unemp-barplot.do
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // * MTurk results (Study 4)
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Table
+* Table 6
 do ./mturk_hk/reg_table.do
 
-**** Figure
+* Figure 6
 do ./mturk_hk/barplots.do
 
-
+do ./mturk_hk/fig-partisan-gap.do
 
 
 tictoc toc
