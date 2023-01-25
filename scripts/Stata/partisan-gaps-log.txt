@@ -1,0 +1,3324 @@
+------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\partisan-gaps\scripts\Stata\partisan-gaps-log.txt
+  log type:  text
+ opened on:  25 Jan 2023, 17:43:43
+
+. 
+. version 13              // Still on version 13 :(
+
+. 
+. global figsavedir `rootdir'/figs
+
+. global tabsavedir `rootdir'/tabs
+
+. adopath ++ ./ado                // Add path to ados
+  [1]              "./ado"
+  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
+  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+
+. 
+. *** Setup dependencies
+. txt2macro stata-requirements.txt
+
+. setup "`r(mymacro)'"
+Installing ssc packages, please wait...
+sssssss
+. * -----------------------------------------------------------------------------
+. tictoc tic
+------------------------------------------------------------------------------------------------------------------------
+----------- Time log -----------
+Start time: 25 Jan 2023 17:43:43
+------------------------------------------------------------------------------------------------------------------------
+
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * MTurk results (Study 1)
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. **** Basic prep of data
+. import delimited `rootdir'/data/turk/mturk-recoded.csv
+(344 vars, 1253 obs)
+
+. do ./mturk/preamble.do
+
+. global arms             RW IPS FSR 14k 24k
+
+. global demo     age i.female i.educ i.hisla $races
+
+. 
+. rename v1 id
+
+. label var id "Participant ID"
+
+. 
+. *------------------------------------------------------------------------------
+. *** Response for the 9 items
+. global items    birth religion illegal death increase science fraud mmr deficit
+
+. label define itemResponseLabel 1 "Correct" 0 "Incorrect"
+
+. 
+. foreach var of varlist $items {
+  2.         tempvar _`var'
+  3.         gen `_`var'' = `var'
+  4.         drop `var'
+  5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
+  6.         label variable `var' "=1 if response is wrong and congenial to R for `var' item"
+  7.         * If we define it as correct and congenial to D, and then use D as the "congenial dummy". it's going
+.         * to be the same. (Independents dropped)
+.         // replace `var' = 1 - `var'
+.         // label variable `var' "=1 if response is correct and congenial for D for `var' item"
+.         label values `var' itemResponseLabel
+  8. }
+(24 missing values generated)
+(35 missing values generated)
+(113 missing values generated)
+(115 missing values generated)
+(18 missing values generated)
+(12 missing values generated)
+(18 missing values generated)
+(31 missing values generated)
+(82 missing values generated)
+
+. * deficif seems to have been coded differently compared to previous 8 items
+. * https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
+. replace deficit = 1 - deficit 
+(1171 real changes made)
+
+. 
+. rename avg avg_str
+
+. destring avg_str, gen(avg) force
+avg_str contains nonnumeric characters; avg generated as double
+(2 missing values generated)
+
+. label variable avg "Avg of the 9 survey questions"
+
+. 
+. *------------------------------------------------------------------------------
+. *** pid
+. rename pid pid_str
+
+. drop if pid_str =="Something else"
+(46 observations deleted)
+
+. 
+. label define pidLabel 1 "Democrat" 2 "Independent" 3 "Republican"
+
+. encode pid_str, gen(pid) label(pidLabel)
+
+. 
+. fvset base 2 pid // permanently set Independent as base
+
+. 
+. gen rep = (pid_str=="Republican") if !missing(pid_str)
+
+. 
+. 
+. *------------------------------------------------------------------------------
+. *** Demo
+. rename gender gender_str
+
+. label define genderLabel 0 "Male" 1 "Female"
+
+. encode gender_str, gen(female) label(genderLabel)
+
+. 
+. foreach demo in educ hisla race {
+  2.         rename `demo' `demo'_str
+  3.         encode `demo'_str, gen(`demo')
+  4. }
+
+. 
+. gen asian = strmatch(race_str, "Asian*")
+
+. gen black = strmatch(race_str, "Black*")
+
+. gen white = strmatch(race_str, "White*")
+
+. gen others = strmatch(race_str, "Other*")
+
+. global races asian black white others
+
+. 
+. *------------------------------------------------------------------------------
+. *** Survey types
+. encode question_type, gen(survey)
+
+. fvset base 4 survey // permanently set IPS (IDA) as base
+
+. 
+end of do-file
+
+. 
+. **** Figure for raw partisan gaps by items, by survey type
+. * Figure 1
+. do ./mturk/fig-partisan-gap.do
+
+. grstyle init
+
+. grstyle set plain, 
+
+. 
+. eststo clear
+
+. foreach item of varlist $items avg {
+  2.         foreach arm in $arms {
+  3.                 qui: reg `item' ib1.pid if (pid_str!="Independent") & (question_type=="`arm'"), vce(hc3)
+  4.                 est store `item'_`arm'          
+  5.                 * Store estimates for average of conditions for annotations later
+.                 if "`item'"=="avg" {
+  6.                         local beta_`arm' = round(_b[3.pid], 0.01)
+  7.                         dis `beta_`arm''
+  8.                 }
+  9.         }
+ 10. }
+.38
+.35
+.21
+.22
+.1
+
+. 
+. /* In order that should appear
+> IDA = IPS
+> CUD = RW
+> FSR = FSR
+> IMC = 14k
+> CCD = 24k
+> */
+. 
+. 
+. // coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
+. coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k), /// removing 24k aka CCD
+>         msymbol(s) ///
+>         keep(3.pid) ///
+>         asequation /// "set equation to model name or string" make the rows the models
+>         swapnames /// "swap coefficient names and equation names"
+>         subtitle("") /// Remove subtitles for now
+>         byopts(row(1)) /// Force results to be in one row (1xn)
+>         xline(0, lcolor(gs10) lpattern(dash) lwidth(medium)) ///
+>         xlabel(-.3(.3).6) ///
+>         xscale(range(-.2 .53)) ///
+>         plotregion(margin(zero) ) ///   
+>         plotregion(lcolor(black) margin(zero) lwidth(medthin)) /// draw box around columns
+>         graphregion(margin(zero)) ///
+>         ytick(none) /// remove horizontal grids
+>         yscale(noline alt)  /// swap labels to RHS
+>         eqrename( ///
+>                 birth_RW = "{bf:Obama birthplace}" ///
+>                 birth_IPS = "{bf:Obama birthplace}" ///
+>                 birth_FSR = "{bf:Obama birthplace}" ///
+>                 birth_14k = "{bf:Obama birthplace}" ///
+>                 religion_RW = "{bf:Obama religion}" ///                                                               
+>                                     " ///
+>                 religion_IPS = "{bf:Obama religion}" ///
+>                 religion_FSR = "{bf:Obama religion}" ///
+>                 religion_14k = "{bf:Obama religion}" ///
+>                 illegal_RW = "{bf:ACA illegal}" ///
+>                 illegal_IPS = "{bf:ACA illegal}" ///
+>                 illegal_FSR = "{bf:ACA illegal}" ///
+>                 illegal_14k = "{bf:ACA illegal}" ///
+>                 death_RW = "{bf:ACA death panels}" ///
+>                 death_IPS = "{bf:ACA death panels}" ///
+>                 death_FSR = "{bf:ACA death panels}" ///
+>                 death_14k = "{bf:ACA death panels}" ///
+>                 increase_RW = "{bf:GW causes}" ///
+>                 increase_IPS = "{bf:GW causes}" ///
+>                 increase_FSR = "{bf:GW causes}" ///
+>                 increase_14k = "{bf:GW causes}" ///
+>                 science_RW = "{bf:GW scientists agree}" ///
+>                 science_IPS = "{bf:GW scientists agree}" ///
+>                 science_FSR = "{bf:GW scientists agree}" ///
+>                 science_14k = "{bf:GW scientists agree}" ///
+>                 fraud_RW = "{bf:Voter fraud}" ///
+>                 fraud_IPS = "{bf:Voter fraud}" ///
+>                 fraud_FSR = "{bf:Voter fraud}" ///
+>                 fraud_14k = "{bf:Voter fraud}" ///
+>                 mmr_RW = "{bf:MMR vaccine}" ///
+>                 mmr_IPS = "{bf:MMR vaccine}" ///
+>                 mmr_FSR = "{bf:MMR vaccine}" ///
+>                 mmr_14k = "{bf:MMR vaccine}" ///
+>                 deficit_RW = "{bf:Budget deficit}" ///
+>                 deficit_IPS = "{bf:Budget deficit}" ///
+>                 deficit_FSR = "{bf:Budget deficit}" ///
+>                 deficit_14k = "{bf:Budget deficit}" ///
+>                 avg_RW = "{bf:Average}" ///                                                             
+>                 avg_IPS = "{bf:Average}" ///                                                            
+>                 avg_FSR = "{bf:Average}" ///                                                            
+>                 avg_14k = "{bf:Average}" ///                                                            
+>                 )
+
+. 
+. 
+. * Add column titles     
+. addplot 1: , title("{bf:IDA}", size(med)) norescaling
+(note:  named style med not found in class gsize, default attributes used)
+
+. addplot 2: , title("{bf:CUD}") norescaling
+
+. addplot 3: , title("{bf:FSR}") norescaling
+
+. addplot 4: , title("{bf:IMC}") norescaling
+
+. 
+. * graph margin
+. gr_edit .style.editstyle margin(left) editcopy 
+
+. * plot margin
+. gr_edit .plotregion1.style.editstyle margin(left) editcopy
+
+. * Remove ylabel ticks
+. gr_edit .plotregion1.yaxis1[4].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
+
+. * Shift labels to left
+. gr_edit .plotregion1.move yaxis1[4] leftof 9 1
+
+. 
+. * reset margins back to zero to flush with new col of labels
+. gr_edit .style.editstyle margin(zero) editcopy 
+
+. gr_edit .plotregion1.style.editstyle margin(zero) editcopy
+
+. 
+. * Add annotes
+. local y_heigh_coord = 9.748674339250291
+
+. local annote_style angle(default) size(small) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero
+> ) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(
+> east) editcopy
+
+. 
+. gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_IPS'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].text.Arrpush `beta_IPS'
+
+. 
+. gr_edit .plotregion1.plotregion1[2].AddTextBox added_text editor `y_heigh_coord' `beta_RW'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_RW'
+
+. 
+. gr_edit .plotregion1.plotregion1[3].AddTextBox added_text editor `y_heigh_coord' `beta_FSR'
+
+. gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[3].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[3].added_text[1].text.Arrpush `beta_FSR'
+
+. 
+. gr_edit .plotregion1.plotregion1[4].AddTextBox added_text editor `y_heigh_coord' `beta_14k'
+
+. gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
+
+. 
+. graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace        
+(file D:/partisan-gaps/figs/partisan-gap-by-item-arm.pdf written in PDF format)
+
+. 
+. 
+. * sort(, descending) /// sort by coeff size (by first column) 
+> *       transform(* = min(max(@,-.25),.5)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound
+
+end of do-file
+
+. do ./mturk/fig-partisan-gap-ips-24k.do
+
+. grstyle init
+
+. grstyle set plain, 
+
+. 
+. eststo clear
+
+. foreach item of varlist $items avg {
+  2.         foreach arm in IPS 24k {
+  3.                 qui: reg `item' ib1.pid if (pid_str!="Independent") & (question_type=="`arm'"), vce(hc3)
+  4.                 est store `item'_`arm'          
+  5.                 * Store estimates for average of conditions for annotations later
+.                 if "`item'"=="avg" {
+  6.                         local beta_`arm' = round(_b[3.pid], 0.01)
+  7.                         dis `beta_`arm''
+  8.                 }
+  9.         }
+ 10. }
+.35
+.1
+
+. 
+. /* In order that should appear
+> IDA = IPS
+> CUD = RW
+> FSR = FSR
+> IMC = 14k
+> CCD = 24k
+> */
+. 
+. 
+. coefplot (*_IPS) || (*_24k), /// 
+>         msymbol(s) ///
+>         keep(3.pid) ///
+>         asequation /// "set equation to model name or string" make the rows the models
+>         swapnames /// "swap coefficient names and equation names"
+>         subtitle("") /// Remove subtitles for now
+>         byopts(row(1)) /// Force results to be in one row (1xn)
+>         xline(0, lcolor(gs10) lpattern(dash) lwidth(medium)) ///
+>         xlabel(-.3(.3).6) ///
+>         xscale(range(-.2 .53)) ///
+>         plotregion(margin(zero) ) ///   
+>         plotregion(lcolor(black) margin(zero) lwidth(medthin)) /// draw box around columns
+>         graphregion(margin(zero)) ///
+>         ytick(none) /// remove horizontal grids
+>         yscale(noline alt)  /// swap labels to RHS
+>         eqrename( ///
+>                 birth_IPS = "{bf:Obama birthplace}" ///
+>                 religion_IPS = "{bf:Obama religion}" ///
+>                 illegal_IPS = "{bf:ACA illegal}" ///
+>                 death_IPS = "{bf:ACA death panels}" ///
+>                 increase_IPS = "{bf:GW causes}" ///
+>                 science_IPS = "{bf:GW scientists agree}" ///
+>                 fraud_IPS = "{bf:Voter fraud}" ///
+>                 mmr_IPS = "{bf:MMR vaccine}" ///
+>                 deficit_IPS = "{bf:Budget deficit}" ///
+>                 avg_IPS = "{bf:Average}" ///            
+>                 birth_24k = "{bf:Obama birthplace}" ///
+>                 religion_24k = "{bf:Obama religion}" ///
+>                 illegal_24k = "{bf:ACA illegal}" ///
+>                 death_24k = "{bf:ACA death panels}" ///
+>                 increase_24k = "{bf:GW causes}" ///
+>                 science_24k = "{bf:GW scientists agree}" ///
+>                 fraud_24k = "{bf:Voter fraud}" ///
+>                 mmr_24k = "{bf:MMR vaccine}" ///
+>                 deficit_24k = "{bf:Budget deficit}" ///
+>                 avg_24k = "{bf:Average}" ///                                                            
+>                 )
+
+. 
+. 
+. * Add column titles     
+. addplot 1: , title("{bf:Inflationary Design Approach (IDA)}", size(medsmall)) norescaling
+
+. addplot 2: , title("{bf:Confidence Coding Design (CCD)}", size(medsmall)) norescaling
+
+. 
+. * graph margin
+. gr_edit .style.editstyle margin(left) editcopy 
+
+. * plot margin
+. gr_edit .plotregion1.style.editstyle margin(left) editcopy
+
+. * Remove ylabel ticks
+. gr_edit .plotregion1.yaxis1[2].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
+
+. * Shift labels to left
+. gr_edit .plotregion1.move yaxis1[2] leftof 9 1
+
+. 
+. * reset margins back to zero to flush with new col of labels
+. gr_edit .style.editstyle margin(zero) editcopy 
+
+. gr_edit .plotregion1.style.editstyle margin(zero) editcopy
+
+. 
+. 
+. * Add annotes
+. local y_heigh_coord = 9.748674339250291
+
+. local annote_style angle(default) size(small) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero
+> ) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(
+> east) editcopy
+
+. 
+. gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_IPS'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].text.Arrpush `beta_IPS'
+
+. 
+. gr_edit .plotregion1.plotregion1[2].AddTextBox added_text editor `y_heigh_coord' `beta_24k'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_24k'
+
+. 
+. 
+. graph export "$figsavedir/partisan-gap-by-item-arm-ips-24k.pdf", replace        
+(file D:/partisan-gaps/figs/partisan-gap-by-item-arm-ips-24k.pdf written in PDF format)
+
+. 
+. 
+end of do-file
+
+. * Figure 5
+. do ./mturk/fig-partisan-gap-mc-24k.do
+
+. grstyle init
+
+. grstyle set plain, 
+
+. 
+. preserve
+
+. replace question_type = "mc" if question_type!="24k"
+(953 real changes made)
+
+. 
+. eststo clear
+
+. foreach item of varlist $items avg {
+  2.         foreach arm in mc 24k {
+  3.                 qui: reg `item' ib1.pid if (pid_str!="Independent") & (question_type=="`arm'"), vce(hc3)
+  4.                 est store `item'_`arm'          
+  5.                 * Store estimates for average of conditions for annotations later
+.                 if "`item'"=="avg" {
+  6.                         local beta_`arm' = round(_b[3.pid], 0.01)
+  7.                         dis `beta_`arm''
+  8.                 }
+  9.         }
+ 10. }
+.29
+.1
+
+. restore
+
+. /* In order that should appear
+> IDA = IPS
+> CUD = RW
+> FSR = FSR
+> IMC = 14k
+> CCD = 24k
+> */
+. 
+. 
+. coefplot (*_mc) || (*_24k), /// 
+>         msymbol(s) ///
+>         keep(3.pid) ///
+>         asequation /// "set equation to model name or string" make the rows the models
+>         swapnames /// "swap coefficient names and equation names"
+>         subtitle("") /// Remove subtitles for now
+>         byopts(row(1)) /// Force results to be in one row (1xn)
+>         xline(0, lcolor(gs10) lpattern(dash) lwidth(medium)) ///
+>         xlabel(-.3(.3).6) ///
+>         xscale(range(-.31 .61)) ///
+>         plotregion(margin(zero) ) ///   
+>         plotregion(lcolor(black) margin(zero) lwidth(medthin)) /// draw box around columns
+>         graphregion(margin(zero)) ///
+>         ytick(none) /// remove horizontal grids
+>         yscale(noline alt)  /// swap labels to RHS
+>         eqrename( ///
+>                 birth_mc = "{bf:Obama birthplace}" ///
+>                 religion_mc = "{bf:Obama religion}" ///
+>                 illegal_mc = "{bf:ACA illegal}" ///
+>                 death_mc = "{bf:ACA death panels}" ///
+>                 increase_mc = "{bf:GW causes}" ///
+>                 science_mc = "{bf:GW scientists agree}" ///
+>                 fraud_mc = "{bf:Voter fraud}" ///
+>                 mmr_mc = "{bf:MMR vaccine}" ///
+>                 deficit_mc = "{bf:Budget deficit}" ///
+>                 avg_mc = "{bf:Average}" ///             
+>                 birth_24k = "{bf:Obama birthplace}" ///
+>                 religion_24k = "{bf:Obama religion}" ///
+>                 illegal_24k = "{bf:ACA illegal}" ///
+>                 death_24k = "{bf:ACA death panels}" ///
+>                 increase_24k = "{bf:GW causes}" ///
+>                 science_24k = "{bf:GW scientists agree}" ///
+>                 fraud_24k = "{bf:Voter fraud}" ///
+>                 mmr_24k = "{bf:MMR vaccine}" ///
+>                 deficit_24k = "{bf:Budget deficit}" ///
+>                 avg_24k = "{bf:Average}" ///                                                            
+>                 )
+
+. 
+. 
+. * Add column titles     
+. addplot 1: , title("{bf:Multiple Choices}" "{bf:(IDA, CUD, FSR, IMC)}", size(medsmall)) norescaling
+
+. addplot 2: , title("{bf:Confidence Coding Design}" "{bf:(CCD)}", size(medsmall)) norescaling
+
+. 
+. * graph margin
+. gr_edit .style.editstyle margin(left) editcopy 
+
+. * plot margin
+. gr_edit .plotregion1.style.editstyle margin(left) editcopy
+
+. * Remove ylabel ticks
+. gr_edit .plotregion1.yaxis1[2].style.editstyle majorstyle(tickstyle(show_ticks(no))) editcopy
+
+. * Shift labels to left
+. gr_edit .plotregion1.move yaxis1[2] leftof 9 1
+
+. 
+. * reset margins back to zero to flush with new col of labels
+. gr_edit .style.editstyle margin(zero) editcopy 
+
+. gr_edit .plotregion1.style.editstyle margin(zero) editcopy
+
+. 
+. 
+. * Add annotes
+. local y_heigh_coord = 9.748674339250291
+
+. local annote_style angle(default) size(small) color(black) horizontal(left) vertical(middle) margin(zero) linegap(zero
+> ) drawbox(no) boxmargin(zero) fillcolor(bluishgray) linestyle( width(thin) color(black) pattern(solid)) box_alignment(
+> east) editcopy
+
+. 
+. gr_edit .plotregion1.plotregion1[1].AddTextBox added_text editor `y_heigh_coord' `beta_mc'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[1].added_text[1].text.Arrpush `beta_mc'
+
+. 
+. gr_edit .plotregion1.plotregion1[2].AddTextBox added_text editor `y_heigh_coord' `beta_24k'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle `annote_style'
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle box_alignment(center) editcopy
+
+. gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_24k'
+
+. 
+. 
+. graph export "$figsavedir/partisan-gap-by-item-arm-mc-24k.pdf", replace 
+(file D:/partisan-gaps/figs/partisan-gap-by-item-arm-mc-24k.pdf written in PDF format)
+
+. 
+. 
+end of do-file
+
+. 
+. *** Balance tests (IPS/IDA as base) 
+. do ./mturk/balance-tests.do // store estimates only
+
+. center age interest_1 vote_1 pid_strength_1, standardize inplace
+(modified variables: age interest_1 vote_1 pid_strength_1)
+
+. qui tabulate educ, gen(d_educ)
+
+. local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
+
+. 
+. local conditions RW FSR 14k 24k
+
+. foreach condition in `conditions' {
+  2.         preserve
+  3.         * Retain only IPS (as base condition) and one of the other four (conditions)
+.         qui drop if (question_type!="`condition'") & (question_type!="IPS")
+  4.         gen tarm = (question_type=="`condition'")       
+  5. 
+.         * Prep filepath to save to
+.         local filepath "../../data/turk/storespecs-baltest-`condition'-ips"
+  6.         cap erase `filepath'.dta
+  7. 
+.         * Do balance test for each xvar and save to filepath
+.         eststo clear 
+  8.         local i = 1
+  9.         foreach xvar of varlist `listofxvar' {  
+ 10.                 _dots `i++' 0
+ 11.                 qui reg tarm `xvar', vce(hc3) 
+ 12.                 qui storespecs `xvar', spec(`xvar') file(`filepath')
+ 13.         }
+ 14.         restore // to full data before dropping three conditions
+ 15. }
+....................................................
+. 
+. 
+end of do-file
+
+. 
+. **** Reg results for effect of party & survey type on response (Tab 2 + Fig 2)
+. * Table 2
+. do ./mturk/reg-table.do
+
+. * Drop CCD (confidence coding/24k)
+. drop if survey == 2
+(254 observations deleted)
+
+. 
+. * Reshape from wide to long to stack participant-item observations
+. foreach item of varlist $items {
+  2.         rename `item' item`item'
+  3. }
+
+. reshape long item, i(id) j(item_type, string)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                      953   ->    8577
+Number of variables                 411   ->     404
+j variable (9 values)                     ->   item_type
+xij variables:
+    itembirth itemdeath ... itemscience   ->   item
+-----------------------------------------------------------------------------
+
+. 
+. drop if pid_str=="Independent"
+(2925 observations deleted)
+
+. 
+. 
+. local spec1 i.rep
+
+. local spec2 i.survey
+
+. local spec3 i.rep##i.survey
+
+. local spec4 `spec1' $demo
+
+. local spec5 `spec2' $demo
+
+. local spec6 `spec3' $demo
+
+. 
+. eststo clear
+
+. forvalues i = 1/6 {
+  2. eststo: qui reghdfe item `spec`i'', absorb(item_type) vce(cluster id)
+  3.         estadd local items 9
+  4.         estadd local Nrespondents = e(N_clust1)
+  5.         local nobs: display %9.0fc `e(N)'
+  6.         estadd local itemFE "\multicolumn{1}{c}{Yes}"
+  7.         estadd local nobs "`nobs'"
+  8.         if `i' > 3 {
+  9.                 estadd local demo "\multicolumn{1}{c}{Yes}"
+ 10.         }
+ 11.         else {
+ 12.                 estadd local demo "\multicolumn{1}{c}{.}"       
+ 13.         }
+ 14. }
+(est1 stored)
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "628"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+               e(nobs) : "    5,652"
+
+added macro:
+               e(demo) : "\multicolumn{1}{c}{.}"
+(est2 stored)
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "628"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+               e(nobs) : "    5,652"
+
+added macro:
+               e(demo) : "\multicolumn{1}{c}{.}"
+(est3 stored)
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "628"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+               e(nobs) : "    5,652"
+
+added macro:
+               e(demo) : "\multicolumn{1}{c}{.}"
+(est4 stored)
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "627"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+               e(nobs) : "    5,643"
+
+added macro:
+               e(demo) : "\multicolumn{1}{c}{Yes}"
+(est5 stored)
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "627"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+               e(nobs) : "    5,643"
+
+added macro:
+               e(demo) : "\multicolumn{1}{c}{Yes}"
+(est6 stored)
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "627"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+               e(nobs) : "    5,643"
+
+added macro:
+               e(demo) : "\multicolumn{1}{c}{Yes}"
+
+. 
+. 
+. #delimit;
+delimiter now ;
+. esttab,
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.rep *.survey _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(1.rep "Congenial"
+>                           5.survey "CUD"
+>                           3.survey "FSR"
+>                           1.survey "IMC"
+>                           // 2.survey "CCD"
+>                       1.rep#5.survey "Congenial $\times$ CUD"
+>                       1.rep#3.survey "Congenial $\times$ FSR"           
+>                       1.rep#1.survey "Congenial $\times$ IMC"
+>                       // 1.rep#2.survey "Congenial $\times$ CCD"
+>                       // 1.rep#4.survey "Congenial $\times$ IPS"
+>                 )
+>         // order(1.rep 5.survey 3.survey 1.survey 2.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey 1.rep#2.survey
+> )
+>         order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "itemFE Survey item FE"
+>                 "demo Demographic controls"
+>                 "items Items"
+>                 "Nrespondents Respondents"
+>                 "nobs Respondent-items"
+>                 ) 
+>         title("Dep. var. is 1(response is congenial)")
+> ;
+
+Dep. var. is 1(response is congenial)
+--------------------------------------------------------------------------------------------
+                          (1)         (2)         (3)         (4)         (5)         (6)   
+--------------------------------------------------------------------------------------------
+Congenial               0.281***                0.351***    0.284***                0.353***
+                      (0.017)                 (0.035)     (0.017)                 (0.034)   
+
+CUD                                 0.010       0.000                   0.011       0.002   
+                                  (0.028)     (0.022)                 (0.028)     (0.021)   
+
+FSR                                -0.064**     0.000                  -0.063**    -0.001   
+                                  (0.024)     (0.019)                 (0.024)     (0.019)   
+
+IMC                                -0.080**    -0.023                  -0.079**    -0.021   
+                                  (0.025)     (0.019)                 (0.025)     (0.019)   
+
+Congenial $\times$~D                            0.024                               0.024   
+                                              (0.046)                             (0.045)   
+
+Congenial $\times$~R                           -0.173***                           -0.163***
+                                              (0.046)                             (0.045)   
+
+Congenial $\times$~C                           -0.132**                            -0.136** 
+                                              (0.048)                             (0.048)   
+
+Constant                0.179***    0.306***    0.184***    0.156***    0.303***    0.164***
+                      (0.007)     (0.020)     (0.014)     (0.013)     (0.024)     (0.016)   
+--------------------------------------------------------------------------------------------
+R$^2$                   0.315       0.234       0.328       0.324       0.243       0.337   
+Survey item FE       \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}
+> {Yes}    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
+Demographic controls \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{.}    \multicolumn{1}{c}{Yes} 
+>    \multicolumn{1}{c}{Yes}    \multicolumn{1}{c}{Yes}   
+Items                       9           9           9           9           9           9   
+Respondents               628         628         628         627         627         627   
+Respondent-items         5,652        5,652        5,652        5,643        5,643        5,643   
+--------------------------------------------------------------------------------------------
+Standard errors in parentheses
++ p<0.1, * p<0.05, ** p<0.01, *** p<0.001
+
+.         esttab using $tabsavedir/mturk-reg-table-fragment.tex, 
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(20)
+>         modelwidth(8)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         keep(1.rep *.survey _cons)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle
+>         coeflabel(1.rep "Congenial"
+>                           5.survey "CUD"
+>                           3.survey "FSR"
+>                           1.survey "IMC"
+>                           // 2.survey "CCD"
+>                       1.rep#5.survey "Congenial $\times$ CUD"
+>                       1.rep#3.survey "Congenial $\times$ FSR"           
+>                       1.rep#1.survey "Congenial $\times$ IMC"
+>                       // 1.rep#2.survey "Congenial $\times$ CCD"
+>                       // 1.rep#4.survey "Congenial $\times$ IPS"
+>                 )
+>         order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "itemFE Survey item FE"
+>                 "demo Demographic controls"
+>                 "items Items"
+>                 "Nrespondents Respondents"
+>                 "nobs Respondent-items"
+>                 ) 
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+>         ;
+(output written to D:/partisan-gaps/tabs/mturk-reg-table-fragment.tex)
+
+. #delimit cr     
+delimiter now cr
+. 
+end of do-file
+
+. * Figure 2
+. do ./mturk/barplot.do
+
+. local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+
+. cd `rootdir'
+D:\partisan-gaps
+
+. cd scripts/Stata
+D:\partisan-gaps\scripts\Stata
+
+. **** Basic prep of data
+. import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
+(344 vars, 1253 obs)
+
+. do ./mturk/preamble.do
+
+. global arms             RW IPS FSR 14k 24k
+
+. global demo     age i.female i.educ i.hisla $races
+
+. 
+. rename v1 id
+
+. label var id "Participant ID"
+
+. 
+. *------------------------------------------------------------------------------
+. *** Response for the 9 items
+. global items    birth religion illegal death increase science fraud mmr deficit
+
+. label define itemResponseLabel 1 "Correct" 0 "Incorrect"
+
+. 
+. foreach var of varlist $items {
+  2.         tempvar _`var'
+  3.         gen `_`var'' = `var'
+  4.         drop `var'
+  5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
+  6.         label variable `var' "=1 if response is wrong and congenial to R for `var' item"
+  7.         * If we define it as correct and congenial to D, and then use D as the "congenial dummy". it's going
+.         * to be the same. (Independents dropped)
+.         // replace `var' = 1 - `var'
+.         // label variable `var' "=1 if response is correct and congenial for D for `var' item"
+.         label values `var' itemResponseLabel
+  8. }
+(24 missing values generated)
+(35 missing values generated)
+(113 missing values generated)
+(115 missing values generated)
+(18 missing values generated)
+(12 missing values generated)
+(18 missing values generated)
+(31 missing values generated)
+(82 missing values generated)
+
+. * deficif seems to have been coded differently compared to previous 8 items
+. * https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
+. replace deficit = 1 - deficit 
+(1171 real changes made)
+
+. 
+. rename avg avg_str
+
+. destring avg_str, gen(avg) force
+avg_str contains nonnumeric characters; avg generated as double
+(2 missing values generated)
+
+. label variable avg "Avg of the 9 survey questions"
+
+. 
+. *------------------------------------------------------------------------------
+. *** pid
+. rename pid pid_str
+
+. drop if pid_str =="Something else"
+(46 observations deleted)
+
+. 
+. label define pidLabel 1 "Democrat" 2 "Independent" 3 "Republican"
+
+. encode pid_str, gen(pid) label(pidLabel)
+
+. 
+. fvset base 2 pid // permanently set Independent as base
+
+. 
+. gen rep = (pid_str=="Republican") if !missing(pid_str)
+
+. 
+. 
+. *------------------------------------------------------------------------------
+. *** Demo
+. rename gender gender_str
+
+. label define genderLabel 0 "Male" 1 "Female"
+
+. encode gender_str, gen(female) label(genderLabel)
+
+. 
+. foreach demo in educ hisla race {
+  2.         rename `demo' `demo'_str
+  3.         encode `demo'_str, gen(`demo')
+  4. }
+
+. 
+. gen asian = strmatch(race_str, "Asian*")
+
+. gen black = strmatch(race_str, "Black*")
+
+. gen white = strmatch(race_str, "White*")
+
+. gen others = strmatch(race_str, "Other*")
+
+. global races asian black white others
+
+. 
+. *------------------------------------------------------------------------------
+. *** Survey types
+. encode question_type, gen(survey)
+
+. fvset base 4 survey // permanently set IPS (IDA) as base
+
+. 
+end of do-file
+
+. 
+. * Reshape from wide to long to stack participant-item observations
+. foreach item of varlist $items {
+  2.         rename `item' item`item'
+  3. }
+
+. reshape long item, i(id) j(item_type, string)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     1207   ->   10863
+Number of variables                 356   ->     349
+j variable (9 values)                     ->   item_type
+xij variables:
+    itembirth itemdeath ... itemscience   ->   item
+-----------------------------------------------------------------------------
+
+. 
+. drop if pid_str=="Independent"
+(3708 observations deleted)
+
+. * Drop CCD (confidence coding/24k)
+. drop if survey == 2
+(1503 observations deleted)
+
+. 
+. eststo: qui reghdfe item i.rep##i.survey $demo, absorb(item_type) vce(cluster id)
+(est7 stored)
+
+. 
+. mat coefmat = e(b)
+
+. mat list coefmat
+
+coefmat[1,29]
+            0b.          1.          1.          3.         4b.          5.     0b.rep#     0b.rep#     0b.rep#
+           rep         rep      survey      survey      survey      survey   1o.survey   3o.survey   4b.survey
+y1           0   .36250244  -.01842748  -.00143353           0   .00018715           0           0           0
+
+        0b.rep#      1.rep#      1.rep#     1o.rep#      1.rep#                     0b.          1.         1b.
+     5o.survey    1.survey    3.survey   4b.survey    5.survey         age      female      female        educ
+y1           0  -.13464867  -.16386998           0    .0249549  -.00020876           0   .01569866           0
+
+             2.          3.          4.          5.         1b.          2.                                    
+          educ        educ        educ        educ       hisla       hisla       asian       black       white
+y1   .02533311   .41662524   -.0274593   .03659491           0  -.00109593  -.06090855  -.02826621   -.0997682
+
+                           
+        others       _cons
+y1  -.05118928   .66260155
+
+. local baseline = coefmat[1, 2] /* 1.rep */
+
+. 
+. // preserve
+. regsave
+
+. drop if var=="_cons"
+(1 observation deleted)
+
+. drop if strpos(var, "0b.rep")
+(5 observations deleted)
+
+. drop if var=="1.survey"
+(1 observation deleted)
+
+. drop if var=="2.survey"
+(0 observations deleted)
+
+. drop if var=="3.survey"
+(1 observation deleted)
+
+. drop if var=="4b.survey"
+(1 observation deleted)
+
+. drop if var=="5.survey"
+(1 observation deleted)
+
+. drop if var=="1o.rep#4b.survey"
+(1 observation deleted)
+
+. drop if strpos(var, "female")
+(2 observations deleted)
+
+. drop if strpos(var, "educ")
+(5 observations deleted)
+
+. drop if strpos(var, "hisla")
+(2 observations deleted)
+
+. drop if var=="age"
+(1 observation deleted)
+
+. drop if var=="asian"
+(1 observation deleted)
+
+. drop if var=="black"
+(1 observation deleted)
+
+. drop if var=="white"
+(1 observation deleted)
+
+. drop if var=="others"
+(1 observation deleted)
+
+. * Gen coef for plotting (add estimates back to baseline)
+. gen est = coef
+
+. label var est "Original reg estimate (before adding back to baseline)"
+
+. replace coef = `baseline' + coef if var!="1.rep"
+(3 real changes made)
+
+. 
+. * Construct CI
+. gen uci = coef + 1.96 * stderr
+
+. gen lci = coef - 1.96 * stderr
+
+. replace uci = 0 if var=="_cons"
+(0 real changes made)
+
+. replace lci = 0 if var=="_cons"
+(0 real changes made)
+
+. 
+. 
+. * Create plot order var by treat dummies and label values with sample size
+. /* In order that should appear
+> IDA = IPS _n == 1
+> CUD = RW 1 _n==5
+> FSR = FSR 4 _n==3
+> IMC = 14k 2 _n==2
+> CCD = 24k 3 _n==3
+> */
+. 
+. gen porder = .
+(4 missing values generated)
+
+. replace porder = 1 if _n==1
+(1 real change made)
+
+. replace porder = 4 if _n==2 
+(1 real change made)
+
+. replace porder = 3 if _n==3
+(1 real change made)
+
+. replace porder = 2 if _n==4
+(1 real change made)
+
+. // replace porder = 2 if _n==5
+. sort porder
+
+. 
+. label define xlab 1 "IDA" 2 "CUD" 3 "FSR" 4 "IMC"
+
+. label values porder xlab
+
+. 
+. 
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. * Graph settings
+. set scheme s2mono
+
+. local YLAB_OPTS angle(horizontal) labsize(large) nogrid
+
+. local YRANGE 0.1(0.1).4
+
+. local BASELINE_XLIM = _N+.5
+
+. local CI_WIDTH medium
+
+. local XLAB_SIZE large
+
+. local BAR_OPTS          color(gs10) fcolor(none) lwidth(medthick) 
+
+. local BAR_OPTS_BASE color(gs10) fcolor(none) lwidth(medthick)
+
+. 
+. local graphsavedir ./figures
+
+. *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. 
+. #delimit;
+delimiter now ;
+.         twoway  
+>                         (bar coef porder if porder==1, `BAR_OPTS_BASE') 
+>                         (bar coef porder if porder==2, `BAR_OPTS') 
+>                         (bar coef porder if porder==3, `BAR_OPTS') 
+>                         (bar coef porder if porder==4, `BAR_OPTS' 
+>                         // (bar coef porder if porder==5, `BAR_OPTS'
+>                                 xlabel(,val labsize(`XLAB_SIZE') )
+>                         ) 
+>                         (rcap uci lci porder if porder!=1, 
+>                                 color(gs5)
+>                                 lwidth(`CI_WIDTH') 
+>                                 legend(off)
+>                                 ylabel(`YRANGE', `YLAB_OPTS' ) 
+>                                 xlabel(, notick)
+>                                 xscale(noextend lcolor(none))
+>                                 graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+>                                 bgcolor(white)
+>                                 plotregion(margin(12 12 0 0))
+>                         )               
+>                         (scatteri `baseline' .5 `baseline' `BASELINE_XLIM', 
+>                                 xlabel(1 2 3 4)
+>                                 recast(line) color(black) lpattern(dash)
+>                         )
+>                 ;
+
+.         #delimit cr     
+delimiter now cr
+. graph export $figsavedir/mturk-pgag-surveyarms.pdf, replace     
+(file D:/partisan-gaps/figs/mturk-pgag-surveyarms.pdf written in PDF format)
+
+. 
+end of do-file
+
+. 
+. **** Reg results for comparing 24k/CCD (Confidence scoring) with the four other 
+. ****  multiple choice conditions (IPS/IDA, RW/CUD, FSR/FSR, 14K/IMC)
+. * Tables in SI 1.1
+. do ./mturk/confidence-scoring-reg-tables.do
+
+. local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+
+. cd `rootdir'
+D:\partisan-gaps
+
+. cd scripts/Stata
+D:\partisan-gaps\scripts\Stata
+
+. import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
+(344 vars, 1253 obs)
+
+. do ./mturk/preamble.do
+
+. global arms             RW IPS FSR 14k 24k
+
+. global demo     age i.female i.educ i.hisla $races
+
+. 
+. rename v1 id
+
+. label var id "Participant ID"
+
+. 
+. *------------------------------------------------------------------------------
+. *** Response for the 9 items
+. global items    birth religion illegal death increase science fraud mmr deficit
+
+. label define itemResponseLabel 1 "Correct" 0 "Incorrect"
+
+. 
+. foreach var of varlist $items {
+  2.         tempvar _`var'
+  3.         gen `_`var'' = `var'
+  4.         drop `var'
+  5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
+  6.         label variable `var' "=1 if response is wrong and congenial to R for `var' item"
+  7.         * If we define it as correct and congenial to D, and then use D as the "congenial dummy". it's going
+.         * to be the same. (Independents dropped)
+.         // replace `var' = 1 - `var'
+.         // label variable `var' "=1 if response is correct and congenial for D for `var' item"
+.         label values `var' itemResponseLabel
+  8. }
+(24 missing values generated)
+(35 missing values generated)
+(113 missing values generated)
+(115 missing values generated)
+(18 missing values generated)
+(12 missing values generated)
+(18 missing values generated)
+(31 missing values generated)
+(82 missing values generated)
+
+. * deficif seems to have been coded differently compared to previous 8 items
+. * https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
+. replace deficit = 1 - deficit 
+(1171 real changes made)
+
+. 
+. rename avg avg_str
+
+. destring avg_str, gen(avg) force
+avg_str contains nonnumeric characters; avg generated as double
+(2 missing values generated)
+
+. label variable avg "Avg of the 9 survey questions"
+
+. 
+. *------------------------------------------------------------------------------
+. *** pid
+. rename pid pid_str
+
+. drop if pid_str =="Something else"
+(46 observations deleted)
+
+. 
+. label define pidLabel 1 "Democrat" 2 "Independent" 3 "Republican"
+
+. encode pid_str, gen(pid) label(pidLabel)
+
+. 
+. fvset base 2 pid // permanently set Independent as base
+
+. 
+. gen rep = (pid_str=="Republican") if !missing(pid_str)
+
+. 
+. 
+. *------------------------------------------------------------------------------
+. *** Demo
+. rename gender gender_str
+
+. label define genderLabel 0 "Male" 1 "Female"
+
+. encode gender_str, gen(female) label(genderLabel)
+
+. 
+. foreach demo in educ hisla race {
+  2.         rename `demo' `demo'_str
+  3.         encode `demo'_str, gen(`demo')
+  4. }
+
+. 
+. gen asian = strmatch(race_str, "Asian*")
+
+. gen black = strmatch(race_str, "Black*")
+
+. gen white = strmatch(race_str, "White*")
+
+. gen others = strmatch(race_str, "Other*")
+
+. global races asian black white others
+
+. 
+. *------------------------------------------------------------------------------
+. *** Survey types
+. encode question_type, gen(survey)
+
+. fvset base 4 survey // permanently set IPS (IDA) as base
+
+. 
+end of do-file
+
+. 
+. * Reshape from wide to long to stack participant-item observations
+. foreach item of varlist $items {
+  2.         rename `item' item`item'
+  3. }
+
+. reshape long item, i(id) j(item_type, string)
+(note: j = birth death deficit fraud illegal increase mmr religion science)
+
+Data                               wide   ->   long
+-----------------------------------------------------------------------------
+Number of obs.                     1207   ->   10863
+Number of variables                 356   ->     349
+j variable (9 values)                     ->   item_type
+xij variables:
+    itembirth itemdeath ... itemscience   ->   item
+-----------------------------------------------------------------------------
+
+. 
+. drop if pid_str=="Independent"
+(3708 observations deleted)
+
+. 
+. gen ccd = (survey==2)  /* 2.survey = 24k */
+
+. label var ccd "=1 if 24k condition (confidence scoring condition)"
+
+. /*
+> ================================================
+> * Confidence coding vs all four other conditions
+> ================================================
+> */ 
+. eststo clear
+
+. * Regressions for each of nine survey questions
+. foreach item_type in $items {
+  2.         eststo: reg item i.rep##i.ccd if item_type=="`item_type'", vce(cluster id)
+  3.                 estadd local itemFE "\multicolumn{1}{c}{No}"
+  4.                 estadd local items 1
+  5.                 estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
+  6.                 local nobs: display %9.0fc `e(N)'
+  7.                 estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+  8. }
+
+Linear regression                                      Number of obs =     784
+                                                       F(  3,   783) =   21.71
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.1272
+                                                       Root MSE      =  .28969
+
+                                   (Std. Err. adjusted for 784 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2460084     .03269     7.53   0.000      .181838    .3101788
+       1.ccd |   -.009683    .017319    -0.56   0.576    -.0436802    .0243143
+             |
+     rep#ccd |
+        1 1  |  -.0718704   .0728522    -0.99   0.324    -.2148792    .0711383
+             |
+       _cons |    .035545   .0090362     3.93   0.000      .017807     .053283
+------------------------------------------------------------------------------
+(est1 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{784}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      784}"
+
+Linear regression                                      Number of obs =     774
+                                                       F(  3,   773) =   52.36
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.1853
+                                                       Root MSE      =  .36038
+
+                                   (Std. Err. adjusted for 774 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3667234   .0380574     9.64   0.000     .2920153    .4414315
+       1.ccd |  -.0906561   .0199361    -4.55   0.000    -.1297915   -.0515207
+             |
+     rep#ccd |
+        1 1  |  -.1958829   .0760386    -2.58   0.010    -.3451494   -.0466163
+             |
+       _cons |   .1090047     .01521     7.17   0.000     .0791469    .1388625
+------------------------------------------------------------------------------
+(est2 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{774}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      774}"
+
+Linear regression                                      Number of obs =     728
+                                                       F(  2,   727) =       .
+                                                       Prob > F      =       .
+                                                       R-squared     =  0.1714
+                                                       Root MSE      =  .39452
+
+                                   (Std. Err. adjusted for 728 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3631344   .0392365     9.26   0.000      .286104    .4401648
+       1.ccd |  -.1611374   .0179467    -8.98   0.000    -.1963709    -.125904
+             |
+     rep#ccd |
+        1 1  |  -.2160756   .0724505    -2.98   0.003    -.3583128   -.0738384
+             |
+       _cons |   .1611374   .0179467     8.98   0.000      .125904    .1963709
+------------------------------------------------------------------------------
+(est3 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{728}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      728}"
+
+Linear regression                                      Number of obs =     729
+                                                       F(  3,   728) =   12.37
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.0636
+                                                       Root MSE      =  .38734
+
+                                   (Std. Err. adjusted for 729 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2217825   .0374971     5.91   0.000     .1481673    .2953978
+       1.ccd |  -.0106802   .0430131    -0.25   0.804    -.0951247    .0737643
+             |
+     rep#ccd |
+        1 1  |  -.2152098   .0827453    -2.60   0.009    -.3776576   -.0527619
+             |
+       _cons |   .1374408    .016807     8.18   0.000     .1044447    .1704368
+------------------------------------------------------------------------------
+(est4 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{729}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      729}"
+
+Linear regression                                      Number of obs =     784
+                                                       F(  3,   783) =   92.67
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.3009
+                                                       Root MSE      =  .34396
+
+                                   (Std. Err. adjusted for 784 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .4948465   .0371094    13.33   0.000     .4220008    .5676923
+       1.ccd |  -.0791307   .0162272    -4.88   0.000    -.1109846   -.0472768
+             |
+     rep#ccd |
+        1 1  |  -.2469833   .0797734    -3.10   0.002    -.4035784   -.0903882
+             |
+       _cons |   .0876777    .013803     6.35   0.000     .0605825     .114773
+------------------------------------------------------------------------------
+(est5 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{784}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      784}"
+
+Linear regression                                      Number of obs =     787
+                                                       F(  3,   786) =   21.58
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.1112
+                                                       Root MSE      =  .30793
+
+                                   (Std. Err. adjusted for 787 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2322505   .0343358     6.76   0.000     .1648499    .2996511
+       1.ccd |  -.0424046    .019451    -2.18   0.030    -.0805867   -.0042225
+             |
+     rep#ccd |
+        1 1  |  -.2363441   .0434762    -5.44   0.000    -.3216872   -.1510009
+             |
+       _cons |   .0687204   .0123462     5.57   0.000      .044485    .0929558
+------------------------------------------------------------------------------
+(est6 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{787}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      787}"
+
+Linear regression                                      Number of obs =     785
+                                                       F(  3,   784) =   51.29
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.1901
+                                                       Root MSE      =  .37476
+
+                                   (Std. Err. adjusted for 785 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3890857   .0385738    10.09   0.000     .3133657    .4648058
+       1.ccd |  -.0946175   .0240631    -3.93   0.000    -.1418531   -.0473818
+             |
+     rep#ccd |
+        1 1  |  -.2470222   .0711472    -3.47   0.001    -.3866837   -.1073607
+             |
+       _cons |   .1303318   .0164307     7.93   0.000     .0980785     .162585
+------------------------------------------------------------------------------
+(est7 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{785}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      785}"
+
+Linear regression                                      Number of obs =     775
+                                                       F(  3,   774) =   13.80
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.0379
+                                                       Root MSE      =  .27637
+
+                                   (Std. Err. adjusted for 775 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .0988129   .0290773     3.40   0.001     .0417332    .1558925
+       1.ccd |  -.0615662   .0157353    -3.91   0.000    -.0924552   -.0306772
+             |
+     rep#ccd |
+        1 1  |  -.0845272   .0386272    -2.19   0.029    -.1603536   -.0087007
+             |
+       _cons |     .07109   .0125418     5.67   0.000     .0464701      .09571
+------------------------------------------------------------------------------
+(est8 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{775}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      775}"
+
+Linear regression                                      Number of obs =     747
+                                                       F(  3,   746) =    6.90
+                                                       Prob > F      =  0.0001
+                                                       R-squared     =  0.0220
+                                                       Root MSE      =   .3553
+
+                                   (Std. Err. adjusted for 747 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1166429   .0268814     4.34   0.000     .0638708     .169415
+       1.ccd |   .0443128   .0444445     1.00   0.319    -.0429383    .1315639
+             |
+     rep#ccd |
+        1 1  |   -.043566   .0644624    -0.68   0.499    -.1701153    .0829834
+             |
+       _cons |   .8056872   .0193127    41.72   0.000     .7677734     .843601
+------------------------------------------------------------------------------
+(est9 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{747}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      747}"
+
+. * Regression for the pooled survey questions
+. eststo: reghdfe item i.rep##i.ccd, absorb(item_type) vce(cluster id)
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =      6,893
+Absorbing 1 HDFE group                            F(   3,    793) =     139.71
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3427
+                                                  Adj R-squared   =     0.3416
+                                                  Within R-sq.    =     0.1209
+Number of clusters (id)      =        794         Root MSE        =     0.3498
+
+                                   (Std. Err. adjusted for 794 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2810319   .0169727    16.56   0.000     .2477152    .3143486
+       1.ccd |  -.0580791   .0096445    -6.02   0.000    -.0770108   -.0391475
+             |
+     rep#ccd |
+        1 1  |  -.1709851   .0337784    -5.06   0.000    -.2372907   -.1046795
+             |
+       _cons |   .1760361   .0072941    24.13   0.000     .1617181    .1903541
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+   item_type |         9           0           9     |
+-----------------------------------------------------+
+(est10 stored)
+
+.         estadd local itemFE "\multicolumn{1}{c}{Yes}"
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+.         estadd local items 9
+
+added macro:
+              e(items) : "9"
+
+.         estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{794}"
+
+.         local nobs: display %9.0fc `e(N)'
+
+.         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    6,893}"
+
+. 
+. * Store LaTeX fragment
+. #delimit;
+delimiter now ;
+. esttab using $tabsavedir/confidence-scoring-study1-fragment.tex, 
+>         keep(1.rep 1.ccd 1.rep#1.ccd _cons)
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         varwidth(15)
+>         modelwidth(6)   
+>         star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>         obslast
+>         label
+>         nobase  
+>         noobs
+>         nomtitle        
+>         coeflabel(
+>                 1.rep "Congenial"
+>                 1.ccd "Confidence scoring (CS)"
+>                 1.rep#1.ccd "Congenial $\times$ CS"
+>                 _cons "Constant"
+>                 )       
+>         scalar(
+>                 "r2 R$^2$" 
+>                 "itemFE Survey item FE"
+>                 "items Items"
+>                 "Nrespondents Respondents"
+>                 "nobs Respondent-items"
+>                 )       
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         fragment booktabs replace        
+>         ;
+(output written to D:/partisan-gaps/tabs/confidence-scoring-study1-fragment.tex)
+
+. #delimit cr     
+delimiter now cr
+. 
+. 
+. /*
+> ========================================================
+> * Confidence coding vs each of the four other conditions
+> ========================================================
+> */
+. foreach ix_survey in 1 3 4 5 {
+  2.         * Name the subgroups for file naming later
+.         if `ix_survey'==1 {
+  3.                 local subname = "imc-14k"
+  4.         }
+  5.         else if  `ix_survey'==3 {
+  6.                 local subname = "fsr-fsr"
+  7.         }
+  8.         else if  `ix_survey'==4 {
+  9.                 local subname = "ida-ips"
+ 10.         }       
+ 11.         else if  `ix_survey'==5 {
+ 12.                 local subname = "cud-rw"
+ 13.         }       
+ 14.         preserve
+ 15.         drop if (survey!=2) & (survey!=`ix_survey')
+ 16.         
+.         * Regressions for each of nine survey questions
+.         eststo clear
+ 17.         foreach item_type in $items {
+ 18.                 eststo: reg item i.rep##i.ccd if item_type=="`item_type'", vce(cluster id)
+ 19.                         estadd local itemFE "\multicolumn{1}{c}{No}"
+ 20.                         estadd local items 1
+ 21.                         estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
+ 22.                         local nobs: display %9.0fc `e(N)'
+ 23.                         estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+ 24.         }
+ 25.         * Regression for the pooled survey questions
+.         eststo: reghdfe item i.rep##i.ccd, absorb(item_type) vce(cluster id)
+ 26.                 estadd local itemFE "\multicolumn{1}{c}{Yes}"
+ 27.                 estadd local items 9
+ 28.                 estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
+ 29.                 local nobs: display %9.0fc `e(N)'
+ 30.                 estadd local nobs "\multicolumn{1}{c}{`nobs'}"
+ 31.         restore
+ 32. 
+.         * Store LaTeX fragment
+.         #delimit;
+delimiter now ;
+.         esttab using $tabsavedir/confidence-scoring-study1-ccd-`subname'-fragment.tex, 
+>                 keep(1.rep 1.ccd 1.rep#1.ccd _cons)
+>                 b(%9.3fc)
+>                 se(%9.3fc)
+>                 varwidth(15)
+>                 modelwidth(6)   
+>                 star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
+>                 obslast
+>                 label
+>                 nobase  
+>                 noobs
+>                 nomtitle        
+>                 coeflabel(
+>                         1.rep "Congenial"
+>                         1.ccd "Confidence scoring (CS)"
+>                         1.rep#1.ccd "Congenial $\times$ CS"
+>                         _cons "Constant"
+>                         )       
+>                 scalar(
+>                         "r2 R$^2$" 
+>                         "itemFE Survey item FE"
+>                         "items Items"
+>                         "Nrespondents Respondents"
+>                         "nobs Respondent-items"
+>                         )       
+>                 alignment(D{.}{.}{-1})
+>                 substitute(\_ _)
+>                 fragment booktabs replace        
+>                 ;
+ 33.         #delimit cr     
+delimiter now cr
+. }
+(4221 observations deleted)
+
+Linear regression                                      Number of obs =     315
+                                                       F(  3,   314) =    4.02
+                                                       Prob > F      =  0.0079
+                                                       R-squared     =  0.0510
+                                                       Root MSE      =  .26501
+
+                                   (Std. Err. adjusted for 315 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .0864362   .0571093     1.51   0.131    -.0259291    .1988014
+       1.ccd |  -.0366379   .0273836    -1.34   0.182    -.0905165    .0172407
+             |
+     rep#ccd |
+        1 1  |   .0877018   .0867923     1.01   0.313    -.0830661    .2584697
+             |
+       _cons |      .0625   .0230193     2.72   0.007     .0172085    .1077915
+------------------------------------------------------------------------------
+(est1 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{315}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      315}"
+
+Linear regression                                      Number of obs =     305
+                                                       F(  3,   304) =   10.29
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.0843
+                                                       Root MSE      =  .31811
+
+                                   (Std. Err. adjusted for 305 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1639438   .0745548     2.20   0.029      .017235    .3106526
+       1.ccd |  -.1155799   .0348833    -3.31   0.001    -.1842233   -.0469366
+             |
+     rep#ccd |
+        1 1  |   .0068968   .0996334     0.07   0.945    -.1891616    .2029552
+             |
+       _cons |   .1339286   .0323945     4.13   0.000     .0701828    .1976744
+------------------------------------------------------------------------------
+(est2 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{305}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      305}"
+
+Linear regression                                      Number of obs =     259
+                                                       F(  2,   258) =       .
+                                                       Prob > F      =       .
+                                                       R-squared     =  0.1367
+                                                       Root MSE      =  .35164
+
+                                   (Std. Err. adjusted for 259 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2558891    .080995     3.16   0.002     .0963936    .4153845
+       1.ccd |  -.1696429   .0357414    -4.75   0.000    -.2400248   -.0992609
+             |
+     rep#ccd |
+        1 1  |  -.1088302   .1015246    -1.07   0.285    -.3087527    .0910922
+             |
+       _cons |   .1696429   .0357414     4.75   0.000     .0992609    .2400248
+------------------------------------------------------------------------------
+(est3 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{259}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      259}"
+
+Linear regression                                      Number of obs =     260
+                                                       F(  3,   259) =    3.26
+                                                       Prob > F      =  0.0222
+                                                       R-squared     =  0.0555
+                                                       Root MSE      =  .34599
+
+                                   (Std. Err. adjusted for 260 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2298632   .0737079     3.12   0.002     .0847202    .3750062
+       1.ccd |   .0374748   .0481743     0.78   0.437    -.0573884    .1323381
+             |
+     rep#ccd |
+        1 1  |  -.2232905   .1045385    -2.14   0.034     -.429144   -.0174369
+             |
+       _cons |   .0892857   .0271544     3.29   0.001     .0358143    .1427572
+------------------------------------------------------------------------------
+(est4 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{260}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      260}"
+
+Linear regression                                      Number of obs =     315
+                                                       F(  3,   314) =   24.82
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.3135
+                                                       Root MSE      =  .29179
+
+                                   (Std. Err. adjusted for 315 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .5119681   .0761442     6.72   0.000     .3621507    .6617855
+       1.ccd |   -.053953   .0245611    -2.20   0.029    -.1022781   -.0056279
+             |
+     rep#ccd |
+        1 1  |  -.2641048   .1040337    -2.54   0.012     -.468796   -.0594137
+             |
+       _cons |      .0625   .0230193     2.72   0.007     .0172085    .1077915
+------------------------------------------------------------------------------
+(est5 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{315}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      315}"
+
+Linear regression                                      Number of obs =     318
+                                                       F(  3,   317) =    7.10
+                                                       Prob > F      =  0.0001
+                                                       R-squared     =  0.1190
+                                                       Root MSE      =  .27193
+
+                                   (Std. Err. adjusted for 318 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2298632   .0736031     3.12   0.002      .085051    .3746755
+       1.ccd |  -.0629699   .0310305    -2.03   0.043    -.1240217   -.0019181
+             |
+     rep#ccd |
+        1 1  |  -.2339568   .0783201    -2.99   0.003    -.3880498   -.0798638
+             |
+       _cons |   .0892857   .0271158     3.29   0.001     .0359361    .1426353
+------------------------------------------------------------------------------
+(est6 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{318}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      318}"
+
+Linear regression                                      Number of obs =     316
+                                                       F(  3,   315) =    5.56
+                                                       Prob > F      =  0.0010
+                                                       R-squared     =  0.0589
+                                                       Root MSE      =   .3064
+
+                                   (Std. Err. adjusted for 316 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1571049   .0699867     2.24   0.025     .0194044    .2948053
+       1.ccd |     -.0625    .033352    -1.87   0.062    -.1281209    .0031209
+             |
+     rep#ccd |
+        1 1  |  -.0150414   .0921927    -0.16   0.871    -.1964327      .16635
+             |
+       _cons |   .0982143   .0283006     3.47   0.001     .0425321    .1538965
+------------------------------------------------------------------------------
+(est7 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{316}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      316}"
+
+Linear regression                                      Number of obs =     306
+                                                       F(  3,   305) =    3.25
+                                                       Prob > F      =  0.0220
+                                                       R-squared     =  0.0464
+                                                       Root MSE      =  .21223
+
+                                   (Std. Err. adjusted for 306 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .0953647   .0564916     1.69   0.092     -.015798    .2065274
+       1.ccd |  -.0440476    .023446    -1.88   0.061    -.0901841    .0020889
+             |
+     rep#ccd |
+        1 1  |   -.081079   .0619924    -1.31   0.192     -.203066     .040908
+             |
+       _cons |   .0535714    .021417     2.50   0.013     .0114276    .0957152
+------------------------------------------------------------------------------
+(est8 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{306}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      306}"
+
+Linear regression                                      Number of obs =     278
+                                                       F(  3,   277) =    6.89
+                                                       Prob > F      =  0.0002
+                                                       R-squared     =  0.0666
+                                                       Root MSE      =  .37947
+
+                                   (Std. Err. adjusted for 278 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2397416   .0566141     4.23   0.000     .1282932    .3511901
+       1.ccd |   .1535714   .0594324     2.58   0.010     .0365748     .270568
+             |
+     rep#ccd |
+        1 1  |  -.1666647   .0816665    -2.04   0.042    -.3274305    -.005899
+             |
+       _cons |   .6964286    .043763    15.91   0.000     .6102783    .7825788
+------------------------------------------------------------------------------
+(est9 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{278}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      278}"
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,672
+Absorbing 1 HDFE group                            F(   3,    324) =      28.72
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3632
+                                                  Adj R-squared   =     0.3606
+                                                  Within R-sq.    =     0.0757
+Number of clusters (id)      =        325         Root MSE        =     0.3107
+
+                                   (Std. Err. adjusted for 325 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2189083   .0329029     6.65   0.000     .1541779    .2836387
+       1.ccd |  -.0415918   .0154584    -2.69   0.008    -.0720033   -.0111804
+             |
+     rep#ccd |
+        1 1  |  -.1086911    .044079    -2.47   0.014    -.1954083   -.0219739
+             |
+       _cons |   .1554383   .0140049    11.10   0.000     .1278862    .1829903
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+   item_type |         9           0           9     |
+-----------------------------------------------------+
+(est10 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{325}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,672}"
+(output written to D:/partisan-gaps/tabs/confidence-scoring-study1-ccd-imc-14k-fragment.tex)
+(4086 observations deleted)
+
+Linear regression                                      Number of obs =     330
+                                                       F(  3,   329) =    4.45
+                                                       Prob > F      =  0.0044
+                                                       R-squared     =  0.0680
+                                                       Root MSE      =  .25223
+
+                                   (Std. Err. adjusted for 330 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |    .126816   .0521456     2.43   0.016     .0242352    .2293968
+       1.ccd |  -.0080362   .0223783    -0.36   0.720    -.0520589    .0359864
+             |
+     rep#ccd |
+        1 1  |    .047322   .0835948     0.57   0.572    -.1171258    .2117697
+             |
+       _cons |   .0338983   .0167613     2.02   0.044     .0009255    .0668711
+------------------------------------------------------------------------------
+(est1 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{330}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      330}"
+
+Linear regression                                      Number of obs =     320
+                                                       F(  3,   319) =   13.75
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.1463
+                                                       Root MSE      =  .31711
+
+                                   (Std. Err. adjusted for 320 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2911622   .0713946     4.08   0.000     .1506985     .431626
+       1.ccd |  -.0833463   .0308434    -2.70   0.007    -.1440285   -.0226641
+             |
+     rep#ccd |
+        1 1  |  -.1203217   .0972772    -1.24   0.217    -.3117076    .0710643
+             |
+       _cons |   .1016949   .0279996     3.63   0.000     .0466077    .1567821
+------------------------------------------------------------------------------
+(est2 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{320}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      320}"
+
+Linear regression                                      Number of obs =     274
+                                                       F(  2,   273) =       .
+                                                       Prob > F      =       .
+                                                       R-squared     =  0.1174
+                                                       Root MSE      =  .31971
+
+                                   (Std. Err. adjusted for 274 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2375908   .0696276     3.41   0.001     .1005155    .3746661
+       1.ccd |  -.1016949   .0280294    -3.63   0.000    -.1568762   -.0465137
+             |
+     rep#ccd |
+        1 1  |   -.090532   .0926922    -0.98   0.330    -.2730144    .0919505
+             |
+       _cons |   .1016949   .0280294     3.63   0.000     .0465137    .1568762
+------------------------------------------------------------------------------
+(est3 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{274}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      274}"
+
+Linear regression                                      Number of obs =     275
+                                                       F(  3,   274) =    2.30
+                                                       Prob > F      =  0.0778
+                                                       R-squared     =  0.0326
+                                                       Root MSE      =   .3381
+
+                                   (Std. Err. adjusted for 275 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1652542   .0637547     2.59   0.010      .039743    .2907655
+       1.ccd |   .0420148   .0474245     0.89   0.376    -.0513479    .1353775
+             |
+     rep#ccd |
+        1 1  |  -.1586815   .0977518    -1.62   0.106    -.3511216    .0337586
+             |
+       _cons |   .0847458   .0258268     3.28   0.001     .0339016    .1355899
+------------------------------------------------------------------------------
+(est4 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{275}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      275}"
+
+Linear regression                                      Number of obs =     330
+                                                       F(  3,   329) =   23.90
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.2020
+                                                       Root MSE      =  .33001
+
+                                   (Std. Err. adjusted for 330 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3550242   .0739268     4.80   0.000     .2095954     .500453
+       1.ccd |  -.1185716   .0320186    -3.70   0.000    -.1815586   -.0555847
+             |
+     rep#ccd |
+        1 1  |   -.107161   .1024075    -1.05   0.296     -.308617    .0942951
+             |
+       _cons |   .1271186   .0308524     4.12   0.000     .0664257    .1878116
+------------------------------------------------------------------------------
+(est5 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{330}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      330}"
+
+Linear regression                                      Number of obs =     333
+                                                       F(  3,   332) =    4.57
+                                                       Prob > F      =  0.0038
+                                                       R-squared     =  0.0810
+                                                       Root MSE      =  .24941
+
+                                   (Std. Err. adjusted for 333 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1728208   .0608312     2.84   0.005     .0531576     .292484
+       1.ccd |  -.0330062   .0265736    -1.24   0.215      -.08528    .0192675
+             |
+     rep#ccd |
+        1 1  |  -.1769144    .066458    -2.66   0.008    -.3076462   -.0461826
+             |
+       _cons |    .059322   .0218782     2.71   0.007     .0162847    .1023594
+------------------------------------------------------------------------------
+(est6 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{333}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      333}"
+
+Linear regression                                      Number of obs =     331
+                                                       F(  3,   330) =   10.52
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.0935
+                                                       Root MSE      =  .34019
+
+                                   (Std. Err. adjusted for 331 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2130751   .0721651     2.95   0.003     .0711133    .3550368
+       1.ccd |  -.1083535   .0370007    -2.93   0.004    -.1811405   -.0355665
+             |
+     rep#ccd |
+        1 1  |  -.0710116    .093846    -0.76   0.450    -.2556235    .1136003
+             |
+       _cons |   .1440678   .0325239     4.43   0.000     .0800875    .2080481
+------------------------------------------------------------------------------
+(est7 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{331}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      331}"
+
+Linear regression                                      Number of obs =     321
+                                                       F(  3,   320) =    4.17
+                                                       Prob > F      =  0.0064
+                                                       R-squared     =  0.0521
+                                                       Root MSE      =   .2254
+
+                                   (Std. Err. adjusted for 321 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1013923   .0540179     1.88   0.061    -.0048828    .2076673
+       1.ccd |  -.0497982   .0238715    -2.09   0.038     -.096763   -.0028334
+             |
+     rep#ccd |
+        1 1  |  -.0871065   .0597435    -1.46   0.146    -.2046461    .0304331
+             |
+       _cons |    .059322   .0218832     2.71   0.007      .016269    .1023751
+------------------------------------------------------------------------------
+(est8 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{321}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      321}"
+
+Linear regression                                      Number of obs =     293
+                                                       F(  3,   292) =    1.82
+                                                       Prob > F      =  0.1428
+                                                       R-squared     =  0.0200
+                                                       Root MSE      =   .2883
+
+                                   (Std. Err. adjusted for 293 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |  -.0562954   .0463312    -1.22   0.225    -.1474808      .03489
+       1.ccd |  -.0991525   .0450607    -2.20   0.029    -.1878375   -.0104675
+             |
+     rep#ccd |
+        1 1  |   .1293723   .0748883     1.73   0.085    -.0180168    .2767615
+             |
+       _cons |   .9491525   .0203632    46.61   0.000     .9090752    .9892298
+------------------------------------------------------------------------------
+(est9 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{293}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      293}"
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,807
+Absorbing 1 HDFE group                            F(   3,    339) =      34.24
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.4276
+                                                  Adj R-squared   =     0.4253
+                                                  Within R-sq.    =     0.0720
+Number of clusters (id)      =        340         Root MSE        =     0.3009
+
+                                   (Std. Err. adjusted for 340 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1785378   .0293036     6.09   0.000     .1208979    .2361777
+       1.ccd |  -.0649507   .0154655    -4.20   0.000    -.0953711   -.0345303
+             |
+     rep#ccd |
+        1 1  |  -.0690187   .0414023    -1.67   0.096    -.1504564    .0124191
+             |
+       _cons |   .1789026   .0140438    12.74   0.000     .1512786    .2065266
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+   item_type |         9           0           9     |
+-----------------------------------------------------+
+(est10 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{340}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,807}"
+(output written to D:/partisan-gaps/tabs/confidence-scoring-study1-ccd-fsr-fsr-fragment.tex)
+(4356 observations deleted)
+
+Linear regression                                      Number of obs =     300
+                                                       F(  3,   299) =    9.77
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.1693
+                                                       Root MSE      =  .28324
+
+                                   (Std. Err. adjusted for 300 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3280851   .0707347     4.64   0.000     .1888842     .467286
+       1.ccd |  -.0060528   .0235211    -0.26   0.797    -.0523408    .0402351
+             |
+     rep#ccd |
+        1 1  |  -.1539472   .0963201    -1.60   0.111    -.3434984    .0356041
+             |
+       _cons |   .0319149   .0182517     1.75   0.081    -.0040033     .067833
+------------------------------------------------------------------------------
+(est1 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{300}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      300}"
+
+Linear regression                                      Number of obs =     290
+                                                       F(  3,   289) =   17.30
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.2355
+                                                       Root MSE      =  .30985
+
+                                   (Std. Err. adjusted for 290 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .4148936   .0768755     5.40   0.000     .2635867    .5662005
+       1.ccd |  -.0667578   .0317408    -2.10   0.036    -.1292301   -.0042854
+             |
+     rep#ccd |
+        1 1  |  -.2440531   .1013965    -2.41   0.017    -.4436222   -.0444839
+             |
+       _cons |   .0851064   .0289813     2.94   0.004     .0280651    .1421476
+------------------------------------------------------------------------------
+(est2 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{290}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      290}"
+
+Linear regression                                      Number of obs =     244
+                                                       F(  2,   243) =       .
+                                                       Prob > F      =       .
+                                                       R-squared     =  0.3160
+                                                       Root MSE      =  .34618
+
+                                   (Std. Err. adjusted for 244 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .4897872    .078041     6.28   0.000      .336064    .6435104
+       1.ccd |  -.1702128   .0390845    -4.35   0.000    -.2472005   -.0932251
+             |
+     rep#ccd |
+        1 1  |  -.3427284   .0992022    -3.45   0.001    -.5381344   -.1473224
+             |
+       _cons |   .1702128   .0390845     4.35   0.000     .0932251    .2472005
+------------------------------------------------------------------------------
+(est3 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{244}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      244}"
+
+Linear regression                                      Number of obs =     245
+                                                       F(  3,   244) =    4.82
+                                                       Prob > F      =  0.0028
+                                                       R-squared     =  0.0823
+                                                       Root MSE      =  .38337
+
+                                   (Std. Err. adjusted for 245 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2710638   .0795216     3.41   0.001     .1144273    .4277003
+       1.ccd |  -.0221756   .0543668    -0.41   0.684    -.1292638    .0849126
+             |
+     rep#ccd |
+        1 1  |  -.2644911   .1087401    -2.43   0.016      -.47868   -.0503021
+             |
+       _cons |   .1489362   .0370247     4.02   0.000     .0760073     .221865
+------------------------------------------------------------------------------
+(est4 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{245}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      245}"
+
+Linear regression                                      Number of obs =     300
+                                                       F(  3,   299) =   30.32
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.3595
+                                                       Root MSE      =  .29537
+
+                                   (Std. Err. adjusted for 300 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .5561702   .0736204     7.55   0.000     .4112904      .70105
+       1.ccd |  -.0552828   .0267898    -2.06   0.040    -.1080032   -.0025623
+             |
+     rep#ccd |
+        1 1  |   -.308307   .1022167    -3.02   0.003    -.5094623   -.1071517
+             |
+       _cons |   .0638298   .0253828     2.51   0.012     .0138782    .1137814
+------------------------------------------------------------------------------
+(est5 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{300}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      300}"
+
+Linear regression                                      Number of obs =     303
+                                                       F(  3,   302) =    7.49
+                                                       Prob > F      =  0.0001
+                                                       R-squared     =  0.1261
+                                                       Root MSE      =  .27685
+
+                                   (Std. Err. adjusted for 303 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2242553   .0730998     3.07   0.002     .0804059    .3681048
+       1.ccd |  -.0694289   .0340754    -2.04   0.042    -.1364842   -.0023736
+             |
+     rep#ccd |
+        1 1  |  -.2283489   .0778503    -2.93   0.004    -.3815466   -.0751512
+             |
+       _cons |   .0957447   .0305509     3.13   0.002      .035625    .1558644
+------------------------------------------------------------------------------
+(est6 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{303}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      303}"
+
+Linear regression                                      Number of obs =     301
+                                                       F(  3,   300) =   55.32
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.4349
+                                                       Root MSE      =  .30785
+
+                                   (Std. Err. adjusted for 301 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .6829787   .0660085    10.35   0.000     .5530803    .8128771
+       1.ccd |   -.081307   .0377579    -2.15   0.032    -.1556109    -.007003
+             |
+     rep#ccd |
+        1 1  |  -.5409152   .0892233    -6.06   0.000     -.716498   -.3653325
+             |
+       _cons |   .1170213   .0333771     3.51   0.001     .0513384    .1827042
+------------------------------------------------------------------------------
+(est7 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{301}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      301}"
+
+Linear regression                                      Number of obs =     291
+                                                       F(  3,   290) =    4.41
+                                                       Prob > F      =  0.0047
+                                                       R-squared     =  0.0816
+                                                       Root MSE      =  .22632
+
+                                   (Std. Err. adjusted for 291 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .1468085   .0615454     2.39   0.018     .0256763    .2679408
+       1.ccd |  -.0436677   .0251858    -1.73   0.084    -.0932379    .0059025
+             |
+     rep#ccd |
+        1 1  |  -.1325228   .0666336    -1.99   0.048    -.2636695   -.0013761
+             |
+       _cons |   .0531915   .0233074     2.28   0.023     .0073184    .0990646
+------------------------------------------------------------------------------
+(est8 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{291}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      291}"
+
+Linear regression                                      Number of obs =     263
+                                                       F(  3,   262) =    1.08
+                                                       Prob > F      =  0.3589
+                                                       R-squared     =  0.0117
+                                                       Root MSE      =  .30897
+
+                                   (Std. Err. adjusted for 263 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |    .046383   .0466088     1.00   0.321    -.0453925    .1381584
+       1.ccd |   -.043617   .0514327    -0.85   0.397     -.144891     .057657
+             |
+     rep#ccd |
+        1 1  |   .0266939   .0750968     0.36   0.723    -.1211761    .1745639
+             |
+       _cons |    .893617   .0320461    27.89   0.000     .8305162    .9567178
+------------------------------------------------------------------------------
+(est9 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{263}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      263}"
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,537
+Absorbing 1 HDFE group                            F(   3,    309) =      58.41
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.4363
+                                                  Adj R-squared   =     0.4338
+                                                  Within R-sq.    =     0.1786
+Number of clusters (id)      =        310         Root MSE        =     0.3137
+
+                                   (Std. Err. adjusted for 310 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3511584   .0350202    10.03   0.000     .2822501    .4200667
+       1.ccd |  -.0625077   .0149322    -4.19   0.000    -.0918894   -.0331261
+             |
+     rep#ccd |
+        1 1  |  -.2428636   .0456584    -5.32   0.000    -.3327044   -.1530229
+             |
+       _cons |   .1771933   .0135245    13.10   0.000     .1505815     .203805
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+   item_type |         9           0           9     |
+-----------------------------------------------------+
+(est10 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{310}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,537}"
+(output written to D:/partisan-gaps/tabs/confidence-scoring-study1-ccd-ida-ips-fragment.tex)
+(4293 observations deleted)
+
+Linear regression                                      Number of obs =     307
+                                                       F(  3,   306) =   16.10
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.2623
+                                                       Root MSE      =  .27816
+
+                                   (Std. Err. adjusted for 307 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .4426261   .0695783     6.36   0.000     .3057137    .5795385
+       1.ccd |    .015658   .0180131     0.87   0.385    -.0197872    .0511032
+             |
+     rep#ccd |
+        1 1  |  -.2684882   .0954672    -2.81   0.005    -.4563435   -.0806328
+             |
+       _cons |   .0102041   .0102187     1.00   0.319    -.0099037    .0303118
+------------------------------------------------------------------------------
+(est1 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{307}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      307}"
+
+Linear regression                                      Number of obs =     297
+                                                       F(  3,   296) =   39.33
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.3796
+                                                       Root MSE      =  .31229
+
+                                   (Std. Err. adjusted for 297 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .5858683   .0711435     8.24   0.000     .4458571    .7258795
+       1.ccd |  -.0938963   .0346147    -2.71   0.007    -.1620185   -.0257741
+             |
+     rep#ccd |
+        1 1  |  -.4150277   .0971152    -4.27   0.000    -.6061514    -.223904
+             |
+       _cons |   .1122449   .0321042     3.50   0.001     .0490636    .1754262
+------------------------------------------------------------------------------
+(est2 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{297}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      297}"
+
+Linear regression                                      Number of obs =     251
+                                                       F(  2,   250) =       .
+                                                       Prob > F      =       .
+                                                       R-squared     =  0.3079
+                                                       Root MSE      =  .36169
+
+                                   (Std. Err. adjusted for 251 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .4649596   .0769624     6.04   0.000     .3133823    .6165368
+       1.ccd |  -.2142857   .0417834    -5.13   0.000    -.2965781   -.1319933
+             |
+     rep#ccd |
+        1 1  |  -.3179007    .098347    -3.23   0.001    -.5115951   -.1242064
+             |
+       _cons |   .2142857   .0417834     5.13   0.000     .1319933    .2965781
+------------------------------------------------------------------------------
+(est3 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{251}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      251}"
+
+Linear regression                                      Number of obs =     252
+                                                       F(  3,   251) =    6.31
+                                                       Prob > F      =  0.0004
+                                                       R-squared     =  0.0790
+                                                       Root MSE      =  .41436
+
+                                   (Std. Err. adjusted for 252 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2079322   .0816566     2.55   0.011     .0471127    .3687517
+       1.ccd |  -.1181374   .0591743    -2.00   0.047    -.2346788    -.001596
+             |
+     rep#ccd |
+        1 1  |  -.2013595   .1102995    -1.83   0.069    -.4185899     .015871
+             |
+       _cons |    .244898   .0437882     5.59   0.000     .1586589     .331137
+------------------------------------------------------------------------------
+(est4 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{252}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      252}"
+
+Linear regression                                      Number of obs =     307
+                                                       F(  3,   306) =   37.90
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.3690
+                                                       Root MSE      =  .30662
+
+                                   (Std. Err. adjusted for 307 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .5685406   .0717623     7.92   0.000     .4273306    .7097507
+       1.ccd |  -.0832897   .0305887    -2.72   0.007    -.1434805    -.023099
+             |
+     rep#ccd |
+        1 1  |  -.3206774    .100879    -3.18   0.002    -.5191817   -.1221731
+             |
+       _cons |   .0918367   .0293647     3.13   0.002     .0340545     .149619
+------------------------------------------------------------------------------
+(est5 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{307}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      307}"
+
+Linear regression                                      Number of obs =     310
+                                                       F(  3,   309) =    7.46
+                                                       Prob > F      =  0.0001
+                                                       R-squared     =  0.1867
+                                                       Root MSE      =  .24717
+
+                                   (Std. Err. adjusted for 310 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3090104   .0677773     4.56   0.000      .175647    .4423738
+       1.ccd |  -.0042965   .0231186    -0.19   0.853    -.0497862    .0411933
+             |
+     rep#ccd |
+        1 1  |   -.313104   .0728741    -4.30   0.000    -.4564962   -.1697118
+             |
+       _cons |   .0306122   .0175147     1.75   0.081     -.003851    .0650755
+------------------------------------------------------------------------------
+(est6 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{310}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      310}"
+
+Linear regression                                      Number of obs =     308
+                                                       F(  3,   307) =   30.39
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.2874
+                                                       Root MSE      =  .34273
+
+                                   (Std. Err. adjusted for 308 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .4971121   .0754962     6.58   0.000     .3485565    .6456676
+       1.ccd |   -.127551   .0415193    -3.07   0.002    -.2092495   -.0458526
+             |
+     rep#ccd |
+        1 1  |  -.3550486   .0964481    -3.68   0.000    -.5448316   -.1652655
+             |
+       _cons |   .1632653   .0375808     4.34   0.000     .0893167    .2372139
+------------------------------------------------------------------------------
+(est7 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{308}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      308}"
+
+Linear regression                                      Number of obs =     298
+                                                       F(  3,   297) =    6.30
+                                                       Prob > F      =  0.0004
+                                                       R-squared     =  0.0592
+                                                       Root MSE      =  .26062
+
+                                   (Std. Err. adjusted for 298 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .0473623    .061705     0.77   0.443     -.074072    .1687967
+       1.ccd |  -.1129252   .0346765    -3.26   0.001     -.181168   -.0446823
+             |
+     rep#ccd |
+        1 1  |  -.0330766   .0667794    -0.50   0.621    -.1644974    .0983442
+             |
+       _cons |    .122449   .0333377     3.67   0.000      .056841     .188057
+------------------------------------------------------------------------------
+(est8 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{298}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      298}"
+
+Linear regression                                      Number of obs =     270
+                                                       F(  3,   269) =    6.86
+                                                       Prob > F      =  0.0002
+                                                       R-squared     =  0.0761
+                                                       Root MSE      =  .37905
+
+                                   (Std. Err. adjusted for 270 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .2510589   .0601168     4.18   0.000     .1326997    .3694182
+       1.ccd |   .1765306   .0624133     2.83   0.005     .0536499    .2994113
+             |
+     rep#ccd |
+        1 1  |   -.177982   .0841415    -2.12   0.035    -.3436416   -.0123224
+             |
+       _cons |   .6734694   .0477253    14.11   0.000     .5795067    .7674321
+------------------------------------------------------------------------------
+(est9 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{No}"
+
+added macro:
+              e(items) : "1"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{270}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{      270}"
+(MWFE estimator converged in 1 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,600
+Absorbing 1 HDFE group                            F(   3,    316) =     101.05
+Statistics robust to heteroskedasticity           Prob > F        =     0.0000
+                                                  R-squared       =     0.3771
+                                                  Adj R-squared   =     0.3745
+                                                  Within R-sq.    =     0.1814
+Number of clusters (id)      =        317         Root MSE        =     0.3335
+
+                                   (Std. Err. adjusted for 317 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+        item |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |   .3749412   .0298373    12.57   0.000     .3162362    .4336461
+       1.ccd |  -.0632818   .0175598    -3.60   0.000    -.0978307   -.0287329
+             |
+     rep#ccd |
+        1 1  |  -.2643567   .0418157    -6.32   0.000    -.3466292   -.1820843
+             |
+       _cons |   .1776425   .0165357    10.74   0.000     .1451085    .2101766
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+   item_type |         9           0           9     |
+-----------------------------------------------------+
+(est10 stored)
+
+added macro:
+             e(itemFE) : "\multicolumn{1}{c}{Yes}"
+
+added macro:
+              e(items) : "9"
+
+added macro:
+       e(Nrespondents) : "\multicolumn{1}{c}{317}"
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    2,600}"
+(output written to D:/partisan-gaps/tabs/confidence-scoring-study1-ccd-cud-rw-fragment.tex)
+
+. 
+end of do-file
+
+. * Figures in SI 1.1
+. do ./mturk/confidence-scoring-barplots.do
+
+. 
+. * -----------------------------------------------------------------------------
+. * Program Setup
+. * -----------------------------------------------------------------------------
+. cls                                     // Clear results window
+
+. clear all               // Start with a clean slate
+
+. set more off            // Disable partitioned output
+
+. macro drop _all         // Clear all macros to avoid namespace conflicts
+
+. set linesize 120        // Line size limit to make output more readable, affects logs
+
+. 
+. local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+
+. cd `rootdir'
+D:\partisan-gaps
+
+. 
+. cd scripts/Stata
+D:\partisan-gaps\scripts\Stata
+
+. 
+. cap log close
