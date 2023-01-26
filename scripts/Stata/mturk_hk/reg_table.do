@@ -22,7 +22,7 @@ foreach q_item in `q_items' {
 		local nobs: display %9.0fc `e(N)'
 		estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 }
-eststo: qui reghdfe responses congenial##survey if `close_relscore', absorb(q_item) cluster(respondent) 
+eststo: qui reghdfe responses i.congenial##i.survey if `close_relscore', absorb(q_item) cluster(respondent) 
 	estadd local itemFE "\multicolumn{1}{c}{Yes}"
 	estadd local items 4
 	estadd local Nrespondents = "\multicolumn{1}{c}{`e(N_clust)'}"
