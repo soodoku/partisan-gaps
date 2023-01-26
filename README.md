@@ -81,8 +81,5 @@ Most of the code uses [R](https://www.r-project.org/) and [Stata](https://www.st
 
 ### Authors
 
-Daniel Weitzel<br>
-Gaurav Sood<br>
-Lucas Shen
-
+Lucas Shen, Gaurav Sood, and Daniel Weitzel
 
