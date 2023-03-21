@@ -5,6 +5,8 @@ cd scripts/Stata
 import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
 do ./mturk/preamble.do
 
+preserve
+
 * Reshape from wide to long to stack participant-item observations
 foreach item of varlist $items {
 	rename `item' item`item'
@@ -21,7 +23,6 @@ mat coefmat = e(b)
 mat list coefmat
 local baseline = coefmat[1, 2] /* 1.rep */
 
-// preserve
 regsave
 drop if var=="_cons"
 drop if strpos(var, "0b.rep")
@@ -113,3 +114,5 @@ local graphsavedir ./figures
 		;
 	#delimit cr	
 graph export $figsavedir/mturk-pgag-surveyarms.pdf, replace	
+
+restore
