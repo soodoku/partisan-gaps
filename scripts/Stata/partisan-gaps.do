@@ -39,8 +39,6 @@ do ./mturk/preamble.do
 * Figure 1
 do ./mturk/fig-partisan-gap.do
 do ./mturk/fig-partisan-gap-ips-24k.do
-* Figure 5
-do ./mturk/fig-partisan-gap-mc-24k.do
 
 *** Balance tests (IPS/IDA as base) 
 do ./mturk/balance-tests.do // store estimates only
@@ -51,12 +49,27 @@ do ./mturk/reg-table.do
 * Figure 2
 do ./mturk/barplot.do
 
+**** Figure 5: IMC/14k vs CCD/24k
+do ./mturk/fig-partisan-gap-imc-24k.do
+
 **** Reg results for comparing 24k/CCD (Confidence scoring) with the four other 
 ****  multiple choice conditions (IPS/IDA, RW/CUD, FSR/FSR, 14K/IMC)
+* (In appendix)
 * Tables in SI 1.1
 do ./mturk/confidence-scoring-reg-tables.do
 * Figures in SI 1.1
 do ./mturk/confidence-scoring-barplots.do
+
+**** Figure: All multiple choice vs CCD/24k
+import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
+do ./mturk/preamble.do
+
+do ./mturk/fig-partisan-gap-mc-24k.do
+
+* Robustness test with CCD threshold = 8 (instead of 10)
+import delimited `rootdir'/data/turk/mturk-recoded-greaterthan7.csv, clear
+do ./mturk/preamble.do
+do ./mturk/fig-partisan-gap-imc-24k-greaterthan7.do
 
 
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
