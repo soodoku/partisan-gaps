@@ -30,40 +30,41 @@ Structure of `scripts/Stata/` folder
 
   ```
   .
-  |-- Makefile
-  |-- README.md
-  |-- ado
-  |   |-- rho_report.ado
-  |   |-- setup.ado
-  |   |-- storespecs.ado
-  |   |-- tictoc.ado
-  |   `-- txt2macro.ado
-  |-- mturk
-  |   |-- balance-tests.do
-  |   |-- barplot.do
-  |   |-- confidence-scoring-barplots.do
-  |   |-- confidence-scoring-reg-tables.do
-  |   |-- fig-partisan-gap-ips-24k.do
-  |   |-- fig-partisan-gap-mc-24k.do
-  |   |-- fig-partisan-gap.do
-  |   |-- preamble.do
-  |   `-- reg-table.do
-  |-- mturk_hk
-  |   |-- barplots.do
-  |   |-- fig-partisan-gap.do
-  |   `-- reg_table.do
-  |-- partisan-gaps-log.txt
-  |-- partisan-gaps.do
-  |-- stata-requirements.txt
-  |-- survey-exp
-  |   |-- deficit-barplots.do
-  |   |-- preamble.do
-  |   |-- reg-table.do
-  |   `-- unemp-barplots.do
-  `-- tx-lyceum
-      |-- preamble.do
-      |-- reg-table.do
-      `-- unemp-barplot.do
+  ├── ado
+  │  ├── setup.ado
+  │  ├── storespecs.ado
+  │  ├── tictoc.ado
+  │  └── txt2macro.ado
+  ├── mturk
+  │  ├── balance-tests.do
+  │  ├── barplot.do
+  │  ├── confidence-scoring-barplots.do
+  │  ├── confidence-scoring-reg-tables.do
+  │  ├── fig-partisan-gap-imc-24k-greaterthan7.do
+  │  ├── fig-partisan-gap-imc-24k.do
+  │  ├── fig-partisan-gap-ips-24k.do
+  │  ├── fig-partisan-gap-mc-24k.do
+  │  ├── fig-partisan-gap.do
+  │  ├── preamble.do
+  │  └── reg-table.do
+  ├── mturk_hk
+  │  ├── barplots.do
+  │  ├── fig-partisan-gap.do
+  │  └── reg_table.do
+  ├── survey-exp
+  │  ├── deficit-barplots.do
+  │  ├── preamble.do
+  │  ├── reg-table.do
+  │  └── unemp-barplots.do
+  ├── tx-lyceum
+  │  ├── preamble.do
+  │  ├── reg-table.do
+  │  └── unemp-barplot.do
+  ├── Makefile
+  ├── partisan-gaps-log.txt
+  ├── partisan-gaps.do
+  ├── README.md
+  └── stata-requirements.txt
   ```
 </p></details><p></p>
 
