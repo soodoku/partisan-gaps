@@ -1,0 +1,1745 @@
+------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\partisan-gaps\scripts\Stata\corr-validity-log.txt
+  log type:  text
+ opened on:  14 Oct 2023, 16:14:06
+
+. 
+. version 13              // Still on version 13 :(
+
+. 
+. global figsavedir `rootdir'/figs
+
+. global tabsavedir `rootdir'/tabs
+
+. adopath ++ ./ado                // Add path to ados
+  [1]              "./ado"
+  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
+  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+
+. 
+. * -----------------------------------------------------------------------------
+. import delimited `rootdir'/data/turk/mturk-recoded.csv
+(344 vars, 1253 obs)
+
+. do ./mturk/preamble.do
+
+. global arms             RW IPS FSR 14k 24k
+
+. global demo     age i.female i.educ i.hisla $races
+
+. 
+. rename v1 id
+
+. label var id "Participant ID"
+
+. 
+. *------------------------------------------------------------------------------
+. *** Response for the 9 items
+. global items    birth religion illegal death increase science fraud mmr deficit
+
+. label define itemResponseLabel 1 "Correct" 0 "Incorrect"
+
+. 
+. foreach var of varlist $items {
+  2.         tempvar _`var'
+  3.         gen `_`var'' = `var'
+  4.         drop `var'
+  5.         gen `var' = (`_`var''=="TRUE") if (`_`var''!="NA")
+  6.         label variable `var' "=1 if response is wrong and congenial to R for `var' item"
+  7.         * If we define it as correct and congenial to D, and then use D as the "congenial dummy". it's going
+.         * to be the same. (Independents dropped)
+.         // replace `var' = 1 - `var'
+.         // label variable `var' "=1 if response is correct and congenial for D for `var' item"
+.         label values `var' itemResponseLabel
+  8. }
+(24 missing values generated)
+(35 missing values generated)
+(113 missing values generated)
+(115 missing values generated)
+(18 missing values generated)
+(12 missing values generated)
+(18 missing values generated)
+(31 missing values generated)
+(82 missing values generated)
+
+. * deficif seems to have been coded differently compared to previous 8 items
+. * https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
+. replace deficit = 1 - deficit 
+(1171 real changes made)
+
+. 
+. rename avg avg_str
+
+. destring avg_str, gen(avg) force
+avg_str contains nonnumeric characters; avg generated as double
+(2 missing values generated)
+
+. label variable avg "Avg of the 9 survey questions"
+
+. 
+. *------------------------------------------------------------------------------
+. *** pid
+. rename pid pid_str
+
+. drop if pid_str =="Something else"
+(46 observations deleted)
+
+. 
+. label define pidLabel 1 "Democrat" 2 "Independent" 3 "Republican"
+
+. encode pid_str, gen(pid) label(pidLabel)
+
+. 
+. fvset base 2 pid // permanently set Independent as base
+
+. 
+. gen rep = (pid_str=="Republican") if !missing(pid_str)
+
+. 
+. 
+. *------------------------------------------------------------------------------
+. *** Demo
+. rename gender gender_str
+
+. label define genderLabel 0 "Male" 1 "Female"
+
+. encode gender_str, gen(female) label(genderLabel)
+
+. 
+. foreach demo in educ hisla race {
+  2.         rename `demo' `demo'_str
+  3.         encode `demo'_str, gen(`demo')
+  4. }
+
+. 
+. gen asian = strmatch(race_str, "Asian*")
+
+. gen black = strmatch(race_str, "Black*")
+
+. gen white = strmatch(race_str, "White*")
+
+. gen others = strmatch(race_str, "Other*")
+
+. global races asian black white others
+
+. 
+. *------------------------------------------------------------------------------
+. *** Survey types
+. encode question_type, gen(survey)
+
+. fvset base 4 survey // permanently set IPS (IDA) as base
+
+. 
+end of do-file
+
+. // =================================================================================
+. 
+. tab interest_1
+
+ interest_1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         27        2.24        2.24
+          1 |         37        3.07        5.30
+          2 |         59        4.89       10.19
+          3 |         55        4.56       14.75
+          4 |         78        6.46       21.21
+          5 |        183       15.16       36.37
+          6 |        138       11.43       47.80
+          7 |        223       18.48       66.28
+          8 |        229       18.97       85.25
+          9 |        109        9.03       94.28
+         10 |         69        5.72      100.00
+------------+-----------------------------------
+      Total |      1,207      100.00
+
+. 
+. tab vote_1
+
+     vote_1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         54        4.47        4.47
+          1 |         37        3.07        7.54
+          2 |         46        3.81       11.35
+          3 |         42        3.48       14.83
+          4 |         28        2.32       17.15
+          5 |        128       10.60       27.75
+          6 |         47        3.89       31.65
+          7 |         76        6.30       37.95
+          8 |        129       10.69       48.63
+          9 |        121       10.02       58.66
+         10 |        499       41.34      100.00
+------------+-----------------------------------
+      Total |      1,207      100.00
+
+. 
+. tab deficit
+
+      =1 if |
+response is |
+  wrong and |
+  congenial |
+   to R for |
+    deficit |
+       item |      Freq.     Percent        Cum.
+------------+-----------------------------------
+  Incorrect |        150       13.29       13.29
+    Correct |        979       86.71      100.00
+------------+-----------------------------------
+      Total |      1,129      100.00
+
+. 
+. tab educ
+
+                             educ |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+       Four year college graduate |        498       41.26       41.26
+High school diploma or equivalent |        118        9.78       51.04
+           No high school diploma |          7        0.58       51.62
+             Post-graduate degree |        194       16.07       67.69
+                     Some college |        390       32.31      100.00
+----------------------------------+-----------------------------------
+                            Total |      1,207      100.00
+
+. 
+. tab survey
+
+     survey |      Freq.     Percent        Cum.
+------------+-----------------------------------
+        14k |        235       19.47       19.47
+        24k |        254       21.04       40.51
+        FSR |        251       20.80       61.31
+        IPS |        239       19.80       81.11
+         RW |        228       18.89      100.00
+------------+-----------------------------------
+      Total |      1,207      100.00
+
+. 
+. // =================================================================================
+. // Coding correct responses (for the four groups: ips rw fsr x14k)
+. * 1 birth
+. local _stem "birth"
+
+. local _correct = "The US"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (strpos(`_original_response', "`_correct'")>0) if ~missing(`_original_respo
+> nse')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. * 14k has a space after "The US" --> "The US "
+. 
+. * 2 religion
+. local _stem "religion"
+
+. local _correct = "Christian"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (`_original_response'=="`_correct'") if ~missing(`_original_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. 
+. * 3 illegal
+. local _stem "illegal"
+
+. local _correct = "not give illegal immigrants"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (strpos(strlower(`_original_response'), "`_correct'")>0) if ~missing(`_orig
+> inal_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. 
+. * 4 death
+. local _stem "death"
+
+. local _correct = "Does not create government panels to make decisions about end-of-life care"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (`_original_response'=="`_correct'") if ~missing(`_original_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. 
+. * 5 increase
+. local _stem "increase"
+
+. local _correct = "human activity"
+
+. foreach qtype in ips rw fsr {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (strpos(strlower(`_original_response'), "`_correct'")>0) if ~missing(`_orig
+> inal_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+
+. * 14k phrases differently
+. * with "Increasing because human activity,..." instead of
+. * with "Increasing because of human activity,..."
+. local _correct = "Increasing because human activity, like burning coal and gasoline"
+
+. local _correct_indicator c`_stem'_x14k
+
+. local _original_response x14k_`_stem'
+
+. cap drop `_correct_indicator'
+
+. gen byte `_correct_indicator' = (`_original_response'=="`_correct'") if ~missing(`_original_response')
+(972 missing values generated)
+
+. 
+. * 6 science
+. local _stem "science"
+
+. local _correct = "Most climate scientists believe that global warming is occurring"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (`_original_response'=="`_correct'") if ~missing(`_original_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. 
+. * 7 fraud
+. local _stem "fraud"
+
+. local _correct = "Did not win the majority of the legally cast votes"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (`_original_response'=="`_correct'") if ~missing(`_original_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. 
+. * 8 mmr
+. local _stem "mmr"
+
+. local _correct = "not cause autism"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (strpos(strlower(`_original_response'), "`_correct'")>0) if ~missing(`_orig
+> inal_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. // * 14k phrases differently
+. // * with "Not cause autism in children" instead of
+. // * with "Does not cause autism is children"
+. 
+. // * fsr phrases differently (correctly)
+. // * with "Not cause autism in children" instead of
+. // * with "Does not cause autism is children"
+. 
+. * 9 deficit
+. local _stem "deficit"
+
+. local _correct = "increased"
+
+. foreach qtype in ips rw fsr x14k {
+  2.         local _correct_indicator c`_stem'_`qtype'
+  3.         local _original_response `qtype'_`_stem'
+  4.         cap drop `_correct_indicator'
+  5.         gen byte `_correct_indicator' = (strpos(strlower(`_original_response'), "`_correct'")>0) if ~missing(`_orig
+> inal_response')
+  6. }
+(968 missing values generated)
+(979 missing values generated)
+(956 missing values generated)
+(972 missing values generated)
+
+. 
+. // =================================================================================
+. // Coding correct responses (for x24k)
+. * 1 birth
+. local _stem "birth"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="10") if x24k_`_stem'!="NA"
+(974 missing values generated)
+
+. 
+. * 2 religion
+. local _stem "religion"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="0") if x24k_`_stem'!="NA"
+(981 missing values generated)
+
+. 
+. * 3 illegal
+. local _stem "illegal"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="0") if x24k_`_stem'!="NA"
+(1058 missing values generated)
+
+. 
+. * 4 death
+. local _stem "death"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="10") if x24k_`_stem'!="NA"
+(1062 missing values generated)
+
+. 
+. * 5 increase
+. local _stem "increase"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="10") if x24k_`_stem'!="NA"
+(968 missing values generated)
+
+. 
+. * 6 science
+. local _stem "science"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="0") if x24k_`_stem'!="NA"
+(963 missing values generated)
+
+. 
+. * 7 fraud
+. local _stem "fraud"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="0") if x24k_`_stem'!="NA"
+(968 missing values generated)
+
+. 
+. * 8 mmr
+. local _stem "mmr"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="0") if x24k_`_stem'!="NA"
+(982 missing values generated)
+
+. 
+. * 9 deficit
+. local _stem "deficit"
+
+. local _correct_indicator c`_stem'_x24k
+
+. cap drop `_correct_indicator' 
+
+. gen double `_correct_indicator' = (x24k_`_stem'=="10") if x24k_`_stem'!="NA"
+(1031 missing values generated)
+
+. 
+. 
+. // =================================================================================
+. // Tally totals by the 5 question types
+. foreach qtype in ips rw fsr x14k x24k {
+  2.         cap drop cavg_`qtype'
+  3.         egen double cavg_`qtype' = rowtotal(cbirth_`qtype' creligion_`qtype' cillegal_`qtype' cdeath_`qtype' cincre
+> ase_`qtype' cscience_`qtype' cfraud_`qtype' cmmr_`qtype' cdeficit_`qtype') if ~missing(cbirth_`qtype')
+  4.         replace cavg_`qtype' = cavg_`qtype'/9
+  5. }
+(968 missing values generated)
+(237 real changes made)
+(979 missing values generated)
+(228 real changes made)
+(956 missing values generated)
+(246 real changes made)
+(972 missing values generated)
+(235 real changes made)
+(974 missing values generated)
+(215 real changes made)
+
+. 
+. 
+. gen double cavg = .
+(1207 missing values generated)
+
+. replace cavg = cavg_ips if question_type=="IPS"
+(239 real changes made)
+
+. replace cavg = cavg_rw if question_type=="RW"
+(228 real changes made)
+
+. replace cavg = cavg_fsr if question_type=="FSR"
+(251 real changes made)
+
+. replace cavg = cavg_x14k if question_type=="14k"
+(235 real changes made)
+
+. replace cavg = cavg_x24k if question_type=="24k"
+(233 real changes made)
+
+. 
+. su cavg*
+
+    Variable |       Obs        Mean    Std. Dev.       Min        Max
+-------------+--------------------------------------------------------
+    cavg_ips |       239    .7605765    .2366107          0          1
+     cavg_rw |       228    .7305068    .2174891   .1111111          1
+    cavg_fsr |       251    .6427623    .2644708          0          1
+   cavg_x14k |       235    .6619385     .227336   .1111111          1
+   cavg_x24k |       233    .4954697    .2723476          0          1
+-------------+--------------------------------------------------------
+        cavg |      1186     .658235    .2610913          0          1
+
+. 
+. // =================================================================================
+. // Make education continuous
+. cap drop ceduc
+
+. gen ceduc = .
+(1207 missing values generated)
+
+. replace ceduc = 1 if educ_str=="No high school diploma"
+(7 real changes made)
+
+. replace ceduc = 2 if educ_str=="High school diploma or equivalent"
+(118 real changes made)
+
+. replace ceduc = 3 if educ_str=="Some college"
+(390 real changes made)
+
+. replace ceduc = 4 if educ_str=="Four year college graduate"
+(498 real changes made)
+
+. replace ceduc = 5 if educ_str=="Post-graduate degree"
+(194 real changes made)
+
+. 
+. // Score the knowledge question
+. cap drop know
+
+. gen know = .
+(1207 missing values generated)
+
+. replace know = (deficits=="Democratic party is better at that") & ~missing(deficits)
+(1207 real changes made)
+
+. 
+. global criteria interest_1 vote_1 ceduc pid_strength_1
+
+. 
+. 
+. // =================================================================================
+. // =================================================================================
+. // Correlation with criterion
+. // =================================================================================
+. foreach qtype in ips rw fsr x14k x24k {
+  2. foreach criterion of global criteria {
+  3.         corr cavg_`qtype' `criterion'
+  4.         local corr_`qtype'_`criterion' = r(rho)
+  5.         corr_pval
+  6.         local corrpval_`qtype'_`criterion' = r(corr_pval)
+  7.         dis in white `corr_`qtype'_`criterion''
+  8. }
+  9. }
+(obs=239)
+
+             | cavg_ips intere~1
+-------------+------------------
+    cavg_ips |   1.0000
+  interest_1 |   0.1154   1.0000
+
+.11536599
+(obs=239)
+
+             | cavg_ips   vote_1
+-------------+------------------
+    cavg_ips |   1.0000
+      vote_1 |   0.1377   1.0000
+
+.13772858
+(obs=239)
+
+             | cavg_ips    ceduc
+-------------+------------------
+    cavg_ips |   1.0000
+       ceduc |   0.0774   1.0000
+
+.07735599
+(obs=239)
+
+             | cavg_ips pid_st~1
+-------------+------------------
+    cavg_ips |   1.0000
+pid_streng~1 |  -0.5942   1.0000
+
+-.59421253
+(obs=228)
+
+             |  cavg_rw intere~1
+-------------+------------------
+     cavg_rw |   1.0000
+  interest_1 |   0.2779   1.0000
+
+.27787499
+(obs=228)
+
+             |  cavg_rw   vote_1
+-------------+------------------
+     cavg_rw |   1.0000
+      vote_1 |   0.1679   1.0000
+
+.16789151
+(obs=228)
+
+             |  cavg_rw    ceduc
+-------------+------------------
+     cavg_rw |   1.0000
+       ceduc |   0.1671   1.0000
+
+.16706329
+(obs=228)
+
+             |  cavg_rw pid_st~1
+-------------+------------------
+     cavg_rw |   1.0000
+pid_streng~1 |  -0.6038   1.0000
+
+-.60384333
+(obs=251)
+
+             | cavg_fsr intere~1
+-------------+------------------
+    cavg_fsr |   1.0000
+  interest_1 |   0.2706   1.0000
+
+.27061391
+(obs=251)
+
+             | cavg_fsr   vote_1
+-------------+------------------
+    cavg_fsr |   1.0000
+      vote_1 |   0.2760   1.0000
+
+.27596207
+(obs=251)
+
+             | cavg_fsr    ceduc
+-------------+------------------
+    cavg_fsr |   1.0000
+       ceduc |   0.2296   1.0000
+
+.22956817
+(obs=251)
+
+             | cavg_fsr pid_st~1
+-------------+------------------
+    cavg_fsr |   1.0000
+pid_streng~1 |  -0.4485   1.0000
+
+-.44846979
+(obs=235)
+
+             | cavg~14k intere~1
+-------------+------------------
+   cavg_x14k |   1.0000
+  interest_1 |   0.4122   1.0000
+
+.41220639
+(obs=235)
+
+             | cavg~14k   vote_1
+-------------+------------------
+   cavg_x14k |   1.0000
+      vote_1 |   0.2976   1.0000
+
+.29762645
+(obs=235)
+
+             | cavg~14k    ceduc
+-------------+------------------
+   cavg_x14k |   1.0000
+       ceduc |   0.1802   1.0000
+
+.18019929
+(obs=235)
+
+             | cavg~14k pid_st~1
+-------------+------------------
+   cavg_x14k |   1.0000
+pid_streng~1 |  -0.3009   1.0000
+
+-.3009191
+(obs=233)
+
+             | cavg~24k intere~1
+-------------+------------------
+   cavg_x24k |   1.0000
+  interest_1 |   0.3795   1.0000
+
+.37948511
+(obs=233)
+
+             | cavg~24k   vote_1
+-------------+------------------
+   cavg_x24k |   1.0000
+      vote_1 |   0.3564   1.0000
+
+.35637443
+(obs=233)
+
+             | cavg~24k    ceduc
+-------------+------------------
+   cavg_x24k |   1.0000
+       ceduc |   0.3018   1.0000
+
+.30183777
+(obs=233)
+
+             | cavg~24k pid_st~1
+-------------+------------------
+   cavg_x24k |   1.0000
+pid_streng~1 |  -0.3985   1.0000
+
+-.3985029
+
+. 
+. // Version 0
+. // Row = conditions
+. // Column = 3 criterion
+. #delimit;
+delimiter now ;
+. matrix corr_table = (
+>         `corr_ips_interest_1', `corr_ips_vote_1', `corr_ips_ceduc' \
+>         `corr_rw_interest_1', `corr_rw_vote_1', `corr_rw_ceduc' \
+>         `corr_fsr_interest_1', `corr_fsr_vote_1', `corr_fsr_ceduc' \
+>         `corr_x14k_interest_1', `corr_x14k_vote_1', `corr_x14k_ceduc' \
+>         `corr_x24k_interest_1', `corr_x24k_vote_1', `corr_x24k_ceduc' 
+> )
+> ;
+
+. #delimit cr
+delimiter now cr
+. matrix colnames corr_table = "interest" "participation" "education"
+
+. matrix rownames corr_table = "IPS/IDA" "RW/CUD" "FSR/FSR" "14k/IMC" "24k/CCD"
+
+. matlist corr_table
+
+             |  interest  partici~n  education 
+-------------+---------------------------------
+     IPS/IDA |   .115366   .1377286    .077356 
+      RW/CUD |   .277875   .1678915   .1670633 
+     FSR/FSR |  .2706139   .2759621   .2295682 
+     14k/IMC |  .4122064   .2976265   .1801993 
+     24k/CCD |  .3794851   .3563744   .3018378 
+
+. 
+. // corr interest_1 vote_1
+. // local corr_interest_vote = r(rho)
+. 
+. // corr interest_1 vote_1
+. // local corr_interest_vote = r(rho)
+. 
+. // Version 1
+. // Row = 3 criterion
+. // Column = conditions
+. #delimit;
+delimiter now ;
+. matrix corr_table2 = (
+>         `corr_ips_interest_1', `corr_rw_interest_1', `corr_fsr_interest_1', `corr_x14k_interest_1', `corr_x24k_interes
+> t_1' \
+>         // `corrpval_ips_interest_1', `corrpval_rw_interest_1', `corrpval_fsr_interest_1', `corrpval_x14k_interest_1',
+>  `corrpval_x24k_interest_1' \
+>         `corr_ips_vote_1', `corr_rw_vote_1', `corr_fsr_vote_1', `corr_x14k_vote_1', `corr_x24k_vote_1' \
+>         // `corrpval_ips_vote_1', `corrpval_rw_vote_1', `corrpval_fsr_vote_1', `corrpval_x14k_vote_1', `corrpval_x24k_
+> vote_1' \
+>         `corr_ips_ceduc', `corr_rw_ceduc', `corr_fsr_ceduc', `corr_x14k_ceduc', `corr_x24k_ceduc' \
+>         // `corrpval_ips_ceduc', `corrpval_rw_ceduc', `corrpval_fsr_ceduc', `corrpval_x14k_ceduc', `corrpval_x24k_cedu
+> c' 
+>         `corr_ips_pid_strength_1', `corr_rw_pid_strength_1', `corr_fsr_pid_strength_1', `corr_x14k_pid_strength_1', `c
+> orr_x24k_pid_strength_1' 
+> )
+> ;
+
+. #delimit cr
+delimiter now cr
+. matrix colnames corr_table2 = "IPS/IDA" "RW/CUD" "FSR/FSR" "14k/IMC" "24k/CCD" 
+
+. // matrix rownames corr_table2 = "interest" "." "participation" "." "education" "."
+. matrix rownames corr_table2 = "Politicalinterest" "Politicalparticipation" "Education" "Partisanship"
+
+. matlist corr_table2, format(%6.3f)
+
+             | IPS/~A  RW/CUD  FSR/~R  14k/~C  24k/~D 
+-------------+----------------------------------------
+Politicali~t |  0.115   0.278   0.271   0.412   0.379 
+Politicalp~n |  0.138   0.168   0.276   0.298   0.356 
+   Education |  0.077   0.167   0.230   0.180   0.302 
+Partisanship | -0.594  -0.604  -0.448  -0.301  -0.399 
+
+. 
+. dis `corrpval_ips_interest_1'
+.07505754
+
+. #delimit;
+delimiter now ;
+. matrix corr_table2_pval = (
+>         `corr_ips_interest_1', `corr_rw_interest_1', `corr_fsr_interest_1', `corr_x14k_interest_1', `corr_x24k_interes
+> t_1' \
+>         `corrpval_ips_interest_1', `corrpval_rw_interest_1', `corrpval_fsr_interest_1', `corrpval_x14k_interest_1', `c
+> orrpval_x24k_interest_1' \
+>         `corr_ips_vote_1', `corr_rw_vote_1', `corr_fsr_vote_1', `corr_x14k_vote_1', `corr_x24k_vote_1' \
+>         `corrpval_ips_vote_1', `corrpval_rw_vote_1', `corrpval_fsr_vote_1', `corrpval_x14k_vote_1', `corrpval_x24k_vot
+> e_1' \
+>         `corr_ips_ceduc', `corr_rw_ceduc', `corr_fsr_ceduc', `corr_x14k_ceduc', `corr_x24k_ceduc' \
+>         `corrpval_ips_ceduc', `corrpval_rw_ceduc', `corrpval_fsr_ceduc', `corrpval_x14k_ceduc', `corrpval_x24k_ceduc' 
+> )
+> ;
+
+. #delimit cr
+delimiter now cr
+. matrix colnames corr_table2_pval = "IPS/IDA" "RW/CUD" "FSR/FSR" "14k/IMC" "24k/CCD" 
+
+. matrix rownames corr_table2_pval = "interest" "(pval)" "participation" "(pval)" "education" "(pval)"
+
+. matlist corr_table2_pval
+
+             |   IPS/IDA     RW/CUD    FSR/FSR    14k/IMC    24k/CCD 
+-------------+-------------------------------------------------------
+    interest |   .115366    .277875   .2706139   .4122064   .3794851 
+      (pval) |  .0750575   .0000207   .0000138   4.70e-11   2.14e-09 
+participat~n |  .1377286   .1678915   .2759621   .2976265   .3563744 
+      (pval) |  .0333187   .0111099   9.14e-06   3.42e-06   2.20e-08 
+   education |   .077356   .1670633   .2295682   .1801993   .3018378 
+      (pval) |  .2334923     .01152   .0002445    .005599   2.70e-06 
+
+.         // corr cavg_`qtype' `criterion'
+.         // local corr_`qtype'_`criterion' = r(rho)
+.         // corr_pval
+.         // local corrpval_`qtype'_`criterion' = r(corr_pval)
+.         // dis in white `corr_`qtype'_`criterion''
+. 
+. // * Store the correlation (and pval) between the criterion variables
+. // local _x1 interest_1
+. // local _x2 vote_1
+. // local _x3 ceduc
+. // corr `_x1' `_x2'
+. // local corr_`_x1'_`_x2' = r(rho)
+. // corr_pval
+. // local corrpval_`_x1'_`_x2' = r(corr_pval)
+. 
+. // corr `_x1' `_x3'
+. // local corr_`_x1'_`_x3' = r(rho)
+. // corr_pval
+. // local corrpval_`_x1'_`_x3' = r(corr_pval)
+. 
+. // corr `_x2' `_x3'
+. // local corr_`_x2'_`_x3' = r(rho)
+. // corr_pval
+. // local corrpval_`_x2'_`_x3' = r(corr_pval)
+. 
+. // pwcorr interest_1 vote_1 ceduc
+. // #delimit;
+. // matrix corr_criterion = (
+. //      1, .,.   \
+. //      ., ., . \
+. //      `corr_`_x1'_`_x2'', 1, .  \
+. //      `corrpval_`_x1'_`_x2'', ., .  \
+. //      `corr_`_x1'_`_x3'', `corr_`_x2'_`_x3'', 1 \
+. //      `corrpval_`_x1'_`_x3'', `corrpval_`_x2'_`_x3'', 1 
+. // )
+. // ;
+. // #delimit cr
+. // * Correlation matrix of criterion variables (with pvalues)
+. // matlist corr_criterion
+. 
+. // // Version2
+. // // Row = 3 criterion
+. // // Column = conditions + 3 criterion
+. // pwcorr interest_1 vote_1 ceduc
+. // // matrix corr_table3 = corr_table2, r(C)
+. // matrix corr_table3 = corr_table2, corr_criterion
+. // matrix colnames corr_table3 = "IPS/IDA" "RW/CUD" "FSR/FSR" "14k/IMC" "24k/CCD" "interest" "participation" "educatio
+> n"
+. // matrix rownames corr_table3 = "interest" "." "participation" "." "education" "."
+. // matlist corr_table3, format(%5.3g)
+. 
+. // Output
+. preserve
+
+. drop _all
+
+. svmat2 corr_table2, rnames(type) // Adding to dta temporarily
+number of observations will be reset to 4
+Press any key to continue, or Break to abort
+obs was 0, now 4
+
+. order type
+
+. foreach var of varlist corr_table21 corr_table22 corr_table23 corr_table24 corr_table25 {
+  2.         replace `var' = round(`var', 0.001)
+  3. }
+(4 real changes made)
+(4 real changes made)
+(4 real changes made)
+(4 real changes made)
+(4 real changes made)
+
+. list
+
+     +-------------------------------------------------------------------------------+
+     |                   type   corr_~21   corr_~22   corr_~23   corr_~24   corr_~25 |
+     |-------------------------------------------------------------------------------|
+  1. |      Politicalinterest       .115       .278       .271       .412       .379 |
+  2. | Politicalparticipation       .138       .168       .276       .298       .356 |
+  3. |              Education       .077       .167        .23        .18       .302 |
+  4. |           Partisanship      -.594      -.604      -.448      -.301      -.399 |
+     +-------------------------------------------------------------------------------+
+
+. texsave using ../../tabs/correlation-validity-table.tex, dataonly replace 
+
+. restore
+
+. 
+. 
+. // =================================================================================
+. // =================================================================================
+. // Inter-item correlation, by group
+. // =================================================================================
+. local CRONBACH_ALPHA_OPTS asis item std
+
+. 
+. // Inter-item correlation for correct responses as the items
+. global correct_items_ips  cbirth_ips  creligion_ips  cillegal_ips  cdeath_ips  cincrease_ips  cscience_ips  cfraud_ips
+>   cmmr_ips  cdeficit_ips
+
+. global correct_items_rw   cbirth_rw   creligion_rw   cillegal_rw   cdeath_rw   cincrease_rw   cscience_rw   cfraud_rw 
+>   cmmr_rw   cdeficit_rw
+
+. global correct_items_fsr  cbirth_fsr  creligion_fsr  cillegal_fsr  cdeath_fsr  cincrease_fsr  cscience_fsr  cfraud_fsr
+>   cmmr_fsr  cdeficit_fsr
+
+. global correct_items_x14k cbirth_x14k creligion_x14k cillegal_x14k cdeath_x14k cincrease_x14k cscience_x14k cfraud_x14
+> k cmmr_x14k cdeficit_x14k
+
+. global correct_items_x24k cbirth_x24k creligion_x24k cillegal_x24k cdeath_x24k cincrease_x24k cscience_x24k cfraud_x24
+> k cmmr_x24k cdeficit_x24k
+
+. 
+. 
+. alpha $correct_items_ips, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+cbirth_ips   |  239    +       0.6634        0.5300          0.2199      0.6928
+creligion_~s |  239    +       0.6455        0.5074          0.2232      0.6968
+cillegal_ips |  239    +       0.6769        0.5471          0.2174      0.6897
+cdeath_ips   |  239    +       0.5240        0.3595          0.2453      0.7223
+cincrease_~s |  239    +       0.6388        0.4991          0.2244      0.6983
+cscience_ips |  239    +       0.5446        0.3840          0.2416      0.7182
+cfraud_ips   |  239    +       0.6412        0.5020          0.2239      0.6978
+cmmr_ips     |  239    +       0.5251        0.3609          0.2451      0.7220
+cdeficit_ips |  239    +       0.2485        0.0543          0.2956      0.7705
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.2374      0.7369
+-------------------------------------------------------------------------------
+
+. alpha $correct_items_rw, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+cbirth_rw    |  228    +       0.6128        0.4456          0.1461      0.5778
+creligion_rw |  228    +       0.6454        0.4870          0.1408      0.5672
+cillegal_rw  |  228    +       0.5568        0.3763          0.1552      0.5950
+cdeath_rw    |  228    +       0.5338        0.3484          0.1589      0.6018
+cincrease_rw |  228    +       0.5276        0.3410          0.1599      0.6036
+cscience_rw  |  228    +       0.5516        0.3700          0.1560      0.5966
+cfraud_rw    |  228    +       0.6142        0.4474          0.1458      0.5773
+cmmr_rw      |  228    +       0.4319        0.2293          0.1755      0.6300
+cdeficit_rw  |  228    +       0.0827       -0.1360          0.2323      0.7077
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.1634      0.6374
+-------------------------------------------------------------------------------
+
+. alpha $correct_items_fsr, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+cbirth_fsr   |  251    +       0.6811        0.5548          0.2288      0.7035
+creligion_~r |  251    +       0.6544        0.5210          0.2337      0.7093
+cillegal_fsr |  251    +       0.5503        0.3936          0.2530      0.7304
+cdeath_fsr   |  251    +       0.6197        0.4777          0.2401      0.7166
+cincrease_~r |  251    +       0.6223        0.4810          0.2396      0.7160
+cscience_fsr |  251    +       0.6053        0.4600          0.2428      0.7195
+cfraud_fsr   |  251    +       0.6233        0.4822          0.2395      0.7158
+cmmr_fsr     |  251    +       0.5315        0.3711          0.2565      0.7340
+cdeficit_fsr |  251    +       0.2959        0.1072          0.3001      0.7743
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.2482      0.7482
+-------------------------------------------------------------------------------
+
+. alpha $correct_items_x14k, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+cbirth_x14k  |  235    +       0.5773        0.4045          0.1616      0.6067
+creligio~14k |  235    +       0.6091        0.4439          0.1564      0.5973
+cillegal~14k |  235    +       0.5253        0.3414          0.1702      0.6214
+cdeath_x14k  |  235    +       0.6211        0.4590          0.1544      0.5936
+cincreas~14k |  235    +       0.5209        0.3361          0.1710      0.6226
+cscience~14k |  235    +       0.6103        0.4454          0.1562      0.5969
+cfraud_x14k  |  235    +       0.5152        0.3294          0.1719      0.6242
+cmmr_x14k    |  235    +       0.5498        0.3709          0.1662      0.6146
+cdeficit~14k |  235    +       0.0963       -0.1196          0.2411      0.7176
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.1721      0.6517
+-------------------------------------------------------------------------------
+
+. alpha $correct_items_x24k, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+cbirth_x24k  |  233    +       0.6772        0.5253          0.3179      0.7885
+creligio~24k |  226    +       0.6741        0.5198          0.3149      0.7862
+cillegal~24k |  149    +       0.6411        0.5085          0.3219      0.7915
+cdeath_x24k  |  145    +       0.6459        0.5064          0.3228      0.7923
+cincreas~24k |  239    +       0.6729        0.5155          0.3164      0.7874
+cscience~24k |  244    +       0.7237        0.5910          0.3059      0.7791
+cfraud_x24k  |  239    +       0.7071        0.5635          0.3083      0.7810
+cmmr_x24k    |  225    +       0.6884        0.5452          0.3123      0.7842
+cdeficit~24k |  176    +       0.2534        0.0449          0.3984      0.8412
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.3248      0.8124
+-------------------------------------------------------------------------------
+
+. 
+. 
+. 
+. // Inter-item correlation for original coded responses as the items, by partisanship
+. // Coded response = 1 if wrong and congenial to R
+. foreach qtype in IPS RW FSR 14k 24k {
+  2.         dis in white "`qtype'"
+  3.         alpha birth-deficit if question_type=="`qtype'", `CRONBACH_ALPHA_OPTS'
+  4. }
+IPS
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+birth        |  239    +       0.6898        0.5597          0.1950      0.6596
+religion     |  239    +       0.6596        0.5210          0.2003      0.6671
+illegal      |  239    +       0.6553        0.5156          0.2011      0.6682
+death        |  239    +       0.5325        0.3648          0.2229      0.6965
+increase     |  239    +       0.6551        0.5153          0.2011      0.6682
+science      |  239    +       0.5096        0.3377          0.2270      0.7014
+fraud        |  239    +       0.6256        0.4782          0.2064      0.6754
+mmr          |  239    +       0.5271        0.3584          0.2239      0.6977
+deficit      |  239    +       0.1239       -0.0773          0.2956      0.7705
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.2193      0.7165
+-------------------------------------------------------------------------------
+RW
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+birth        |  228    +       0.6285        0.4785          0.1919      0.6552
+religion     |  228    +       0.6711        0.5326          0.1845      0.6441
+illegal      |  228    +       0.5622        0.3970          0.2035      0.6715
+death        |  228    +       0.5497        0.3818          0.2057      0.6745
+increase     |  228    +       0.5141        0.3394          0.2119      0.6827
+science      |  228    +       0.5036        0.3271          0.2137      0.6850
+fraud        |  228    +       0.6235        0.4723          0.1928      0.6565
+mmr          |  228    +       0.4175        0.2281          0.2288      0.7035
+deficit      |  228    +       0.4179        0.2286          0.2287      0.7035
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.2068      0.7012
+-------------------------------------------------------------------------------
+FSR
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+birth        |  251    +       0.5608        0.3813          0.1549      0.5945
+religion     |  251    +       0.5738        0.3972          0.1527      0.5905
+illegal      |  251    +       0.6159        0.4496          0.1459      0.5774
+death        |  251    +       0.5790        0.4037          0.1519      0.5889
+increase     |  251    +       0.6337        0.4722          0.1430      0.5717
+science      |  251    +       0.6020        0.4321          0.1482      0.5818
+fraud        |  251    +       0.5168        0.3282          0.1620      0.6074
+mmr          |  251    +       0.4992        0.3073          0.1649      0.6123
+deficit      |  251    +      -0.0220       -0.2347          0.2498      0.7270
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.1637      0.6379
+-------------------------------------------------------------------------------
+14k
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+birth        |  235    +       0.5345        0.3499          0.1606      0.6048
+religion     |  235    +       0.5749        0.3990          0.1540      0.5929
+illegal      |  235    +       0.4663        0.2694          0.1717      0.6238
+death        |  235    +       0.6142        0.4479          0.1476      0.5807
+increase     |  235    +       0.5572        0.3773          0.1569      0.5982
+science      |  235    +       0.5545        0.3740          0.1573      0.5990
+fraud        |  235    +       0.4826        0.2883          0.1691      0.6194
+mmr          |  235    +       0.5435        0.3608          0.1591      0.6022
+deficit      |  235    +       0.2414        0.0232          0.2084      0.6781
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.1650      0.6400
+-------------------------------------------------------------------------------
+24k
+
+Test scale = mean(standardized items)
+
+                                                            average
+                             item-test     item-rest       interitem
+Item         |  Obs  Sign   correlation   correlation     correlation     alpha
+-------------+-----------------------------------------------------------------
+birth        |  233    +       0.7128        0.5555          0.1144      0.5081
+religion     |  226    +       0.7207        0.5491          0.1158      0.5118
+illegal      |  149    +       0.5945        0.3838          0.1457      0.5770
+death        |  145    +       0.4789        0.2184          0.1583      0.6006
+increase     |  239    +       0.5431        0.2993          0.1420      0.5696
+science      |  244    +       0.3901        0.1750          0.1726      0.6253
+fraud        |  239    +       0.4763        0.2109          0.1542      0.5932
+mmr          |  225    +       0.4565        0.2327          0.1642      0.6112
+deficit      |  176    +       0.2401        0.0094          0.1827      0.6413
+-------------+-----------------------------------------------------------------
+Test scale   |                                               0.1502      0.6140
+-------------------------------------------------------------------------------
+
+. 
+. // Inter-item correlation for original coded responses as the items, by partisanship
+. // // Coded response = 1 if wrong and congenial to R
+. // foreach qtype in IPS RW FSR 14k 24k {
+. //      dis in white "`qtype'"
+. //      dis in red "Republican"
+. //      alpha birth-deficit if pid_str=="Republican" & question_type=="`qtype'", `CRONBACH_ALPHA_OPTS'
+. //      dis in blue "Democrat"
+. //      alpha birth-deficit if pid_str=="Democrat"       & question_type=="`qtype'", `CRONBACH_ALPHA_OPTS'
+. // }
+. 
+. local CRONBACH_ALPHA_OPTS asis std
+
+. alpha $correct_items_ips, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+Average interitem correlation:      0.2374
+Number of items in the scale:            9
+Scale reliability coefficient:      0.7369
+
+. alpha $correct_items_rw, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+Average interitem correlation:      0.1634
+Number of items in the scale:            9
+Scale reliability coefficient:      0.6374
+
+. alpha $correct_items_fsr, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+Average interitem correlation:      0.2482
+Number of items in the scale:            9
+Scale reliability coefficient:      0.7482
+
+. alpha $correct_items_x14k, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+Average interitem correlation:      0.1721
+Number of items in the scale:            9
+Scale reliability coefficient:      0.6517
+
+. alpha $correct_items_x24k, `CRONBACH_ALPHA_OPTS'
+
+Test scale = mean(standardized items)
+
+Average interitem correlation:      0.3248
+Number of items in the scale:            9
+Scale reliability coefficient:      0.8124
+
+. 
+. rename pid_strength_1 pid11
+
+. 
+. 
+. local PCA_OPTS components(7)
+
+. local PWCORR_OPTS star(0.01)
+
+. local princomps pc1 pc2 pc3 pc4 pc5 pc6 pc7
+
+. // Princomp
+. cap drop `princomps'
+
+. pca $correct_items_ips, `PCA_OPTS'
+
+Principal components/correlation                  Number of obs    =       239
+                                                  Number of comp.  =         7
+                                                  Trace            =         9
+    Rotation: (unrotated = principal)             Rho              =    0.9008
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      3.12092      1.94968             0.3468       0.3468
+           Comp2 |      1.17124       .10158             0.1301       0.4769
+           Comp3 |      1.06966      .185669             0.1189       0.5958
+           Comp4 |      .883989      .211165             0.0982       0.6940
+           Comp5 |      .672824      .070897             0.0748       0.7687
+           Comp6 |      .601927     .0153697             0.0669       0.8356
+           Comp7 |      .586557     .0741131             0.0652       0.9008
+           Comp8 |      .512444         .132             0.0569       0.9577
+           Comp9 |      .380444            .             0.0423       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    --------------------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 | Unexplained 
+    -------------+----------------------------------------------------------------------+-------------
+      cbirth_ips |   0.4110   -0.2901   -0.1890   -0.0913    0.2692    0.1620   -0.3802 |       .1792 
+    creligion_~s |   0.4003   -0.3114   -0.2972   -0.0690    0.2231    0.3353   -0.0124 |       .1864 
+    cillegal_ips |   0.3953    0.0216   -0.1064    0.3028   -0.4254   -0.1310   -0.3475 |       .2157 
+      cdeath_ips |   0.2911   -0.1307    0.4901    0.4831   -0.3241    0.3827    0.2745 |      .04917 
+    cincrease_~s |   0.3703    0.1263   -0.0042   -0.4999   -0.0445    0.1401    0.6369 |      .08139 
+    cscience_ips |   0.2803    0.4700    0.2242   -0.4725   -0.3372   -0.0084   -0.3887 |      .07984 
+      cfraud_ips |   0.3680    0.0908   -0.3315    0.2334   -0.0332   -0.6700    0.3091 |      .07507 
+        cmmr_ips |   0.2775    0.1114    0.6101    0.0778    0.6265   -0.2859   -0.0815 |      .02447 
+    cdeficit_ips |   0.0415    0.7375   -0.3033    0.3580    0.2871    0.3839    0.0169 |     .001606 
+    --------------------------------------------------------------------------------------------------
+
+. predict `princomps'
+(score assumed)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 
+    -------------+----------------------------------------------------------------------
+      cbirth_ips |   0.4110   -0.2901   -0.1890   -0.0913    0.2692    0.1620   -0.3802 
+    creligion_~s |   0.4003   -0.3114   -0.2972   -0.0690    0.2231    0.3353   -0.0124 
+    cillegal_ips |   0.3953    0.0216   -0.1064    0.3028   -0.4254   -0.1310   -0.3475 
+      cdeath_ips |   0.2911   -0.1307    0.4901    0.4831   -0.3241    0.3827    0.2745 
+    cincrease_~s |   0.3703    0.1263   -0.0042   -0.4999   -0.0445    0.1401    0.6369 
+    cscience_ips |   0.2803    0.4700    0.2242   -0.4725   -0.3372   -0.0084   -0.3887 
+      cfraud_ips |   0.3680    0.0908   -0.3315    0.2334   -0.0332   -0.6700    0.3091 
+        cmmr_ips |   0.2775    0.1114    0.6101    0.0778    0.6265   -0.2859   -0.0815 
+    cdeficit_ips |   0.0415    0.7375   -0.3033    0.3580    0.2871    0.3839    0.0169 
+    ------------------------------------------------------------------------------------
+
+. dis "IPS"
+IPS
+
+. pwcorr `princomps' pid11, `PWCORR_OPTS'
+
+             |      pc1      pc2      pc3      pc4      pc5      pc6      pc7
+-------------+---------------------------------------------------------------
+         pc1 |   1.0000 
+         pc2 |  -0.0000   1.0000 
+         pc3 |  -0.0000   0.0000   1.0000 
+         pc4 |  -0.0000  -0.0000   0.0000   1.0000 
+         pc5 |  -0.0000   0.0000   0.0000   0.0000   1.0000 
+         pc6 |  -0.0000  -0.0000   0.0000   0.0000   0.0000   1.0000 
+         pc7 |  -0.0000  -0.0000   0.0000   0.0000   0.0000  -0.0000   1.0000 
+       pid11 |  -0.5973* -0.0620   0.1277   0.0420   0.1072   0.0739  -0.1495 
+
+             |    pid11
+-------------+---------
+       pid11 |   1.0000 
+
+. 
+. cap drop `princomps'
+
+. pca $correct_items_rw, `PCA_OPTS'
+
+Principal components/correlation                  Number of obs    =       228
+                                                  Number of comp.  =         7
+                                                  Trace            =         9
+    Rotation: (unrotated = principal)             Rho              =    0.8892
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      2.72419      1.51412             0.3027       0.3027
+           Comp2 |      1.21007      .192559             0.1345       0.4371
+           Comp3 |      1.01751      .084741             0.1131       0.5502
+           Comp4 |      .932767      .130288             0.1036       0.6538
+           Comp5 |      .802479     .0964027             0.0892       0.7430
+           Comp6 |      .706076     .0962667             0.0785       0.8215
+           Comp7 |      .609809     .0835146             0.0678       0.8892
+           Comp8 |      .526295     .0554833             0.0585       0.9477
+           Comp9 |      .470811            .             0.0523       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    --------------------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 | Unexplained 
+    -------------+----------------------------------------------------------------------+-------------
+       cbirth_rw |   0.4005    0.0854   -0.0214   -0.1669   -0.4978    0.4892    0.1111 |       .1525 
+    creligion_rw |   0.4399   -0.2584    0.0408    0.0261   -0.2435    0.1557    0.2981 |        .271 
+     cillegal_rw |   0.3519   -0.3279    0.0138    0.5028    0.1840   -0.2598    0.4355 |       .1062 
+       cdeath_rw |   0.3365   -0.2626    0.1431   -0.0577    0.6405    0.4677   -0.4050 |    .0005274 
+    cincrease_rw |   0.3124    0.4814   -0.3492    0.1183    0.3410   -0.1879    0.1590 |       .1829 
+     cscience_rw |   0.3028    0.6271   -0.0563   -0.0771    0.0621    0.0686   -0.0304 |       .2585 
+       cfraud_rw |   0.3980   -0.0687    0.0044    0.1896   -0.3326   -0.4520   -0.6956 |     .001082 
+         cmmr_rw |   0.2042    0.0850    0.7099   -0.4912    0.1077   -0.3773    0.1807 |      .01012 
+     cdeficit_rw |  -0.1406    0.3354    0.5900    0.6467   -0.0803    0.2522   -0.0496 |      .01422 
+    --------------------------------------------------------------------------------------------------
+
+. predict `princomps'
+(score assumed)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 
+    -------------+----------------------------------------------------------------------
+       cbirth_rw |   0.4005    0.0854   -0.0214   -0.1669   -0.4978    0.4892    0.1111 
+    creligion_rw |   0.4399   -0.2584    0.0408    0.0261   -0.2435    0.1557    0.2981 
+     cillegal_rw |   0.3519   -0.3279    0.0138    0.5028    0.1840   -0.2598    0.4355 
+       cdeath_rw |   0.3365   -0.2626    0.1431   -0.0577    0.6405    0.4677   -0.4050 
+    cincrease_rw |   0.3124    0.4814   -0.3492    0.1183    0.3410   -0.1879    0.1590 
+     cscience_rw |   0.3028    0.6271   -0.0563   -0.0771    0.0621    0.0686   -0.0304 
+       cfraud_rw |   0.3980   -0.0687    0.0044    0.1896   -0.3326   -0.4520   -0.6956 
+         cmmr_rw |   0.2042    0.0850    0.7099   -0.4912    0.1077   -0.3773    0.1807 
+     cdeficit_rw |  -0.1406    0.3354    0.5900    0.6467   -0.0803    0.2522   -0.0496 
+    ------------------------------------------------------------------------------------
+
+. dis "RW"
+RW
+
+. pwcorr `princomps' pid11, `PWCORR_OPTS'
+
+             |      pc1      pc2      pc3      pc4      pc5      pc6      pc7
+-------------+---------------------------------------------------------------
+         pc1 |   1.0000 
+         pc2 |   0.0000   1.0000 
+         pc3 |   0.0000   0.0000   1.0000 
+         pc4 |   0.0000  -0.0000   0.0000   1.0000 
+         pc5 |  -0.0000   0.0000   0.0000   0.0000   1.0000 
+         pc6 |  -0.0000  -0.0000   0.0000  -0.0000   0.0000   1.0000 
+         pc7 |  -0.0000  -0.0000  -0.0000   0.0000  -0.0000  -0.0000   1.0000 
+       pid11 |  -0.6665* -0.0543   0.1776* -0.0823   0.0840   0.0811  -0.1013 
+
+             |    pid11
+-------------+---------
+       pid11 |   1.0000 
+
+. 
+. cap drop `princomps'
+
+. pca $correct_items_fsr, `PCA_OPTS'
+
+Principal components/correlation                  Number of obs    =       251
+                                                  Number of comp.  =         7
+                                                  Trace            =         9
+    Rotation: (unrotated = principal)             Rho              =    0.8953
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      3.14249      1.95475             0.3492       0.3492
+           Comp2 |      1.18773      .267707             0.1320       0.4811
+           Comp3 |      .920025      .126581             0.1022       0.5834
+           Comp4 |      .793444     .0614032             0.0882       0.6715
+           Comp5 |      .732041     .0710203             0.0813       0.7529
+           Comp6 |      .661021     .0402688             0.0734       0.8263
+           Comp7 |      .620752       .10142             0.0690       0.8953
+           Comp8 |      .519332     .0961642             0.0577       0.9530
+           Comp9 |      .423168            .             0.0470       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    --------------------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 | Unexplained 
+    -------------+----------------------------------------------------------------------+-------------
+      cbirth_fsr |   0.4006   -0.0378    0.0414    0.4025   -0.3019    0.1700    0.3598 |       .1976 
+    creligion_~r |   0.3877   -0.1330    0.0663    0.4441   -0.2364   -0.0528   -0.2528 |       .2637 
+    cillegal_fsr |   0.2871    0.4733    0.0090   -0.3990   -0.3019    0.6213    0.0504 |      .02497 
+      cdeath_fsr |   0.3464    0.2520   -0.4168   -0.0269    0.0238   -0.1925   -0.6948 |      .06239 
+    cincrease_~r |   0.3709   -0.3220    0.4657    0.0231    0.0029   -0.0125   -0.1090 |       .2372 
+    cscience_fsr |   0.3477   -0.1485    0.4235   -0.5566    0.2397   -0.1700   -0.0631 |       .1195 
+      cfraud_fsr |   0.3587    0.0989   -0.3638   -0.2186   -0.1177   -0.5716    0.5192 |      .03095 
+        cmmr_fsr |   0.3040   -0.2645   -0.3981    0.0816    0.6887    0.4048    0.1546 |     .005083 
+    cdeficit_fsr |   0.0851    0.6985    0.3647    0.3406    0.4643   -0.1601    0.1092 |     .001189 
+    --------------------------------------------------------------------------------------------------
+
+. predict `princomps'
+(score assumed)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 
+    -------------+----------------------------------------------------------------------
+      cbirth_fsr |   0.4006   -0.0378    0.0414    0.4025   -0.3019    0.1700    0.3598 
+    creligion_~r |   0.3877   -0.1330    0.0663    0.4441   -0.2364   -0.0528   -0.2528 
+    cillegal_fsr |   0.2871    0.4733    0.0090   -0.3990   -0.3019    0.6213    0.0504 
+      cdeath_fsr |   0.3464    0.2520   -0.4168   -0.0269    0.0238   -0.1925   -0.6948 
+    cincrease_~r |   0.3709   -0.3220    0.4657    0.0231    0.0029   -0.0125   -0.1090 
+    cscience_fsr |   0.3477   -0.1485    0.4235   -0.5566    0.2397   -0.1700   -0.0631 
+      cfraud_fsr |   0.3587    0.0989   -0.3638   -0.2186   -0.1177   -0.5716    0.5192 
+        cmmr_fsr |   0.3040   -0.2645   -0.3981    0.0816    0.6887    0.4048    0.1546 
+    cdeficit_fsr |   0.0851    0.6985    0.3647    0.3406    0.4643   -0.1601    0.1092 
+    ------------------------------------------------------------------------------------
+
+. dis "FSR"
+FSR
+
+. pwcorr `princomps' pid11, `PWCORR_OPTS'
+
+             |      pc1      pc2      pc3      pc4      pc5      pc6      pc7
+-------------+---------------------------------------------------------------
+         pc1 |   1.0000 
+         pc2 |  -0.0000   1.0000 
+         pc3 |   0.0000   0.0000   1.0000 
+         pc4 |  -0.0000   0.0000   0.0000   1.0000 
+         pc5 |   0.0000   0.0000  -0.0000   0.0000   1.0000 
+         pc6 |  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000   1.0000 
+         pc7 |   0.0000  -0.0000   0.0000  -0.0000   0.0000   0.0000   1.0000 
+       pid11 |  -0.4644*  0.0682  -0.1009   0.0165   0.0652   0.0541  -0.0071 
+
+             |    pid11
+-------------+---------
+       pid11 |   1.0000 
+
+. 
+. cap drop `princomps'
+
+. pca $correct_items_x14k, `PCA_OPTS'
+
+Principal components/correlation                  Number of obs    =       235
+                                                  Number of comp.  =         7
+                                                  Trace            =         9
+    Rotation: (unrotated = principal)             Rho              =    0.8900
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      2.72684      1.60245             0.3030       0.3030
+           Comp2 |      1.12439      .152587             0.1249       0.4279
+           Comp3 |      .971801     .0469467             0.1080       0.5359
+           Comp4 |      .924854     .0883099             0.1028       0.6387
+           Comp5 |      .836544     .0624973             0.0929       0.7316
+           Comp6 |      .774047      .122724             0.0860       0.8176
+           Comp7 |      .651323      .139044             0.0724       0.8900
+           Comp8 |      .512279     .0343554             0.0569       0.9469
+           Comp9 |      .477923            .             0.0531       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    --------------------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 | Unexplained 
+    -------------+----------------------------------------------------------------------+-------------
+     cbirth_x14k |   0.3674   -0.1088   -0.1212    0.5503    0.2793   -0.1201    0.4440 |       .1194 
+    creligio~14k |   0.3872    0.2044   -0.1709    0.5034    0.0830   -0.0870   -0.3823 |       .1747 
+    cillegal~14k |   0.3062    0.4697   -0.2272   -0.4547    0.2248    0.2554    0.1496 |       .1475 
+     cdeath_x14k |   0.3891    0.4378   -0.1813   -0.1218   -0.2434    0.0414   -0.0775 |       .2713 
+    cincreas~14k |   0.3303   -0.4204    0.0637   -0.3228    0.5126    0.0974    0.2329 |        .141 
+    cscience~14k |   0.3781   -0.2556    0.3694   -0.1290    0.1217    0.0274   -0.6600 |      .09196 
+     cfraud_x14k |   0.3122   -0.2315    0.2174    0.1270   -0.5718    0.6121    0.2320 |      .01459 
+       cmmr_x14k |   0.3283    0.0281    0.3277   -0.2246   -0.3469   -0.7083    0.2579 |      .02192 
+    cdeficit~14k |  -0.1124    0.4875    0.7593    0.1865    0.2837    0.1564    0.1350 |     .007828 
+    --------------------------------------------------------------------------------------------------
+
+. predict `princomps'
+(score assumed)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 
+    -------------+----------------------------------------------------------------------
+     cbirth_x14k |   0.3674   -0.1088   -0.1212    0.5503    0.2793   -0.1201    0.4440 
+    creligio~14k |   0.3872    0.2044   -0.1709    0.5034    0.0830   -0.0870   -0.3823 
+    cillegal~14k |   0.3062    0.4697   -0.2272   -0.4547    0.2248    0.2554    0.1496 
+     cdeath_x14k |   0.3891    0.4378   -0.1813   -0.1218   -0.2434    0.0414   -0.0775 
+    cincreas~14k |   0.3303   -0.4204    0.0637   -0.3228    0.5126    0.0974    0.2329 
+    cscience~14k |   0.3781   -0.2556    0.3694   -0.1290    0.1217    0.0274   -0.6600 
+     cfraud_x14k |   0.3122   -0.2315    0.2174    0.1270   -0.5718    0.6121    0.2320 
+       cmmr_x14k |   0.3283    0.0281    0.3277   -0.2246   -0.3469   -0.7083    0.2579 
+    cdeficit~14k |  -0.1124    0.4875    0.7593    0.1865    0.2837    0.1564    0.1350 
+    ------------------------------------------------------------------------------------
+
+. dis "14k"
+14k
+
+. pwcorr `princomps' pid11, `PWCORR_OPTS'
+
+             |      pc1      pc2      pc3      pc4      pc5      pc6      pc7
+-------------+---------------------------------------------------------------
+         pc1 |   1.0000 
+         pc2 |  -0.0000   1.0000 
+         pc3 |   0.0000  -0.0000   1.0000 
+         pc4 |   0.0000   0.0000  -0.0000   1.0000 
+         pc5 |  -0.0000  -0.0000   0.0000   0.0000   1.0000 
+         pc6 |   0.0000   0.0000   0.0000  -0.0000  -0.0000   1.0000 
+         pc7 |  -0.0000  -0.0000  -0.0000   0.0000  -0.0000  -0.0000   1.0000 
+       pid11 |  -0.4134*  0.2711*  0.2086*  0.1464  -0.1064  -0.0355   0.0593 
+
+             |    pid11
+-------------+---------
+       pid11 |   1.0000 
+
+. 
+. cap drop `princomps'
+
+. pca $correct_items_x24k, `PCA_OPTS'
+
+Principal components/correlation                  Number of obs    =        70
+                                                  Number of comp.  =         7
+                                                  Trace            =         9
+    Rotation: (unrotated = principal)             Rho              =    0.9343
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      3.88911      2.65491             0.4321       0.4321
+           Comp2 |      1.23421      .379205             0.1371       0.5693
+           Comp3 |      .855001      .128524             0.0950       0.6643
+           Comp4 |      .726477     .0645266             0.0807       0.7450
+           Comp5 |      .661951       .11881             0.0736       0.8185
+           Comp6 |      .543141     .0441833             0.0603       0.8789
+           Comp7 |      .498957      .190542             0.0554       0.9343
+           Comp8 |      .308416     .0256752             0.0343       0.9686
+           Comp9 |       .28274            .             0.0314       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    --------------------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 | Unexplained 
+    -------------+----------------------------------------------------------------------+-------------
+     cbirth_x24k |   0.3572   -0.1971    0.0324    0.5609    0.4380   -0.1413   -0.0484 |       .0875 
+    creligio~24k |   0.3985   -0.2729    0.0937    0.0698    0.1336    0.2508   -0.4443 |       .1351 
+    cillegal~24k |   0.3308    0.1139   -0.5973   -0.0476    0.3657   -0.1193    0.4766 |      .04203 
+     cdeath_x24k |   0.2699    0.5231   -0.3902   -0.0761   -0.1688   -0.1698   -0.6309 |      .01142 
+    cincreas~24k |   0.3766   -0.0215   -0.1038   -0.2015   -0.1960    0.7831    0.1763 |        .035 
+    cscience~24k |   0.3046    0.1147    0.4021   -0.6969    0.3345   -0.2608    0.0561 |      .01932 
+     cfraud_x24k |   0.4005   -0.0937    0.3995    0.1062   -0.1891   -0.1384    0.0018 |       .1865 
+       cmmr_x24k |   0.3570    0.2222    0.1258    0.2268   -0.5787   -0.2627    0.3658 |      .06644 
+    cdeficit~24k |  -0.0941    0.7268    0.3649    0.2890    0.3272    0.3235    0.0841 |     .007838 
+    --------------------------------------------------------------------------------------------------
+
+. predict `princomps'
+(score assumed)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7 
+    -------------+----------------------------------------------------------------------
+     cbirth_x24k |   0.3572   -0.1971    0.0324    0.5609    0.4380   -0.1413   -0.0484 
+    creligio~24k |   0.3985   -0.2729    0.0937    0.0698    0.1336    0.2508   -0.4443 
+    cillegal~24k |   0.3308    0.1139   -0.5973   -0.0476    0.3657   -0.1193    0.4766 
+     cdeath_x24k |   0.2699    0.5231   -0.3902   -0.0761   -0.1688   -0.1698   -0.6309 
+    cincreas~24k |   0.3766   -0.0215   -0.1038   -0.2015   -0.1960    0.7831    0.1763 
+    cscience~24k |   0.3046    0.1147    0.4021   -0.6969    0.3345   -0.2608    0.0561 
+     cfraud_x24k |   0.4005   -0.0937    0.3995    0.1062   -0.1891   -0.1384    0.0018 
+       cmmr_x24k |   0.3570    0.2222    0.1258    0.2268   -0.5787   -0.2627    0.3658 
+    cdeficit~24k |  -0.0941    0.7268    0.3649    0.2890    0.3272    0.3235    0.0841 
+    ------------------------------------------------------------------------------------
+
+. dis "24k"
+24k
+
+. pwcorr `princomps' pid11, `PWCORR_OPTS'
+
+             |      pc1      pc2      pc3      pc4      pc5      pc6      pc7
+-------------+---------------------------------------------------------------
+         pc1 |   1.0000 
+         pc2 |   0.0000   1.0000 
+         pc3 |   0.0000  -0.0000   1.0000 
+         pc4 |  -0.0000   0.0000   0.0000   1.0000 
+         pc5 |  -0.0000   0.0000  -0.0000  -0.0000   1.0000 
+         pc6 |  -0.0000   0.0000  -0.0000   0.0000   0.0000   1.0000 
+         pc7 |  -0.0000  -0.0000  -0.0000   0.0000   0.0000   0.0000   1.0000 
+       pid11 |  -0.4677*  0.5126* -0.0309  -0.0094  -0.1480  -0.2205   0.1771 
+
+             |    pid11
+-------------+---------
+       pid11 |   1.0000 
+
+. 
+. 
+. reg cavg c.pid11##i.survey interest_1 vote_1 ceduc, hc3
+
+Linear regression                                      Number of obs =    1186
+                                                       F( 12,  1173) =   73.68
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.3900
+                                                       Root MSE      =  .20496
+
+--------------------------------------------------------------------------------
+               |             Robust HC3
+          cavg |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+         pid11 |  -.0481985   .0053999    -8.93   0.000    -.0587931   -.0376039
+               |
+        survey |
+          14k  |  -.2259465   .0298267    -7.58   0.000    -.2844661    -.167427
+          24k  |  -.3549434   .0306568   -11.58   0.000    -.4150918   -.2947951
+          FSR  |  -.1666227   .0299637    -5.56   0.000    -.2254112   -.1078342
+           RW  |  -.0689077   .0273683    -2.52   0.012     -.122604   -.0152114
+               |
+survey#c.pid11 |
+          14k  |   .0260797   .0072429     3.60   0.000     .0118691    .0402903
+          24k  |   .0137138   .0073903     1.86   0.064    -.0007858    .0282134
+          FSR  |   .0076175   .0071012     1.07   0.284     -.006315    .0215499
+           RW  |   .0052883    .006726     0.79   0.432     -.007908    .0184846
+               |
+    interest_1 |   .0173963   .0032136     5.41   0.000     .0110913    .0237012
+        vote_1 |   .0059876   .0025592     2.34   0.019     .0009664    .0110087
+         ceduc |   .0374234   .0071029     5.27   0.000     .0234876    .0513592
+         _cons |   .6872358   .0345043    19.92   0.000     .6195388    .7549327
+--------------------------------------------------------------------------------
+
+. reg cavg i.rep##i.survey interest_1 vote_1 ceduc if pid_str!="Independent", hc3
+
+Linear regression                                      Number of obs =     784
+                                                       F( 12,   771) =   58.05
+                                                       Prob > F      =  0.0000
+                                                       R-squared     =  0.4336
+                                                       Root MSE      =  .20078
+
+------------------------------------------------------------------------------
+             |             Robust HC3
+        cavg |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       1.rep |  -.3473921   .0381368    -9.11   0.000    -.4222563   -.2725278
+             |
+      survey |
+        14k  |   -.176224   .0230664    -7.64   0.000    -.2215044   -.1309435
+        24k  |  -.3333261   .0249493   -13.36   0.000    -.3823026   -.2843496
+        FSR  |   -.156441   .0235437    -6.64   0.000    -.2026583   -.1102237
+         RW  |   -.074609   .0198651    -3.76   0.000    -.1136051   -.0356129
+             |
+  rep#survey |
+      1#14k  |    .198156   .0553464     3.58   0.000     .0895085    .3068036
+      1#24k  |   .1207365   .0578901     2.09   0.037     .0070957    .2343773
+      1#FSR  |   .1291017   .0539518     2.39   0.017     .0231918    .2350116
+       1#RW  |   .0469516   .0484851     0.97   0.333    -.0482268      .14213
+             |
+  interest_1 |   .0158066   .0038453     4.11   0.000     .0082581     .023355
+      vote_1 |   .0132027   .0033976     3.89   0.000      .006533    .0198724
+       ceduc |   .0415696   .0088503     4.70   0.000      .024196    .0589431
+       _cons |   .5297358   .0400872    13.21   0.000     .4510428    .6084288
+------------------------------------------------------------------------------
+
+. 
+. log close
+      name:  <unnamed>
+       log:  D:\partisan-gaps\scripts\Stata\corr-validity-log.txt
+  log type:  text
+ closed on:  14 Oct 2023, 16:14:08
+------------------------------------------------------------------------------------------------------------------------
