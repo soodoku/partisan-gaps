@@ -12,12 +12,12 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage[linkcolor=blue,
-			colorlinks=true,
-			urlcolor=blue,
-			pdfstartview={XYZ null null 1.00},
-			pdfpagemode=UseNone,
-			citecolor={bluish},
-			pdftitle={partisan gap}]{hyperref}
+            colorlinks=true,
+            urlcolor=blue,
+            pdfstartview={XYZ null null 1.00},
+            pdfpagemode=UseNone,
+            citecolor={bluish},
+            pdftitle={partisan gap}]{hyperref}
 
 \usepackage[resetlabels,labeled]{multibib}
 \newcites{SI}{SI References}
@@ -160,7 +160,7 @@ More generally, researchers argue that partisan gaps in political knowledge with
 
 \end{itemize}
 
-In this paper, we interrogate the latter explanation in the context of commercial polls. An analysis of 180 media polls by \citet{luskinetal_nd} found that guessing encouraging features were exceedingly common. For instance, less than 9\% of the surveys offered an explicit `Don't Know' or `Not Sure' option, which causes a positive bias in the estimates of political knowledge \citep{luskin2011don}. And about half of the items offered only two choices, a design choice dramatically inflates estimates of knowledge \citep{bullock2022response}. An overwhelming majority of the items (168) also included wording that encouraged guessing, by framing the factual question as one of a `matter of opinion.' They also found that the scoring rules used by analysts treated all correct responses--even when the respondent is unconfident about their answer---as evidence of knowledge. Doing so conflates guesses and on-the-spot inferences with knowledge \citep{pasek2015}. 
+In this paper, we interrogate the latter explanation in the context of commercial polls. An analysis of 180 media polls by \citet{luskinetal_nd} found that guessing encouraging features were exceedingly common. For instance, less than 9\% of the surveys offered an explicit `Don't Know' or `Not Sure' option, which causes a positive bias in the estimates of political knowledge \citep{luskin2011don}. And about half of the items offered only two choices, a design choice that dramatically inflates estimates of knowledge \citep{bullock2022response}. An overwhelming majority of the items (168) also included wording that encouraged guessing, by framing the factual question as one of a `matter of opinion.' They also found that the scoring rules used by analysts treated all correct responses--even when the respondent is unconfident about their answer---as evidence of knowledge. Doing so conflates guesses and on-the-spot inferences with knowledge \citep{pasek2015}. 
 
 To study the effect of ``inflationary'' features of survey and question design on the partisan knowledge gap, we conduct a series of survey experiments that modify various guessing encouraging features. To study the effect of taking respondents' confidence in account, we draft an instrument and scoring rule inspired by \citet{pasek2015}, which uses self-assessed confidence to rescore the answers, taking only correct answers respondents are confident about as evidence that the respondent knows the fact. (Correct responses that respondents are confident about have higher test-retest reliability \citep{graham2021measuring} suggesting that these measures are also more valid.) Finally, we analyze which item formats yield more reliable measures of knowledge and have greater criterion validity. (We find that items without the ``inflationary'' features have higher criterion validity.)
 
@@ -219,11 +219,11 @@ We start by summarizing the average partisan gap on each survey item in each tre
 % partisan-gaps/scripts/Stata/mturk/fig-partisan-gap.do
  
 \begin{figure}[ht]
-		\centering
-		\caption{Partisan Gap by Treatment Arm (MTurk 1)}
-		\includegraphics[width=\textwidth]{../figs/partisan-gap-by-item-arm.pdf}
-		\label{fig:partisangaps-mturk}
-		\caption*{\footnotesize The figure shows the estimated partisan gap in each of the nine knowledge items (see \cref{si:mturk1} for the details of the items) and the average partisan gap across the four conditions \Cref{tab:conditions}. The partisan gap is estimated using the linear model $\text{Correct response}_{i} = \alpha + \beta \text{congenial}_i + \varepsilon_i$ where `congenial' is a dummy variable that takes the value 1 when the correct response is congenial to the party. Horizontal bars are 95\% confidence intervals constructed from robust standard errors.}
+        \centering
+        \caption{Partisan Gap by Treatment Arm (MTurk 1)}
+        \includegraphics[width=\textwidth]{../figs/partisan-gap-by-item-arm.pdf}
+        \label{fig:partisangaps-mturk}
+        \caption*{\footnotesize The figure shows the estimated partisan gap in each of the nine knowledge items (see \cref{si:mturk1} for the details of the items) and the average partisan gap across the four conditions \Cref{tab:conditions}. The partisan gap is estimated using the linear model $\text{Correct response}_{i} = \alpha + \beta \text{congenial}_i + \varepsilon_i$ where `congenial' is a dummy variable that takes the value 1 when the correct response is congenial to the party. Horizontal bars are 95\% confidence intervals constructed from robust standard errors.}
 \end{figure}
 
 To formally test our hypothesis, we regress whether the answer is correct, on the interaction of the survey conditions and the congenial dummy. For respondent $i$, survey item $j$, and condition $k$, we estimate the following equation:
@@ -236,17 +236,17 @@ $\beta$ captures the difference in the proportion of correct responses when the 
 
 % partisan-gaps/scripts/Stata/mturk/reg-table.do
 \begin{table}[t] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{The Effect of Various Treatments on the Partisan Gap (MTurk 1)}
-	\label{tab:partisangaps-mturk}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{l*{6}{D{.}{.}{-1}}}
-			\toprule
-			\input ../tabs/mturk-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize All models are linear probability models where the dependent variable is whether the response is correct or not. See \cref{tab:conditions} for the description of the IDA, CUD, FSR, and IMC conditions. Demographic controls include age, gender, education, and race. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{The Effect of Various Treatments on the Partisan Gap (MTurk 1)}
+    \label{tab:partisangaps-mturk}
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{l*{6}{D{.}{.}{-1}}}
+            \toprule
+            \input ../tabs/mturk-reg-table-fragment.tex
+            \bottomrule
+        \end{tabular}
+    \end{adjustbox}
+    \caption*{\footnotesize All models are linear probability models where the dependent variable is whether the response is correct or not. See \cref{tab:conditions} for the description of the IDA, CUD, FSR, and IMC conditions. Demographic controls include age, gender, education, and race. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 \cref{tab:partisangaps-mturk} reports the results. Column (1) includes just the congenial variable, which is significant and consistent with conventional wisdom about gaps in partisan knowledge \citep[e.g.][]{bullocketal_2015, pew2018disagree}.
@@ -288,43 +288,43 @@ We estimate the impact of partisan cues by regressing whether the response is co
 
 % partisan-gaps/scripts/Stata/survey-exp/reg-table.do
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{The Impact of Partisan Cues on Partisan Gaps (YouGov)}
-	\label{tab:partisangaps-yougov}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{2}{c}{Unemployment has gone up}&\multicolumn{2}{c}{Deficit has gone up}\\
-			\cmidrule(lr){2-3}\cmidrule(l){4-5} 
-			\input ../tabs/yougov-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize Dependent variables indicate whether or not the respondent chose the correct answer. Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
-		All models are linear probability models. 
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{The Impact of Partisan Cues on Partisan Gaps (YouGov)}
+    \label{tab:partisangaps-yougov}
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+            \toprule
+            % https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+            &\multicolumn{2}{c}{Unemployment has gone up}&\multicolumn{2}{c}{Deficit has gone up}\\
+            \cmidrule(lr){2-3}\cmidrule(l){4-5} 
+            \input ../tabs/yougov-reg-table-fragment.tex
+            \bottomrule
+        \end{tabular}
+    \end{adjustbox}
+    \caption*{\footnotesize Dependent variables indicate whether or not the respondent chose the correct answer. Demographic controls include age cohort, gender, education level, marital status, employment status, news interest, family income, and race. Standard errors are heteroskedasticity-robust. 
+        All models are linear probability models. 
+        Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 % partisan-gaps/scripts/Stata/survey-exp/unemp-barplots.do
 % partisan-gaps/scripts/Stata/survey-exp/deficit-barplots.do
 
 \begin{figure}[t]
-	\caption{Partisan Gap by Treatment Arm (YouGov)}	
-	\centering
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-unemp-congenialcue.pdf}
-		\caption{Unemployment}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-deficit-congenialcue.pdf}
-		\caption{Budget deficit}
-	\end{subfigure}	
-	\caption*{\footnotesize Bars indicate the predicted percent of correct answers as reported in \cref{tab:partisangaps-yougov} (columns (1) and (4)).  
-		Capped vertical bars indicate 95\% confidence intervals.
-	}
-	\label{fig:yougov-reg}
+    \caption{Partisan Gap by Treatment Arm (YouGov)}    
+    \centering
+    \begin{subfigure}{.495\textwidth}\centering
+        \includegraphics[width=\textwidth]{../figs/yougov-unemp-congenialcue.pdf}
+        \caption{Unemployment}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}{.495\textwidth}\centering
+        \includegraphics[width=\textwidth]{../figs/yougov-deficit-congenialcue.pdf}
+        \caption{Budget deficit}
+    \end{subfigure} 
+    \caption*{\footnotesize Bars indicate the predicted percent of correct answers as reported in \cref{tab:partisangaps-yougov} (columns (1) and (4)).  
+        Capped vertical bars indicate 95\% confidence intervals.
+    }
+    \label{fig:yougov-reg}
 \end{figure}
 
 \cref{fig:yougov-reg} plots the results. As Panel (a) of \cref{fig:yougov-reg} illustrates, showing a congenial cue instead of an uncongenial one causes the probability of the correct response on the unemployment question to increase by 14 percentage points ($p < 0.001$, reported in \cref{tab:partisangaps-yougov}). Panel (b) of \cref{fig:yougov-reg} shows that this effect is not unique to the unemployment question. On the budget deficit question, the difference is 18 percentage points ($p<0.001$). Partisans are therefore more likely to respond correctly to a survey question when there is a partisan cue in the question stem that frames the right answer as congenial to the party.
@@ -333,57 +333,57 @@ We estimate the impact of partisan cues by regressing whether the response is co
 
 % partisan-gaps/scripts/Stata/tx-lyceum/unemp-barplot.do
 \begin{figure}[!t]
-	\centering
-	\caption{Partisan Gap on Unemployment by Treatment Arm (Texas Lyceum)}
-	\includegraphics[width=.55\textwidth]{../figs/texas-unemp-congenialcue.pdf}
-	\label{fig:partisangaps-texas-unemp}
-	\caption*{\footnotesize 
-		Bars indicate the predicted percent of responses saying that unemployment has gone up (correct response) as reported in column (1) of \cref{tab:partisangaps-texas-unemp}.  
-		Capped vertical bars indicate 95\% confidence intervals.
-	}
+    \centering
+    \caption{Partisan Gap on Unemployment by Treatment Arm (Texas Lyceum)}
+    \includegraphics[width=.55\textwidth]{../figs/texas-unemp-congenialcue.pdf}
+    \label{fig:partisangaps-texas-unemp}
+    \caption*{\footnotesize 
+        Bars indicate the predicted percent of responses saying that unemployment has gone up (correct response) as reported in column (1) of \cref{tab:partisangaps-texas-unemp}.  
+        Capped vertical bars indicate 95\% confidence intervals.
+    }
 \end{figure}
 
 We supplement our results with the Texas Lyceum survey. As \cref{fig:partisangaps-texas-unemp} shows, on the unemployment question, the pattern we saw on YouGov still holds when we include a neutral cue. Compared to respondents who received a neutral cue, respondents who received an uncongenial cue were 17 percentage points less likely to get the correct answer ($p<0.001$). While respondents who received a congenial cue were 8 percentage points more likely to get the correct answer ($p<0.1$). These results are tabulated in \cref{tab:partisangaps-texas-unemp}.
 
 % partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Partisan Gap on Unemployment by Treatment Arm (Texas Lyceum)}
-	\label{tab:partisangaps-texas-unemp}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{3}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{3}{c}{Unemployment has gone up}\\
-			\cmidrule(l){2-4}
-			\input ../tabs/texas-unemp-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize The Dependent variable is whether or not the respondent got the answer correct.  
-		Demographic controls include age cohort, gender, education level, marital status, number of children, children's school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
-		All models are linear probability models. 
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{Partisan Gap on Unemployment by Treatment Arm (Texas Lyceum)}
+    \label{tab:partisangaps-texas-unemp}
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{@{\hspace{0\tabcolsep}}l*{3}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+            \toprule
+            % https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+            &\multicolumn{3}{c}{Unemployment has gone up}\\
+            \cmidrule(l){2-4}
+            \input ../tabs/texas-unemp-reg-table-fragment.tex
+            \bottomrule
+        \end{tabular}
+    \end{adjustbox}
+    \caption*{\footnotesize The Dependent variable is whether or not the respondent got the answer correct.  
+        Demographic controls include age cohort, gender, education level, marital status, number of children, children's school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
+        All models are linear probability models. 
+        Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 % partisan-gaps/scripts/Stata/tx-lyceum/reg-table.do
 \begin{table}[t] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Impact of Various Treatments on Partisan Gap on Federal Taxes (Texas Lyceum)}
-	\label{tab:partisangaps-texas-fedtax}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{4}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{2}{c}{Responded ``Gone up''}&\multicolumn{2}{c}{Responded ``Don't Know''}\\
-			\cmidrule(lr){2-3}\cmidrule(l){4-5} 
-			\input ../tabs/texas-fedtax-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize The dependent variable is whether or not the respondent got the answer correct. Demographic controls include age cohort, gender, education level, marital status, number of children, children's school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
-		All models are linear probability models. 
-		Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{Impact of Various Treatments on Partisan Gap on Federal Taxes (Texas Lyceum)}
+    \label{tab:partisangaps-texas-fedtax}
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{@{\hspace{0\tabcolsep}}l*{4}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+            \toprule
+            % https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+            &\multicolumn{2}{c}{Responded ``Gone up''}&\multicolumn{2}{c}{Responded ``Don't Know''}\\
+            \cmidrule(lr){2-3}\cmidrule(l){4-5} 
+            \input ../tabs/texas-fedtax-reg-table-fragment.tex
+            \bottomrule
+        \end{tabular}
+    \end{adjustbox}
+    \caption*{\footnotesize The dependent variable is whether or not the respondent got the answer correct. Demographic controls include age cohort, gender, education level, marital status, number of children, children's school enrollment, family income, religion, liberalism/conservatism, and race. Standard errors are heteroskedasticity-robust. 
+        All models are linear probability models. 
+        Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 Finally, we examine the federal tax rate question in the Texas Lyceum survey. As \cref{tab:partisangaps-texas-fedtax} shows, randomly receiving a congenial cue leads to a 21.5 percentage points increase in the chance of getting the answer right compared to the neutral cue condition ($p<0.001$). On the other hand, an uncongenial cue leads to a 29.8 percent lower chance ($p<0.001$). We also estimate how the cue that encourages guessing affects the ``Don't Know'' response rate. Including a substantive response encouraging cue does not have a stark effect. Overall, results from Studies 2 and 3 show that partisan cues dramatically affect the size of partisan gaps. If partisan gaps only reflected partisans' existing stores of knowledge, the gaps would be unresponsive to these cues. Thus, the data show that the partisan gap in the presence of partisan cues is upwardly biased.    
@@ -419,18 +419,18 @@ The scoring for this study is more nuanced, as the multiple-choice questions had
 The best version of the dichotomous multiple-choice items (IMC) showed a partisan gap of .22 (see \cref{fig:partisangaps-mturk}). As \cref{fig:mturk_hk24} shows, nearly half of the gap vanishes under the confidence scoring of CCD. Furthermore, the number of items where there is no statistically significant gap between partisans doubles from two to four. In all, there is a nearly 11 percentage point drop in the size of the partisan gap when we treat only confident correct answers as evidence that the respondent knows the answer. 
 
 \begin{center}
-	\begin{figure}[ht]
-		\centering
-		\caption{Partisan Gaps in Knowledge in Different Question Designs}
-		\includegraphics[width=.9\textwidth]{../figs/partisan-gap-by-item-arm-14k-24k.pdf}
-		\label{fig:mturk_hk24}
-		\caption*{\footnotesize
-			The figure shows the estimated partisan gaps in knowledge from MTurk 1 for two different survey conditions. The CCD condition only considers selecting the right answer with complete confidence as evidence that the respondent knows the answer (see \cref{si:mturk2}).
+    \begin{figure}[ht]
+        \centering
+        \caption{Partisan Gaps in Knowledge in Different Question Designs}
+        \includegraphics[width=.9\textwidth]{../figs/partisan-gap-by-item-arm-14k-24k.pdf}
+        \label{fig:mturk_hk24}
+        \caption*{\footnotesize
+            The figure shows the estimated partisan gaps in knowledge from MTurk 1 for two different survey conditions. The CCD condition only considers selecting the right answer with complete confidence as evidence that the respondent knows the answer (see \cref{si:mturk2}).
             See \crefrange{tab:confidence-scoring-study1}{tab:confidence-scoring-study1-ccd-14k-imc} in \cref{si:mturk1-ccd} for the regression estimates of the multiple-choice conditions to the confidence coding condition.
             See \cref{fig:mturk_hk24_mc} for the same analysis with all four multiple-choice conditions pooled together.
             \Cref{fig:mturk_hk24_greaterthan7} implements a robustness check setting the relative scoring threshold to 8.
-		}
-	\end{figure}
+        }
+    \end{figure}
 \end{center}
 
 \subsection*{Study 3: MTurk 2 Results}
@@ -448,34 +448,34 @@ for respondents \(i\), survey item \(j\), and scoring condition \(k\). As in \cr
  In all, if we pool evidence across the two MTurk studies, the data suggest that treating only confident correct answers as evidence that the respondent knows the answer shrinks the partisan gap substantially. 
 
 \begin{figure}[ht]
-	\caption{Partisan Gaps by Coding (MTurk 2)}	
-	\centering
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/relative_score_aca.pdf}
-		\caption{Affordable Care Act}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/relative_score_aca2.pdf}
-		\caption{Affordable Care Act 2}
-	\end{subfigure}	
+    \caption{Partisan Gaps by Coding (MTurk 2)} 
+    \centering
+    \begin{subfigure}{.495\textwidth}\centering
+        \includegraphics[width=\textwidth]{../figs/relative_score_aca.pdf}
+        \caption{Affordable Care Act}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}{.495\textwidth}\centering
+        \includegraphics[width=\textwidth]{../figs/relative_score_aca2.pdf}
+        \caption{Affordable Care Act 2}
+    \end{subfigure} 
         \vfil
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/relative_score_gg.pdf}
-		\caption{Greenhouse Gases}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/relative_score_dt.pdf}
-		\caption{Donald Trump}
-	\end{subfigure}	        
-	\caption*{\footnotesize
+    \begin{subfigure}{.495\textwidth}\centering
+        \includegraphics[width=\textwidth]{../figs/relative_score_gg.pdf}
+        \caption{Greenhouse Gases}
+    \end{subfigure}
+    \hfil
+    \begin{subfigure}{.495\textwidth}\centering
+        \includegraphics[width=\textwidth]{../figs/relative_score_dt.pdf}
+        \caption{Donald Trump}
+    \end{subfigure}         
+    \caption*{\footnotesize
             Bars indicate the predicted percent of correct responses as reported in \cref{table:study4_results}.  
             MC bar indicates the predicted effect of multiple choice with congenial responses on getting the correct response.
             RL bar indicates the effect of relative scoring with congenial responses on getting the correct response relative to the multiple choice (MC) scheme.
-		Capped vertical bars indicate 95\% confidence intervals.
-	}
-	\label{fig:mturk_relative_score}
+        Capped vertical bars indicate 95\% confidence intervals.
+    }
+    \label{fig:mturk_relative_score}
 \end{figure}
 
 % Commenting out for now
@@ -488,19 +488,19 @@ for respondents \(i\), survey item \(j\), and scoring condition \(k\). As in \cr
 \iffalse
 % partisan-gaps/scripts/Stata/mturk_hk/mc_likert_coefplot.do
 \begin{center}
-	\begin{figure}[ht]
-		\centering
-		\caption{Partisan Gaps in different question designs}
-		\includegraphics[width=.55\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
-		\label{fig:mturk_hk}
-		\caption*{\scriptsize
-			The figure shows the estimated partisan gaps in MTurk 2 for two different survey conditions.
-			The multiple-choice condition provides five closed-ended options, including the correct answer and a ``Don't Know''.
-			The Likert scale condition only considers the selection of the correct answer with complete confidence of 10 (see \cref{si:mturk2}).
-			Estimates correspond to those reported in \cref{tab:mturk_hk}.
-			Horizontal bars are 95\% confidence intervals.
-		}
-	\end{figure}
+    \begin{figure}[ht]
+        \centering
+        \caption{Partisan Gaps in different question designs}
+        \includegraphics[width=.55\textwidth]{../figs/mturk-hk-MC-LIKERT.pdf}
+        \label{fig:mturk_hk}
+        \caption*{\scriptsize
+            The figure shows the estimated partisan gaps in MTurk 2 for two different survey conditions.
+            The multiple-choice condition provides five closed-ended options, including the correct answer and a ``Don't Know''.
+            The Likert scale condition only considers the selection of the correct answer with complete confidence of 10 (see \cref{si:mturk2}).
+            Estimates correspond to those reported in \cref{tab:mturk_hk}.
+            Horizontal bars are 95\% confidence intervals.
+        }
+    \end{figure}
 \end{center}
 \fi
 
@@ -510,27 +510,27 @@ for respondents \(i\), survey item \(j\), and scoring condition \(k\). As in \cr
 
 % partisan-gaps/scripts/Stata/mturk_hk/reg-table.do
 \begin{table}[t] \centering \small \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Confidence Scoring and Knowledge Gaps: MTurk 2} 
-	\label{table:study4_results}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule
-			% https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
-			&\multicolumn{4}{c}{Individual survey question}\\
-			\cmidrule(l){2-5}
-			&\multicolumn{1}{c}{Affordable Care Act}&\multicolumn{1}{c}{Affordable Care Act 2}&\multicolumn{1}{c}{Greenhouse gases}&\multicolumn{1}{c}{Donald Trump}&\multicolumn{1}{c}{All}\\
-			\input ../tabs/mturk-hk-reg-table-fragment.tex
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\scriptsize Dependent variables indicate whether the respondent answered the question(s) correctly. 
-		See \cref{si:mturk2} for the exact wording of the four questions.
-		Columns (1)--(4) estimates by the individual survey questions.
-		Column (5) includes all questions and adds the survey question fixed effects.
-		All models are linear probability models.
-		In the relative scoring scheme, a response is correct only if the correct answer is selected with full confidence of 10 (see \nameref{sec:data3} in the \nameref{sec:confidence_coding} section).
-		The baseline is the multiple choice designs. \cref{tab:tab6_robustness} implements a robustness check setting the relative scoring threshold to 8. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{Confidence Scoring and Knowledge Gaps: MTurk 2} 
+    \label{table:study4_results}
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+            \toprule
+            % https://tex.stackexchange.com/questions/567985/problems-with-inputtable-tex-hline-after-2020-fall-latex-release
+            &\multicolumn{4}{c}{Individual survey question}\\
+            \cmidrule(l){2-5}
+            &\multicolumn{1}{c}{Affordable Care Act}&\multicolumn{1}{c}{Affordable Care Act 2}&\multicolumn{1}{c}{Greenhouse gases}&\multicolumn{1}{c}{Donald Trump}&\multicolumn{1}{c}{All}\\
+            \input ../tabs/mturk-hk-reg-table-fragment.tex
+            \bottomrule
+        \end{tabular}
+    \end{adjustbox}
+    \caption*{\scriptsize Dependent variables indicate whether the respondent answered the question(s) correctly. 
+        See \cref{si:mturk2} for the exact wording of the four questions.
+        Columns (1)--(4) estimates by the individual survey questions.
+        Column (5) includes all questions and adds the survey question fixed effects.
+        All models are linear probability models.
+        In the relative scoring scheme, a response is correct only if the correct answer is selected with full confidence of 10 (see \nameref{sec:data3} in the \nameref{sec:confidence_coding} section).
+        The baseline is the multiple choice designs. \cref{tab:tab6_robustness} implements a robustness check setting the relative scoring threshold to 8. Standard errors are clustered at the respondent level. Significance levels: + 0.1 * 0.05 ** 0.01 *** 0.001.}
 \end{table}
 
 \clearpage
@@ -545,12 +545,12 @@ To answer which design choices lead to better measures, we use data from the fir
 \cref{tab:criterion-var-corr} reports results for each of the four conditions (see \cref{tab:conditions}) and the confidence coding condition (CCD) that scores a response as correct when the respondent is completely confident about the correct answer. CCD has better reliability than other versions. However, the picture is more mixed for the other conditions with FSR and IDA having greater reliability than CUD and IMC. One of the reasons for this mixed picture may be that partisan guessing increases reliability without increasing validity because it introduces correlated error. A more diagnostic test for the quality of the instrument hence is criterion validity. As Panel A of \cref{tab:criterion-var-corr} shows, the average correlation between IMC and CCD and criterion variables is markedly higher (~ .34) than IDA (.11), CUD (.20), and FSR (.26).\footnote{We did one more test to get at the validity. We hypothesized that partisan guessing would lead to a greater negative correlation between congenial and uncongenial items on items that encouraged guessing. And indeed the item-rest correlations between uncongenial and congenial items are the smallest for CCD.)}
 
 \begin{table}[ht] \centering \normalsize \setlength\tabcolsep{6 pt} \setlength{\defaultaddspace}{0pt}
-	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-	\caption{Validity and Reliability}
-	\label{tab:criterion-var-corr}
-	\begin{adjustbox}{max width=\textwidth}
-		\begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
-			\toprule	
+    \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+    \caption{Validity and Reliability}
+    \label{tab:criterion-var-corr}
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{@{\hspace{0\tabcolsep}}l*{6}{D{.}{.}{-1}}@{\hspace{0\tabcolsep}}}
+            \toprule    
                 &\multicolumn{5}{c}{\textbf{Conditions}}\\
                 &\multicolumn{2}{c}{No DK}&\multicolumn{3}{c}{With DK}\\
                 \cmidrule(lr){2-3}\cmidrule(l){4-6}
@@ -570,16 +570,16 @@ To answer which design choices lead to better measures, we use data from the fir
                 &\multicolumn{5}{c}{\textbf{Panel C.} Scale reliability}\\
                 \cmidrule(l){2-6}
                 Cronbach's alpha&.737&.637&.748&.652&.812\\
-			\bottomrule
-		\end{tabular}
-	\end{adjustbox}
-	\caption*{\footnotesize 
+            \bottomrule
+        \end{tabular}
+    \end{adjustbox}
+    \caption*{\footnotesize 
             Panel A reports the correlation coefficient between each condition and the three criterion variables. 
             Political interest and political participation (voting) are coded on an 11-point scale. Education is coded from 1--5 by education qualification. 
             Panel B reports the inter-item correlation for the nine items (see \cref{fig:partisangaps-mturk}).
             Panel C reports the Cronbach's alpha coefficient of scale reliability for the nine items.
             See \cref{tab:conditions} for a brief description of the first four conditions and \nameref{sec:confidence_coding} for the confidence coding design.
-		}
+        }
 \end{table}
 
 The results obtained above are consistent with those obtained by \citet{graham2021measuring} who finds that the test-retest reliability of confident correct answers is much higher. In all, the data suggest that the substantially smaller partisan gap that we see in CCD is also the best estimate of the partisan gap.
