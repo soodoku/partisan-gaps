@@ -1,15 +1,15 @@
-## Mind the Gap: Partisan Gaps 
+## A Measurement Gap? Effect of Survey Instrument and Scoring on the Partisan Knowledge Gap
 
-This repository contains data, code, and manuscript source for the paper "_A Measurement Gap? Effect of Survey Instrument and Scoring on the Partisan Knowledge Gap_". Code for this paper is written in R and Stata (Python sparingly). The manuscript in pdf is compiled using LaTeX. The manuscript and the key results can be reproduced either by running the scripts directly or using the makefiles `make` utilities. 
+This repository contains data, code, and manuscript source for the paper "_A Measurement Gap? Effect of Survey Instrument and Scoring on the Partisan Knowledge Gap_". The code for this paper is written in R and Stata (Python sparingly). The manuscript in pdf is compiled using LaTeX. The manuscript and the key results can be reproduced either by running the scripts directly or using the makefiles `make` utilities. 
 
 <p align="center">
   <img width="100%" src="figs/partisan-gap-by-item-arm.png">
 </p>
 
 ### Manuscript preparation
-The Overleaf repository for the manuscript is linked its own [GitHub repository](https://github.com/LSYS/overleaf-partisan-gap) and included as a Git submodule in this repository. See  `./overleaf-partisan-gap/`. When cloning or pulling this repo, the submodule metadata (via `.gitsubmodules`) and the folder for the manuscript submodule are included. However, the actual contents of the manuscript are not included. To get the contents, `cd` into `overleaf-partisan-gap/` submodule folder, do a `git submodule init` and then `git submodule update`.
+The Overleaf repository for the manuscript is linked to its own [GitHub repository](https://github.com/LSYS/overleaf-partisan-gap) and included as a Git submodule in this repository. See  `./overleaf-partisan-gap/`. When cloning or pulling this repo, the submodule metadata (via `.gitsubmodules`) and the folder for the manuscript submodule are included. However, the actual contents of the manuscript are not included. To get the contents, `cd` into `overleaf-partisan-gap/` submodule folder, do a `git submodule init` and then `git submodule update`.
 
-The `./Makefile` includes a recipe to update all [output](#output-of-scripts) of scripts into the `./overleaf-partisan-gap/` submodule folder. Type `make update` to do so. The `./overleaf-partisan-gap/` repository also includes a Makefile to compile the manuscript in LaTeX and clean up auxilliary files using `latexmk`. Type `make ms` from `./overleaf-partisan-gap/` to compile the [manuscript](https://github.com/LSYS/overleaf-partisan-gap/blob/main/ms/partisan_gap.pdf).
+The `./Makefile` includes a recipe to update all [output](#output-of-scripts) of scripts into the `./overleaf-partisan-gap/` submodule folder. Type `make update` to do so. The `./overleaf-partisan-gap/` repository also includes a Makefile to compile the manuscript in LaTeX and clean up auxiliary files using `latexmk`. Type `make ms` from `./overleaf-partisan-gap/` to compile the [manuscript](https://github.com/LSYS/overleaf-partisan-gap/blob/main/ms/partisan_gap.pdf).
 
 ### Output of scripts
 See [here](tabs/) for the tables (TeX) and [here](figs/) for the figures (pdf, png).
@@ -72,15 +72,13 @@ The `scripts/Stata/partisan-gaps.do` do file is the master `do` file to generate
 
 To `make` the Stata output, `cd` to `scripts/Stata/` and type `make all`. The path to the Stata executable is defined in the `STATA_PATH` variable in the [`makefile`](./scripts/Stata/Makefile). Change the path as required. Alternatively, run `partisan-gaps.do` from Stata to generate all output. The path to the project is defined in [`local rootdir D:/partisan-gaps`](https://github.com/soodoku/partisan-gaps/blob/6087c4bcb5feac94057bdbe6dd5f6fdffd0249f2/scripts/Stata/partisan-gaps.do#L11) in the preamble. Change this as required. Making all the Stata output should take not much longer than a couple of minutes.
 
-Python, via Jupyter notebooks, is used only to produce the balance of covariates tests for Study 1 (MTurk sample 1) and to inspect data. These are in `scripts/py/`. The `makefile` in the path runs both notebooks and output the balance tests figures with `make all` (relies on the [`runpynb`](https://github.com/lsys/runpynb) and the [`forestplot`](https://github.com/lsys/forestplot) utilities). Making the Python output should take only a minute or so.
+Python, via Jupyter notebooks, is used only to produce the balance of covariates tests for Study 1 (MTurk sample 1) and to inspect data. These are in `scripts/py/`. The `makefile` in the path runs both notebooks and outputs the balance tests figures with `make all` (relies on the [`runpynb`](https://github.com/lsys/runpynb) and the [`forestplot`](https://github.com/lsys/forestplot) utilities). Making the Python output should take only a minute or so.
 
-Total time to `make` all output should take only a few minutes.
+The total time to `make` all output should take only a few minutes.
 
 ### Software requirements
-Most of the code uses [R](https://www.r-project.org/) and [Stata](https://www.stata.com/). Stata code was tested using Stata 13 and Stata 17. Python code is used sparingly from Jupyter notebooks. These can be run from the command line using the `runpynb` utility (without initiating Jupyter notebooks JupyterLab). Manuscript is compiled in `LaTeX` and from `makefiles` using `latexmk`. Some recipes are provided for convenience in the `makefiles` using [GNU Make](https://www.gnu.org/software/make/). Makefiles come with quick help by typing `make` or `make help`. 
-
+Most of the code uses [R](https://www.r-project.org/) and [Stata](https://www.stata.com/). Stata code was tested using Stata 13 and Stata 17. Python code is used sparingly from Jupyter notebooks. These can be run from the command line using the `runpynb` utility (without initiating Jupyter notebooks JupyterLab). The manuscript is compiled in `LaTeX` and from `makefiles` using `latexmk`. Some recipes are provided for convenience in the `makefiles` using [GNU Make](https://www.gnu.org/software/make/). Makefiles come with quick help by typing `make` or `make help`. 
 
 ### Authors
 
 Lucas Shen, Gaurav Sood, and Daniel Weitzel
-
