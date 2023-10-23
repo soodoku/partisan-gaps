@@ -87,31 +87,8 @@
 	\end{figure}
 \end{center}
 
-\section{Partisan Knowledge Gaps with Partisan Cues: YouGov}
-
-\begin{figure}[ht]
-	\caption{Partisan Knowledge Gaps with Partisan Cues: YouGov}
-	\centering
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-unemp-congenialcue-partisan.pdf}
-		\caption{Unemployment}
-	\end{subfigure}
-	\hfil
-	\begin{subfigure}{.495\textwidth}\centering
-		\includegraphics[width=\textwidth]{../figs/yougov-deficit-congenialcue-partisan.pdf}
-		\caption{Budget deficit}
-	\end{subfigure}
-	\caption*{\footnotesize Figure shows the effect of congenial cues for the YouGov survey by partisanship. Bars indicate the predicted percent of responses saying that unemployment has gone up (correct response) as retrieved from the estimates in \cref{tab:partisangaps-yougov} (columns (2) and (5)).  The estimates are obtained by estimating:\\
-
-	$\qquad\text{correct response}_{i} = \alpha + \beta (congenial \; cue)_i + \gamma (Rep)_i + \delta (congenial\; cue \times Rep)_i + \varepsilon_{i}$.\\
-
-	Capped vertical bars indicate 95\% confidence intervals.
-	}
-	\label{fig:yougov-reg-by-partisanship}
-\end{figure}
-
-\clearpage
-\section{Confidence Scoring for Mturk 1}\label{si:mturk1-ccd}
+\newpage
+\section{Additional Results for Confidence Scoring (Mturk 1)}\label{si:mturk1-ccd}
 
 \begin{table}[th] \centering \small \setlength\tabcolsep{0 pt} \setlength{\defaultaddspace}{0pt}
 	\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
@@ -664,7 +641,7 @@
 	\label{fig:confidence-scoring-study1-ccd-imc-14k}
 \end{figure}
 
-\section{Partisan Gaps in Knowledge Across Question Designs}
+\clearpage
 \begin{center}
 	\begin{figure}[ht]
 		\centering
@@ -672,7 +649,7 @@
 		\includegraphics[width=.9\textwidth]{../figs/partisan-gap-by-item-arm-mc-24k.pdf}
 		\label{fig:mturk_hk24_mc}
 		\caption*{\footnotesize
-		The figure shows the estimated partisan gaps in knowledge from the MTurk sample for Study 1 for the four multiple-choice survey conditions (pooling IDA, CUD, FSR, and IMC) and the confidence coding design (CCD). Corresponds to \cref{fig:mturk_hk24}.
+		The figure shows the estimated partisan gaps in knowledge from MTurk 1 for the four multiple-choice survey conditions (pooling IDA, CUD, FSR, and IMC) and the confidence coding design (CCD). Corresponds to \cref{fig:mturk_hk24}.
             The CCD condition only considers selecting the right answer with complete confidence as evidence that the respondent knows the answer (see \cref{si:mturk2}).
             See \crefrange{tab:confidence-scoring-study1}{tab:confidence-scoring-study1-ccd-14k-imc} in \cref{si:mturk1-ccd} for the regression estimates of the multiple-choice conditions to the confidence coding condition.
 		}
@@ -1057,7 +1034,7 @@ Since 2012, has the annual federal budget deficit \ldots
 \newpage
 
 \clearpage
-\section{Criterion Variables}\label{si:mturk1_criteria}
+\section{Criterion Variables (MTurk 1)}\label{si:mturk1_criteria}
 \begin{itemize}
 
     \item Political Interest: On a scale from 0 to 10, where 0 is not at all, 10 is passionately, and 5 is exactly in the middle, how interested would you say you generally are in politics and public affairs?
@@ -1147,16 +1124,13 @@ If the close-ended questions 3 and 4 were not answered with Don’t know the res
 \end{center}
 
 \clearpage
-\section{Proportion Correct across Questions}
+\section{Alternate Scoring Criteria for CCD}
 
 Table \ref{tab:prop_correct} shows the proportion of correct answers across the Affordable Care Act questions (ACA and ACA2), the Greenhouse Gas question, and the question about Donald Trump's executive order. We report the proportion correct for closed questions in the multiple-choice format and the relative scoring at the thresholds of 8 and 10. For the relative scoring to code an answer as correct the confidence for the correct answer had to be 8 (or 10), the scoring had to be the maximum number given, it had to be unique, and incorrect answers were not allowed to be scored higher than 2 (or 0). 
 
 \input{tabs/tab_prop_correct.tex}
 
-\clearpage
-\section{Less Stringent Coding Criteria for CCD}
 \label{si_alternate_coding}
-
 \begin{center}
 	\begin{figure}[ht]
 		\centering
@@ -1164,7 +1138,7 @@ Table \ref{tab:prop_correct} shows the proportion of correct answers across the 
 		\includegraphics[width=.9\textwidth]{../figs/partisan-gap-by-item-arm-14k-24k-greaterthan7.pdf}
 		\label{fig:mturk_hk24_greaterthan7}
 		\caption*{\footnotesize
-		The figure shows the estimated partisan gaps in knowledge from the MTurk sample for Study 1 for two different survey conditions. The CCD condition only considers selecting the right answer with confidence larger than 7 as evidence that the respondent knows the answer (see \cref{si:mturk2}). Corresponds to \cref{fig:mturk_hk24}, the difference here is that the analysis implements a relative scoring threshold of 8. See \cref{tab:tab6_robustness} for the analogous table for Study 3: MTurk 2 Results.
+		The figure shows the estimated partisan gaps in knowledge from MTurk 1 for two different survey conditions. The CCD condition only considers selecting the right answer with confidence larger than 7 as evidence that the respondent knows the answer (see \cref{si:mturk2}). Corresponds to \cref{fig:mturk_hk24}, the difference here is that the analysis implements a relative scoring threshold of 8. See \cref{tab:tab6_robustness} for the analogous table for Study 3: MTurk 2 Results.
 		}
 	\end{figure}
 \end{center}
