@@ -41,8 +41,12 @@ eststo: reghdfe item i.rep##i.ccd, absorb(item_type) vce(cluster id)
 #delimit;
 esttab using $tabsavedir/confidence-scoring-study1-fragment.tex, 
 	keep(1.rep 1.ccd 1.rep#1.ccd _cons)
-	b(%9.3fc)
-	se(%9.3fc)
+	cell(
+      b (fmt(%9.3fc) star) 
+      se(par fmt(%9.3fc))
+      p (par([ ]) fmt(%9.3fc))
+    )  
+    collabels(, none)
 	varwidth(15)
 	modelwidth(6)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
@@ -116,8 +120,12 @@ foreach ix_survey in 1 3 4 5 {
 	#delimit;
 	esttab using $tabsavedir/confidence-scoring-study1-ccd-`subname'-fragment.tex, 
 		keep(1.rep 1.ccd 1.rep#1.ccd _cons)
-		b(%9.3fc)
-		se(%9.3fc)
+		cell(
+	      b (fmt(%9.3fc) star) 
+	      se(par fmt(%9.3fc))
+	      p (par([ ]) fmt(%9.3fc))
+	    )  
+	    collabels(, none)
 		varwidth(15)
 		modelwidth(6)	
 		star (+ 0.1 * 0.05 ** 0.01 *** 0.001)

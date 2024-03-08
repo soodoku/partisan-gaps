@@ -31,8 +31,12 @@ eststo: qui reghdfe responses i.congenial##i.survey if `close_relscore', absorb(
 
 #delimit;
 esttab,
-	b(%9.3fc)
-	se(%9.3fc)
+	cell(
+      b (fmt(%9.3fc) star) 
+      se(par fmt(%9.3fc))
+      p (par([ ]) fmt(%9.3fc))
+    )  
+    collabels(, none)
 	varwidth(30)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
@@ -59,8 +63,12 @@ esttab,
 ;
 
 esttab using $tabsavedir/mturk-hk-reg-table-fragment.tex, 
-	b(%9.3fc)
-	se(%9.3fc)
+	cell(
+      b (fmt(%9.3fc) star) 
+      se(par fmt(%9.3fc))
+      p (par([ ]) fmt(%9.3fc))
+    )  
+    collabels(, none)
 	varwidth(20)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
