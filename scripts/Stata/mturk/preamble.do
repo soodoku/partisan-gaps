@@ -56,7 +56,11 @@ foreach demo in educ hisla race {
 gen asian = strmatch(race_str, "Asian*")
 gen black = strmatch(race_str, "Black*")
 gen white = strmatch(race_str, "White*")
-gen others = strmatch(race_str, "Other*")
+gen others = (race_str== ///
+	"American Indian or Alaska Native") ///
+	| (race_str=="Native Hawaiian or Pacific Islander") ///
+	| (race_str=="Other") 
+assert 1 == (asian + black + others + white)
 global races asian black white others
 
 *------------------------------------------------------------------------------

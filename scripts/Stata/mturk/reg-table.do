@@ -157,6 +157,7 @@ coefplot,
 	ytitle("Predicted proportion of correct responses" "when congenial")
 	name(congenial)
 ;
+graph export $figsavedir/mturk-ida-cud-fsr-imc-congenial.pdf, replace;
 
 
 #delimit;
@@ -185,6 +186,7 @@ coefplot,
 	xlabel(,val noticks)
 	plotregion(margin(10 10 0 0))
 	ytitle("Predicted proportion of correct responses" "when not* congenial")
-	name(not_congenial)
+	name(uncongenial)
 ;
+graph export $figsavedir/mturk-ida-cud-fsr-imc-uncongenial.pdf, replace;
 
