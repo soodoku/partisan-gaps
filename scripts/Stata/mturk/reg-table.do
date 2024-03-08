@@ -1,3 +1,38 @@
+
+* -----------------------------------------------------------------------------
+* Program Setup
+* -----------------------------------------------------------------------------
+cls 					// Clear results window
+clear all               // Start with a clean slate
+set more off            // Disable partitioned output
+macro drop _all         // Clear all macros to avoid namespace conflicts
+set linesize 120        // Line size limit to make output more readable, affects logs
+
+local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+cd `rootdir'
+
+cd scripts/Stata
+
+cap log close
+log using partisan-gaps-log.txt, replace text
+
+version 13              // Still on version 13 :(
+
+global figsavedir `rootdir'/figs
+global tabsavedir `rootdir'/tabs
+adopath ++ ./ado 		// Add path to ados
+
+*** Setup dependencies
+txt2macro stata-requirements.txt
+setup "`r(mymacro)'"
+* -----------------------------------------------------------------------------
+tictoc tic
+
+import delimited `rootdir'/data/turk/mturk-recoded.csv
+do ./mturk/preamble.do
+
+
+
 * Drop CCD (confidence coding/24k)
 drop if survey == 2
 
@@ -36,8 +71,12 @@ eststo: qui reghdfe item `spec`i'', absorb(item_type) vce(cluster id)
 
 #delimit;
 esttab,
-	b(%9.3fc)
-	se(%9.3fc)
+	cell(
+      b (fmt(%9.3fc) star) 
+      se(par fmt(%9.3fc))
+      p (par([ ]) fmt(%9.3fc))
+    )  
+    collabels(, none)
 	varwidth(20)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
@@ -73,8 +112,12 @@ esttab,
 
 
 esttab using $tabsavedir/mturk-reg-table-fragment.tex, 
-	b(%9.3fc)
-	se(%9.3fc)
+	cell(
+      b (fmt(%9.3fc) star) 
+      se(par fmt(%9.3fc))
+      p (par([ ]) fmt(%9.3fc))
+    )  
+    collabels(, none)
 	varwidth(20)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
@@ -97,7 +140,7 @@ esttab using $tabsavedir/mturk-reg-table-fragment.tex,
 		)
 	order(1.rep 5.survey 3.survey 1.survey 1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
 	scalar(
-		"r2 R$^2$" 
+		"r2 R$^2$"
 		"itemFE Survey item FE"
 		"demo Demographic controls"
 		"items Items"
@@ -109,3 +152,72 @@ esttab using $tabsavedir/mturk-reg-table-fragment.tex,
 	fragment booktabs replace        
 	;
 #delimit cr	
+
+
+// Test plot
+* IPS = IDA
+* RW = CUD
+* FSR = FSR
+* 14k = IMD
+* 24k = CCD
+margins rep#survey, post
+
+#delimit;
+coefplot,
+	keep(1.rep#*)
+	recast(bar)
+	vertical
+	color(gs7) fcolor(none) lwidth(thick)
+	ylabel(0(.2).6, angle(horizontal) labsize(large) nogrid )
+	yscale(r(0 .65))
+	ciopts(recast(rcap))
+	coeflabel(
+		1.rep#4.survey = "IDA"
+		1.rep#5.survey = "CUD"
+		1.rep#3.survey = "FSR"
+		1.rep#1.survey = "IMD"
+		// 1.rep#2.survey = "24k"
+	)
+	order(
+		1.rep#4.survey
+		1.rep#5.survey
+		1.rep#3.survey
+		1.rep#1.survey
+	)
+	graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+	xlabel(,val noticks)
+	plotregion(margin(0 0 0 0))
+	ytitle("Predicted proportion of correct responses" "when congenial")
+	name(congenial)
+;
+
+
+#delimit;
+coefplot,
+	keep(0.rep#*)
+	recast(bar)
+	vertical
+	color(gs7) fcolor(none) lwidth(thick)
+	ylabel(0(.2).6, angle(horizontal) labsize(large) nogrid )
+	yscale(r(0 .65))
+	ciopts(recast(rcap))
+	coeflabel(
+		0.rep#4.survey = "IDA"
+		0.rep#5.survey = "CUD"
+		0.rep#3.survey = "FSR"
+		0.rep#1.survey = "IMD"
+		// 1.rep#2.survey = "24k"
+	)
+	order(
+		0.rep#4.survey
+		0.rep#5.survey
+		0.rep#3.survey
+		0.rep#1.survey
+	)
+	graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
+	xlabel(,val noticks)
+	plotregion(margin(0 0 0 0))
+	ytitle("Predicted proportion of correct responses" "when not* congenial")
+	name(not_congenial)
+;
+
