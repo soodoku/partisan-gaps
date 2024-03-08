@@ -1,38 +1,3 @@
-
-* -----------------------------------------------------------------------------
-* Program Setup
-* -----------------------------------------------------------------------------
-cls 					// Clear results window
-clear all               // Start with a clean slate
-set more off            // Disable partitioned output
-macro drop _all         // Clear all macros to avoid namespace conflicts
-set linesize 120        // Line size limit to make output more readable, affects logs
-
-local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-cd `rootdir'
-
-cd scripts/Stata
-
-cap log close
-log using partisan-gaps-log.txt, replace text
-
-version 13              // Still on version 13 :(
-
-global figsavedir `rootdir'/figs
-global tabsavedir `rootdir'/tabs
-adopath ++ ./ado 		// Add path to ados
-
-*** Setup dependencies
-txt2macro stata-requirements.txt
-setup "`r(mymacro)'"
-* -----------------------------------------------------------------------------
-tictoc tic
-
-import delimited `rootdir'/data/turk/mturk-recoded.csv
-do ./mturk/preamble.do
-
-
-
 * Drop CCD (confidence coding/24k)
 drop if survey == 2
 
@@ -154,6 +119,8 @@ esttab using $tabsavedir/mturk-reg-table-fragment.tex,
 #delimit cr	
 
 
+grstyle init
+grstyle set plain, nogrid noextend horizontal
 // Test plot
 * IPS = IDA
 * RW = CUD
@@ -168,7 +135,7 @@ coefplot,
 	recast(bar)
 	vertical
 	color(gs7) fcolor(none) lwidth(thick)
-	ylabel(0(.2).6, angle(horizontal) labsize(large) nogrid )
+	ylabel(0(.2).6, labsize(large) nogrid )
 	yscale(r(0 .65))
 	ciopts(recast(rcap))
 	coeflabel(
@@ -186,7 +153,7 @@ coefplot,
 	)
 	graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
 	xlabel(,val noticks)
-	plotregion(margin(0 0 0 0))
+	plotregion(margin(10 10 0 0))
 	ytitle("Predicted proportion of correct responses" "when congenial")
 	name(congenial)
 ;
@@ -216,7 +183,7 @@ coefplot,
 	)
 	graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
 	xlabel(,val noticks)
-	plotregion(margin(0 0 0 0))
+	plotregion(margin(10 10 0 0))
 	ytitle("Predicted proportion of correct responses" "when not* congenial")
 	name(not_congenial)
 ;
