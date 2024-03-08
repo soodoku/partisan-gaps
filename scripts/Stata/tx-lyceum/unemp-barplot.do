@@ -50,7 +50,7 @@ twoway
 			xlabel(,val labsize(`XLAB_SIZE') )
 			xtitle("")
 		) 
-		(rcap uci lci porder if porder!=0, 
+		(rcap uci lci porder, 
 			color(black)
 			lwidth(`CI_WIDTH')
 			legend(off)
