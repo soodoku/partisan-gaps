@@ -15,8 +15,8 @@ replace effect = `baseline' if var=="_cons"
 * Construct CI
 gen uci = effect + 1.96 * stderr
 gen lci = effect - 1.96 * stderr
-replace uci = 0 if var=="_cons"
-replace lci = 0 if var=="_cons"
+// replace uci = 0 if var=="_cons"
+// replace lci = 0 if var=="_cons"
 
 gen porder = 0 if var=="_cons"
 replace porder = 1 if var=="1.congenialcue"
@@ -42,7 +42,7 @@ twoway
 			xlabel(,val labsize(`XLAB_SIZE') )
 			xtitle("")
 		) 
-		(rcap uci lci porder if porder!=0, 
+		(rcap uci lci porder, 
 			color(black)
 			lwidth(`CI_WIDTH')
 			legend(off)
