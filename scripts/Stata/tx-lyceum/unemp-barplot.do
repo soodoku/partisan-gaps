@@ -20,8 +20,8 @@ replace effect = `baseline' if var=="_cons"
 * Construct CI
 gen uci = effect + 1.96 * stderr
 gen lci = effect - 1.96 * stderr
-replace uci = 0 if var=="_cons"
-replace lci = 0 if var=="_cons"
+// replace uci = 0 if var=="_cons"
+// replace lci = 0 if var=="_cons"
 
 gen porder = 0 if var=="_cons"
 replace porder = 1 if var=="1.unempuncongenial"
