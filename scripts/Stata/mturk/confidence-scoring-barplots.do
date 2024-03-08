@@ -39,8 +39,8 @@ foreach item_type in $items {
 	* Construct CI
 	gen uci = coef + 1.96 * stderr
 	gen lci = coef - 1.96 * stderr
-	replace uci = 0 if var=="_cons"
-	replace lci = 0 if var=="_cons"
+	// replace uci = 0 if var=="_cons"
+	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
 	label define xlab 1 "MC" 2 "CS"
@@ -61,7 +61,7 @@ foreach item_type in $items {
 				(bar coef porder if porder==2, `BAR_OPTS'
 					xlabel(,val labsize(`XLAB_SIZE') )
 				) 
-				(rcap uci lci porder if porder!=1, 
+				(rcap uci lci porder, 
 					color(gs5)
 					msize(huge)  // size of rcap
 					lwidth(`CI_WIDTH') 
@@ -112,8 +112,8 @@ foreach item_type in $items {
 	* Construct CI
 	gen uci = coef + 1.96 * stderr
 	gen lci = coef - 1.96 * stderr
-	replace uci = 0 if var=="_cons"
-	replace lci = 0 if var=="_cons"
+	// replace uci = 0 if var=="_cons"
+	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
 	label define xlab 1 "MC" 2 "CS"
@@ -134,7 +134,7 @@ foreach item_type in $items {
 				(bar coef porder if porder==2, `BAR_OPTS'
 					xlabel(,val labsize(`XLAB_SIZE') )
 				) 
-				(rcap uci lci porder if porder!=1, 
+				(rcap uci lci porder, 
 					color(gs5)
 					msize(huge)  // size of rcap
 					lwidth(`CI_WIDTH') 
@@ -187,8 +187,8 @@ foreach item_type in $items {
 	* Construct CI
 	gen uci = coef + 1.96 * stderr
 	gen lci = coef - 1.96 * stderr
-	replace uci = 0 if var=="_cons"
-	replace lci = 0 if var=="_cons"
+	// replace uci = 0 if var=="_cons"
+	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
 	label define xlab 1 "MC" 2 "CS"
@@ -209,7 +209,7 @@ foreach item_type in $items {
 				(bar coef porder if porder==2, `BAR_OPTS'
 					xlabel(,val labsize(`XLAB_SIZE') )
 				) 
-				(rcap uci lci porder if porder!=1, 
+				(rcap uci lci porder, 
 					color(gs5)
 					msize(huge)  // size of rcap
 					lwidth(`CI_WIDTH') 
@@ -260,8 +260,8 @@ foreach item_type in $items {
 	* Construct CI
 	gen uci = coef + 1.96 * stderr
 	gen lci = coef - 1.96 * stderr
-	replace uci = 0 if var=="_cons"
-	replace lci = 0 if var=="_cons"
+	// replace uci = 0 if var=="_cons"
+	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
 	label define xlab 1 "MC" 2 "CS"
@@ -282,7 +282,7 @@ foreach item_type in $items {
 				(bar coef porder if porder==2, `BAR_OPTS'
 					xlabel(,val labsize(`XLAB_SIZE') )
 				) 
-				(rcap uci lci porder if porder!=1, 
+				(rcap uci lci porder, 
 					color(gs5)
 					msize(huge)  // size of rcap
 					lwidth(`CI_WIDTH') 
@@ -333,8 +333,8 @@ foreach item_type in $items {
 	* Construct CI
 	gen uci = coef + 1.96 * stderr
 	gen lci = coef - 1.96 * stderr
-	replace uci = 0 if var=="_cons"
-	replace lci = 0 if var=="_cons"
+	// replace uci = 0 if var=="_cons"
+	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
 	label define xlab 1 "MC" 2 "CS"
@@ -355,7 +355,7 @@ foreach item_type in $items {
 				(bar coef porder if porder==2, `BAR_OPTS'
 					xlabel(,val labsize(`XLAB_SIZE') )
 				) 
-				(rcap uci lci porder if porder!=1, 
+				(rcap uci lci porder, 
 					color(gs5)
 					msize(huge)  // size of rcap
 					lwidth(`CI_WIDTH') 
