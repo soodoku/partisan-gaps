@@ -57,8 +57,8 @@ esttab using $tabsavedir/confidence-scoring-study1-fragment.tex,
 	nomtitle	
 	coeflabel(
 		1.rep "Congenial"
-		1.ccd "Confidence scoring (CS)"
-		1.rep#1.ccd "Congenial $\times$ CS"
+		1.ccd "Relative scoring (RL)"
+		1.rep#1.ccd "Congenial $\times$ RL"
 		_cons "Constant"
 		)	
 	scalar(
@@ -136,8 +136,8 @@ foreach ix_survey in 1 3 4 5 {
 		nomtitle	
 		coeflabel(
 			1.rep "Congenial"
-			1.ccd "Confidence scoring (CS)"
-			1.rep#1.ccd "Congenial $\times$ CS"
+			1.ccd "Relative scoring (RL)"
+			1.rep#1.ccd "Congenial $\times$ RL"
 			_cons "Constant"
 			)	
 		scalar(
