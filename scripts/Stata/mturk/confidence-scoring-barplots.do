@@ -43,7 +43,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "CS"
+	label define xlab 1 "MC" 2 "RL"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -116,7 +116,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "CS"
+	label define xlab 1 "MC" 2 "RL"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -191,7 +191,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "CS"
+	label define xlab 1 "MC" 2 "RL"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -264,7 +264,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "CS"
+	label define xlab 1 "MC" 2 "RL"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -337,7 +337,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "CS"
+	label define xlab 1 "MC" 2 "RL"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
