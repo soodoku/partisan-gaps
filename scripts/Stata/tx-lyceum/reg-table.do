@@ -90,11 +90,13 @@ eststo: qui reg fedtaxdk $congguess, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{.}"
-eststo: qui reg fedtaxdk $congguess $demoX, vce(hc3)
+eststo: reg fedtaxdk $congguess $demoX, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{Yes}"
 	estadd local demo "Yes"
+	test fedtaxcongenial = fedtaxcongenialguess
+	test fedtaxuncongenial = fedtaxuncongenialguess
 
 #delimit;
 esttab,
