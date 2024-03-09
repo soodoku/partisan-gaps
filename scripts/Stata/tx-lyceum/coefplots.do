@@ -64,18 +64,18 @@ coefplot,
 	mcolor(gs5)
 	mlwidth(vthin)
 	mlcolor(navy)	
-	ylabel(, noticks)
+	ylabel(, noticks labsize(large))
 	grid(none)
 	yscale(lcolor(white))
 	xlabel(-.4(.2).4)
 	xline(0, lcolor(navy) lpattern(dash) lwidth(medium) )
 	levels(99 95)
 	ciopts(color(gs7 gs9) )
-	graphregion(color(white) margin(0 2 0 0) )
+	graphregion(color(white) margin(0 4 0 0) )
 	plotregion(lcolor(white) margin(0 0 0 0) )
 	xtitle(
-		"Estimated difference in probability of correct response"
-		"by experiment condition", size(large)
+		"Estimated difference in probability of"
+		"correct response by experiment condition", size(large)
 	)
 	// ========================================
 	// Annotate if significant
@@ -109,18 +109,18 @@ coefplot,
 	mcolor(gs5)
 	mlwidth(vthin)
 	mlcolor(navy)	
-	ylabel(, noticks)
+	ylabel(, noticks labsize(large))
 	grid(none)
 	yscale(lcolor(white))
 	xlabel(-.4(.2).4)
 	xline(0, lcolor(navy) lpattern(dash) lwidth(medium) )
 	levels(99 95)
 	ciopts(color(gs7 gs9) )
-	graphregion(color(white) margin(0 2 0 0) )
+	graphregion(color(white) margin(0 4 0 0) )
 	plotregion(lcolor(white) margin(0 0 0 0) )
 	xtitle(
-		"Estimated difference in probability of correct response"
-		"by experiment condition", size(large)
+		"Estimated difference in probability of"
+		"DK response by experiment condition", size(large)
 	)
 	// ========================================
 	// Annotate if significant
