@@ -152,7 +152,7 @@ coefplot,
 		1.rep#1.survey
 	)
 	graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
-	xlabel(,val noticks)
+	xlabel(,val noticks labsize(medlarge))
 	plotregion(margin(10 10 0 0))
 	ytitle("Predicted proportion of correct responses" "when congenial", size(large))
 	name(congenial)
@@ -183,10 +183,13 @@ coefplot,
 		0.rep#1.survey
 	)
 	graphregion(color(white) lc(white) lw(medium) margin(0 0 0 0)) 
-	xlabel(,val noticks)
+	xlabel(,val noticks labsize(medlarge))
 	plotregion(margin(10 10 0 0))
 	ytitle("Predicted proportion of correct responses" "when not* congenial", size(large))
 	name(uncongenial)
 ;
 graph export $figsavedir/mturk-ida-cud-fsr-imc-uncongenial.pdf, replace;
 
+
+
+coef
