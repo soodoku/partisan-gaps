@@ -4,3 +4,5 @@ ms/*.blg
 ms/*.log
 ms/*.out
 ms/*.synctex(busy)
+.Rproj.user
+scripts/scripts.Rproj
