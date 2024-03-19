@@ -3,6 +3,7 @@ cd `rootdir'
 cd scripts/Stata
 import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
 do ./mturk/preamble.do
+global figsavedir `rootdir'/figs
 
 * Reshape from wide to long to stack participant-item observations
 foreach item of varlist $items {
@@ -43,7 +44,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "RL"
+	label define xlab 1 "MC" 2 "CCD"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -116,7 +117,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "RL"
+	label define xlab 1 "MC" 2 "CCD"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -191,7 +192,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "RL"
+	label define xlab 1 "MC" 2 "CCD"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -264,7 +265,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "RL"
+	label define xlab 1 "MC" 2 "CCD"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings
@@ -337,7 +338,7 @@ foreach item_type in $items {
 	// replace lci = 0 if var=="_cons"
 
 	gen porder = _n
-	label define xlab 1 "MC" 2 "RL"
+	label define xlab 1 "MC" 2 "CCD"
 	label values porder xlab
 	*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	* Graph settings

@@ -1,3 +1,30 @@
+* -----------------------------------------------------------------------------
+* Program Setup
+* -----------------------------------------------------------------------------
+cls 					// Clear results window
+clear all               // Start with a clean slate
+set more off            // Disable partitioned output
+macro drop _all         // Clear all macros to avoid namespace conflicts
+set linesize 120        // Line size limit to make output more readable, affects logs
+
+local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+cd `rootdir'
+
+cd scripts/Stata
+
+cap log close
+log using partisan-gaps-log.txt, replace text
+
+version 13              // Still on version 13 :(
+
+global figsavedir `rootdir'/figs
+global tabsavedir `rootdir'/tabs
+adopath ++ ./ado 		// Add path to ados
+
+*** Setup dependencies
+txt2macro stata-requirements.txt
+setup "`r(mymacro)'"
+
 **** Basic prep of data
 import delimited ../../data/mturk_hk/mturk_hk_relative_scoring_MC.csv, clear
 
@@ -30,7 +57,7 @@ foreach q_item in `q_items' {
 		vertical
 		color(gs7) fcolor(none) lwidth(thick)
 		ciopts(recast(rcap))
-		xlabel(1 "MC" 2 "RL",val noticks)
+		xlabel(1 "MC" 2 "CCD",val noticks)
 		xscale( lc(none))
 		graphregion(color(white) lc(white) lw(medium) margin(0 0 0 2)) 
 		plotregion(margin(30 30 0 0))
