@@ -1,3 +1,39 @@
+* -----------------------------------------------------------------------------
+* Program Setup
+* -----------------------------------------------------------------------------
+cls 					// Clear results window
+clear all               // Start with a clean slate
+set more off            // Disable partitioned output
+macro drop _all         // Clear all macros to avoid namespace conflicts
+set linesize 120        // Line size limit to make output more readable, affects logs
+
+local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+cd `rootdir'
+
+cd scripts/Stata
+
+cap log close
+log using partisan-gaps-log.txt, replace text
+
+version 13              // Still on version 13 :(
+
+global figsavedir `rootdir'/figs
+global tabsavedir `rootdir'/tabs
+adopath ++ ./ado 		// Add path to ados
+
+*** Setup dependencies
+txt2macro stata-requirements.txt
+setup "`r(mymacro)'"
+* -----------------------------------------------------------------------------
+tictoc tic
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* MTurk results (Study 1)
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**** Basic prep of data
+import delimited `rootdir'/data/turk/mturk-recoded.csv
+do ./mturk/preamble.do
+
 grstyle init
 grstyle set plain, 
 
@@ -22,10 +58,17 @@ IMC = 14k
 CCD = 24k
 */
 
-
+local AVG_MARKER_OPTS offset(0) mcolor(navy) mlcolor(black) mlwidth(vvvthin)
 // coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k) || (*_24k), ///
-coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k), /// removing 24k aka CCD
+coefplot (*_IPS, offset(0)) (avg_IPS, `AVG_MARKER_OPTS') ///
+	|| (*_RW, offset(0)) (avg_RW, `AVG_MARKER_OPTS') ///
+	|| (*_FSR, offset(0)) (avg_FSR, `AVG_MARKER_OPTS') ///
+	|| (*_14k, offset(0)) (avg_14k, `AVG_MARKER_OPTS'), /// 
 	msymbol(s) ///
+	mcolor(gs9) ///
+	mlcolor(gs7) ///
+	mlwidth(vvvthin) ///
+	ciopts( color(gs10) ) ///
 	keep(3.pid) ///
 	asequation /// "set equation to model name or string" make the rows the models
 	swapnames /// "swap coefficient names and equation names"
@@ -80,14 +123,14 @@ coefplot (*_IPS) || (*_RW) || (*_FSR) || (*_14k), /// removing 24k aka CCD
 		avg_IPS = "{bf:Average}" ///								
 		avg_FSR = "{bf:Average}" ///								
 		avg_14k = "{bf:Average}" ///								
-		)
+		) ///
 
 
 * Add column titles	
-addplot 1: , title("{bf:IDA}", size(med)) norescaling
-addplot 2: , title("{bf:CUD}") norescaling
-addplot 3: , title("{bf:FSR}") norescaling
-addplot 4: , title("{bf:IMC}") norescaling
+addplot 1: , title("{bf:Condition 1}", size(medium)) norescaling
+addplot 2: , title("{bf:Condition 2}", size(medium)) norescaling
+addplot 3: , title("{bf:Condition 3}", size(medium)) norescaling
+addplot 4: , title("{bf:Condition 4}", size(medium)) norescaling
 
 * graph margin
 gr_edit .style.editstyle margin(left) editcopy 
@@ -125,6 +168,8 @@ gr_edit .plotregion1.plotregion1[4].AddTextBox added_text editor `y_heigh_coord'
 gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle `annote_style'
 gr_edit .plotregion1.plotregion1[4].added_text[1].style.editstyle box_alignment(center) editcopy
 gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
+
+gr_edit .legend.draw_view.setstyle, style(no)
 
 graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace	
 
