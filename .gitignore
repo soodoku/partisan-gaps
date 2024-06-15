@@ -6,3 +6,5 @@ ms/*.out
 ms/*.synctex(busy)
 .Rproj.user
 scripts/scripts.Rproj
+scripts/.RData
+scripts/.Rhistory
