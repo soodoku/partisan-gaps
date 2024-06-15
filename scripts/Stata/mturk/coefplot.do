@@ -1,40 +1,3 @@
-* -----------------------------------------------------------------------------
-* Program Setup
-* -----------------------------------------------------------------------------
-cls 					// Clear results window
-clear all               // Start with a clean slate
-set more off            // Disable partitioned output
-macro drop _all         // Clear all macros to avoid namespace conflicts
-set linesize 120        // Line size limit to make output more readable, affects logs
-
-local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-cd `rootdir'
-
-cd scripts/Stata
-
-cap log close
-log using partisan-gaps-log.txt, replace text
-
-version 13              // Still on version 13 :(
-
-global figsavedir `rootdir'/figs
-global tabsavedir `rootdir'/tabs
-adopath ++ ./ado 		// Add path to ados
-
-*** Setup dependencies
-txt2macro stata-requirements.txt
-setup "`r(mymacro)'"
-* -----------------------------------------------------------------------------
-tictoc tic
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* MTurk results (Study 1)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Basic prep of data
-import delimited `rootdir'/data/turk/mturk-recoded.csv
-do ./mturk/preamble.do
-
-
 * Drop CCD (confidence coding/24k)
 drop if survey == 2
 
@@ -64,9 +27,9 @@ grstyle set plain, noextend
 coefplot,
 	keep(1.rep#*.survey)
 	coeflabel(
-		1.rep#5.survey="Congenial x CUD"
-		1.rep#3.survey="Congenial x FSR"		
-		1.rep#1.survey="Congenial x IMC"	
+		1.rep#5.survey="Congenial x Condition 2"
+		1.rep#3.survey="Congenial x Condition 3"		
+		1.rep#1.survey="Congenial x Condition 4"	
 	)
 	order(1.rep#5.survey 1.rep#3.survey 1.rep#1.survey)
 	msize(vlarge)
