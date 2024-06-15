@@ -139,10 +139,10 @@ coefplot,
 	yscale(r(0 .65))
 	ciopts(recast(rcap))
 	coeflabel(
-		1.rep#4.survey = "IDA"
-		1.rep#5.survey = "CUD"
-		1.rep#3.survey = "FSR"
-		1.rep#1.survey = "IMD"
+		1.rep#4.survey = "Cond. 1"
+		1.rep#5.survey = "Cond. 2"
+		1.rep#3.survey = "Cond. 3"
+		1.rep#1.survey = "Cond. 4"
 		// 1.rep#2.survey = "24k"
 	)
 	order(
@@ -170,10 +170,11 @@ coefplot,
 	yscale(r(0 .65))
 	ciopts(recast(rcap))
 	coeflabel(
-		0.rep#4.survey = "IDA"
-		0.rep#5.survey = "CUD"
-		0.rep#3.survey = "FSR"
-		0.rep#1.survey = "IMD"
+		0.rep#4.survey = "Cond. 1"
+		0.rep#5.survey = "Cond. 2"
+		0.rep#3.survey = "Cond. 3"
+		0.rep#1.survey = "Cond. 4"
+		4.survey = "xx"
 		// 1.rep#2.survey = "24k"
 	)
 	order(
