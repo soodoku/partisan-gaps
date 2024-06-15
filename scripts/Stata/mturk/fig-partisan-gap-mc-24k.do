@@ -25,9 +25,15 @@ IMC = 14k
 CCD = 24k
 */
 
-
-coefplot (*_mc) || (*_24k), /// 
+local AVG_MARKER_OPTS offset(0) mcolor(navy) mlcolor(black) mlwidth(vvvthin)
+coefplot ///
+	(*_mc) (avg_mc, `AVG_MARKER_OPTS') ///
+	|| (*_24k) (avg_24k, `AVG_MARKER_OPTS'), ///
 	msymbol(s) ///
+	mcolor(gs8) ///
+	mlcolor(gs6) ///
+	mlwidth(vvvthin) ///
+	ciopts( color(gs9) ) ///
 	keep(3.pid) ///
 	asequation /// "set equation to model name or string" make the rows the models
 	swapnames /// "swap coefficient names and equation names"
@@ -66,8 +72,8 @@ coefplot (*_mc) || (*_24k), ///
 
 
 * Add column titles	
-addplot 1: , title("{bf:Multiple Choices}" "{bf:(IDA, CUD, FSR, IMC)}", size(medsmall)) norescaling
-addplot 2: , title("{bf:Confidence Coding Design}" "{bf:(CCD)}", size(medsmall)) norescaling
+addplot 1: , title("{bf:Multiple Choices}" "{bf:(Conditions 1 to 4)}", size(medsmall)) norescaling
+addplot 2: , title(" " "{bf:Confidence Coding Design (CCD)}", size(medsmall)) norescaling
 
 * graph margin
 gr_edit .style.editstyle margin(left) editcopy 
@@ -97,6 +103,7 @@ gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle `annote_style'
 gr_edit .plotregion1.plotregion1[2].added_text[1].style.editstyle box_alignment(center) editcopy
 gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_24k'
 
+gr_edit .legend.draw_view.setstyle, style(no)
 
 graph export "$figsavedir/partisan-gap-by-item-arm-mc-24k.pdf", replace	
 
