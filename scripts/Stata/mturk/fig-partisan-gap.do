@@ -172,6 +172,7 @@ gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
 gr_edit .legend.draw_view.setstyle, style(no)
 
 graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace	
+graph export "$figsavedir/partisan-gap-by-item-arm.png", replace	
 
 
 * sort(, descending) /// sort by coeff size (by first column) 
