@@ -82,21 +82,21 @@ esttab using $tabsavedir/mturk-reg-table-by-gender-fragment.tex,
 	noobs
 	nomtitle
 	coeflabel(1.rep "Congenial"
-			  5.survey "CUD"
-			  3.survey "FSR"
-			  1.survey "IMC"
+			  5.survey "Condition 2"
+			  3.survey "Condition 3"
+			  1.survey "Condition 4"
 			  // 2.survey "CCD"
 			  1.female "Female"
-		      1.rep#5.survey "Congenial $\times$ CUD"
-		      1.rep#3.survey "Congenial $\times$ FSR"		
-		      1.rep#1.survey "Congenial $\times$ IMC"
+		      1.rep#5.survey "Congenial $\times$ Cond. 2"
+		      1.rep#3.survey "Congenial $\times$ Cond. 3"		
+		      1.rep#1.survey "Congenial $\times$ Cond. 4"
 		      1.rep#1.female "Congenial $\times$ Female"
-		      5.survey#1.female "CUD $\times$ Female"
-		      3.survey#1.female "FSR $\times$ Female"
-		      1.survey#1.female "IMC $\times$ Female"
-		      1.rep#5.survey#1.female "(Congenial $\times$ CUD) $\times$ Female"
-		      1.rep#3.survey#1.female "(Congenial $\times$ FSR) $\times$ Female"
-		      1.rep#1.survey#1.female "(Congenial $\times$ IMC) $\times$ Female"
+		      5.survey#1.female "Cond. 2 $\times$ Female"
+		      3.survey#1.female "Cond. 3 $\times$ Female"
+		      1.survey#1.female "Cond. 4 $\times$ Female"
+		      1.rep#5.survey#1.female "(Congenial $\times$ Cond. 2) $\times$ Female"
+		      1.rep#3.survey#1.female "(Congenial $\times$ Cond. 3) $\times$ Female"
+		      1.rep#1.survey#1.female "(Congenial $\times$ Cond. 4) $\times$ Female"
 		)
 	order(
 		1.rep 5.survey 3.survey 1.survey 1.female
