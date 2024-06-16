@@ -83,21 +83,21 @@ esttab using $tabsavedir/mturk-reg-table-by-white-nonwhite-fragment.tex,
 	noobs
 	nomtitle
 	coeflabel(1.rep "Congenial"
-			  5.survey "CUD"
-			  3.survey "FSR"
-			  1.survey "IMC"
+			  5.survey "Condition 2"
+			  3.survey "Condition 3"
+			  1.survey "Condition 4"
 			  // 2.survey "CCD"
 			  1.nonwhite "Non-White"
-		      1.rep#5.survey "Congenial $\times$ CUD"
-		      1.rep#3.survey "Congenial $\times$ FSR"		
-		      1.rep#1.survey "Congenial $\times$ IMC"
+		      1.rep#5.survey "Congenial $\times$ Cond. 2"
+		      1.rep#3.survey "Congenial $\times$ Cond. 3"		
+		      1.rep#1.survey "Congenial $\times$ Cond. 4"
 		      1.rep#1.nonwhite "Congenial $\times$ Non-White"
-		      5.survey#1.nonwhite "CUD $\times$ Non-White"
-		      3.survey#1.nonwhite "FSR $\times$ Non-White"
-		      1.survey#1.nonwhite "IMC $\times$ Non-White"
-		      1.rep#5.survey#1.nonwhite "(Congenial $\times$ CUD) $\times$ Non-White"
-		      1.rep#3.survey#1.nonwhite "(Congenial $\times$ FSR) $\times$ Non-White"
-		      1.rep#1.survey#1.nonwhite "(Congenial $\times$ IMC) $\times$ Non-White"
+		      5.survey#1.nonwhite "Cond. 2 $\times$ Non-White"
+		      3.survey#1.nonwhite "Cond. 3 $\times$ Non-White"
+		      1.survey#1.nonwhite "Cond. 4 $\times$ Non-White"
+		      1.rep#5.survey#1.nonwhite "(Congenial $\times$ Cond. 2) $\times$ Non-White"
+		      1.rep#3.survey#1.nonwhite "(Congenial $\times$ Cond. 3) $\times$ Non-White"
+		      1.rep#1.survey#1.nonwhite "(Congenial $\times$ Cond. 4) $\times$ Non-White"
 		)
 	order(
 		1.rep 5.survey 3.survey 1.survey 1.nonwhite
