@@ -18,10 +18,12 @@ Count Code Label
 46 8 Skipped
 0 9 Not Asked
 */
-gen unempup = (qpk7=="Gone Up") 
-label var unempup "Responded that unempployment has gone up"
+// gen unempup = (qpk7=="Gone Up") 
+// label var unempup "Responded that unempployment has gone up"
+gen unemp_correct = (qpk7=="Gone Down") 
+label var unemp_correct "=1 if correctly responded that unemp. went down"
 
-/* Unemployment (qpk7)
+/* Budget deficit (qpk8)
 Budget deficit since the 2010 midterm elections ...
 
 Count Code Label
@@ -33,20 +35,13 @@ Count Code Label
 39 8 Skipped
 0 9 Not Asked
 */
-gen deficitup = (qpk8=="Gone Up")
-label var deficitup "Responded that budget deficit has gone up"
-
-
-/* Partisan cue (qpk7_insert)
-when Democrats retained control of  the Senate
-when Republicans regained control of the US Cong
-*/
-gen repcue = (strpos(qpk7_insert, "Rep")>0)
-label var repcue "=1 if Republican cue"
-
+// gen deficitup = (qpk8=="Gone Up")
+// label var deficitup "Responded that budget deficit has gone up"
+gen deficit_correct = (qpk8=="Gone Down") 
+label var deficit_correct "=1 if correctly responded that deficit went down"
 
 /* Demographics*/
-global demoX birthyr i.gender i.white i.educ i.marstat i.employ newsint i.faminc
+global demoX birthyr i.gender i.white i.educ i.marstat i.employ i.newsint i.faminc
 
 rename gender gender_str
 encode gender_str, gen(gender)
@@ -66,11 +61,19 @@ rename faminc faminc_str
 encode faminc_str, gen(faminc)
 
 
-/* Congenial cues 
-Cue is congenial when the cue makes a partisan more likely to get the correct response (unemp went up)
-This is when:
-	* a R sees a D cue
-	* a D sees a R cue
+* Congenial cues 
+* Correct answer is congenial to D if both unemp/deficit dropped during Obama's term
+* This is the same as party - specifically D
+gen congenial = (dem==1)
+
+/* Partisan cue (qpk7_insert)
+when Democrats retained control of the Senate
+when Republicans regained control of the US Cong
 */
-gen congenialcue = (rep==1 & repcue==0) | (dem==1 & repcue==1)
-gen uncongenialcue = (rep==1 & repcue==1) | (dem==1 & repcue==0)
+* Defining Dcue at question level
+gen Dcue = (strpos(qpk7_insert, "when Democrats retained control of the Senate")>0)
+label var Dcue "=1 if Dem. cue"
+gen Rcue = 1 - Dcue
+label var Rcue "=1 if Rep. cue"
+
+drop if ind==1
