@@ -1,21 +1,21 @@
 eststo clear
-eststo: qui reg unempup i.congenialcue, vce(hc3)
+eststo: reg unemp_correct i.congenial##i.Dcue, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{.}"
 
-eststo: qui reg unempup i.congenialcue $demoX, vce(hc3)
+eststo: reg unemp_correct i.congenial##i.Dcue $demoX, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{Yes}"
+	estadd local demo "Yes"	
 
-
-eststo: qui reg deficitup i.congenialcue, vce(hc3)
+eststo: reg deficit_correct i.congenial##i.Dcue, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{.}"
 
-eststo: qui reg deficitup i.congenialcue $demoX, vce(hc3)
+eststo: reg deficit_correct i.congenial##i.Dcue $demoX, vce(hc3)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs "\multicolumn{1}{c}{`nobs'}"
 	estadd local demotab "\multicolumn{1}{c}{Yes}"
@@ -27,20 +27,26 @@ esttab,
       b (fmt(%9.3fc) star) 
       se(par fmt(%9.3fc))
       p (par([ ]) fmt(%9.3fc))
-    )  
+    )
     collabels(, none)
 	varwidth(30)
-	modelwidth(8)	
+	modelwidth(8)
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.congenialcue _cons)
+	keep(
+		1.congenial
+		1.Dcue
+		1.congenial#1.Dcue
+		_cons
+	)
 	obslast
 	label
 	nobase 	
 	nomtitle
-	coeflabel(1.congenialcue "Congenial"
-			  1.rep "Republican"
-		      1.congenialcue#1.rep "Congenial x Republican"		
-		)
+	coeflabel(
+		1.congenial "Congenial"
+		1.Dcue "Democratic cue"
+		1.congenial#1.Dcue "Congenial x Democratic cue"		
+	)
 	scalar(
 		"demo Demographic controls"
 		"r2 R-square" 
@@ -58,24 +64,30 @@ esttab using $tabsavedir/yougov-reg-table-fragment.tex,
 	varwidth(20)
 	modelwidth(8)	
 	star (+ 0.1 * 0.05 ** 0.01 *** 0.001)
-	keep(1.congenialcue _cons)
+	keep(
+		1.congenial
+		1.Dcue
+		1.congenial#1.Dcue
+		_cons
+	)
 	obslast
 	label
-	nobase 	
+	nobase
 	noobs
 	nomtitle
-	coeflabel(1.congenialcue "Congenial"
-			  1.rep "Republican"
-		      1.congenialcue#1.rep "Congenial $\times$ Republican"		
-		      _cons "Constant"	
-		)
+	coeflabel(
+		1.congenial "Congenial"
+		1.Dcue "Democratic cue"
+		1.congenial#1.Dcue "Congenial $\times$ Democratic cue"
+		_cons "Constant"
+	)
 	scalar(
-		"r2 R$^2$" 
+		"r2 R$^2$"
 		"demotab Demographic controls"
 		"nobs Respondents"
-		) 
+		)
 	alignment(D{.}{.}{-1})
 	substitute(\_ _)
-	fragment booktabs replace        
+	fragment booktabs replace
 	;
 #delimit cr	
