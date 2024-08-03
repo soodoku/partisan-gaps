@@ -27,23 +27,7 @@ Q45C = ... when the Democrats retained control of the Senate, has the unemployme
 gen unemp_correct = (q45a==2) | (q45b==2) | (q45c==2)
 label var unemp_correct "= 1 if correctly responded that unemp. went down"
 
-
-gen unemp_dk = (q45a==4) | (q45b==4) | (q45c==4)
-label var unemp_dk "Responded DK for unemployment"
-
-/* Congenial cues 
-Cue is congenial when the cue makes a partisan more likely to get the correct response (unemp went up)
-This is when:
-	* a R sees a D cue
-	* a D sees a R cue
-*/
 rename sel03 q45arm
-
-gen unempcongenial = (rep==1 & q45arm==3) | (rep==0 & q45arm==2)
-gen unempuncongenial = (rep==1 & q45arm==2) | (rep==0 & q45arm==3)
-gen unempneutral = (q45arm==1)
-assert (unempcongenial + unempuncongenial + unempneutral)==1
-
 
 /* Defining fedtaxup = dep. var. for Q46 (Fed taxes)
 Since the 2010 midterm elections...
@@ -64,40 +48,4 @@ label var fedtax_correct "= 1 if correctly responded that fed tax remained the s
 gen fedtax_dk = (q46a==4) | (q46b==4) | (q46c==4)
 label var fedtax_dk "Responded DK for has federal taxes has gone up?"
 
-
-// /* Cues 
-
-// Cue is congenial when a Rep sees the Dem cue (Q46b)
-
-// Cue is congenial w guessing encouraged when Rep sees the Dem cue with "based on what you have heard" (Q46C)
-
-// Note: Only Rep can have congenial guess. Dem will have only neutral or uncongenial cues
-// */
-// rename sel04 q46arm
-
-// gen fedtaxcongenial = (rep==1 & q46arm==2)
-// gen fedtaxuncongenial = (rep==0 & q46arm==2)
-// gen fedtaxcongenialguess = (rep==1 & q46arm==3)
-// gen fedtaxuncongenialguess = (rep==0 & q46arm==3)
-// gen fedtaxneutral = (q46arm==1)
-
-
-// assert (fedtaxcongenial + fedtaxuncongenial + fedtaxcongenialguess + fedtaxuncongenialguess + fedtaxneutral)==1
-
-
-/* Cues 
-
-Cue is congenial when a Rep sees the Dem cue (Q46b)
-
-Cue is congenial w guessing encouraged when Rep sees the Dem cue with "based on what you have heard" (Q46C)
-
-Note: Only Rep can have congenial guess. Dem will have only neutral or uncongenial cues
-*/
-// gen tax_congenial = (dem==1)
-// rename sel04 q46arm
-// gen taxDcue = (q46arm==2)
-// gen taxDcue_guess = (q46arm==3)
-
-// reg fedtax_correct tax_congenial##(taxDcue taxDcue_guess), vce(hc3)
-
-// reg fedtax_dk tax_congenial##(taxDcue taxDcue_guess), vce(hc3)
+rename sel04 q46arm
