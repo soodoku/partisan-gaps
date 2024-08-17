@@ -1,4 +1,5 @@
-import excel ../../../data/yg_tx_unemp.xlsx, firstrow clear
+set more off
+import excel $rootdir/data/yg_tx_unemp.xlsx, firstrow clear
 
 preserve
 * No adjustments
@@ -27,7 +28,6 @@ meta forestplot,
 ;
 #delimit cr;
 graph export ../../../figs/yg_tx_unemp_meta.pdf, replace	
-aa
 restore
 
 //

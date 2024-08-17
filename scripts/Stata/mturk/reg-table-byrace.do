@@ -63,10 +63,9 @@ eststo: reghdfe item `spec`i'', absorb(item_type) vce(cluster id)
 		estadd local demo "\multicolumn{1}{c}{.}"	
 	}
 }
-// esttab using $tabsavedir/mturk-reg-table-by-race-fragment.tex, 
 
 #delimit;
-esttab,
+esttab using $tabsavedir/mturk-reg-table-by-race-fragment.tex,
 	cell(
       b (fmt(%9.3fc) star) 
       se(par fmt(%9.3fc))
@@ -121,6 +120,9 @@ esttab,
 		5.survey#1.asian 5.survey#1.black 5.survey#1.others
 		3.survey#1.asian 3.survey#1.black 3.survey#1.others
 		1.survey#1.asian 1.survey#1.black 1.survey#1.others
+		1.rep#5.survey#1.asian 1.rep#5.survey#1.black 1.rep#5.survey#1.others
+		1.rep#3.survey#1.asian 1.rep#3.survey#1.black 1.rep#3.survey#1.others
+		1.rep#1.survey#1.asian 1.rep#1.survey#1.black 1.rep#1.survey#1.others
 	)
 	scalar(
 		"r2 R$^2$"

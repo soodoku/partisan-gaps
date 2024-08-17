@@ -1,3 +1,7 @@
+set more off
+import delimited $rootdir/data/turk/mturk-recoded.csv, clear
+do ./mturk/preamble.do
+
 * Drop CCD (confidence coding/24k)
 drop if survey == 2
 
