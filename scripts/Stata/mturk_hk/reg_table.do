@@ -1,4 +1,4 @@
-import delimited ../../data/mturk_hk/mturk_hk_relative_scoring_MC.csv, clear
+import delimited $rootdir/data/mturk_hk/mturk_hk_relative_scoring_MC.csv, clear
 
 rename responses responses_str
 gen responses = (responses_str=="1")

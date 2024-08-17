@@ -1,7 +1,5 @@
-local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-cd `rootdir'
-cd scripts/Stata
-import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
+set more off
+import delimited $rootdir/data/turk/mturk-recoded.csv, clear
 do ./mturk/preamble.do
 
 * Reshape from wide to long to stack participant-item observations

@@ -1,3 +1,7 @@
+set more off
+import delimited $rootdir/data/turk/mturk-recoded.csv, clear
+do ./mturk/preamble.do
+
 grstyle init
 grstyle set plain, 
 
@@ -105,5 +109,6 @@ gr_edit .plotregion1.plotregion1[2].added_text[1].text.Arrpush `beta_24k'
 
 gr_edit .legend.draw_view.setstyle, style(no)
 
-graph export "$figsavedir/partisan-gap-by-item-arm-mc-24k.pdf", replace	
+// graph export "$figsavedir/partisan-gap-by-item-arm-mc-24k.pdf", replace	
 
+savefig, path("$figsavedir/partisan-gap-by-item-arm-mc-24k") format(png pdf eps tif) override(width(1200))

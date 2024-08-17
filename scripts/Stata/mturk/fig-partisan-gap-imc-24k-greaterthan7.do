@@ -1,3 +1,7 @@
+set more off
+import delimited $rootdir/data/turk/mturk-recoded-greaterthan7.csv, clear
+do ./mturk/preamble.do
+
 grstyle init
 grstyle set plain, 
 

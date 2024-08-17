@@ -1,37 +1,5 @@
-* -----------------------------------------------------------------------------
-* Program Setup
-* -----------------------------------------------------------------------------
-cls 					// Clear results window
-clear all               // Start with a clean slate
-set more off            // Disable partitioned output
-macro drop _all         // Clear all macros to avoid namespace conflicts
-set linesize 120        // Line size limit to make output more readable, affects logs
-
-local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-cd `rootdir'
-
-cd scripts/Stata
-
-cap log close
-log using partisan-gaps-log.txt, replace text
-
-version 13              // Still on version 13 :(
-
-global figsavedir `rootdir'/figs
-global tabsavedir `rootdir'/tabs
-adopath ++ ./ado 		// Add path to ados
-
-*** Setup dependencies
-txt2macro stata-requirements.txt
-setup "`r(mymacro)'"
-* -----------------------------------------------------------------------------
-tictoc tic
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* MTurk results (Study 1)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Basic prep of data
-import delimited `rootdir'/data/turk/mturk-recoded.csv
+set more off
+import delimited $rootdir/data/turk/mturk-recoded.csv, clear
 do ./mturk/preamble.do
 
 grstyle init
@@ -171,9 +139,6 @@ gr_edit .plotregion1.plotregion1[4].added_text[1].text.Arrpush `beta_14k'
 
 gr_edit .legend.draw_view.setstyle, style(no)
 
-graph export "$figsavedir/partisan-gap-by-item-arm.pdf", replace	
-graph export "$figsavedir/partisan-gap-by-item-arm.png", replace	
-
-
+savefig, path("$figsavedir/partisan-gap-by-item-arm") format(png pdf eps tif) override(width(1200))
 * sort(, descending) /// sort by coeff size (by first column) 
 * 	transform(* = min(max(@,-.25),.5)) /// truncate CI, 1st num is lower bound, 2nd num is upper bound

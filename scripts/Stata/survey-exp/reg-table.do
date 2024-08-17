@@ -1,3 +1,7 @@
+import delimited $rootdir/data/survey_exp/selex.csv, clear
+do ./survey-exp/preamble.do
+drop if ind==1
+
 eststo clear
 eststo: reg unemp_correct i.congenial##i.Dcue, vce(hc3)
 	local nobs: display %9.0fc `e(N)'

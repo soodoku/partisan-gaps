@@ -1,3 +1,6 @@
+import delimited $rootdir/data/turk/mturk-recoded.csv, clear
+do ./mturk/preamble.do
+
 center age interest_1 vote_1 pid_strength_1, standardize inplace
 qui tabulate educ, gen(d_educ)
 local listofxvar female age hisla d_educ2 d_educ5 d_educ1 d_educ4 asian black white interest_1 vote_1 pid_strength_1
