@@ -1,4 +1,3 @@
-
 * -----------------------------------------------------------------------------
 * Program Setup
 * -----------------------------------------------------------------------------
@@ -8,8 +7,8 @@ set more off            // Disable partitioned output
 macro drop _all         // Clear all macros to avoid namespace conflicts
 set linesize 120        // Line size limit to make output more readable, affects logs
 
-local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-cd `rootdir'
+global rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
+cd $rootdir
 
 cd scripts/Stata
 
@@ -18,106 +17,110 @@ log using partisan-gaps-log.txt, replace text
 
 version 13              // Still on version 13 :(
 
-global figsavedir `rootdir'/figs
-global tabsavedir `rootdir'/tabs
+global figsavedir $rootdir/figs
+global tabsavedir $rootdir/tabs
 adopath ++ ./ado 		// Add path to ados
 
 *** Setup dependencies
 txt2macro stata-requirements.txt
 setup "`r(mymacro)'"
 * -----------------------------------------------------------------------------
-tictoc tic
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* MTurk results (Study 1)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Basic prep of data
-import delimited `rootdir'/data/turk/mturk-recoded.csv
-do ./mturk/preamble.do
-
-**** Figure for raw partisan gaps by items, by survey type
+// ***************************************************
+* Study 1: The Effect of Guessing-Encouraging Features
+// ***************************************************
 * Figure 1
+* Partisan Gap by Treatment Arm (MTurk 1)
 do ./mturk/fig-partisan-gap.do
-do ./mturk/fig-partisan-gap-ips-24k.do
 
-*** Balance tests (IPS/IDA as base) 
-do ./mturk/balance-tests.do // store estimates only
-
-**** Reg results for effect of party & survey type on response (Tab 2 + Fig 2)
 * Table 2
+* The Effect of Various Treatments on the Partisan Gap (MTurk 1)
 do ./mturk/reg-table.do
-* Figure 2
-do ./mturk/barplot.do
 
-**** Figure 5: IMC/14k vs CCD/24k
+// ****************************************************
+* Study 2: The Effect of Partisan Cues on Partisan Gaps
+// ****************************************************
+* Table 3
+* The Impact of Partisan Cues on Partisan Gaps (YouGov)
+do ./survey-exp/reg-table.do
+
+* Table 4
+* Impact of Partisan Cues on Proportion Correct on Unemployment (Texas Lyceum)
+* Table 5
+* Impact of Partisan Cues and Guessing-Encouraging Wording on Proportion Correct on
+do ./tx-lyceum/reg-table.do
+
+// **********************************************************
+* Study 3:  The Effect of the Scoring Method on Partisan Gaps
+// **********************************************************
+* Figure 2
+* Partisan Gaps in Knowledge in Different Question Designs
 do ./mturk/fig-partisan-gap-imc-24k.do
 
-**** Reg results for comparing 24k/CCD (Confidence scoring) with the four other 
-****  multiple choice conditions (IPS/IDA, RW/CUD, FSR/FSR, 14K/IMC)
-* (In appendix)
-* Tables in SI 1.1
+* Table 6
+* Confidence Scoring and Knowledge Gaps: MTurk 2
+do ./mturk_hk/reg_table.do
+
+* Figure 3
+* Partisan Gaps by Coding (MTurk 2)
+do ./mturk_hk/barplots.do
+
+// *********************
+* Validty (from MTurk 1)
+// *********************
+* Table 7
+* Validity and Reliability
+do ./mturk/corr-validity.do
+
+// *************************************************************
+// Supplementary Material
+// *************************************************************
+* SI 1: Balance Tests
+* Figures SI 1.1 to 1.4
+* Estimates for Balance of conditions in MTurk 1
+do ./mturk/balance-tests.do
+
+* SI 2: Additional Results for Confidence Coding (Mturk 1)
+* CCD vs. other conditions
+* Tables SI 2.1 to 2.5
 do ./mturk/confidence-scoring-reg-tables.do
 * Figures in SI 1.1
 do ./mturk/confidence-scoring-barplots.do
 
-**** Figure: All multiple choice vs CCD/24k
-import delimited `rootdir'/data/turk/mturk-recoded.csv, clear
-do ./mturk/preamble.do
-
+* Figure SI 2.6
+* Partisan Gaps in Knowledge Across Question Designs (Pooled multiple choices)
 do ./mturk/fig-partisan-gap-mc-24k.do
 
-* Robustness test with CCD threshold = 8 (instead of 10)
-import delimited `rootdir'/data/turk/mturk-recoded-greaterthan7.csv, clear
-do ./mturk/preamble.do
+* SI 6: Alternate Scoring Criteria for CCD
+* Figure SI 6.1
+* Robustness Check for Confidence Coding and Knowledge Gaps: MTurk 1
 do ./mturk/fig-partisan-gap-imc-24k-greaterthan7.do
 
+* SI 7: Alternative visualizations of results
+* Figure SI 7.1: The Effect of Various Treatments on the Partisan Gap (MTurk 1)
+do ./mturk/coefplot.do
 
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* YouGov results (Study 2)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Basic prep of data
-import delimited D:/partisan-gaps/data/survey_exp/selex.csv, clear
-do ./survey-exp/preamble.do
-drop if ind==1
+* Figure SI 7.2
+* Partisan Gap by Treatment Arm (MTurk 1)
+* do ./mturk/reg-table.do
 
-**** Reg table for effect of party & survey type on response
-* Table 3
-do ./survey-exp/reg-table.do
+* Figure SI 7.3
+* Weighted Estimate of Inflation of Partisan Gap (Study 2)
+* do ./meta/meta.do
 
-**** Barplots for effect of party & survey type on response
-* Figure 3a
-do ./survey-exp/unemp-barplots.do
-* Figure 3b
-do ./survey-exp/deficit-barplots.do
+* SI 8: Differences by Subgroups (Gender/Race)
+* Table SI 8.1
+* The Effect of Various Treatments on the Partisan Gap (MTurk 1), by Gender
+do ./mturk/reg-table-bygender.do
 
+* Table SI 8.2
+* The Effect of Various Treatments on the Partisan Gap (MTurk 1), by White vs Non-White
+do ./mturk/reg-table-byrace-white-nonwhite.do
 
-// *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* Texas Lyceum results (Study 3)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-**** Basic prep of data
-use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
-do ./tx-lyceum/preamble.do
+* SI 9: Hierarchical MOdels
+* Table SI 9.1
+* Comparison of Linear Mixed-Effects Models
+* see scripts/07_turk_hlm.R
 
-**** Reg table for effect of party & survey type on response
-* Table 4 & Table 5
-do ./tx-lyceum/reg-table.do
-
-**** Barplots for effect of party & survey type on response
-* Figure 4
-do ./tx-lyceum/unemp-barplot.do
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// * MTurk results (Study 4)
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-* Table 6
-do ./mturk_hk/reg_table.do
-
-* Figure 6
-do ./mturk_hk/barplots.do
-
-do ./mturk_hk/fig-partisan-gap.do
-
-
-tictoc toc
 
 log close
