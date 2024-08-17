@@ -1,23 +1,4 @@
-* -----------------------------------------------------------------------------
-* Program Setup
-* -----------------------------------------------------------------------------
-set more off
-local rootdir D:/partisan-gaps // for my convenience to set project root dir, comment out to avoid conflict
-cd `rootdir'
-
-cd scripts/Stata
-
-cap log close
-log using partisan-gaps-log.txt, replace text
-
-version 13              // Still on version 13 :(
-
-global figsavedir `rootdir'/figs
-global tabsavedir `rootdir'/tabs
-adopath ++ ./ado 		// Add path to ados
-
-**** Basic prep of data
-use "D:/partisan-gaps/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
+use "$rootdir/data/tx_lyceum/Texas Lyceum 2012 Data.dta", clear
 do ./tx-lyceum/preamble.do
 
 // =============================================================

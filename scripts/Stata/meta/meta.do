@@ -9,7 +9,6 @@ meta set es se,
 	studylab(study) 
 	studysize(n)
 	eslabel(Partisan gap inflation)
-	
 ;
 #delimit cr
 
