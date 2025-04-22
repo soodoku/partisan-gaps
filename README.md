@@ -82,3 +82,11 @@ Most of the code uses [R](https://www.r-project.org/) and [Stata](https://www.st
 ### Authors
 
 Lucas Shen, Gaurav Sood, and Daniel Weitzel
+
+## 🔗 Adjacent Repositories
+
+- [soodoku/nireland](https://github.com/soodoku/nireland) — Replication Data And Scripts for How Can You Think That?: Deliberation and the Learning of Opposing Arguments
+- [soodoku/party_time](https://github.com/soodoku/party_time) — Replication Data and Scripts for Affect, Not Ideology: A Social Identity Perspective on Polarization
+- [soodoku/pcomp](https://github.com/soodoku/pcomp)
+- [soodoku/partisan_gap](https://github.com/soodoku/partisan_gap)
+- [soodoku/partisan_head](https://github.com/soodoku/partisan_head)
