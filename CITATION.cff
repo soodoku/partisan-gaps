@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using the metadata below."
+type: article
+title: "A Measurement Gap? Effect of Survey Instrument and Scoring on the Partisan Knowledge Gap"
+authors:
+  - family-names: Shen
+    given-names: Lucas
+  - family-names: Sood
+    given-names: Gaurav
+  - family-names: Weitzel
+    given-names: Daniel
+journal: "Public Opinion Quarterly"
+year: 2025
+month: 11
+pages: "nfaf044"
+doi: "10.1093/poq/nfaf044"
+url: "https://doi.org/10.1093/poq/nfaf044"
+issn: "1537-5331"
