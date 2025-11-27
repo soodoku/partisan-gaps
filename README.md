@@ -2,6 +2,9 @@
 
 This repository contains data, code, and manuscript source for the paper "_A Measurement Gap? Effect of Survey Instrument and Scoring on the Partisan Knowledge Gap_". The code for this paper is written in R and Stata (Python sparingly). The manuscript in pdf is compiled using LaTeX. The manuscript and the key results can be reproduced either by running the scripts directly or using the makefiles `make` utilities. 
 
+(Lucas Shen, Gaurav Sood, Daniel Weitzel, A Measurement Gap? Effect of Survey Instrument and Scoring on the Partisan Knowledge Gap, Public Opinion Quarterly, 2025;, nfaf044, https://doi.org/10.1093/poq/nfaf044)
+
+
 <p align="center">
   <img width="100%" src="figs/partisan-gap-by-item-arm.png">
 </p>
@@ -82,6 +85,23 @@ Most of the code uses [R](https://www.r-project.org/) and [Stata](https://www.st
 ### Authors
 
 Lucas Shen, Gaurav Sood, and Daniel Weitzel
+
+
+```tex
+@article{10.1093/poq/nfaf044,
+    author = {Shen, Lucas and Sood, Gaurav and Weitzel, Daniel},
+    title = {A Measurement Gap? Effect of Survey Instrument and Scoring on the Partisan Knowledge Gap},
+    journal = {Public Opinion Quarterly},
+    pages = {nfaf044},
+    year = {2025},
+    month = {11},
+    abstract = {Research suggests that partisan gaps in political knowledge with partisan implications are wide and widespread in the United States. Using a series of experiments, we estimate the extent to which the partisan gaps in commercial surveys reflect differences in confidently held beliefs rather than motivated guessing. Knowledge items on commercial surveys often have guessing-encouraging features. Removing such features yields scales with greater reliability and higher criterion validity. More substantively, partisan gaps on scales without these “inflationary” features are roughly 40 percent smaller. Thus, contrary to some prior research, which finds that the upward bias is explained by the knowledgeable deliberately marking the wrong answer (partisan cheerleading), our data suggest that partisan gaps on commercial surveys in the United States are strongly upwardly biased by motivated guessing by the ignorant. Relatedly, we also find that partisans know less than what toplines of commercial polls suggest.},
+    issn = {1537-5331},
+    doi = {10.1093/poq/nfaf044},
+    url = {https://doi.org/10.1093/poq/nfaf044},
+    eprint = {https://academic.oup.com/poq/advance-article-pdf/doi/10.1093/poq/nfaf044/65472284/nfaf044.pdf},
+}
+```
 
 ## 🔗 Adjacent Repositories
 
