@@ -105,7 +105,7 @@ Lucas Shen, Gaurav Sood, and Daniel Weitzel
 
 ## 🔗 Adjacent Repositories
 
-- [soodoku/interpretation_gap](https://github.com/soodoku/interpretation_gap) — Replication Materials For "A Gap in Our Understanding? Reconsidering the Evidence for Partisan Knowledge Gaps"
+- [finite-sample/interpretation_gap](https://github.com/finite-sample/interpretation_gap) — Replication Materials For "A Gap in Our Understanding? Reconsidering the Evidence for Partisan Knowledge Gaps"
 - [soodoku/adult](https://github.com/soodoku/adult) — Consumption of Pornography Online Using Passively Observed Browsing Data
 - [soodoku/dp-nireland](https://github.com/soodoku/dp-nireland) — Replication Data And Scripts for How Can You Think That?: Deliberation and the Learning of Opposing Arguments
 - [soodoku/party_time](https://github.com/soodoku/party_time) — Replication Data and Scripts for Affect, Not Ideology: A Social Identity Perspective on Polarization

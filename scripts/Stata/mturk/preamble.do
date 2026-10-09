@@ -22,7 +22,7 @@ foreach var of varlist $items {
 	label values `var' itemResponseLabel
 }
 * deficif seems to have been coded differently compared to previous 8 items
-* https://github.com/soodoku/partisan-gaps/blob/main/scripts/02_mturk_recode.R
+* https://github.com/finite-sample/partisan-gaps/blob/main/scripts/02_mturk_recode.R
 replace deficit = 1 - deficit 
 
 rename avg avg_str

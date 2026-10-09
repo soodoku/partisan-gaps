@@ -12,5 +12,5 @@ make all
 
 Two key lines of code may reqire changing:
 
-* the [`local rootdir D:/partisan-gaps`](https://github.com/soodoku/partisan-gaps/blob/6087c4bcb5feac94057bdbe6dd5f6fdffd0249f2/scripts/Stata/partisan-gaps.do#L11) lie in the [`./partisan-gaps.do`](./partisan-gaps.do) for the local `root directory` of this repository
-* the [`STATA_PATH="C:\Program Files (x86)\Stata13\StataMP-64"`](https://github.com/soodoku/partisan-gaps/blob/6087c4bcb5feac94057bdbe6dd5f6fdffd0249f2/scripts/Stata/Makefile#L3) line in the [`./Makefile`](./Makefile) for the local path to the `Stata` executable
+* the [`local rootdir D:/partisan-gaps`](https://github.com/finite-sample/partisan-gaps/blob/6087c4bcb5feac94057bdbe6dd5f6fdffd0249f2/scripts/Stata/partisan-gaps.do#L11) lie in the [`./partisan-gaps.do`](./partisan-gaps.do) for the local `root directory` of this repository
+* the [`STATA_PATH="C:\Program Files (x86)\Stata13\StataMP-64"`](https://github.com/finite-sample/partisan-gaps/blob/6087c4bcb5feac94057bdbe6dd5f6fdffd0249f2/scripts/Stata/Makefile#L3) line in the [`./Makefile`](./Makefile) for the local path to the `Stata` executable
