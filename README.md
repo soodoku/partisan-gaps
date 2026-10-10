@@ -73,7 +73,7 @@ Structure of `scripts/Stata/` folder
 
 The `scripts/Stata/partisan-gaps.do` do file is the master `do` file to generate the [tables](./tabs) and [figures](./figs/). In addition to (i) reproducing the key tables and figures, the `partisan-gaps.do` master file also (ii) takes care of handling requirements using the Stata SSC packages enumerated in the [`stata-requirements.txt`](scripts/Stata/stata-requirements.txt) file and the [`setup.ado`](scripts/Stata/ado/setup.ado) file, (iii) times the runtime of the script, and (iv) log the output to the [`partisan-gaps-log.txt`](./scripts/Stata/partisan-gaps-log.txt) log file.
 
-To `make` the Stata output, `cd` to `scripts/Stata/` and type `make all`. The path to the Stata executable is defined in the `STATA_PATH` variable in the [`makefile`](./scripts/Stata/Makefile). Change the path as required. Alternatively, run `partisan-gaps.do` from Stata to generate all output. The path to the project is defined in [`local rootdir D:/partisan-gaps`](https://github.com/soodoku/partisan-gaps/blob/6087c4bcb5feac94057bdbe6dd5f6fdffd0249f2/scripts/Stata/partisan-gaps.do#L11) in the preamble. Change this as required. Making all the Stata output should take not much longer than a couple of minutes.
+To `make` the Stata output, `cd` to `scripts/Stata/` and type `make all`. The path to the Stata executable is defined in the `STATA_PATH` variable in the [`makefile`](./scripts/Stata/Makefile). Change the path as required. Alternatively, run `partisan-gaps.do` from Stata to generate all output. The path to the project is defined in [`local rootdir D:/partisan-gaps`](https://github.com/finite-sample/know_pgap_format/blob/6087c4bcb5feac94057bdbe6dd5f6fdffd0249f2/scripts/Stata/partisan-gaps.do#L11) in the preamble. Change this as required. Making all the Stata output should take not much longer than a couple of minutes.
 
 Python, via Jupyter notebooks, is used only to produce the balance of covariates tests for Study 1 (MTurk sample 1) and to inspect data. These are in `scripts/py/`. The `makefile` in the path runs both notebooks and outputs the balance tests figures with `make all` (relies on the [`runpynb`](https://github.com/lsys/runpynb) and the [`forestplot`](https://github.com/lsys/forestplot) utilities). Making the Python output should take only a minute or so.
 
@@ -105,7 +105,7 @@ Lucas Shen, Gaurav Sood, and Daniel Weitzel
 
 ## 🔗 Adjacent Repositories
 
-- [finite-sample/interpretation_gap](https://github.com/finite-sample/interpretation_gap) — Replication Materials For "A Gap in Our Understanding? Reconsidering the Evidence for Partisan Knowledge Gaps"
+- [finite-sample/know_pgap_review](https://github.com/finite-sample/know_pgap_review) — Replication Materials For "A Gap in Our Understanding? Reconsidering the Evidence for Partisan Knowledge Gaps"
 - [soodoku/adult](https://github.com/soodoku/adult) — Consumption of Pornography Online Using Passively Observed Browsing Data
 - [soodoku/dp-nireland](https://github.com/soodoku/dp-nireland) — Replication Data And Scripts for How Can You Think That?: Deliberation and the Learning of Opposing Arguments
 - [soodoku/party_time](https://github.com/soodoku/party_time) — Replication Data and Scripts for Affect, Not Ideology: A Social Identity Perspective on Polarization
